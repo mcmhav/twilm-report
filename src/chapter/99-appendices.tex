@@ -1,0 +1,1111 @@
+\appendix
+
+\input{chapter/project-management/risks.tex}
+
+\clearpage
+
+\chapter{Templates}
+
+\section{Status Report Template}
+\label{statusreporttemplate}
+
+\subsubsection{Weekly Status Report}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{ l X }
+\hline
+ & \textbf{Week ??(??th ???. – ??th ???.)} \\
+\textbf{Project} &  \\ \hline
+\textbf{Project name} & \textbf{Customer Driven Project – Group 7} \\
+\textbf{Customer:} & \textbf{Netlight} \\ \hline
+\\
+\textbf{Participants} &  \\ \hline
+\textbf{Oddvar Hungnes} & \textbf{Ivo Dlouhy}  \\
+\textbf{Øystein Heimark} & \textbf{Martin Havig} \\ \hline
+\end{tabularx}
+\captionof{table}{}
+\end{center}
+
+\subsubsection{1 Summary}
+
+...
+
+\subsubsection{2 Work done this period}
+
+...
+
+\textbf{Milestones reached this week:}
+
+...
+
+\textbf{2.1 Status of documents}
+
+-We currently have the following documents:
+
+* The LaTex report
+
+* User and administrator manual
+
+\textbf{2.2 Meetings}
+
+ - We had an internal meeting 12th Nov.
+
+
+\subsubsection{3 Problems and issues}
+
+...
+
+
+\subsubsection{4 Planning for the following period}
+
+...
+
+\textbf{4.1 Meetings}
+These are the meetings we have planned (disregarding internal meetings):
+\begin{itemize}
+\item 15th Nov. Advisor meeting
+\item 15th Nov. Customer demonstration
+\item 22th Nov. Final demonstration
+\end{itemize}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{ l l l X }
+\textbf{Week} & \textbf{Activity} & \textbf{Estimate} &  \textbf{Actual} \\ \hline
+\textbf{n} & ... & ... & ... \\ \hline
+  & ... & ... & ... \\ \hline
+  &  & \textbf{sum} & \textbf{sum} \\ \hline
+\end{tabularx}
+\captionof{table}{}
+\end{center}
+
+
+
+\section{Meeting Agenda Template}
+\label{meetingagendatemplate}
+
+\subsubsection{Meeting agenda DD/MM}
+
+\textbf{Time: 09:15}
+
+\textbf{Place: ITV 242}
+
+\textbf{Attendees:}
+
+On behalf of the group: Øystein Heimark, Martin Havig, Oddvar Hungnes, Ivo Dlouhy
+
+Advisor: Meng Zhu
+
+\textbf{Agenda}
+\begin{itemize}
+\item Go through notes from last meeting
+\item Discuss the progress report
+\item ...
+\item ...
+\item Discuss work for next sprint
+\end{itemize}
+
+\section{Meeting Notes Template}
+\label{meetingnotestemplate}
+
+\subsubsection{Advisor Meeting Notes DD/MM}
+
+\textbf{Time: 09:15}
+
+\textbf{Place: ITV 242}
+
+\textbf{Attendees:}
+
+On behalf of the group: Øystein Heimark, Martin Havig, Oddvar Hungnes, Ivo Dlouhy
+
+Advisor: Meng Zhu
+
+\textbf{Last week's notes}
+
+\textbf{Progress report}
+
+\textbf{Work for the next week}
+
+\chapter{Test Cases}
+\section{Sprint 1}
+\label{sec:sp1testcases}
+
+\begin{table}[H]
+\caption{Test Case TID01}
+\centering
+\begin{tabular}{ l p{13cm} }
+\hline
+ Item            & Description                                                              \\
+\hline \\ [-2.0ex]
+ Description     & Storing objects in a database on the central server                        \\
+ Tester          & Øystein Heimark                  \\
+ Preconditions   & There needs to be a server running with a connection to a database available \\
+ Feature         & Test the ability to store objects permanently on the server from the client  \vspace{3pt}                     \\
+\hline \\ [-1.5ex]
+ Execution steps & \pbox{13cm}{1. Open a new client \\ 2. Call the appropriate method for storing a new object with a given set of attributes from the client. \\ 3. List the content of the database and observe if the new object is indeed stored with its correct attributes. } \vspace{3pt} \\
+\hline \\ [-1.5ex]
+ Expected result & The object is stored in the database with the correct attributes                                          \\
+\hline
+\end{tabular}
+\label{table:testcasetid01}
+\end{table}
+
+
+\begin{table}[H]
+\caption{Test Case TID02}
+\centering
+\begin{tabular}{ l p{13cm} }
+\hline
+ Item            & Description                                                              \\
+\hline \\ [-2.0ex]
+ Description     & Retrieving objects from the database on the central server \\
+ Tester          & Øystein Heimark                  \\
+ Preconditions   & There needs to be a server running with a connection to a database available \\
+ Feature         & Test the clients ability to retrieve objects from the server   \vspace{3pt}                     \\
+\hline \\ [-1.5ex]
+ Execution steps & \pbox{13cm}{1. Open a new client. \\ 2. Call the appropriate method for retrieving an object. \\ 3. Observe the response from the server. } \vspace{3pt} \\
+\hline \\ [-1.5ex]
+ Expected result & The object is successfully retrieved from the server with the correct attributes          \\
+\hline
+\end{tabular}
+\label{table:testcasetid02}
+\end{table}
+
+
+\begin{table}[H]
+\caption{Test Case TID03}
+\centering
+\begin{tabular}{ l p{13cm} }
+\hline
+ Item            & Description                                                              \\
+\hline \\ [-2.0ex]
+ Description     & Sending real- time messages from server to client \\
+ Tester          & Øystein Heimark                  \\
+ Preconditions   & There needs to be a server able to send messages up and running, and a client ready to receive \\
+ Feature         & Test the ability to send real- time messages from server to client   \vspace{3pt}                     \\
+\hline \\ [-1.5ex]
+ Execution steps & \pbox{13cm}{1. Open a new client. \\ 2. Send a message from the server with the associated method. \\ 3. Observe the output on the client side. } \vspace{3pt} \\
+\hline \\ [-1.5ex]
+ Expected result & The message will be received by the client and displayed within one second from when the message is sent from the server.          \\
+\hline
+\end{tabular}
+\label{table:testcasetid03}
+\end{table}
+
+\begin{table}[H]
+\caption{Test Case TID04}
+\centering
+\begin{tabular}{ l p{13cm} }
+\hline
+ Item            & Description                                                              \\
+\hline \\ [-2.0ex]
+ Description     & Alerting clients that there has been added a book to the central database on the server \\
+ Tester          & Øystein Heimark                  \\
+ Preconditions   & TID03 and either TID05 or TID06 must alredady have passed. The server must be running \\
+ Feature         &The ability to alert multiple clients that a new book is added to the system real- time \vspace{3pt}                     \\
+\hline \\ [-1.5ex]
+ Execution steps & \pbox{13cm}{1. Open the application with multiple clients. \\ 2. Add a new book from one of the clients. \\ 3. Observe the output on all the clients} \vspace{3pt} \\
+\hline \\ [-1.5ex]
+ Expected result & All the clients will be alerted within one second that a new book has been added, and the list of books in the client will be updated.          \\
+\hline
+\end{tabular}
+\label{table:testcasetid04}
+\end{table}
+
+
+\begin{table}[H]
+\caption{Test Case TID05}
+\centering
+\begin{tabular}{ l p{13cm} }
+\hline
+ Item            & Description                                                              \\
+\hline \\ [-2.0ex]
+ Description     & Verifying that domain specific objects are available through the console \\
+ Tester          & Øystein Heimark                  \\
+ Preconditions   &A console must be available \\
+ Feature         &The ability to work directly with domain specific objects and objects attributes \vspace{3pt}                     \\
+\hline \\ [-1.5ex]
+ Execution steps & \pbox{13cm}{1. Open a console. \\ 2. Create a book object. \\ 3. Change the attribute of the newly created object by command.} \vspace{3pt} \\
+\hline \\ [-1.5ex]
+ Expected result & The user is able to retrieve objects and change their attributes via the console.          \\
+\hline
+\end{tabular}
+\label{table:testcasetid05}
+\end{table}
+
+
+\begin{table}[H]
+\caption{Test Case TID06}
+\centering
+\begin{tabular}{ l p{13cm} }
+\hline
+ Item            & Description                                                              \\
+\hline \\ [-2.0ex]
+ Description     & Verifying that there is a console and graphical interface present on each page\\
+ Tester          & Øystein Heimark                  \\
+ Preconditions   &None \\
+ Feature         &Simultaneous display of console and graphical interface \vspace{3pt}                     \\
+\hline \\ [-1.5ex]
+ Execution steps & \pbox{13cm}{1. Open a new instance of the application with a web- client. \\ 2. Observe if there is a graphical interface as well as a console present.} \vspace{3pt} \\
+\hline \\ [-1.5ex]
+ Expected result & Console and graphical interface is present on the same page.          \\
+\hline
+\end{tabular}
+\label{table:testcasetid06}
+\end{table}
+
+
+\begin{table}[H]
+\caption{Test Case TID07}
+\centering
+\begin{tabular}{ l p{13cm} }
+\hline
+ Item            & Description                                                              \\
+\hline \\ [-2.0ex]
+ Description     & Adding a new book to the system with the graphical web- application \\
+ Tester          & Øystein Heimark                  \\
+ Preconditions   & The server with the REST api must be running. A graphical interface must be available. \\
+ Feature         & The ability to add new books to the system from a client with the graphical web- application   \vspace{3pt}                     \\
+\hline \\ [-1.5ex]
+ Execution steps & \pbox{13cm}{1. Open the application with a web client \\ 2. Add a new book from the web- application on the client. \\ 3. List the books currently on the system and observe if the new book is added.} \vspace{3pt} \\
+\hline \\ [-1.5ex]
+ Expected result & The new book is added to the system and the list of books with the attributes stated in the creation of the book.          \\
+\hline
+\end{tabular}
+\label{table:testcasetid07}
+\end{table}
+
+
+
+\begin{table}[H]
+\caption{Test Case TID08}
+\centering
+\begin{tabular}{ l p{13cm} }
+\hline
+ Item            & Description                                                              \\
+\hline \\ [-2.0ex]
+ Description     & Adding a new book to the system with the console. A console must be available \\
+ Tester          & Øystein Heimark                  \\
+ Preconditions   & The server with the REST api must be running \\
+ Feature         & The ability to add new books to the system from a client with the console.   \vspace{3pt}                     \\
+\hline \\ [-1.5ex]
+ Execution steps & \pbox{13cm}{1. Open the application with a web client \\ 2. Add a new book from the console on the client. \\ 3. Observe the list of the books currently on the system and observe if the new book is in this list.} \vspace{3pt} \\
+\hline \\ [-1.5ex]
+ Expected result & The new book is added to the system and the list of books with the attributes stated in the creation of the book.          \\
+\hline
+\end{tabular}
+\label{table:testcasetid08}
+\end{table}
+
+
+\begin{table}[H]
+\caption{Test Case TID09}
+\centering
+\begin{tabular}{ l p{13cm} }
+\hline
+ Item            & Description                                                              \\
+\hline \\ [-2.0ex]
+ Description     & Listing all the books currently in the system using the graphical web- application \\
+ Tester          & Øystein Heimark                  \\
+ Preconditions   & The server with the REST api must be running. There has to be books stored in the database. A graphical interface must be available\\
+ Feature         & The ability to get an overview of the books currently in the system using the web- application   \vspace{3pt}                     \\
+\hline \\ [-1.5ex]
+ Execution steps & \pbox{13cm}{1. Obtain a list of all the books in the system directly from the central database/server \\ 2. Use the graphical web- application to get a list of all the books in the system \\ 3. Compare the result from step two to the one obtained in step 1, and verify that they contain the same books.} \vspace{3pt} \\
+\hline \\ [-1.5ex]
+ Expected result & The list of books presented in the graphical web- application is identical to the one stored on the central database/server.          \\
+\hline
+\end{tabular}
+\label{table:testcasetid09}
+\end{table}
+
+
+\begin{table}[H]
+\caption{Test Case TID10}
+\centering
+\begin{tabular}{ l p{13cm} }
+\hline
+ Item            & Description                                                              \\
+\hline \\ [-2.0ex]
+ Description     & Listing all the books currently in the system using the console. \\
+ Tester          & Øystein Heimark                  \\
+ Preconditions   & The server with the REST api must be running. There has to be books stored in the database.  A console must be available\\
+ Feature         & The ability to get an overview of the books currently in the system using console.   \vspace{3pt}                     \\
+\hline \\ [-1.5ex]
+ Execution steps & \pbox{13cm}{1. Obtain a list of all the books in the system directly from the central database/server \\ 2. Use the console to get a list of all the books in the system \\ 3. Compare the result from step two to the one obtained in step 1, and verify that they contain the same books.} \vspace{3pt} \\
+\hline \\ [-1.5ex]
+ Expected result & The list of books presented in the console is identical to the one stored on the central database/server.          \\
+\hline
+\end{tabular}
+\label{table:testcasetid10}
+\end{table}
+
+\clearpage
+
+
+\section{Sprint 2}
+\label{sec:sp2testcases}
+
+
+\begin{table}[H]
+\caption{Test Case TID11}
+\centering
+\begin{tabular}{ l p{13cm} }
+\hline
+ Item            & Description                                                              \\
+\hline \\ [-2.0ex]
+ Description     &Storing objects without a schema in a database on the central server . \\
+ Tester          & Øystein Heimark                  \\
+ Preconditions   & There needs to be a server up and running with a database available\\
+ Feature         & The ability to store objects with a different attribute set, in the same database.   \vspace{3pt}                     \\
+\hline \\ [-1.5ex]
+ Execution steps & \pbox{13cm}{1. Call the appropriate method for storing a new object with a given set of attributes \\ 2. Call the same method again, but provide an object with a different set of attributes \\ 3. Observe that both objects are stored in the database with the correct attributes.} \vspace{3pt} \\
+\hline \\ [-1.5ex]
+ Expected result & Both objects, with different attributes, are stored in the database.          \\
+\hline
+\end{tabular}
+\label{table:testcasetid11}
+\end{table}
+
+
+\begin{table}[H]
+\caption{Test Case TID12}
+\centering
+\begin{tabular}{ l p{13cm} }
+\hline
+ Item            & Description                                                              \\
+\hline \\ [-2.0ex]
+ Description     &Printing out commands in the console while operating with the GUI. \\
+ Tester          & Øystein Heimark                  \\
+ Preconditions   & None\\
+ Feature         & For every action made in the GUI the corresponding command in the console should be printed in the console.   \vspace{3pt}                     \\
+\hline \\ [-1.5ex]
+ Execution steps & \pbox{13cm}{1. Open a new client \\ 2. Do a lot of different actions in the GUI. \\ 3. Observe that the correct commands are printed in the console.} \vspace{3pt} \\
+\hline \\ [-1.5ex]
+ Expected result & The correct commands are printed in the console.          \\
+\hline
+\end{tabular}
+\label{table:testcasetid12}
+\end{table}
+
+
+\begin{table}[H]
+\caption{Test Case TID13}
+\centering
+\begin{tabular}{ l p{13cm} }
+\hline
+ Item            & Description                                                              \\
+\hline \\ [-2.0ex]
+ Description     &Showing a popup menu in the console with the available methods and attributes for the object which is currently selected. \\
+ Tester          & Øystein Heimark                  \\
+ Preconditions   & None\\
+ Feature         & The ability to list the methods and attributes of a given object in a popup menu.   \vspace{3pt}                     \\
+\hline \\ [-1.5ex]
+ Execution steps & \pbox{13cm}{1. Open a new client \\ 2. Create a new object. \\ 3. Select that object using the console. \\ 4. Show the popup menu using the corresponding hotkey} \vspace{3pt} \\
+\hline \\ [-1.5ex]
+ Expected result & The correct methods and attributes of the selected object is shown in the popup menu.          \\
+\hline
+\end{tabular}
+\label{table:testcasetid13}
+\end{table}
+
+
+\begin{table}[H]
+\caption{Test Case TID14}
+\centering
+\begin{tabular}{ l p{13cm} }
+\hline
+ Item            & Description                                                              \\
+\hline \\ [-2.0ex]
+ Description     &Selecting an element from the popup menu and insert the selected method or attribute in the console. \\
+ Tester          & Øystein Heimark                  \\
+ Preconditions   & None\\
+ Feature         & The ability to autocomplete methods and attributes selected from the popup menu.   \vspace{3pt}                     \\
+\hline \\ [-1.5ex]
+ Execution steps & \pbox{13cm}{1. Open a new client \\ 2. Select an object using the console. \\ 3. Pick a method or attribute from the popup menu. } \vspace{3pt} \\
+\hline \\ [-1.5ex]
+ Expected result & The selected method or attribute from the popup menu is printed in the console.          \\
+\hline
+\end{tabular}
+\label{table:testcasetid14}
+\end{table}
+
+
+\begin{table}[H]
+\caption{Test Case TID15}
+\centering
+\begin{tabular}{ l p{13cm} }
+\hline
+ Item            & Description                                                              \\
+\hline \\ [-2.0ex]
+ Description     &Highlighting an object in the GUI when it is selected from the console. \\
+ Tester          & Øystein Heimark                  \\
+ Preconditions   & None\\
+ Feature         & Highlighting a selected object.   \vspace{3pt}                     \\
+\hline \\ [-1.5ex]
+ Execution steps & \pbox{13cm}{1. Open a new client \\ 2. Select an object using the console. \\ 3. Observe the response in the GUI. } \vspace{3pt} \\
+\hline \\ [-1.5ex]
+ Expected result & The selected object should be highlighted in the GUI.          \\
+\hline
+\end{tabular}
+\label{table:testcasetid15}
+\end{table}
+
+
+\begin{table}[H]
+\caption{Test Case TID16}
+\centering
+\begin{tabular}{ l p{13cm} }
+\hline
+ Item            & Description                                                              \\
+\hline \\ [-2.0ex]
+ Description     &Highlighting a group of objects in the GUI when it is selected from the console. \\
+ Tester          & Øystein Heimark                  \\
+ Preconditions   & The system must be capable of selecting multiple objects\\
+ Feature         & Highlighting groups of objects.   \vspace{3pt}                     \\
+\hline \\ [-1.5ex]
+ Execution steps & \pbox{13cm}{1. Open a new client \\ 2. Select a group of objects. \\ 3. Observe the response in the GUI. } \vspace{3pt} \\
+\hline \\ [-1.5ex]
+ Expected result & The selected objects should be highlighted in the GUI.          \\
+\hline
+\end{tabular}
+\label{table:testcasetid16}
+\end{table}
+
+
+\begin{table}[H]
+\caption{Test Case TID17}
+\centering
+\begin{tabular}{ l p{13cm} }
+\hline
+ Item            & Description                                                              \\
+\hline \\ [-2.0ex]
+ Description     &Cycling through the current selection of objects using a hotkey. \\
+ Tester          & Øystein Heimark                  \\
+ Preconditions   & The system must be capable of selecting multiple objects\\
+ Feature         & The ability to cycle through the current selection of objects in the console using a hotkey.   \vspace{3pt}                     \\
+\hline \\ [-1.5ex]
+ Execution steps & \pbox{13cm}{1. Open a new client \\ 2. Select a group of objects. \\ 3. Cycle through the objects using the hotkey in the console. } \vspace{3pt} \\
+\hline \\ [-1.5ex]
+ Expected result & The objects in the current selection are made available to the user one by one, in the correct order.          \\
+\hline
+\end{tabular}
+\label{table:testcasetid17}
+\end{table}
+
+
+\begin{table}[H]
+\caption{Test Case TID18}
+\centering
+\begin{tabular}{ l p{13cm} }
+\hline
+ Item            & Description                                                              \\
+\hline \\ [-2.0ex]
+ Description     &Highlighting the selected object while cycling through a selection of objects. \\
+ Tester          & Øystein Heimark                  \\
+ Preconditions   & The system must be capable of selecting multiple objects\\
+ Feature         & While cycling through a selection of objects in the console the current object will be highlighted in the GUI.   \vspace{3pt}                     \\
+\hline \\ [-1.5ex]
+ Execution steps & \pbox{13cm}{1. Open a new client \\ 2. Select a group of objects. \\ 3. Cycle through the objects using the hotkey in the console. \\ 4. Observe the response in the GUI. } \vspace{3pt} \\
+\hline \\ [-1.5ex]
+ Expected result & The highlighted object in the GUI will be updated as you cycle through the selection.          \\
+\hline
+\end{tabular}
+\label{table:testcasetid18}
+\end{table}
+
+
+\begin{table}[H]
+\caption{Test Case TID19}
+\centering
+\begin{tabular}{ l p{13cm} }
+\hline
+ Item            & Description        \\
+\hline \\ [-2.0ex]
+ Description     &Update a separate section of the GUI when the user clicks on a record, and make the user able to edit the record in this section. \\
+ Tester          & Øystein Heimark                  \\
+ Preconditions   & None\\
+ Feature         & The ability to edit the information on a record from a separate section of the GUI.   \vspace{3pt}                     \\
+\hline \\ [-1.5ex]
+ Execution steps & \pbox{13cm}{1. Open a new client \\ 2. Click on a record. \\ 3. Edit the info on the clicked record in the separate section. \\ 4. Observe the response in the GUI. } \vspace{3pt} \\
+\hline \\ [-1.5ex]
+ Expected result & A separate section of the GUI is updated with the information on the clicked record. When this information is edited the record is updated. \\
+\hline
+\end{tabular}
+\label{table:testcasetid19}
+\end{table}
+
+\clearpage
+
+
+\section{Sprint 3}
+\label{sec:sp3testcases}
+
+\begin{table}[H]
+\caption{Test Case TID20}
+\centering
+\begin{tabular}{ l p{13cm} }
+\hline
+ Item            & Description        \\
+\hline \\ [-2.0ex]
+ Description     &Changing directory in the application in the console. \\
+ Tester          & Øystein Heimark                  \\
+ Preconditions   & None\\
+ Feature         & The ability to easily change the working directory from the console.   \vspace{3pt}                     \\
+\hline \\ [-1.5ex]
+ Execution steps & \pbox{13cm}{1. Open a new client \\ 2. Call the command for changing directory. \\ 3. Observe the response in the GUI and console. } \vspace{3pt} \\
+\hline \\ [-1.5ex]
+ Expected result & The GUI is updated to represent the specified directory. The objects in this directory is available from the console. \\
+\hline
+\end{tabular}
+\label{table:testcasetid20}
+\end{table}
+
+
+\begin{table}[H]
+\caption{Test Case TID21}
+\centering
+\begin{tabular}{ l p{13cm} }
+\hline
+ Item            & Description        \\
+\hline \\ [-2.0ex]
+ Description     &Storing objects as local variable. \\
+ Tester          & Øystein Heimark                  \\
+ Preconditions   & None\\
+ Feature         & The ability to extract objects and store these in specified variables in the console.   \vspace{3pt}                     \\
+\hline \\ [-1.5ex]
+ Execution steps & \pbox{13cm}{1. Open a new client \\ 2. Navigate to a directory with objects. \\ 3. Extract an object with a DSL command, and assign it to a variable. \\ 4.Change directory. \\ 5.Print the content of the variable in the console } \vspace{3pt} \\
+\hline \\ [-1.5ex]
+ Expected result & The object which you assigned to the variable is printed. \\
+\hline
+\end{tabular}
+\label{table:testcasetid21}
+\end{table}
+
+
+\begin{table}[H]
+\caption{Test Case TID22}
+\centering
+\begin{tabular}{ l p{13cm} }
+\hline
+ Item            & Description        \\
+\hline \\ [-2.0ex]
+ Description     &Allow for the use of functions on the objects. \\
+ Tester          & Øystein Heimark                  \\
+ Preconditions   & None\\
+ Feature         & The ability to apply function on single or groups of objects.   \vspace{3pt}                     \\
+\hline \\ [-1.5ex]
+ Execution steps & \pbox{13cm}{1. Open a new client \\ 2. Retrieve a group of objects. \\ 3. Call DSL command for applying a function to a group of objects. \\ 4.Call DSL command and apply a mathematical function on a numerical attribute of the objects.} \vspace{3pt} \\
+\hline \\ [-1.5ex]
+ Expected result & The function is applied correctly to all the objects, and the attributes of the involved objects are updated accordingly. \\
+\hline
+\end{tabular}
+\label{table:testcasetid22}
+\end{table}
+
+
+\begin{table}[H]
+\caption{Test Case TID23}
+\centering
+\begin{tabular}{ l p{13cm} }
+\hline
+ Item            & Description        \\
+\hline \\ [-2.0ex]
+ Description     &Allow for editing and adding of attributes. \\
+ Tester          & Øystein Heimark                  \\
+ Preconditions   & None\\
+ Feature         & The ability to edit existing attributes or add new ones.   \vspace{3pt}                     \\
+\hline \\ [-1.5ex]
+ Execution steps & \pbox{13cm}{1. Open a new client \\ 2. Navigate to a specific object. \\ 3. Change an attribute, using both the GUI and the console. \\ 4.Add an attribute, using both the GUI and the console. \\ 5.Extract an entire JSON object and add it as a new attribute for the object } \vspace{3pt} \\
+\hline \\ [-1.5ex]
+ Expected result & Existing attributes are correctly updated, and new attributes are correctly added. The JSON object is added as a attribute of the specified object. \\
+\hline
+\end{tabular}
+\label{table:testcasetid23}
+\end{table}
+
+
+\begin{table}[H]
+\caption{Test Case TID24}
+\centering
+\begin{tabular}{ l p{13cm} }
+\hline
+ Item            & Description        \\
+\hline \\ [-2.0ex]
+ Description     &Update GUI according to changes. \\
+ Tester          & Øystein Heimark                  \\
+ Preconditions   & None\\
+ Feature         & Whenever a user changes, rmetes or adds an attribute of one or several of the objects, the GUI updates.   \vspace{3pt}                     \\
+\hline \\ [-1.5ex]
+ Execution steps & \pbox{13cm}{1. Open a new client \\ 2. Make changes to single and groups of objects} \vspace{3pt} \\
+\hline \\ [-1.5ex]
+ Expected result & The GUI updates whenever an object changes. \\
+\hline
+\end{tabular}
+\label{table:testcasetid24}
+\end{table}
+
+\begin{table}[H]
+\caption{Test Case TID25}
+\centering
+\begin{tabular}{ l p{13cm} }
+\hline
+ Item            & Description        \\
+\hline \\ [-2.0ex]
+ Description     &Store changes to database. \\
+ Tester          & Øystein Heimark                  \\
+ Preconditions   & None\\
+ Feature         & The ability to work locally and push changes to the server when the user desires.   \vspace{3pt}                     \\
+\hline \\ [-1.5ex]
+ Execution steps & \pbox{13cm}{1. Open a new client \\ 2. Do a variety of actions in the application. \\ 3. Issues DSL command to store the changes on the server} \vspace{3pt} \\
+\hline \\ [-1.5ex]
+ Expected result & The changes are successfully stored on the server, and is retrievable for other users as well. \\
+\hline
+\end{tabular}
+\label{table:testcasetid25}
+\end{table}
+
+\clearpage
+
+
+\section{Sprint 4}
+\label{sec:sp4testcases}
+
+\begin{table}[H]
+\caption{Test Case TID26}
+\centering
+\begin{tabular}{ l p{13cm} }
+\hline
+ Item            & Description        \\
+\hline \\ [-2.0ex]
+ Description     &Call specific functions on a group of objects. \\
+ Tester          & Øystein Heimark                  \\
+ Preconditions   & There needs to be objects present in the system \\
+ Feature         & The ability to call a command that applies a specified function on a group of objects.   \vspace{3pt}                     \\
+\hline \\ [-1.5ex]
+ Execution steps & \pbox{13cm}{1. Open a new client \\ 2. Make a group of books and apply a function that adds 15 percent of the price \\ 3. Make another group of books and apply a function that subtracts 15 percent of the price} \vspace{3pt} \\
+\hline \\ [-1.5ex]
+ Expected result & The books in the first group have their price increased by 15 percent, while the books in the second group have their price decreased by 15 percent. \\
+\hline
+\end{tabular}
+\label{table:testcasetid26}
+\end{table}
+
+
+\begin{table}[H]
+\caption{Test Case TID27}
+\centering
+\begin{tabular}{ l p{13cm} }
+\hline
+ Item            & Description        \\
+\hline \\ [-2.0ex]
+ Description     & Filtering objects \\
+ Tester          & Øystein Heimark                  \\
+ Preconditions   & There needs to be books present in the system\\
+ Feature         & The ability to filter the objects on a specified criteria.   \vspace{3pt}                     \\
+\hline \\ [-1.5ex]
+ Execution steps & \pbox{13cm}{1. Open a new client \\ 2. Call filter command to get all books with title “Peer Gynt”. } \vspace{3pt} \\
+\hline \\ [-1.5ex]
+ Expected result & The GUI is updated to to show only the books with title equal to “Peer Gynt”. \\
+\hline
+\end{tabular}
+\label{table:testcasetid27}
+\end{table}
+
+
+\begin{table}[H]
+\caption{Test Case TID28}
+\centering
+\begin{tabular}{ l p{13cm} }
+\hline
+ Item            & Description        \\
+\hline \\ [-2.0ex]
+ Description     & Adding and rmetion of objects \\
+ Tester          & Øystein Heimark                  \\
+ Preconditions   & There needs to be books present in the system\\
+ Feature         & The ability to add a new book to the system using, and rmete specific books already in it.   \vspace{3pt}                     \\
+\hline \\ [-1.5ex]
+ Execution steps & \pbox{13cm}{1. Open a new client \\ 2. Call command for adding a new book. \\ 3. Call command for rmeting the newly added book.} \vspace{3pt} \\
+\hline \\ [-1.5ex]
+ Expected result & The book is first added to the system and appears in the list of books. When the rmetion command is issued, it should be removed from the system \\
+\hline
+\end{tabular}
+\label{table:testcasetid28}
+\end{table}
+
+\begin{table}[H]
+\caption{Test Case TID29}
+\centering
+\begin{tabular}{ l p{13cm} }
+\hline
+ Item            & Description        \\
+\hline \\ [-2.0ex]
+ Description     & Creating scripts \\
+ Tester          & Øystein Heimark                  \\
+ Preconditions   & The ability to create custom scripts and to execute them\\
+ Feature         & The ability to add a new book to the system using, and rmete specific books already in it.   \vspace{3pt}                     \\
+\hline \\ [-1.5ex]
+ Execution steps & \pbox{13cm}{1. Open a new client \\ 2. Create a script that prints the title of all the books with a price smaller than 100, and save it to a variable. \\ 3. Call the variable.} \vspace{3pt} \\
+\hline \\ [-1.5ex]
+Expected result & The script is stored in the specified variable and executed. The title of all the books with a price smaller than 100 is printed. \\
+\hline
+\end{tabular}
+\label{table:testcasetid29}
+\end{table}
+
+\clearpage
+
+\chapter{Implementation Documentation}
+\section{Wonsole1 Objects}
+\label{wonsoleobjects}
+\subsubsection{Library object specification}
+\begin{verbatim}
+    function removeSelected ()
+    remove all books that are selected in the visible list, will update the web UI and db.
+
+    function listBooks()
+    List all books into the console.
+
+    function removeBookByID(_id)
+    Remove a book with the given ID. Will update the web UI and db.
+
+    function selectAllToggle()
+    Toggle select all books currently in the visible list. Will update the web UI and db.
+    This function is coupled with the checkbox for selecting all books in the list.
+
+    function query(parameter1, value1, parameter2, value2 ...)
+    Queries the list of books for an array of books where the
+    specified book parameters match their respective values.
+    May be called with an arbitrary even number of arguments.
+    The values will be interpreted as regular expressions if they are strings.
+
+    function generateHTML()
+    Generate list elements for all books in the system,
+    at the "BOOKTABLE" element in the HTML document.
+
+    function retrieveObjects()
+    This function retrieves all objects from the server and updates the web UI and db.
+    Will lock the UI until objects have been received.
+
+\end{verbatim}
+
+\subsubsection{Book object specification}
+\begin{verbatim}
+    function Book(title, author, id)
+    Constructor for the Book object. Will add it to the list of Books in LIB.
+    Should be used with the new keyword.
+    If id is null, the object will be sent to the server, and the id will be returned.
+    This will block the UI and then update it.
+    Leaving out the id parameter entirely will be interpreted as the id being null.
+    id should be null when using this from the console or web UI,
+    but defined in the callback function for retrieving Books.
+
+    function saveUpdate()
+    Update the book on the server, blocking/unblocking and updating the UI in the process.
+    Should be called after altering the Book object's variables.
+
+    function changeAuthor(newAuthor)
+    Change the author of the book. Will update the web UI and db.
+
+    function toJSON()
+    Generate a JSON object from this Book.
+
+    function changeTitle(newTitle)
+    Change the name of the book. Will update the web UI and db.
+
+    function toggleSelect()
+    Toggle whether this book is selected.
+    Will make sure the value of the Book's checkbox is correct, if it exists.
+
+    Remove this book from the system. Will update database and UI.
+    function remove()
+
+    function generateHTML()
+    Generate HTML element(s) for this book. Will not manipulate the UI by itself.
+    Returns the DOM HTML element. Should be a table row. Row style will be overridden.
+\end{verbatim}
+
+
+\section{RESTful API Documentation}
+\label{sec:restapi}
+
+\subsubsection{Base URL}
+The base URL for REST API is: http://netlight.dlouho.net:9004/api/
+
+\subsubsection{Get a list of all books}
+Description: Returns a list of all the books currently stored in the system 		\\
+\newline
+Resource URL: http://netlight.dlouho.net:9004/api/books	\\
+HTTP Methods: GET		\\
+Response format: json	\\
+Parameters: None		\\
+\newline
+Request Example:		\\
+GET			http://netlight.dlouho.net:9004/api/books 	\\
+\newline
+Response:
+\begin{verbatim}
+[
+    {
+        "_id": "506b6445b107d7567a000001",
+        "author": "An author",
+        "title": "Book1"
+    },
+    {
+        "_id": "506c91a1b107d7567a000004",
+        "author": "Another author",
+        "title": "Book2"
+    }
+]
+\end{verbatim}
+Example call in jQuery:
+\begin{verbatim}
+$.get(‘http://netlight.dlouho.net:9004/api/books’, function(response){
+	//Callback function
+});
+\end{verbatim}
+
+\subsubsection{Add a book to the database}
+Description: Adds a book to the database with the supplied parameters. The created book object with a text identifier is returned as a repsonse. 		\\
+\newline
+Resource URL: http://netlight.dlouho.net:9004/api/books	\\
+HTTP Methods: POST		\\
+Response format: json	\\
+Parameters: None		\\
+\newline
+Data:
+\begin{itemize}
+
+\item title(required): The title of the book that is to be added. Example values: "Title", "A Book".
+
+\item author(required):The author of the book that is to be added. Example values: "Author", "Another Author".
+
+\end{itemize}
+Request Example:		\\
+POST		http://netlight.dlouho.net:9004/api/books	\\
+POST Data	title="Title", author="Author"
+\newline
+Response:
+\begin{verbatim}
+[
+    {
+        "_id": "506b6445b107d7567a000001",
+        "author": "Author",
+        "title": "Title"
+    }
+]
+\end{verbatim}
+Example call in jQuery:
+\begin{verbatim}
+$.ajax({
+  type: 'POST',
+  url: ‘http://netlight.dlouho.net:9004/api/books’,
+  data: { author:”Author”, title: “Title”},
+  success: function(response){
+  	//Add book to local storage
+  },
+  dataType: ‘json’
+});
+\end{verbatim}
+
+\subsubsection{Get a single book by id}
+Description: Returns a single book, specieifed by the id parameter		\\
+\newline
+Resource URL: http://netlight.dlouho.net:9004/api/books/:id	\\
+HTTP Methods: GET		\\
+Response format: json	\\
+\newline
+Parameters:
+\begin{itemize}
+
+\item id(required): This is a text identifier which is used to identify the book in the database. This is created by the database on insertion, and returned to the user. Example value: "506b6445b107d7567a000001"
+
+\end{itemize}
+Request Example:		\\
+GET		http://netlight.dlouho.net:9004/api/books/506b6445b107d7567a000001	\\
+\newline
+Response:
+\begin{verbatim}
+[
+    {
+        "_id": "506b6445b107d7567a000001",
+        "author": "Author",
+        "title": "Title"
+     }
+]
+\end{verbatim}
+Example call in jQuery:
+\begin{verbatim}
+$.get(‘http://netlight.dlouho.net:9004/api/books/506b6445b107d7567a000001’, function(response){
+	//Callback function
+});
+\end{verbatim}
+
+
+\subsubsection{Update a single book by id}
+Description: Updates a book with the new values, specified by the supplied id parameter. Returns the updated book object.	\\
+\newline
+Resource URL: http://netlight.dlouho.net:9004/api/books/:id	\\
+HTTP Methods: PUT		\\
+Response format: json	\\
+Data format: json		\\
+Parameters: 			\\
+\begin{itemize}
+
+\item id(required): This is a text identifier which is used to identify the book in the database. This is created by the database on insertion, and returned to the user. Example value: "506b6445b107d7567a000001"
+
+\end{itemize}
+Data:
+\begin{itemize}
+
+\item title(required): The title of the book that is to be added. Example values: "Title", "A Book".
+
+\item author(required):The author of the book that is to be added. Example values: "Author", "Another Author".
+
+\end{itemize}
+Request Example:		\\
+PUT 		http://netlight.dlouho.net:9004/api/books/506b6445b107d7567a000001	\\
+PUT Data: title="NewTitle", author="NewAuthor"
+\newline
+Response:
+\begin{verbatim}
+[
+    {
+        "_id": "506b6445b107d7567a000001",
+        "author": "NewAuthor",
+        "title": "NewTitle"
+     }
+]
+\end{verbatim}
+Example call in jQuery:
+\begin{verbatim}
+$.ajax({
+  type: 'PUT',
+  url: ‘http://netlight.dlouho.net:9004/api/books/506b6445b107d7567a000001’,
+  data: { author:”NewAuthor”, title: “NewTitle”},
+  success: function(response){
+  	//Change book attributes in local storage
+  },
+  dataType: ‘json’
+});
+\end{verbatim}
+
+\subsubsection{rmete a book by id}
+Description: rmetes a book, specified by the supplied id parameter.	\\
+\newline
+Resource URL: http://netlight.dlouho.net:9004/api/books/:id 	\\
+HTTP Methods: rmETE		\\
+Parameters:
+\begin{itemize}
+
+\item id(required): This is a text identifier which is used to identify the book in the database. This is created by the database on insertion, and returned to the user. Example value: "506b6445b107d7567a000001"
+
+\end{itemize}
+Request Example:		\\
+rmETE	http://netlight.dlouho.net:9004/api/books/506b6445b107d7567a000001	\\
+\newline
+Example call in jQuery:
+\begin{verbatim}
+$.ajax({
+  type: 'rmETE',
+  url: ‘http://netlight.dlouho.net:9004/api/books/5069868335f41ce71a000001’,
+  success: function(response){
+
+  },
+  dataType: ’json’
+});
+\end{verbatim}
+
+\clearpage
+
+\chapter{Product Backlogs}
+
+This section shows the evolution of the product backlog throughout the sprints.
+
+\section{Sprint 1}
+\label{sprint1pb}
+
+\begin{itemize}
+  \item [\textbf{A1}] As an administrator, I want to be able to store objects in a persistent database, so that I can migrate data easily.
+  \item [\textbf{A2}] As an administrator, I want to reflect the changes in persistent storage back to user sessions within one second, so the users always see the latest updated data.
+  \item [\textbf{A3}] As an administrator, I want to be able to work directly with object attributes rather than any form of raw data.
+  \item [\textbf{G1}] As a user, I want my saved actions to be replicated on to the server within one second, so that my actions will not be lost and the client and server is consistent
+  \item [\textbf{G2}] As a user, I want my changes to be propagated to other users of the system real- time
+  \item [\textbf{G3}] As a user, I want to be able to see the console and graphical interface at the same time, so that I can use them both side by side simultaneously.
+  \item [\textbf{G4}] As a user, I want the changes in console reflect in graphical user interface and likewise, so that I can have overview of the changes I made and I can understand easily, how the system works. In addition this will ensure consistency between the console and graphical interface.
+  \item [\textbf{G5}] As a user, I want access to a tutorial, so that I can learn to work with the system easily.
+  \item [\textbf{G6}] As a user, I want to be able to display the currently available commands in the console, so I can easily see what I can do with the objects at hand.
+  \item [\textbf{G7}] As a user, I want to be able to easily repeat and edit last command, so that I can use it on another object.
+  \item [\textbf{G8}] As a user, I want to be able to use batch commands, so that I can work with more than one object at the same time.
+  \item [\textbf{D1}] As a user, I want to be able to add a new book to the system using both the console and graphical interface.
+  \item [\textbf{D2}] As a user, I want to be able to rmete a book in the system using both the console and graphical interface.
+  \item [\textbf{D3}] As a user, I want to be able to edit information on a specific book and save these changes using both the console and graphical interface.
+  \item [\textbf{D4}] As a user, I want to be able to search for a specific book in the system, so that I can watch the information on it using both the console and graphical interface.
+  \item [\textbf{D5}] As a user, I want to be able to list all the books currently in the system, so that I easily can get an overview of all the books currently in the library. This should be possible in both the console and the graphical interface.
+  \item [\textbf{D6}] As a user, I want to be able to register a new customer in the system, so that customers can be saved in the system. This should be possible in both the console and the graphical interface.
+  \item [\textbf{D7}] As a user, I want to be able to registrate when a customer borrows a book, so that the information is stored in the system. This should be possible in both the console and the graphical interface.
+  \item [\textbf{D8}] As a user, I want to be able to edit the information on a specific borrowing of a book, so that any changes can be recorded. This should be possible in both the console and the graphical interface.
+  \item [\textbf{D9}] As a user, I want to be able to list all the books currently borrowed, so that I can get information on each of them. This should be possible in both the console and the graphical interface.
+  \item [\textbf{D10}] As a user, I want to be able to reserve a book for a customer, so that customers can request and reserve certain books. This should be possible in both the console and the graphical interface.
+  \item [\textbf{D11}] As a user, I want to be able to list all the reservations currently in the system. This should be possible in both the console and the graphical interface.
+  \item [\textbf{D12}] As a user, I want to be able to view reservations on specific books, so that I can see if a specific book is available for borrowing at the moment. This should be possible in both the console and the graphical interface.
+  \item [\textbf{D13}] As a user, I want to be able to order new books for the library using both the console and the graphical interface.
+\end{itemize}
+
+\section{Sprint 2}
+\label{sprint2pb}
+
+\begin{itemize}
+  \item [\textbf{A4}] As a developer, I want to have a schemaless database, so I don't have to change any code every time the objects change.
+  \item [\textbf{G1}] As a user, I want my saved actions to be replicated on to the server within one second, so that my actions will not be lost and the client and server is consistent
+  \item [\textbf{G4}] As a user, I want the changes in console reflect in graphical user interface and likewise, so that I can have overview of the changes I made and I can understand easily, how the system works. In addition this will ensure consistency between the console and graphical interface.
+  \item [\textbf{G4a}] - As a user, I want commands issued in console to update information in graphical UI.
+  \item [\textbf{G4b}] - As a user, I want the actions in graphical UI to print corresponding commands to console.
+  \item [\textbf{G5}] As a user, I want access to a tutorial, so that I can learn to work with the system easily.
+  \item [\textbf{G6}] As a user, I want to be able to display the currently available commands in the console, so I can easily see what I can do with the objects at hand.
+  \item [\textbf{G9}] As a user, I want the system to be able to autocomplete the commands, and display a list of the available commands on a given object that can be chosen.
+  \item [\textbf{G10}] As a user, I want the graphical user interface to indicate which object or group of object I’m working on.
+  \item [\textbf{G10a}] - A newly created object should also be highlighted in the user interface.
+  \item [\textbf{G11}] As a user, I want the console to be able to cycle through objects in an array one at the time, and for the currently selected object to be displayed on the gui.
+  \item [\textbf{G12}] As a user, I want the system to show me details of a record, after I click on a record.
+  \item [\textbf{G13}] As a user, I want the system to highlight the changes my by other users, while I work with the system.
+  \item [\textbf{G14}] As a user I want to be able to maintain an uninterrupted workflow in the web UI when changes are performed by other users.
+  \item [\textbf{G15}] As a user I want to be able to sort the items or find an item, so that i can work with the data effectively
+  \item [\textbf{D3}] As a user, I want to be able to edit information on a specific book and save these changes using both the console and graphical interface.
+  \item [\textbf{D4}] As a user, I want to be able to search for a specific book in the system, so that I can watch the information on it using both the console and graphical interface.
+  \item [\textbf{D6}] As a user, I want to be able to register a new customer in the system, so that customers can be saved in the system. This should be possible in both the console and the graphical interface.
+  \item [\textbf{D7}] As a user, I want to be able to register when a customer borrows a book, so that the information is stored in the system. This should be possible in both the console and the graphical interface.
+  \item [\textbf{D8}] As a user, I want to be able to edit the information on a specific borrowing of a book, so that any changes can be recorded. This should be possible in both the console and the graphical interface.
+  \item [\textbf{D9}] As a user, I want to be able to list all the books currently borrowed, so that I can get information on each of them. This should be possible in both the console and the graphical interface.
+  \item [\textbf{D10}] As a user, I want to be able to reserve a book for a customer, so that customers can request and reserve certain books. This should be possible in both the console and the graphical interface.
+  \item [\textbf{D11}] As a user, I want to be able to list all the reservations currently in the system. This should be possible in both the console and the graphical interface.
+  \item [\textbf{D12}] As a user, I want to be able to view reservations on specific books, so that I can see if a specific book is available for borrowing at the moment. This should be possible in both the console and the graphical interface.
+  \item [\textbf{D13}] As a user, I want to be able to order new books for the library using both the console and the graphical interface.
+\end{itemize}
+
+\section{Sprint 3}
+\label{sprint3pb}
+
+\begin{itemize}
+\item G9 - As a user, I want to be able to navigate the application like a directory structure, using simple commands to change the current directory.
+\item G10 - As a user, I want to be able to store objects in variables in the console, and to be able to use these later on.
+\item G11 - As a user, I want the content of the GUI to represent the current directory, so that I can easily see which directory I am currently in.
+\item G12 - As a user, I want to be able to issue a command to see the properties of a specific object both from the console and in the GUI
+\item G13 - As a user, I want to be able to call a specific function on a group of objects.
+\item G14 - As a user, I want to be able to perform mathematical operations on numerical attributes of the single or groups of objects.
+\item G15 - As a user, I want to be able to change current attributes or dynamically add new ones to the objects.
+\item G16 - As a user, I want to be able to add entire JSON objects as attributes of other objects. For example I want to be able to extract an author object and add this object to multiple book objects.
+\item G17 - As a user, I want the changes I do on the objects from the console to be replicated to GUI, so that the GUI always presents updated information.
+\item G18 - As a user, I want to be able to work locally, so that I can save changes to the server when I want to.
+\item G19 - As a user, I want to be able to filter a list of objects from the console, so that I can view only the books I am interested in.
+\end{itemize}
+
+\section{Sprint 4}
+\label{sprint4pb}
+
+\begin{itemize}
+\item G13 - As a user, I want to be able to call a specific function on a group of objects.
+\item G19 - As a user, I want to be able to filter a list of objects from the console, so that I can view only the books I am interested in.
+\item G20 - As a user, I want to be able to add new objects to the system using a simple syntax.
+\item G21 - As a user, I want to be able to rmete objects from the system using a simple syntax.
+\item G22 - As a user, I want to be able to define and execute scripts.
+\end{itemize}
+

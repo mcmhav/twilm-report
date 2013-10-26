@@ -1,0 +1,160 @@
+\documentclass[10pt,a4paper,oneside]{report}
+
+\usepackage[section] {placeins}
+
+\usepackage[norsk,english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\selectlanguage{english}
+
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{wrapfig}
+\usepackage{pbox}
+
+\usepackage{fullpage}
+\usepackage{verbatim}
+\usepackage{url}
+\usepackage{minitoc}
+\usepackage{cite}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{color}
+\usepackage{caption}
+
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{1.5ex}
+
+\usepackage[acronym]{glossaries}
+
+\fontfamily{ptm}\selectfont
+
+\usepackage{hyperref}
+\hypersetup{
+    bookmarks=true,
+    unicode=true,
+    pdftoolbar=true,
+    pdfmenubar=true,
+    pdffitwindow=false,
+    pdfstartview={FitH},
+    pdftitle={Twilm Report},
+    pdfauthor={Fredrik Persen Fostvedt, Martin Havig},
+    pdfsubject={Customer Driven Project report},
+    %pdfcreator={Creator},
+    %pdfproducer={Producer},
+    pdfkeywords={ntnu} {Twilm},
+    pdfnewwindow=true,
+    colorlinks=false,
+    linkcolor=blue,
+    citecolor=blue,
+    filecolor=blue,
+    urlcolor=blue
+}
+
+
+\bibliographystyle{plain}
+
+\begin{document}
+
+%TITLE
+\thispagestyle{empty}
+\begin{center}
+	\vspace{\stretch{0.7}}
+	{\Huge Twilm} \\
+	\medskip
+	{\LARGE ONELINER ABOUT THE PROJECT HERE} \\
+	\vspace{\stretch{0.2}}
+	\includegraphics[width=2.5in]{image/logo-ntnu.pdf} \\
+\end{center}
+{\Large \textsc{Specialization project? =P}} \\
+{\large \today \\Team: Fredrik Persen Fostvedt and Martin Havig}
+{\large \\Supervisor: Heri Ramampiaro}
+\newpage
+
+\renewcommand{\abstractname}{Acknowledgements}
+\begin{abstract}
+ Thanks Mum!
+\end{abstract}
+
+%ABSTRACT
+\renewcommand{\abstractname}{Abstract}
+\begin{abstract}
+
+Skal brukes til å fange leserens
+oppmerksomhet
+Skal summere innholdet av raporten
+Bør være mellom 1/2 - 1 side lang
+Bør innholde: kontekst, mål, og hva
+som er blitt oppnådd. Også hva som er
+nytt / ny oppdagelse bør være med
+
+Some awesome abstract, example:
+
+This report will give the reader an insight into the details of the design, development and implementation of the task given in the course TDT4290 - Customer Driven Project, taught at NTNU - the Norwegian University of Science and Technology. The customer is Netlight and they have presented the group with the task of breathing new life into the console.
+
+Web-applications these days are leaning against a mouse-controlled, web-fronted design. This has taken away much of the efficiency of power users, who have traditionally used terminal applications on a daily basis, and had the system in their fingers.
+
+A hybrid web-fronted/console design would be a possible solution to this problem: The power user can make use of their full potential through a console whilst the objects are presented in the web-interface.
+
+This is a proof-of-concept task, and all research done will be documented and used to argue for and against the solutions used and not used. Everything from the planning of the project startup and preliminary-study to the complete conclusion is described in this report.
+
+The approach to investigate and solve this problem starts with a thorough study of relevant technologies, and how this can be made possible. The conclusion of this study allows us to create a system which showcases the real potential of our soution. Through this whole process we have a close work-relationship with our customer to ensure his desires and expectations for the project are met, and that our conclusions and findings boosts future research in this field.
+
+\end{abstract}
+
+
+%Acknowledgments
+\chapter*{Acknowledgments}
+Some awesome Acknowledgments
+
+Vet ikke hva som er best, acknowledgments før eller etter abstract, tar det l8er
+
+I hoved-kapitlene beskriv selve forskningen,
+og dens resultater. Inkluder nok teknisk
+detalj slik at leseren klrer å bedømme
+nøyaktigheten og originaliteten av arbeidet
+ditt.
+Denne beskrivelsen av forskningen bør være
+den største delen av avhandlingen din,
+hvordan den er delt inn i kapitler vil avhenge
+av arbeidet ditt.
+
+
+\chapter*{Preface}
+Some awesome preface, example:
+
+This report serves as the primary piece of documentation of our attendance to the TDT4290 Customer Driven Project course, hosted at the Department of Computer and Information Science at the The Norwegian University of Science and Technology, in the autumn of the year 2012.
+
+Our customer was the Netlight consulting company represented by Peder Kongelf.
+
+We would like to thank our supervisor, Zhu Meng, for his feedback on our work, and also Peder Kongelf for presenting us with the opportunity to work on such an interesting project.
+
+\setcounter{tocdepth}{1}
+\dominitoc
+\dominilof
+\dominilot
+\tableofcontents
+\clearpage
+\listoffigures
+\listoftables
+
+%CHAPTERS
+% \input{chapter/01-introduction}
+% \input{chapter/02-prestudy}
+% \input{chapter/03-requirements}
+% \input{chapter/04-design}
+% \input{chapter/05-implementation}
+% \input{chapter/06-test-plan}
+% \input{chapter/07-architecture}
+
+% \input{chapter/90-evaluation}
+% \input{chapter/91-conclusion}
+
+%\input{chapter/99-appendices}
+
+\addcontentsline{toc}{chapter}{References}
+\bibliography{references}
+
+\end{document}
