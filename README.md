@@ -1,4 +1,4 @@
 twilm-report
 ============
 
-Twilm report
+To make: './makefile.bat'
