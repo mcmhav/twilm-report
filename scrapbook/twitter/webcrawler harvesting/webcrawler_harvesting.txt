@@ -1,0 +1,196 @@
+Webcrawling Harvesting of Twitter
+=================================
+Search queries are created to find tweets about each movie. It is hypothesised that the set of tweets returned contains more than 0 tweets about each movie.
+
+
+HTTPS Identification
+====================
+
+
+
+Searching
+=========
+This section will examine how twitters https search requests work. This will be done by browsing twitter.com logged in as a user and examining it Google Chrome Developer Tools (GCDT) [2] as the site is being browsed and search requests are being made.
+
+The goal of this examination is to provide a basis for creating a webcrawler that can search twitter automatically.
+
+
+Initial search request
+----------------------
+Tweets can be found using an HTTPS search request with the search query in the format URLE [1]. Searching for <URLE search query> can be done with the following request.
+
+	https://twitter.com/search?q=<URLE search query>&src=typd
+
+In the rest of the discussion of search, we'll be using the following query as an example. This is a search request for the search query "The Dark Knight Rises 2012".
+
+	https://twitter.com/search?q=the%20dark%20knight%202012&src=typd
+
+Using the Google Chrome Developer Console [2] we can find the DOM elements on the search page that contain the tweets that have been returned, using the select element tool. We'll refer to this as the tweets container.
+
+	<ol class=​"stream-items js-navigable-stream" id=​"stream-items-id">​
+
+The first element contained within the tweets container is a summary of the users who have posted the tweets returned by the search, and is not of interest.
+
+	<li class=​"js-stream-item stream-item  stream-user-gallery separation-module">​…​</li>​
+
+The rest of the li-elements in the tweets container contain tweets. They have the following format
+
+	<li class=​"js-stream-item stream-item stream-item expanding-stream-item" data-item-id=​"397530125715402752" id=​"stream-item-tweet-397530125715402752" data-item-type=​"tweet">​…​</li>​
+
+Using jQuery [3] and the Javascript Console in GCDT [2], we can determine how many tweets have been returned. To do this, we define a javascript function that selects the tweets container dom element, gets a list of it's children and counts the number of items in this list and subtract 1 for the user summary element.
+
+	> number_of_tweets_in_search_results = function(){ return $("li[data-item-type='tweet']").size(); }
+	> number_of_tweets_in_search_results();
+	15
+
+
+Obtaining more search results
+-----------------------------
+In order to obtain more search results it is necessary to scroll to the bottom of the page for the browser to make an XHR request to retrieve more tweets. As the scrolling is done, XHR requests can be monitored in the Network tab of GCDT. Consecutive xhr requests are sent as scrolling is done several times.
+
+	Javascript Console:
+	> number_of_tweets_in_search_results();
+	15
+
+	Network Console > XHR:
+	Request URL:https://twitter.com/i/search/timeline?q=the%20dark%20knight%202012&src=typd&include_available_features=1&include_entities=1&last_note_ts=0&scroll_cursor=TWEET-360758159364734978-399762568459612160
+
+
+	Javascript Console:
+	> number_of_tweets_in_search_results();
+	35
+
+	Network Console > XHR:
+	Request URL:https://twitter.com/i/search/timeline?q=the%20dark%20knight%202012&src=typd&include_available_features=1&include_entities=1&last_note_ts=0&oldest_unread_id=0&scroll_cursor=TWEET-338938038694584320-399762568459612160
+
+	Javascript Console:
+	> number_of_tweets_in_search_results();
+	50
+
+	Network Console > XHR:
+	Request URL:https://twitter.com/i/search/timeline?q=the%20dark%20knight%202012&src=typd&include_available_features=1&include_entities=1&last_note_ts=0&oldest_unread_id=0&scroll_cursor=TWEET-316893896573607937-399762568459612160
+
+	Javascript Console:
+	> number_of_tweets_in_search_results();
+	65
+
+As the requests are sent and processed, tweets are appended to the tweets container. All that is needed in order to keep receiving tweets is to keep sending requests of this pattern. Examining the requests attributes, they consists of the following variables and constants.
+
+	<constant> src=typd
+	<constant> include_available_features=1
+	<constant> include_entities=1
+	<constant> last_note_ts=0
+	<constant> oldest_unread_id=0
+	<variable> scroll_cursor=TWEET-<18 character number>-<18 character number>
+
+At this point a snapshot of the html page is taken [A3]. The only attribute that seems to variate with each request is scroll_cursor attribute. This means that the piece of javascript code that is making the requests somehow has access to the information contained in this changing attribute. A quick dom tree search for 'TWEET-' shows us that scroll_cursor is contained by a div with the class 'stream-container' under under the attribute 'data-scroll-cursor' and 'data-refresh-cursor'.
+
+	<div class=​"stream-container " data-scroll-cursor=​"TWEET-311337362556846081-399762568459612160" data-refresh-cursor=​"TWEET-396773826303762432-399762568459612160">​
+
+By making another scroll to the bottom of the page, a request with scroll_cursor information from one of these attributes is sent. As is shown, the attribute 'data-scroll-cursor' is responsible for what goes in the attribute scroll_cursor.
+
+	Network Console > XHR:
+	https://twitter.com/i/search/timeline?q=the%20dark%20knight%202012&src=typd&include_available_features=1&include_entities=1&last_note_ts=0&scroll_cursor=TWEET-311337362556846081-399762568459612160
+
+
+Extracting tweets from the results
+----------------------------------
+Now that all the dom elements containing tweets can be retrieved, the relevant data can be retrieved from each element.
+
+Relevant data
+	User - the user who posted the tweet
+
+	Content
+		Text - the text contained in the tweet
+		URL - the url that the tweet is linking to, if any
+		Hashtags - the hashtags that are contained in the tweet, if any
+
+
+User
+....
+The user can be found in the header of the tweet. Using the GCDT Select, it can be extracted from the page. It will be referred to as the user element.
+
+	[pic 01_tweet_user_field]
+	Shows the user field in blue
+
+	<span class="username js-action-profile-name"><s>@</s><b>BatmanMemorabil</b></span>
+
+Using jQuery, a function can be created to count the occurances of the class "username js-action-profile-name".
+
+	> number_of_tweet_user_element_occurances = function(){ return $("span.username.js-action-profile-name").size() }
+
+Correlating this with the number of tweets in the search result, shows that this is the right class to crawl for.
+
+	> number_of_tweet_user_element_occurances();
+	119
+	> number_of_tweets_in_search_results();
+	119
+
+Content
+....
+The text can be found in the center of the tweet in the same container as the URL. GCDT Select extracts it from the page. It will be referred to ass the tweet content element.
+
+	[pic 01_tweet_text_and_url_field]
+	Shows the text and url field in blue
+
+This gives us the following dom element.
+
+	<p class="js-tweet-text tweet-text">
+		<strong>The Dark Knight</strong> Rises (DVD, <strong>2012</strong>)
+		<a href="http://t.co/p8pr9wqC4k" rel="nofollow" dir="ltr" data-expanded-url="http://ift.tt/17i5F5V" class="twitter-timeline-link" target="_blank" title="http://ift.tt/17i5F5V">
+			<span class="tco-ellipsis"></span>
+			<span class="invisible">http://</span>
+			<span class="js-display-url">ift.tt/17i5F5V</span>
+			<span class="invisible"></span>
+			<span class="tco-ellipsis">
+				<span class="invisible">&nbsp;</span>
+			</span>
+		</a>
+		<a href="/search?q=%23batman&amp;src=hash" data-query-source="hashtag_click" class="twitter-hashtag pretty-link js-nav" dir="ltr">
+			<s>#</s><b>batman</b>
+		</a>
+	</p>
+
+
+Using jQuery, a function can be created to count the occurances of the class "js-tweet-text tweet-text".
+
+	> number_of_tweet_content_element_occurances = function(){ return $("p.js-tweet-text.tweet-text").size() }
+
+Correlating this with the number of tweets in the search result, shows that this is the right class to crawl for.
+
+	> number_of_tweet_content_element_occurances();
+	119
+	> number_of_tweets_in_search_results();
+	119
+
+Text
+....
+Everything in paragraphs with the class "js-tweet-text tweet-text" that is not a link, is the tweet text.
+
+	<strong>The Dark Knight</strong> Rises (DVD, <strong>2012</strong>)
+
+URL
+...
+Every link with the class "twitter-timeline-link" within paragraphs with the class "js-tweet-text tweet-text" is a tweet url.
+
+	<a href="http://t.co/p8pr9wqC4k" rel="nofollow" dir="ltr" data-expanded-url="http://ift.tt/17i5F5V" class="twitter-timeline-link" target="_blank" title="http://ift.tt/17i5F5V">…​</a>
+
+Hashtag
+.......
+Everything contained within a link with the class "twitter-hashtag" within paragraphs with the class "js-tweet-text tweet-text" is a tweet hashtag.
+
+	<a href="/search?q=%23batman&amp;src=hash" data-query-source="hashtag_click" class="twitter-hashtag pretty-link js-nav" dir="ltr">
+			<s>#</s><b>batman</b>
+	</a>
+
+
+
+References
+[1] URLE reference - http://www.w3schools.com/tags/ref_urlencode.asp
+[2] Google Chrome Version 30.0.1599.101 Developer Tools - GCDT - https://developers.google.com/chrome-developer-tools/
+[3] jQuery - http://jquery.com/
+
+Appendix
+[A1] Twitter search - HTML > full page - https://twitter.com/search?q=visioneers%202008&src=typd
+[A2] Twitter search - HTML > DOM element with tweets returned - https://twitter.com/search?q=visioneers%202008&src=typd
+[A3] Twitter search - HTML > full page after 3 scroll requests - https://twitter.com/search?q=visioneers%202008&src=typd
