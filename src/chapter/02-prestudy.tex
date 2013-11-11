@@ -2,130 +2,179 @@
 
 \minitoc
 
-Review  of  relevant    literature; review  of  similar software    products    or  tools.
+Review of relevant literature;
+review of similar software products or tools.
 
-I “survey”-kapittelet presenter en oversikt over
-tidligere relevant arbeid inkludert artikler og
-evt. eksisterende produkter. Vurder kritisk
-styrker og svakheter av tidligere arbeid
+I “survey”-kapittelet presenter en oversikt over tidligere relevant arbeid inkludert artikler og evt. eksisterende produkter.
+Vurder kritisk styrker og svakheter av tidligere arbeid
 
-This chapter is ment to outline the preliminary study of our project. This includes what our technologies aims to achieve and how we will use them to achieve this. Beyond this, the chapter will show the mythology the team chose to use and why this was a natural choice to go with. Research in software testing methods will be included and the best fit for this project. Since this is a prototype project, a considerable time is put into this part of the project, to assure the team makes good choices when it comes to technologies to use.
+
+
+This chapter is ment to outline the preliminary study of our project. This includes
+    - what our technologies aims to achieve
+    - how we will use them to achieve this.
+Beyond this, the chapter will show the mythology the team chose to use and why this was a natural choice to go with. Research in software testing methods will be included and the best fit for this project. Since this is a prototype project, a considerable time is put into this part of the project, to assure the team makes good choices when it comes to technologies to use.
 
 \clearpage
 
-\section{Set to work with (another name perhaps)}
-Describes the existing stuff from twitter and twitter
+% \section{Set to work with (another name perhaps (or maybe completely removed))}
 % About Netflix
-\subsection{Netflix}
-blablabla
+\section{Movie recommendation}
+This is the prestudy for the movie recommendation part of the system. We will look at existing recommendations systems, datasets to be explored and how to explore this set.
 
-\subsubsection{Dataset}
-\subsubsection{somethingsomething}
-\subsubsection{somethingsomething}
+
+\subsection{Netflix}
+% http://en.wikipedia.org/wiki/Netflix
+% http://electronics.howstuffworks.com/netflix2.htm
+% http://blog.jimjh.com/static/downloads/2013/05/12/netflix.pdf
+
+Netflix is a on-demand Internet streaming media. It started out as a DVD-rental business, but moved over to a more Internet based business model in 1999 and have from then on had a great success in the subscription-based digital distribution service. To improve customer satisfaction they developed a personalized video-recommendation system called Cinematch. About 60\% of the Neflix users select their next movie or TV-show based on this recommendation[------------------2---------------], so it is important that this recommendation system manages to capture the users movie and TV-show preferences and feed back fitting movies and TV-shows.
+
+\subsubsection{Cinematch}
+\label{subsec:Cinematch}
+% http://electronics.howstuffworks.com/netflix2.htm
+This recommendation system is self-updating. It searches the Cinematch database for users who have rated the same movie, determents which of these again have rated a second movie and with this calculates likelihood that users who like the first also likes the second one.
+
+
+\subsection{The Dataset}
+% Pages used:
+% http://www.timelydevelopment.com/demos/NetflixPrize.aspx
+% http://dl.acm.org/citation.cfm?id=1536622&jmp=cit&coll=portal&dl=ACM#CIT
+% http://www.the-ensemble.com/content/netflix-prize-movie-similarity-visualization
+% http://en.wikipedia.org/wiki/Netflix_Prize
+% http://blog.jimjh.com/static/downloads/2013/05/12/netflix.pdf
+% http://en.wikipedia.org/wiki/Root-mean-square_deviation
+
+Netflix held a competition where the contest was made to help Netflix improve their movie recommendation system. The team that could beat Netflix's own collaborative filtering system by more than 10\% could win one million dollars. To measure the score root-mean-square deviation (RMSE) was used, which is used to measure the difference between the values predicted or estimated and the actual values observed. The RMSE of Cinematch~\ref{subsec:Cinematch} was at 0,9525.
+
+For this competition Netflix produced a training dataset based on user ratings from their own database. It contains 100 480 507 ratings from 480 189 unique users on 17 770 movies. The data is split up into 17 770 files, one for each movie, where the data is a triplet of the form <user, rating, date-of-rating>. The user-field and rating-field is an integer, while the date-of-rating-field is on the ISO 8601 form, year-month-day. The different movies have different amounts of ratings, and the different users have rated different amounts of movies.
+
+With the training dataset the teams system was supposed to predict ratings on a "qualifying"-dataset, which contained 2 817 131 triplets with only user ids, movie ids and dates. This "qualifying"-datase must be disregarded since the actual ratings for this dataset was only know to the jury of the competition and is nowhere to be found. Instead a probe set is provided with 1 408 385 users which can be used to remove these from the training set to test predictions based on the test set. This probe set possesses similar statistical values as the qualifying set, so it will give a good prediction of how the result actually would have scored in the competition.
+
+\begin{center}
+\begin{tabularx}{\textwidth}{ l X }
+\hline
+\textbf{Ratings} & 100 480 507 \\ \hline
+\textbf{Customers} & 480 189 \\ \hline
+\textbf{Movies} & 17 770 \\ \hline
+\textbf{Qualifying set} & 2 817 131 \\ \hline
+\textbf{Probe set} & 1 408 385 \\ \hline
+\end{tabularx}
+\captionof{table}{Dataset statistics}\label{tab:nfDatasetStat}
+\end{center}
+
+
+\subsubsection{Dataset statistics}
+% http://en.wikipedia.org/wiki/Principal_components_analysis
+% http://en.wikipedia.org/wiki/Singular_value_decomposition
+% http://en.wikipedia.org/wiki/Latent_semantic_indexing
+
+To better understand the dataset, some statistics about the dataset was produced.
+
+\begin{figure}[H]
+\includegraphics[width=5in]{image/ratingdistr.png}
+\centering
+\caption{Rating distribution}
+\label{figure:ratingdistr}
+\end{figure}
+
+Rating distribution is shown in figure~\ref{figure:ratingdistr}. 1/3 of the ratings are 4, and rating 1 and 2 only makes up for 13\% of the rating distribution. 3 and 5 are quite similarly represented with 28\% and 26\% respectively. It can from this be assumed a greater prediction towards the higher ratings, and predictions towards lower ratings should not be done lightly.
+
+\begin{figure}[H]
+\includegraphics[width=5in]{image/avgratingdistr.png}
+\centering
+\caption{Average rating distribution}
+\label{figure:avgratingdistr}
+\end{figure}
+
+\begin{figure}[H]
+\includegraphics[width=5in]{image/avgratdistrover.png}
+\centering
+\caption{Average rating distribution}
+\label{figure:avgratdistrover}
+\end{figure}
+
+
+Average rating distribution is shown in figure~\ref{figure:avgratingdistr}. The upper graph shows average rating distribution of the customers, while the bottom one shows the distribution per movie. Both graphs have quite similar form. Both customers and movies peak at a rating of 3,5, which is natural. The second second highest point is for the customers at 4 and movies at 3, which is interesting
+
+
+\begin{figure}[H]
+\includegraphics[width=5in]{image/avgmovierating.png}
+\centering
+\caption{Average movie rating distribution}
+\label{figure:avgmovierating}
+\end{figure}
+
+Average movie rating distribution is shown in figure~\ref{figure:avgmovierating}.
+
+
+% About Classification
+\subsection{Classification}
+pages:
+% http://www.netflixprize.com/assets/GrandPrize2009_BPC_PragmaticTheory.pdf
+% http://www.netflixprize.com/assets/GrandPrize2009_BPC_BellKor.pdf
+% http://www.netflixprize.com/assets/GrandPrize2009_BPC_BigChaos.pdf
+% http://www2.research.att.com/~volinsky/netflix/Bellkor2008.pdf
+% http://public.research.att.com/~volinsky/netflix/cfworkshop.pdf
+% http://public.research.att.com/~volinsky/netflix/BellKorICDM07.pdf
+% http://www2.research.att.com/~volinsky/netflix/ProgressPrize2007BellKorSolution.pdf
+% http://public.research.att.com/~volinsky/netflix/sigkddexp.pdf
+% http://www.netflixprize.com//leaderboard
+% https://sites.google.com/site/xlvector/netflixprize/papers
+
+
+There are two basic problems when analysing very large datasets:
+    - Writing the code correctly.
+    - The performance (i.e. speed at which it runs).
+
+
+Something about why and which classification alg to use
+
+\subsubsection{Conclusion}
+% End Classification
+
+
+
+\subsection{Algorithms to solve the problem}
+% http://scenic.princeton.edu/network20q/wiki/index.php?title=Q4:_How_does_Netflix_recommend_movies%3F
+% http://blog.jimjh.com/static/downloads/2013/05/12/netflix.pdf
+There were 51 051 contestants on 41 305 different teams competing in the Netflix-Prize competition, and a lot of these contestants shared their solution through code repositories such as GitHub (--------------something about github here?--------------). Since many of these solution scored very well on the contest it was natural to explore these and use their solution to test potential improvement in collaboration with social media data.
+Here we explore some of the better solutions and how and why these could be used to our benefit.
+
+https://github.com/n8j/school/tree/master/DataMiningCSEP546/HW1
+
+
+
+BellKor's Pragmatic Chaos - RMSE = 0.8567
+
+% End Netflix
+
+
+
+
+
+% About Weka
+\section{Weka}
+\subsection{Weka}
+% End Weka
 
 % About Twitter
-\subsection{Twitter}
-\subsubsection{Twitter-API}
-\subsubsection{somethingsomething}
-\subsubsection{somethingsomething}
+\section{Twitter}
+Describes the existing stuff from twitter and twitter-api
+\subsection{Twitter-API}
+\subsection{somethingsomething}
+\subsection{somethingsomething}
+% End Twitter
 
-\section{Concept}
-Should maybe be in the intro?
 
-The efficiency of the power user can always be increased. And one way of achieving this efficiency boost is through adding new functionality, but for bigger systems, this functionality adding can prove to be troublesome. Switching between the mouse and the keyboard can add up to be time-consuming in the long run, and also inefficient. With an environment where the user then instead can construct their own functionality, and keep their hands on the keyboard, can add tremendous value to the user experience. This can be made possible with a scripting environment, where the user themselves will be given the opportunity to work through a console on their graphical user interface. This can release them from the mouse and let them work more efficiently on the tasks at hand.
+
 
 \section{Similar solutions (Evaluation of State-of-the-art)}
+
 In this section, we will discuss similar solutions and their relevance to our project.
 
 If this is not state of the art stuff, maybe separate this and that
 
-\begin{center}
-\begin{tabularx}{\textwidth}{ l X }
-\hline
-\textbf{Product} & Counter-Strike \\ \hline
-\textbf{Concept} & This game features a console that offers a wide variety of commands, including:
-- Changing the game options
-- Altering the game world
-- Player actions and cheats
-- Multiplayer communication and administration \\ \hline
-\textbf{Intended use} & In a game, this functionality eases development and debugging, as well as increasing the modability and long-term value for players. \\ \hline
-\textbf{Similar products} & Similar consoles also exist in other games, such as Carmageddon TDR 2000. \\ \hline
-\textbf{Relationship to our project} & Like our project, the Counter-Strike console allows for using a DSL to work with objects in its given domain. It shows that the console can be a powerful tool that comes at a relatively small development cost compared to designing a GUI with a similar feature set. \\ \hline
-\end{tabularx}
-\captionof{table}{Counter-Strike Console}\label{tab:csc}
-\end{center}
-
-\begin{center}
-\captionof{figure}{Counter-Strike Console}\label{cscimage}%
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\textwidth}{ l X }
-\hline
-\textbf{Product} & Blender \\ \hline
-\textbf{Concept} & This 3D morming software features a Python console with access to the morm data, animation data, etc. It is also common to extend the program using custom Python scripts. \\ \hline
-\textbf{Intended use} & In a creative suite, this type of functionality can be used to perform operations that are not directly supported in the user interface. It is particularly useful for programmatically executing repetitive tasks that can be automatized. \\ \hline
-\textbf{Similar products} & Similar solutions also exist in other creative tools, including a Python console in GIMP and Nyquist prompt in Audacity. \\ \hline
-\textbf{Relationship to our project} & The Blender console exposes the underlying data structures to the user via an already widespread, powerful scripting language. This enables the users themselves to expand upon the functionality of the program and perform operations that would be prohibitively time-consuming to execute manually. \\ \hline
-\end{tabularx}
-\captionof{table}{Blender Console}\label{tab:blenderc}
-\end{center}
-
-\begin{center}
-\captionof{figure}{Blender Console}\label{blendercimage}%
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\textwidth}{ l X }
-\hline
-\textbf{Product} & Firefox \\ \hline
-\textbf{Concept} & This web browser features a Web Console where it is possible to execute JavaScript commands with access to the objects on the current page. \\ \hline
-\textbf{Intended use} & In a web browser, this is useful for web development, prototyping and debugging for websites that use JavaScript. \\ \hline
-\textbf{Similar products} & Similar features also exist in a few other browsers, such as Google Chrome. \\ \hline
-\textbf{Relationship to our project} & Like our project, the Firefox Web Console offers access to the objects on a web page. It is possible for us to use the same principle, but for features that are useful for the end user and not just the developer. \\ \hline
-\end{tabularx}
-\captionof{table}{Firefox Web Console}\label{tab:firefoxc}
-\end{center}
-
-\begin{center}
-\captionof{figure}{Firefox Web console}\label{firefoxcimage}%
-\end{center}
-
-
-\begin{center}
-\begin{tabularx}{\textwidth}{ l X }
-\hline
-\textbf{Product} & try.mongodb.org \\ \hline
-\textbf{Concept} & This database website features a console where the user can execute commands on a dummy database. \\ \hline
-\textbf{Intended use} & On this website, the console serves as an educational and demonstrational tool for people who don't want to invest too much time in learning about the database system. \\ \hline
-\textbf{Similar products} & Comparable consoles also exist to allow the user to execute arbitrary queries in database administration tools such as PHPMyAdmin. \\ \hline
-\textbf{Relationship to our project} & This console allows the user to execute queries directly on a database, and interestingly it allows input of objects with arbitrary structure. We will require persistent storage of our objects on a server, so this technology may be relevant. \\ \hline
-\end{tabularx}
-\captionof{table}{MongoDB Console}\label{tab:mongodbc}
-\end{center}
-
-\begin{center}
-\captionof{figure}{MongoDB Console}\label{mongodbcimage}%
-\end{center}
-
-
-\begin{center}
-\begin{tabularx}{\textwidth}{ l X }
-\hline
-\textbf{Product} & web-console.org \\ \hline
-\textbf{Concept} & This project provides shell access to a server through the browser window over HTTP with support for real-time communication. \\ \hline
-\textbf{Intended use} & This system is intended to be used for server administration purposes when HTTP may be the only feasible method of connection. \\ \hline
-\textbf{Similar products} & Similar solutions include access to unix Shells via VPN. \\ \hline
-\textbf{Relationship to our project} & If, in our project, the server is designed to support user input using a DSL in a terminal window, then a solution like this one may provide the necessary functionality to embed a useful console into a Web UI. \\ \hline
-\end{tabularx}
-\captionof{table}{Web-Console}\label{tab:webconsolec}
-\end{center}
-
-\begin{center}
-\captionof{figure}{Web- Console}\label{webconsolecimage}%
-\end{center}
-
-These products serve to illustrate that consoles are still applicable for purposes including software development, debugging, learning, extendability and where there is a high demand for flexibility. They can enhance productivity and provide features that would be prohibitively complex or expensive to implement in a graphical user interface. They also show that consoles do exist on the web, and that this is a field that is worth closer examination.
 
 
 \section{Development language and technologies (maybe not needed)}
@@ -139,19 +188,24 @@ BASE \cite{pritchett} instead of ACID.
 Document NoSQL databases seemed like they would fit our project quite well.
 \cite{nosql-databases, nosql-article}
 
+
 \subsubsection*{SQL}
 The traditional SQL databases is by far the most common way of storing data in the world today. They store data in columns and tables, and add relationships between these tables. As a result they are referred to as relational databases. They focus on query optimization techniques and most of them use some kind of structured query language. Typically supports 4 basic operations which is select, update, rmete and insert. SQL databases are schema defined and follows the ACID(atomicity, consistency, isolation, durability) principles.
 \cite{ramakrishnan2003database}
 
+
 \subsubsection{Database Alternatives}
 Below, some of the database implementation available to us are discussed. We mainly investigated document NoSQL databases and regular SQL databases. The most appealing options are introduced below.
+
 
 \subsubsection*{MongoDB}
 MongoDB is a large scale, high availability, robust system. It is a document NoSQL system, so instead of storing the data in tables as you would in MySQL, the data is stored in a document based fashion through for instance JSON with dynamic schemas. This makes the DB easier scalable horizontally. But the mongoDB still possesses the some of the great properties from relational databases, such as indexes, dynamic queries and updates. With mongoDB it is easy to map objects to programming language data types, which makes the DB easy to work with. The embedded documents and arrays makes the join operations less importance, which result in the ability to make reads and writes faster. JavaScripts can also be included in the queries. This makes mongoDB an efficient and high speed data base for storing objects and fetching to a system. MongoDB also has its own access console, where you can use scripting with Javascript language. \cite{mongodb-intro}
 
+
 \subsubsection*{CouchDB}
 CouchDB stores the data in JSON documents(NoSQL) object-oriented, which can be accessed through HTTP. The data documents can be transformed and data fetched with JavaScript. CouchDB has a lot of built in features which makes web development with CouchDB easier. It scales well through replication and is a consistent system, where CouchDB prioritizes the data of the user. CouchDB is multiversion concurrency control based, this is good for intense versioning, offline databases which resync later and master to master replication. The interface to the database is REST based, which is a useful feature when you are developing a web- application.
 \cite{couchdb-about, couchdb-technical}
+
 
 \subsubsection*{MySQL}
 MySQL is the most popular database in the world of open databases. This is because of its high performance, reliability and ease of use. It should therefore be considered for the question of which database system to use. In opposition of the two database systems described above, MySQL is a relational database. This makes it more troublesome to work, with when it comes to JavaScript, than the other two. It is not as well integrated with JSON and will need parsing to be able to work with the clients. This alone is a hard negative towards MySQL.
@@ -164,71 +218,26 @@ We decided to go for CouchDB in this project. We are working in a web domain, wh
 Relational databases is the traditional way to deploy databases and they are in widespread use. In many situations they are extremely useful. However relational databases requires you to morm your data up front, before you save anything to the database. Failing to comply with these restrictions will lead to failure, and it is sometimes difficult to create this kind of morm that actually fits real world data. Even though objects may share common attributes, there are bound to be some attributes that are different. This is difficult to plan for in advance, and its the main reason we will not be using a SQL database for this project. For the database, we originally chose to use MongoDB as our document NoSQL database. This was due to the fact that it was better documented and seemed better suited for the system as we originally planned it. Some of the features CouchDB offered wasn't thought of as necessary for the project at the time. During the implementation process we however came to the conclusion that CouchDB actually was a better fit. This was mostly due to its ability to act as an standalone system on a server without the need for other supporting server technologies like Node.js or ASP.NET. Also, the fact that it automaticly creates a RESTful API to access the database turned out to save us a lot of time. As a result of these discoveries we changed to CouchDb during the third sprint.
 
 
-\subsection{Client-side web application technologies}
+
+\subsection{Programming languages}
 Our main focus will be on the client part of the application, since this is the experimental part of our system, and it is this part that is visible to the user through the web browser. It is therefore important to choose a suitable technology for this.
 
-\subsubsection{Adobe Flash}
-
-\begin{wrapfigure}{r}{.15\textwidth}
-\vspace{-30pt}
-\centering
-\end{wrapfigure}
-
-
-A multimedia platform currently owned by Adobe. Is currently the industry standard for multimedia web applications. It excels at animation and 2D games, but its strong points are not likely to be useful in our project. A separate JavaScript is required to perform communication with a server and the development tools are costly.
-
-\subsubsection{Microsoft Silverlight}
-
-\begin{wrapfigure}{r}{.15\textwidth}
-\vspace{-47pt}
-\centering
-\end{wrapfigure}
-
-A rich media application framework developed by Microsoft. Useful for multimedia applications, but likely not beneficial for our project.
-
-\subsubsection{Java Applets}
-
-\begin{wrapfigure}{r}{.15\textwidth}
-\vspace{-30pt}
-\centering
-\end{wrapfigure}
-
-A technology that allows a Java AWT/Swing application to be displayed in a browser, backed by a Java Virtual Machine. Has excellent performance compared to other popular client side browser technologies. A signed applet can also communicate with a server using traditional sockets. It is possible to embed a scripting engine(for instance JavaScript). However, development effort may prove to become excessively heavy.
 
 \subsubsection{JavaScript}
-
-\begin{wrapfigure}{r}{.15\textwidth}
-\vspace{-20pt}
-\centering
-\end{wrapfigure}
-
 
 JavaScript is a scripting language supported by all popular web browsers. Has extensive frameworks built around it and allows for rapid development. It is also possible to let the user write commands using JavaScript directly.
 
 \subsubsection{Conclusion}
 As a team, we have extensive experience with Java, and less with the other technologies. However, we all have at least some experience with JavaScript, and we believe that it is the better choice for this project: The DSL can be implemented by allowing the user to perform operations on the JavaScript objects using (a subset of) the JavaScript language itself. There are also excellent tools for transfer and storage of JavaScript objects. Furthermore, communication between JavaScript and HTML elements is easily achieved.
 
-\subsubsection{JavaScript Related technologies}
 
-\textbf{jQuery}\\*
-A JavaScript library that simplifies how to use JavaScript to interact with the webpage, notably selection of Document Object Morm elements.\\*
-\\*
-\textbf{MooTools}\\*
-A JavaScript framework that, notably, enhances the Document Object Morm and JavaScript's object oriented programming morm.\\
-\\*
-\textbf{Dojo}\\*
-A JavaScript toolkit offering asynchronous communication, a packaging system and systems for data storage. Intended to ease rapid JavaScript web development.\\*
-\\*
-\textbf{HTML5}\\*
-A revision of the HTML standard currently still in development. Notably, it supplies support for multimedia and more advanced user interface elements. Is commonly used in conjunction with JavaScript.\\*
-\\*
-\textbf{CSS}\\*
-Cascading Style Sheets, used to specify a consistent look and feel to a series of HTML documents.\\*
 
-We decided to include jQuery in this project, coupled with HTML5 and CCS. jQuery was included because it is a technology we as a group have extensive experience with. It enabled us to easily select DOM elements, which is helpful when you want to create a dynamic web GUI.
 
 \subsection{Markup Languages}
 When communicating between the client and the server we need a data exchange format to represent objects and actions. The format has to be able to serialize and deserialize them on sending and receiving. The two alternatives most commonly in use today for solving this problem is XML (Extensive Markup Language) and JSON (JavaScript Object Notation).
+
+\subsubsection{ARFF}
+\subsubsection{TXT}
 
 \subsubsection{XML}
 In widespread use in a lot of areas as of today and boasts great support and documentation. Originally meant to be a document markup language, but has over the years been used as a data representation language as well. It is suited to describe complex objects and documents, and it is easy to extend. Generally thought of as the more secure option of the two.
@@ -238,6 +247,9 @@ As the name suggest JSON is serialized JavaScript objects, well suited for web d
 
 \subsubsection{Conclusion}
 Both languages is well supported in almost all web related libraries, and they are both extensively documented. As security is not a main concern of this project, the fact that XML is more secure will not influence the decision. JSON will be used for this project. It covers the functionality we need, and it is generally thought of as the easier language to use. It is perfectly suited for web- development and JavaScript, which is the domain of this project. In addition the developers have more experience in using JSON than XML. JSON is also used to store objects in most document NoSQL databases, which we will be using for this project.
+
+
+
 
 \section{Software Testing}
 
