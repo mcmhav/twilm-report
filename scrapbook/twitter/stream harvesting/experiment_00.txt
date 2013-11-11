@@ -1,0 +1,82 @@
+Experiment 00
+	start = 2013-10-21 00:00:00 -0700
+	end = 2013-10-21 00:10:00 -0700
+
+	Stream
+		minutes = 10
+		received_tweets = 4128
+		bytes_per_tweet = 3057
+
+		received_tweets_per_day = received_tweets * minutes * 6 * 24
+		bytes_received_per_day = received_tweets_per_day * bytes_per_tweet
+		giga_bytes_received_per_day = bytes_received_per_day.to_f / 2**30
+
+		results:
+		received_tweets_per_day
+		 => 5944320
+		bytes_received_per_day
+		 => 18171786240
+		giga_bytes_received_per_day
+		 => 16.923794746398926
+
+
+	Matches
+		minutes = 10
+		matching_tweets = 55
+		bytes_per_tweet = 2948
+
+		matching_tweets_per_day = matching_tweets * minutes * 6 * 24
+		bytes_stored_per_day = matching_tweets_per_day * bytes_per_tweet
+		giga_bytes_stored_per_day = bytes_stored_per_day.to_f / 2**30
+		giga_bytes_stored_per_year = giga_bytes_stored_per_day * 365
+
+		results:
+		matching_tweets_per_day
+		 => 79200
+		bytes_stored_per_day
+		 => 233481600
+		giga_bytes_stored_per_day
+		 => 0.2174466848373413
+		giga_bytes_stored_per_year
+		 => 79.36803996562958
+
+Experiment 01
+	start = 2013-10-21 00:51:29 -0700
+	end = 2013-10-21 01:01:29 -0700
+
+	Stream
+		minutes = 10
+		received_tweets = 3741
+		bytes_per_tweet = 3267
+
+		received_tweets_per_day = received_tweets * minutes * 6 * 24
+		bytes_received_per_day = received_tweets_per_day * bytes_per_tweet
+		giga_bytes_received_per_day = bytes_received_per_day.to_f / 2**30
+
+		results:
+		received_tweets_per_day = received_tweets * minutes * 6 * 24
+		 => 5387040
+		bytes_received_per_day = received_tweets_per_day * bytes_per_tweet
+		 => 17599459680
+		giga_bytes_received_per_day = bytes_received_per_day.to_f / 2**30
+		 => 16.390774101018906
+
+	Matches
+		minutes = 10
+		matching_tweets = 53
+		bytes_per_tweet = 3319
+
+		matching_tweets_per_day = matching_tweets * minutes * 6 * 24
+		bytes_stored_per_day = matching_tweets_per_day * bytes_per_tweet
+		giga_bytes_stored_per_day = bytes_stored_per_day.to_f / 2**30
+		giga_bytes_stored_per_year = giga_bytes_stored_per_day * 365
+
+		results:
+		matching_tweets_per_day = matching_tweets * minutes * 6 * 24
+		 => 76320
+		bytes_stored_per_day = matching_tweets_per_day * bytes_per_tweet
+		 => 253306080
+		giga_bytes_stored_per_day = bytes_stored_per_day.to_f / 2**30
+		 => 0.23590967059135437
+		giga_bytes_stored_per_year = giga_bytes_stored_per_day * 365
+		 => 86.10702976584435
