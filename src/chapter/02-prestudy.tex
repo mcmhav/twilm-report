@@ -1,4 +1,5 @@
 \chapter{Preliminary Study}
+% http://www-03.ibm.com/press/us/en/pressrelease/42451.wss
 
 \minitoc
 
@@ -25,8 +26,14 @@ This is the prestudy for the movie recommendation part of the system. We will lo
 
 \subsection{Netflix}
 % http://en.wikipedia.org/wiki/Netflix
-% http://electronics.howstuffworks.com/netflix2.htm
+% http://electronics.howdexstuffworks.com/netflix2.htm
 % http://blog.jimjh.com/static/downloads/2013/05/12/netflix.pdf
+
+\begin{wrapfigure}{r}{.30\textwidth}
+\vspace{-30pt}
+\centering
+\includegraphics[width = .25\textwidth]{image/netflix-logo.png}
+\end{wrapfigure}
 
 Netflix is a on-demand Internet streaming media. It started out as a DVD-rental business, but moved over to a more Internet based business model in 1999 and have from then on had a great success in the subscription-based digital distribution service. To improve customer satisfaction they developed a personalized video-recommendation system called Cinematch. About 60\% of the Neflix users select their next movie or TV-show based on this recommendation[------------------2---------------], so it is important that this recommendation system manages to capture the users movie and TV-show preferences and feed back fitting movies and TV-shows.
 
@@ -68,6 +75,7 @@ With the training dataset the teams system was supposed to predict ratings on a 
 % http://en.wikipedia.org/wiki/Principal_components_analysis
 % http://en.wikipedia.org/wiki/Singular_value_decomposition
 % http://en.wikipedia.org/wiki/Latent_semantic_indexing
+% http://www.timelydevelopment.com/demos/NetflixPrize.aspx
 
 To better understand the dataset, some statistics about the dataset was produced.
 
@@ -95,7 +103,7 @@ Rating distribution is shown in figure~\ref{figure:ratingdistr}. 1/3 of the rati
 \end{figure}
 
 
-Average rating distribution is shown in figure~\ref{figure:avgratingdistr}. The upper graph shows average rating distribution of the customers, while the bottom one shows the distribution per movie. Both graphs have quite similar form. Both customers and movies peak at a rating of 3,5, which is natural. The second second highest point is for the customers at 4 and movies at 3, which is interesting
+Average rating distribution is shown in figure~\ref{figure:avgratingdistr}. The upper graph shows average rating distribution of the customers, while the bottom one shows the distribution per movie. Both graphs have quite similar form. Both customers and movies peak at a rating of 3,5, which is natural. The second second highest point is for the customers at 4 and movies at 3, which is interesting to see. TO ANALYSE MORE!
 
 
 \begin{figure}[H]
@@ -105,12 +113,11 @@ Average rating distribution is shown in figure~\ref{figure:avgratingdistr}. The 
 \label{figure:avgmovierating}
 \end{figure}
 
-Average movie rating distribution is shown in figure~\ref{figure:avgmovierating}.
+Average movie rating distribution is shown in figure~\ref{figure:avgmovierating}. Here we see that for the edge ratings (rating 1 or 5) has the least standard deviation, so when a movie is highly rated it usually is rated high, and the same goes for low ratings, while for the middle ratings (2 to 4) we see that it variates more, and quite similarly. So the middle ratings are harder to classify, in other words, when a movie has a rating of 3, the average rating-shift is almost 1.1, so it must be expected that there is a bigger classification hit on these, so the problem will be to fin the right classification.
 
 
 % About Classification
 \subsection{Classification}
-pages:
 % http://www.netflixprize.com/assets/GrandPrize2009_BPC_PragmaticTheory.pdf
 % http://www.netflixprize.com/assets/GrandPrize2009_BPC_BellKor.pdf
 % http://www.netflixprize.com/assets/GrandPrize2009_BPC_BigChaos.pdf
@@ -122,13 +129,21 @@ pages:
 % http://www.netflixprize.com//leaderboard
 % https://sites.google.com/site/xlvector/netflixprize/papers
 
+% https://github.com/cloudera/oryx
 
+TODO:
 There are two basic problems when analysing very large datasets:
     - Writing the code correctly.
     - The performance (i.e. speed at which it runs).
 
 
 Something about why and which classification alg to use
+
+\subsection{What the top Netflix-Prize contestants did}
+
+\subsubsection{BellKor}
+asdf
+
 
 \subsubsection{Conclusion}
 % End Classification
@@ -151,50 +166,123 @@ BellKor's Pragmatic Chaos - RMSE = 0.8567
 
 
 
-
-
 % About Weka
 \section{Weka}
-\subsection{Weka}
+%http://en.wikipedia.org/wiki/Weka_(machine_learning)
+
+\begin{wrapfigure}{r}{.30\textwidth}
+\vspace{-30pt}
+\centering
+\includegraphics[width = .25\textwidth]{image/Weka-logo.png}
+\end{wrapfigure}
+
+
+Weka is a machine learning software written in Java. It can be used to visualize data through analyzing it with different kinds of algorithms. The Explorer, a graphical user interface, makes it easy to work with and explore data from different angles. It is a free software under the General Public License [].
+%http://en.wikipedia.org/wiki/GNU_General_Public_License
+Weka can handle several data mining tasks, including, data preprocessing, clustering, classification, regression and feature selection. The input data has to be a single flat file or relation, each data point must be described by a fixes number of attributes. The dataset can be accessed trough a SQL database. Can link database tables into a single datatable, which can be used for processing using Weka.
+
+\subsection{The Explorer}
+% http://www.cs.waikato.ac.nz/~ml/weka/gui_explorer.html
+% http://research.cs.queensu.ca/home/cisc333/tutorial/Weka.html
+% http://wiki.pentaho.com/display/DATAMINING/Time+Series+Analysis+and+Forecasting+with+Weka
+TODO: TABLE OF EXPLORER PROPERTIES? TOO MUCH?
+
+\subsection{ARFF}
+% http://www.cs.waikato.ac.nz/ml/weka/arff.html
+Attribute Relationship File Format is the file type used to store data in a database. The structure is as follows:
+
+\begin{lstlisting}[caption={ARFF Example},captionpos=b,label={lst:arffEx},numbers=left]
+@relation 'flat-netflix'
+
+@attribute assetId string
+@attribute 14367 numeric
+@attribute 6050 numeric
+@attribute 14112 numeric
+
+@data
+1658496,?,?,4
+684232,3,3,?
+684231,4,?,?
+1774519,1,?,?
+\end{lstlisting}
+
+Listing~\ref{lst:arffEx} is an example of how an ARFF file is structured. It startes with a header, containing "@relation", "@attribute"s and the "@data". This header defines the name of the relation, the attributes in the dataset and the data. The "@data"-header contains arrays, where each array has values for the corresponding "@attribute"s values. If a array has no value for a particular attribute it is denoted as a question mark (?).
 % End Weka
+
+
+
 
 % About Twitter
 \section{Twitter}
+
+\begin{wrapfigure}{r}{.30\textwidth}
+\vspace{-30pt}
+\centering
+\includegraphics[width = .25\textwidth]{image/twitter-logo.png}
+\end{wrapfigure}
+
+TODO:
 Describes the existing stuff from twitter and twitter-api
 \subsection{Twitter-API}
-\subsection{somethingsomething}
-\subsection{somethingsomething}
 % End Twitter
 
 
 
 
 \section{Similar solutions (Evaluation of State-of-the-art)}
-
+TODO:
 In this section, we will discuss similar solutions and their relevance to our project.
 
 If this is not state of the art stuff, maybe separate this and that
 
 
 
+
 \section{Development language and technologies (maybe not needed)}
 
 \subsection{Database}
-For the system we need some kind of persistent storage, a database which all the clients can talk to to get the latest data in the system and to synchronize data from different clients. This database will be placed on a central server which all the clients can communicate with. For the database we are left with a decision between traditional SQL database or a so called NoSQL database. The differences are explained below.
+For the system we need some kind of persistent storage, a database where the harvested data from the Twitter-harvesting is stored so it only is needed to fetch once, and where the data from the Netflix-prize set is stored. This Database will be ran from a personal computer to start with, TODO: SOMETHING ABOUT THE HARVEST IS DONE; OR REFERING TO THE TWITTER CHAPTER, since it is not needed to be constantly running. For the database we are left with a decision between traditional SQL database or a so called NoSQL database. The differences are explained below.
 
 \subsubsection*{NoSQL}
-NoSQL databases are a group of new emerging types of databases that are defined by the fact that they are addressing some of the following points: being non-relational, distributed, open-source and horizontally scalable\cite{nosql}. NoSQL arose from the need to store large amount of data that do not necessarily follow the same schema, or share all the same attributes. One particular type of NoSQL databases that caught our attention early was the document NoSQL databases. The main characteristic of these databases is their schema- less structure. They also differ from SQL by generally not using a structured query language for data manipulation. They are easy to replicate and they offer simple APIs for the clients to communicate with. They are heavily customized for web- applications, and have gained much popularity in the modern web era. Most document NoSQL databases focus on quick replies to requests, as the query operation is by far the most common in a typical web- application. Because they typically are distributed, NoSQL databases are able to store enormous amounts of data, and they are often used within Big Data\cite{bigdata} applications like Hadoop\cite{hadoop}, which recently has become a very popular subject within the computer science community.
-BASE \cite{pritchett} instead of ACID.
-Document NoSQL databases seemed like they would fit our project quite well.
+% http://en.wikipedia.org/wiki/NoSQL
+NoSQL databases can be defined as: being non-relational, distributed, open-source and horizontally scalable\cite{nosql}. NoSQL is meant for storing large amounts of data\cite{bigdata}, where all the data does not share the same attributes or schema. They are focusing on eventually consisten(BASE) instead of the SQL ACID \cite{pritchett}. The different kinds of NoSQL databases have different ways of classifying the database, some of the more used ones are: key-value, column, document, graph and relational.
+
+\begin{table}
+\centering
+\begin{adjustwidth}{-2cm}{}
+\begin{tabularx}{1.3\textwidth}{  l l l l l l }
+  \textbf{Data Model} & \textbf{Performance} & \textbf{Scalability} & \textbf{Flexibility} & \textbf{Complexity} & \textbf{Functionality}\\
+  \hline \\ [-1.5ex]
+  Key-value & high      & high              & high      & none      & variable (none)\\
+  \hline \\ [-1.5ex]
+  Column    & high      & high              & moderate  & low       & minimal \\
+  \hline \\ [-1.5ex]
+  Document  & high      & variable (high)   & high      & low       & variable (low)\\
+  \hline \\ [-1.5ex]
+  Graph     & variable  & variable          & high      & high      & graph theory \\
+  \hline \\ [-1.5ex]
+  Relational & variable & variable          & low       & moderate  & relational algebra\\
+\end{tabularx}
+\end{adjustwidth}
+\caption{Classification based on feature}
+\label{table:nosql-calssifications}
+\end{table}
+% http://www.slideshare.net/bscofield/nosql-death-to-relational-databases
+As we can see from table~\ref{table:nosql-calssifications} performance, scalability and flexibility are usually rated as high in all the categories. Relational algebra in the database will not be needed for the project to succeed so that category can be disregarded. High flexibility in the database would also be a feature sought after when going for NoSQL, so the column storage can also be eliminated from the equation. TODO: MAYBE SOMETHING MORE HERE lol the tree left are described well here : http://en.wikipedia.org/wiki/NoSQL
+% http://en.wikipedia.org/wiki/Comparison_of_structured_storage_software
+% http://www.mongodb.org/
 \cite{nosql-databases, nosql-article}
 
 
 \subsubsection*{SQL}
-The traditional SQL databases is by far the most common way of storing data in the world today. They store data in columns and tables, and add relationships between these tables. As a result they are referred to as relational databases. They focus on query optimization techniques and most of them use some kind of structured query language. Typically supports 4 basic operations which is select, update, rmete and insert. SQL databases are schema defined and follows the ACID(atomicity, consistency, isolation, durability) principles.
+SQL database is the most common way of storing data. The data is stored in columns and tables. The database can make relations between the tables id necessary, hence relational databases. A main focus in SQL databases is queries and optimizing these where there usually exists some king of structured language to fetch the wanted data. The basic operations, which can be found in most SQL databases, are SELECT, UPDATE, REMOVE and INSERT. This kind of database is schema defined and follows the ACID(atomicity, consistency, isolation, durability) principles.
 \cite{ramakrishnan2003database}
 
 
+
+
 \subsubsection{Database Alternatives}
+TODO WHEN EXPLORED THE THREE NOSQL CATEGORIES LEFT, IF THEY ARE TO BE EXPLORED
 Below, some of the database implementation available to us are discussed. We mainly investigated document NoSQL databases and regular SQL databases. The most appealing options are introduced below.
 
 
@@ -212,14 +300,41 @@ MySQL is the most popular database in the world of open databases. This is becau
 \cite{mysql-about}
 
 
+
+
+
 \subsubsection{Conclusion}
+One particular type of NoSQL databases that caught our attention early was the document NoSQL databases.
+The main characteristic of these databases is their schema- less structure.
+They also differ from SQL by generally not using a structured query language for data manipulation.
+They are easy to replicate and they offer simple APIs for the clients to communicate with.
+They are heavily customized for web- applications, and have gained much popularity in the modern web era.
+Most document NoSQL databases focus on quick replies to requests, as the query operation is by far the most common in a typical web- application.
+Because they typically are distributed, NoSQL databases are able to store enormous amounts of data, and they are often used within Big Data\cite{bigdata} applications like Hadoop\cite{hadoop}, which recently has become a very popular subject within the computer science community.
+
+
 We decided to go for CouchDB in this project. We are working in a web domain, which CouchDB was designed for. While developing the console we will be working closely with JavaScript objects, and try to find ways of exposing these to the users. JavaScript objects are easily converted to JSON, the format used to store data in document NoSQL databases like MongoDB and CouchDB.  As we only have the need to store the actual objects and a limited amount of relations between them, using CouchDB will ease our work considerably, and allow us to do things which would not be possible with a regular SQL database. CouchDB imposes far less restrictions on how you store your data than traditional SQL does. As long as the data is represented in JSON, you can store pretty much store anything you like, even within the same database. This will give us great flexibility when it comes to adding information to specific objects, and also means that objects of the same type can contain different attributes without us needing to create a new schema or change anything in the database. It also gives the user great flexibility in the sense that they can add any information they would like to the different objects, and we the developers don't have to plan for it at all, the database does all this for us. The fact that the customer suggested to us that we could use a NoSQL database, also tipped the scale in direction of the NoSQL alternatives.
 
 Relational databases is the traditional way to deploy databases and they are in widespread use. In many situations they are extremely useful. However relational databases requires you to morm your data up front, before you save anything to the database. Failing to comply with these restrictions will lead to failure, and it is sometimes difficult to create this kind of morm that actually fits real world data. Even though objects may share common attributes, there are bound to be some attributes that are different. This is difficult to plan for in advance, and its the main reason we will not be using a SQL database for this project. For the database, we originally chose to use MongoDB as our document NoSQL database. This was due to the fact that it was better documented and seemed better suited for the system as we originally planned it. Some of the features CouchDB offered wasn't thought of as necessary for the project at the time. During the implementation process we however came to the conclusion that CouchDB actually was a better fit. This was mostly due to its ability to act as an standalone system on a server without the need for other supporting server technologies like Node.js or ASP.NET. Also, the fact that it automaticly creates a RESTful API to access the database turned out to save us a lot of time. As a result of these discoveries we changed to CouchDb during the third sprint.
 
 
 
+
+
+
+
+
+
 \subsection{Programming languages}
+TODO something about the languages to use and why!
+Dependent on:
+    weka
+    twitter api
+    solution used to solve netflix api
+    database to choose
+    future thoughts
+
+
 Our main focus will be on the client part of the application, since this is the experimental part of our system, and it is this part that is visible to the user through the web browser. It is therefore important to choose a suitable technology for this.
 
 
@@ -230,23 +345,6 @@ JavaScript is a scripting language supported by all popular web browsers. Has ex
 \subsubsection{Conclusion}
 As a team, we have extensive experience with Java, and less with the other technologies. However, we all have at least some experience with JavaScript, and we believe that it is the better choice for this project: The DSL can be implemented by allowing the user to perform operations on the JavaScript objects using (a subset of) the JavaScript language itself. There are also excellent tools for transfer and storage of JavaScript objects. Furthermore, communication between JavaScript and HTML elements is easily achieved.
 
-
-
-
-\subsection{Markup Languages}
-When communicating between the client and the server we need a data exchange format to represent objects and actions. The format has to be able to serialize and deserialize them on sending and receiving. The two alternatives most commonly in use today for solving this problem is XML (Extensive Markup Language) and JSON (JavaScript Object Notation).
-
-\subsubsection{ARFF}
-\subsubsection{TXT}
-
-\subsubsection{XML}
-In widespread use in a lot of areas as of today and boasts great support and documentation. Originally meant to be a document markup language, but has over the years been used as a data representation language as well. It is suited to describe complex objects and documents, and it is easy to extend. Generally thought of as the more secure option of the two.
-
-\subsubsection{JSON}
-As the name suggest JSON is serialized JavaScript objects, well suited for web development, and very fast. JSON is easy for JavaScript to parse(we will be using JavaScript on both server and client), and the language has built in support for serializing and evaluating JSON data. Its small, simple, and easy to use. JSON is especially good at representing programming-language objects. It has gained a great deal of popularity in recent years, and it is well documented.
-
-\subsubsection{Conclusion}
-Both languages is well supported in almost all web related libraries, and they are both extensively documented. As security is not a main concern of this project, the fact that XML is more secure will not influence the decision. JSON will be used for this project. It covers the functionality we need, and it is generally thought of as the easier language to use. It is perfectly suited for web- development and JavaScript, which is the domain of this project. In addition the developers have more experience in using JSON than XML. JSON is also used to store objects in most document NoSQL databases, which we will be using for this project.
 
 
 
