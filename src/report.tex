@@ -25,6 +25,7 @@
 \usepackage{caption}
 \usepackage{listings}
 \usepackage{changepage}
+\usepackage{fancyhdr}
 
 \setlength{\parskip}{1.5ex}
 % \setlength{\hoffset}{30pt}
@@ -144,6 +145,9 @@ We would like to thank our supervisor, Zhu Meng, for his feedback on our work, a
 \listoftables
 
 \setcounter{tocdepth}{1}
+\pagestyle{fancy}
+\lhead{\leftmark}
+% \rhead{\rightmark}
 
 %CHAPTERS
 \input{chapter/01-introduction}
