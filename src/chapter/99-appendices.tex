@@ -7,11 +7,9 @@
 
 \chapter{Requirements}
 \chapter{Design}
-
+\chapter{Implementation Documentation}
 
 \chapter{Test Cases}
-\section{Sprint 1}
-\label{sec:sp1testcases}
 
 \begin{table}[H]
 \caption{Test Case TID01}
@@ -35,43 +33,5 @@
 
 
 
-\clearpage
-
-\chapter{Implementation Documentation}
-\section{Wonsole1 Objects}
-\label{wonsoleobjects}
-\subsubsection{Library object specification}
-\begin{verbatim}
-    function removeSelected ()
-    remove all books that are selected in the visible list, will update the web UI and db.
-
-    function listBooks()
-    List all books into the console.
-
-    function removeBookByID(_id)
-    Remove a book with the given ID. Will update the web UI and db.
-
-    function selectAllToggle()
-    Toggle select all books currently in the visible list. Will update the web UI and db.
-    This function is coupled with the checkbox for selecting all books in the list.
-
-    function query(parameter1, value1, parameter2, value2 ...)
-    Queries the list of books for an array of books where the
-    specified book parameters match their respective values.
-    May be called with an arbitrary even number of arguments.
-    The values will be interpreted as regular expressions if they are strings.
-
-    function generateHTML()
-    Generate list elements for all books in the system,
-    at the "BOOKTABLE" element in the HTML document.
-
-    function retrieveObjects()
-    This function retrieves all objects from the server and updates the web UI and db.
-    Will lock the UI until objects have been received.
-
-\end{verbatim}
 
 \clearpage
-
-
-
