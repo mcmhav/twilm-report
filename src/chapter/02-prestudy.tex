@@ -116,8 +116,20 @@ Average rating distribution is shown in figure~\ref{figure:avgratingdistr}. The 
 Average movie rating distribution is shown in figure~\ref{figure:avgmovierating}. Here we see that for the edge ratings (rating 1 or 5) has the least standard deviation, so when a movie is highly rated it usually is rated high, and the same goes for low ratings, while for the middle ratings (2 to 4) we see that it variates more, and quite similarly. So the middle ratings are harder to classify, in other words, when a movie has a rating of 3, the average rating-shift is almost 1.1, so it must be expected that there is a bigger classification hit on these, so the problem will be to fin the right classification.
 
 
+
+\subsection{What the top Netflix-Prize contestants did}
+
+\subsubsection{BellKor}
+\subsubsection{The Ensemble}
+\subsubsection{Grand Prize Team}
+
+\subsubsection{Conclusion}
+% End Classification
+
+
+
+\subsection{Classification and Algorithms to solve the problem}
 % About Classification
-\subsection{Classification}
 % http://www.netflixprize.com/assets/GrandPrize2009_BPC_PragmaticTheory.pdf
 % http://www.netflixprize.com/assets/GrandPrize2009_BPC_BellKor.pdf
 % http://www.netflixprize.com/assets/GrandPrize2009_BPC_BigChaos.pdf
@@ -128,6 +140,8 @@ Average movie rating distribution is shown in figure~\ref{figure:avgmovierating}
 % http://public.research.att.com/~volinsky/netflix/sigkddexp.pdf
 % http://www.netflixprize.com//leaderboard
 % https://sites.google.com/site/xlvector/netflixprize/papers
+% http://www.slideshare.net/bmabey/svd-and-the-netflix-dataset-presentation
+% http://lenskit.grouplens.org/
 
 % https://github.com/cloudera/oryx
 
@@ -138,19 +152,6 @@ There are two basic problems when analysing very large datasets:
 
 
 Something about why and which classification alg to use
-
-\subsection{What the top Netflix-Prize contestants did}
-
-\subsubsection{BellKor}
-asdf
-
-
-\subsubsection{Conclusion}
-% End Classification
-
-
-
-\subsection{Algorithms to solve the problem}
 % http://scenic.princeton.edu/network20q/wiki/index.php?title=Q4:_How_does_Netflix_recommend_movies%3F
 % http://blog.jimjh.com/static/downloads/2013/05/12/netflix.pdf
 There were 51 051 contestants on 41 305 different teams competing in the Netflix-Prize competition, and a lot of these contestants shared their solution through code repositories such as GitHub (--------------something about github here?--------------). Since many of these solution scored very well on the contest it was natural to explore these and use their solution to test potential improvement in collaboration with social media data.
@@ -161,6 +162,8 @@ https://github.com/n8j/school/tree/master/DataMiningCSEP546/HW1
 
 
 BellKor's Pragmatic Chaos - RMSE = 0.8567
+
+\subsubsection{Conclusion}
 
 % End Netflix
 
@@ -223,18 +226,35 @@ Listing~\ref{lst:arffEx} is an example of how an ARFF file is structured. It sta
 
 TODO:
 Describes the existing stuff from twitter and twitter-api
-\subsection{Twitter-API}
+\subsection{Twitterminology}
+\subsection{Twitter REST API}
+\subsection{Twitter Stream API}
+\subsection{Datamining Twitter for Recommendations}
 % End Twitter
 
 
 
 
 \section{Similar solutions (Evaluation of State-of-the-art)}
+% http://crowdrec2013.noahlab.com.hk/papers/crowdrec2013_Dooms.pdf
+% http://movielens.umn.edu/login
+% http://www.grouplens.org/datasets/movielens/
+
 TODO:
 In this section, we will discuss similar solutions and their relevance to our project.
 
 If this is not state of the art stuff, maybe separate this and that
 
+
+\subsection{MovieLens}
+Need to rate 20 movies
+
+\subsection{MovieTweetings}
+Does not need to rate movies lol
+
+\subsection{Twitterminology}
+
+\subsection{Twitterminology}
 
 
 
