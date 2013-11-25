@@ -10,4 +10,15 @@ rm *.toc
 rm *.lof
 rm *.lot
 rm *.log
-
+rm chapter/*.bbl
+rm chapter/*.blg
+rm chapter/*.mtc*
+rm chapter/*.mlf*
+rm chapter/*.mlt*
+rm chapter/*.maf
+rm chapter/*.aux
+rm chapter/*.out
+rm chapter/*.toc
+rm chapter/*.lof
+rm chapter/*.lot
+rm chapter/*.log
