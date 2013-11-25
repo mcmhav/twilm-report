@@ -14,7 +14,7 @@
 \usepackage{wrapfig}
 \usepackage{pbox}
 
-\usepackage{fullpage}
+% \usepackage{fullpage}
 \usepackage{verbatim}
 \usepackage{url}
 \usepackage{minitoc}
@@ -23,9 +23,13 @@
 \usepackage{float}
 \usepackage{color}
 \usepackage{caption}
+\usepackage{listings}
+\usepackage{changepage}
+\usepackage{fancyhdr}
 
-\setlength{\parindent}{0.0in}
 \setlength{\parskip}{1.5ex}
+% \setlength{\hoffset}{30pt}
+% \setlength{\textwidth}{393pt}
 
 \usepackage[acronym]{glossaries}
 
@@ -139,6 +143,11 @@ We would like to thank our supervisor, Zhu Meng, for his feedback on our work, a
 \clearpage
 \listoffigures
 \listoftables
+
+\setcounter{tocdepth}{1}
+\pagestyle{fancy}
+\lhead{\leftmark}
+% \rhead{\rightmark}
 
 %CHAPTERS
 \input{chapter/01-introduction}
