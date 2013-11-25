@@ -10,6 +10,7 @@ rm *.toc
 rm *.lof
 rm *.lot
 rm *.log
+rm *.fdb_latexmk
 rm chapter/*.bbl
 rm chapter/*.blg
 rm chapter/*.mtc*
@@ -22,3 +23,4 @@ rm chapter/*.toc
 rm chapter/*.lof
 rm chapter/*.lot
 rm chapter/*.log
+rm chapter/*.fdb_latexmk
