@@ -17,8 +17,10 @@
 *.log
 *.lot
 *.maf
+*.mlf*
+*.mlt*
 *.mtc
-*.mtc0
+*.mtc*
 *.nav
 *.nlo
 *.out
@@ -30,5 +32,4 @@
 *.vrb
 *.xdy
 *.tdo
-
 .DS_Store
