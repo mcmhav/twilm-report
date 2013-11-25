@@ -10,7 +10,7 @@ HTTPS Identification
 
 Searching
 =========
-This section will examine how twitters https search requests work. This will be done by browsing twitter.com logged in as a user and examining it Google Chrome Developer Tools (GCDT) [2] as the site is being browsed and search requests are being made.
+This section will examine how twitters https search requests works. This will be done by browsing twitter.com logged in as a user and examining it Google Chrome Developer Tools (GCDT) [2] as the site is being browsed and search requests are being made.
 
 The goal of this examination is to provide a basis for creating a webcrawler that can search twitter automatically.
 
@@ -85,7 +85,7 @@ As the requests are sent and processed, tweets are appended to the tweets contai
 
 At this point a snapshot of the html page is taken [A3]. The only attribute that seems to variate with each request is scroll_cursor attribute. This means that the piece of javascript code that is making the requests somehow has access to the information contained in this changing attribute. A quick dom tree search for 'TWEET-' shows us that scroll_cursor is contained by a div with the class 'stream-container' under under the attribute 'data-scroll-cursor' and 'data-refresh-cursor'.
 
-	<div class=​"stream-container " data-scroll-cursor=​"TWEET-311337362556846081-399762568459612160" data-refresh-cursor=​"TWEET-396773826303762432-399762568459612160">​
+	<div class=​"stream-container" data-scroll-cursor=​"TWEET-311337362556846081-399762568459612160" data-refresh-cursor=​"TWEET-396773826303762432-399762568459612160">​
 
 By making another scroll to the bottom of the page, a request with scroll_cursor information from one of these attributes is sent. As is shown, the attribute 'data-scroll-cursor' is responsible for what goes in the attribute scroll_cursor.
 
@@ -183,6 +183,9 @@ Everything contained within a link with the class "twitter-hashtag" within parag
 			<s>#</s><b>batman</b>
 	</a>
 
+
+Implementation with Ruby Anemone
+================================
 
 
 References
