@@ -230,12 +230,17 @@ Describes the existing stuff from twitter and twitter-api
 \subsection{Twitter REST API}
 \subsection{Twitter Stream API}
 \subsection{Crawling Twitter}
+TODO: Add appendixes from scrapbook.
 This section will examine how to crawl Twitter using Twitters HTTPS Web Search. This will be examined by browsing twitter.com logged in as a user and examining it Google Chrome Developer Tools (GCDT)\cite{gcdt} as the site is being browsed and search requests are being made. The goal of this examination is to discover requests a webcrawler must be capable of making in order to search twitter and harvest tweets and users automatically.
+
 
 \subsubsection{Search Request}
 TODO: Labels for all snippets in this section.
-Tweets can be found using an HTTPS search request with the search query in the format URLE [1]. Searching for <URLE search query> can be done with the following request.
-
+Tweets can be found using an HTTPS search request with the search query in the format URLE [1]
+TODO: URLE Reference.
+Searching for <URLE search query> can be done with the following request.
+TODO: Make <URLE-search-query> clearer in url
+  
   \url{https://twitter.com/search?q=<URLE-search-query>&src=typd}
 
 In the rest of the discussion of search, we'll be using the following query as an example. This is a search request for the search query "The Dark Knight Rises 2012".
@@ -244,26 +249,83 @@ In the rest of the discussion of search, we'll be using the following query as a
 
 Using the Google Chrome Developer Console [2] we can find the DOM elements on the search page that contain the tweets that have been returned, using the select element tool. We'll refer to this as the tweets element.
 
-\begin{lstlisting}[caption={Tweet Element},label={},captionpos=b]
-<ol class="stream-items js-navigable-stream" id="stream-items-id\">
-\end{lstlisting}
+  \begin{lstlisting}[caption={Tweet Element},label={},captionpos=b]
+  <ol class="stream-items js-navigable-stream" id="stream-items-id\">
+  \end{lstlisting}
 
 The first element contained within the tweets element is a summary of the users who have posted the tweets returned by the search, and is not of interest.
 
 The rest of the li-elements in the tweets element contain tweets elements. They have the following format
 
-\begin{lstlisting}[caption={Tweet Element},label={},captionpos=b]
-<li class="js-stream-item stream-item stream-item expanding-stream-item" data-item-id="397530125715402752" id="stream-item-tweet-397530125715402752" data-item-type="tweet">...</li>
-\end{lstlisting}
+  \begin{lstlisting}[caption={Tweet Element},label={},captionpos=b]
+  <li class="js-stream-item stream-item stream-item expanding-stream-item" data-item-id="397530125715402752" id="stream-item-tweet-397530125715402752" data-item-type="tweet">...</li>
+  \end{lstlisting}
 
 TODO: Create reference for jQuery
 Using jQuery [3] and the Javascript Console in GCDT \cite{gcdt}, we can determine how many tweets have been returned. To do this, we define a javascript function that selects the tweets element dom element, gets a list of it's children and counts the number of items in this list and subtract 1 for the user summary element.
 
-\begin{lstlisting}[caption={TODO: Caption},label={},captionpos=b]
-> number_of_tweets_in_search_results = function(){ return $("li[data-item-type='tweet']").size(); }
-> number_of_tweets_in_search_results();
-15
-\end{lstlisting}
+  \begin{lstlisting}[caption={TODO: Caption},label={},captionpos=b]
+  > number_of_tweets_in_search_results = function(){ return $("li[data-item-type='tweet']").size(); }
+  > number_of_tweets_in_search_results();
+  15
+  \end{lstlisting}
+
+\subsubsection{Scroll Search Results}
+In order to obtain more search results it is necessary to scroll to the bottom of the page for the browser to make an XHR request to retrieve more tweets. As the scrolling is done, XHR requests can be monitored in the Network tab of GCDT. Consecutive xhr requests are sent as scrolling is done several times.
+
+  \begin{lstlisting}[caption={TODO: Caption},label={},captionpos=b]
+  Javascript Console:
+  > number_of_tweets_in_search_results();
+  15
+
+  Network Console > XHR:
+  Request URL:https://twitter.com/i/search/timeline?q=the%20dark%20knight%202012&src=typd&include_available_features=1&include_entities=1&last_note_ts=0&scroll_cursor=TWEET-360758159364734978-399762568459612160
+
+
+  Javascript Console:
+  > number_of_tweets_in_search_results();
+  35
+
+  Network Console > XHR:
+  Request URL:https://twitter.com/i/search/timeline?q=the%20dark%20knight%202012&src=typd&include_available_features=1&include_entities=1&last_note_ts=0&oldest_unread_id=0&scroll_cursor=TWEET-338938038694584320-399762568459612160
+
+  Javascript Console:
+  > number_of_tweets_in_search_results();
+  50
+
+  Network Console > XHR:
+  Request URL:https://twitter.com/i/search/timeline?q=the%20dark%20knight%202012&src=typd&include_available_features=1&include_entities=1&last_note_ts=0&oldest_unread_id=0&scroll_cursor=TWEET-316893896573607937-399762568459612160
+
+  Javascript Console:
+  > number_of_tweets_in_search_results();
+  65
+  \end{lstlisting}
+
+As the requests are sent and processed, tweets are appended to the tweets element. All that is needed in order to keep receiving tweets is to keep sending requests of this pattern.
+Examining the requests attributes, they consists of the following variables and constants.
+
+  \begin{lstlisting}[caption={TODO: Caption},label={},captionpos=b]
+  constant src=typd
+  constant include_available_features=1
+  constant include_entities=1
+  constant last_note_ts=0
+  constant oldest_unread_id=0
+  variable scroll_cursor=TWEET-<18 character number>-<18 character number>
+  \end{lstlisting}
+
+At this point a snapshot of the html page is taken [A3]. The only attribute that seems to variate with each request is scroll\_cursor attribute. This means that the piece of javascript code that is making the requests somehow has access to the information contained in this changing attribute. A quick dom tree search for 'TWEET-' shows us that scroll\_cursor is contained by a div with the class stream-container under under the attribute 'data-scroll-cursor' and 'data-refresh-cursor'.
+
+  \begin{lstlisting}[caption={TODO: Caption},label={},captionpos=b]
+  <div class="stream-container" data-scroll-cursor="TWEET-311337362556846081-399762568459612160" data-refresh-cursor="TWEET-396773826303762432-399762568459612160">
+  \end{lstlisting}
+
+By making another scroll to the bottom of the page, a request with scroll-cursor information from one of these attributes is sent.
+As is shown, the attribute data-scroll-cursor is responsible for what goes in the attribute scroll-cursor.
+
+  \begin{lstlisting}[caption={TODO: Caption},label={},captionpos=b]
+  Network Console > XHR:
+  https://twitter.com/i/search/timeline?q=the%20dark%20knight%202012&src=typd&include_available_features=1&include_entities=1&last_note_ts=0&scroll_cursor=TWEET-311337362556846081-399762568459612160
+  \end{lstlisting}
 
 \subsection{Datamining Twitter for Recommendations}
 % End Twitter
