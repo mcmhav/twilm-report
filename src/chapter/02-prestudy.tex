@@ -194,7 +194,7 @@ TODO: TABLE OF EXPLORER PROPERTIES? TOO MUCH?
 % http://www.cs.waikato.ac.nz/ml/weka/arff.html
 Attribute Relationship File Format is the file type used to store data in a database. The structure is as follows:
 
-\begin{lstlisting}[caption={ARFF Example},captionpos=b,label={lst:arffEx},numbers=left]
+\begin{lstlisting}[caption={ARFF Example},label={lst:arffEx},captionpos=b]
 @relation 'flat-netflix'
 
 @attribute assetId string
@@ -230,6 +230,41 @@ Describes the existing stuff from twitter and twitter-api
 \subsection{Twitter REST API}
 \subsection{Twitter Stream API}
 \subsection{Crawling Twitter}
+This section will examine how to crawl Twitter using Twitters HTTPS Web Search. This will be examined by browsing twitter.com logged in as a user and examining it Google Chrome Developer Tools (GCDT)\cite{gcdt} as the site is being browsed and search requests are being made. The goal of this examination is to discover requests a webcrawler must be capable of making in order to search twitter and harvest tweets and users automatically.
+
+\subsubsection{Search Request}
+TODO: Labels for all snippets in this section.
+Tweets can be found using an HTTPS search request with the search query in the format URLE [1]. Searching for <URLE search query> can be done with the following request.
+
+  \url{https://twitter.com/search?q=<URLE-search-query>&src=typd}
+
+In the rest of the discussion of search, we'll be using the following query as an example. This is a search request for the search query "The Dark Knight Rises 2012".
+
+  \url{https://twitter.com/search?q=the%20dark%20knight%202012&src=typd}
+
+Using the Google Chrome Developer Console [2] we can find the DOM elements on the search page that contain the tweets that have been returned, using the select element tool. We'll refer to this as the tweets element.
+
+\begin{lstlisting}[caption={Tweet Element},label={},captionpos=b]
+<ol class="stream-items js-navigable-stream" id="stream-items-id\">
+\end{lstlisting}
+
+The first element contained within the tweets element is a summary of the users who have posted the tweets returned by the search, and is not of interest.
+
+The rest of the li-elements in the tweets element contain tweets elements. They have the following format
+
+\begin{lstlisting}[caption={Tweet Element},label={},captionpos=b]
+<li class="js-stream-item stream-item stream-item expanding-stream-item" data-item-id="397530125715402752" id="stream-item-tweet-397530125715402752" data-item-type="tweet">...</li>
+\end{lstlisting}
+
+TODO: Create reference for jQuery
+Using jQuery [3] and the Javascript Console in GCDT \cite{gcdt}, we can determine how many tweets have been returned. To do this, we define a javascript function that selects the tweets element dom element, gets a list of it's children and counts the number of items in this list and subtract 1 for the user summary element.
+
+\begin{lstlisting}[caption={TODO: Caption},label={},captionpos=b]
+> number_of_tweets_in_search_results = function(){ return $("li[data-item-type='tweet']").size(); }
+> number_of_tweets_in_search_results();
+15
+\end{lstlisting}
+
 \subsection{Datamining Twitter for Recommendations}
 % End Twitter
 
