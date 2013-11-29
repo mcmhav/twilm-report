@@ -133,17 +133,35 @@ Average movie rating distribution is shown in figure~\ref{figure:avgmovierating}
 
 BellKor's Pragmatic Chaos, the prize winners of the Netflix-Prize competition, was a group of scientists from AT\&T Labs, Yahoo!, Pragmatic Theory and Commendo Research \& Consulting. They achieved a RMSE of 0.8567, which was 10.06\% better than Netflix's own Cinematch score.
 
-The winning algorithm was put together based on multiple different modeling techniques.
+Models for the rating data is learned by fitting previously observed ratings, but since the model is to be used to predict feature ratings, overfitting the data. This achieved by regularizing the learned parameters. A regularization constant is used, and is set to L2 by default. This and other constant such as, step size and number of iterations are set manually through greedy manners. Where the algorithm is ran multiple times and constant value with best score is used. \cite{BellKor-PragmaticTheory}
 
-2008:
+The winning algorithm was put together based on multiple different modeling techniques. Some of these modeling techniques are described in table~\ref{table:bellkor-models}
 
-2009:
+\begin{table}[H]
+\caption{Some of the models the The BellKor's Pragmatic Chaos team used}
+\centering
+\begin{tabular}{ l p{8cm} }
+\hline
 
-Models for the rating data is learned by fitting previously observed ratings, but since the model is to be used to predict feature ratings, overfitting the data. This achieved by regularizing the learned parameters. A regularization constant is used, and is set to L2 by default. This and other constant such as, step size and number of iterations are set manually through greedy manners. Where the algorithm is ran multiple times and constant value with best score is used.
+  \textbf{Model} & \textbf{Description}\\
+  \hline \\ [-1.5ex]
+  Time of week rating & The team saw that a user-rating done in the weekends had a tendency to have a higher value than a rating done on a Monday.\\
+  \hline \\ [-1.5ex]
+  Close User ratings    & Ratings done close to one another done by the same user implied that the user was rating based on the user's recollection of the rated movies, and not that the user just saw that movie, these ratings had to be handled in its own manner. This was because of the effect the faulty or old memories had on these ratings. \\
+  \hline \\ [-1.5ex]
+  Overall higher ratings  & Some users has the tendency to rate on an overall average higher than other users.\\
+\end{tabular}
+\label{table:bellkor-models}
+\end{table}
+
+
 
 \subsubsection{The Ensemble}
+
 \subsubsection{Grand Prize Team}
+
 \subsubsection{Conclusion}
+
 % End Classification
 
 

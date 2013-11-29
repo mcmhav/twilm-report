@@ -10,6 +10,7 @@ rm -f *.toc
 rm -f *.lof
 rm -f *.lot
 rm -f *.log
+rm -f *.fdb_latexmk
 
 rm -f report.aux
 rm -f report.pdf
@@ -33,4 +34,4 @@ rm -f *.toc
 rm -f *.lof
 rm -f *.lot
 rm -f *.log
-
+rm -f *.fdb_latexmk
