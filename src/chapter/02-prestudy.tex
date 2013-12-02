@@ -138,27 +138,40 @@ Models for the rating data is learned by fitting previously observed ratings, bu
 The winning algorithm was put together based on multiple different modeling techniques. Some of these modeling techniques are described in table~\ref{table:bellkor-models}
 
 \begin{table}[H]
-\caption{Some of the models the The BellKor's Pragmatic Chaos team used}
+\caption{Some of the models the "The BellKor's Pragmatic Chaos"-team used \cite{BellKor-PragmaticTheory}}
 \centering
-\begin{tabular}{ l p{8cm} }
+\begin{tabular}{ p{3.2cm} p{9cm} }
 \hline
-
   \textbf{Model} & \textbf{Description}\\
   \hline \\ [-1.5ex]
-  Time of week rating & The team saw that a user-rating done in the weekends had a tendency to have a higher value than a rating done on a Monday.\\
+  Time of week rating & The team saw that a user-rating done in the weekends had a tendency to have a higher value than a rating done on a Monday. This also applies for multiple ratings done the same day, higher ratings does not necessarily imply that the movie is much better than a movie rated lower another day, the user might just be in a good mood. \\
   \hline \\ [-1.5ex]
-  Close User ratings    & Ratings done close to one another done by the same user implied that the user was rating based on the user's recollection of the rated movies, and not that the user just saw that movie, these ratings had to be handled in its own manner. This was because of the effect the faulty or old memories had on these ratings. \\
+  Close User ratings & Ratings done close to one another done by the same user implied that the user was rating based on the user's recollection of the rated movies, and not that the user just saw that movie, these ratings had to be handled in its own manner. This was because of the effect the faulty or old memories had on these ratings. The all time favorites/negatives are also usually in this bulk. While the movies which did not make much of an impression are forgotten. This helps us explain \ref{figure:avgmovierating}, where we saw that movies with the edge ratings (1 or 5) had a lower rating distribution. \\
   \hline \\ [-1.5ex]
-  Overall higher ratings  & Some users has the tendency to rate on an overall average higher than other users.\\
+  Baseline predictors & Some users has the tendency to rate on an overall average higher than other users.\\
+  \hline \\ [-1.5ex]
+  Movie like-ability & Movies can go in and out of popularity. This change usually happens over a extended period. \\
+  \hline \\ [-1.5ex]
+  Frequency term & The number of ratings a users gives on a specific day can help explains data-variability during that day. \\
+  \hline \\ [-1.5ex]
+  Matrix factorization with Temporal Dynamics & Use two sets pf static movie factors. Set one is used in all the models of the factors. Set two uses the movies rated by the user, normalizes the sum, and uses this as a user factor. \\
+  \hline \\ [-1.5ex]
+  Neighborhood model with Temporal Dynamics & Most common approach to collaborative filtering. They used a item-item model based on global optimization. To predict rating of a new item based of rating an old item two sets of weights where used. One where the values of the ratings where accounted for, and one disregarding rating values.
+  A situation where a user rates an old item and a new item close to each other both in time and rating, is a better indicator that these items can be related to each other, than if two items are rated similarly, but with a greater timespan between each other.Therefore a decaying relationship is introduced between items. This decreased RMSE from 0.9002 to 0.8870.\cite{BellKor-CF-TD} \\
 \end{tabular}
 \label{table:bellkor-models}
 \end{table}
 
+Interestingly, the bias model with tanking in the factor that users change rating-scale over time, resulted in a RMSE of 0.9555, which is almost as good as the Cinematch Netflix was already using. The learning with the different modeling techniques is done by a stochastic gradient descent algorithm running for 30 iterations. This is the only time they use an automatic parameter tuner. \cite{BellKor-2008-sol}
 
+As we can see from table~\ref{table:bellkor-models} the "BellKor's Pragmatic Chaos"-team used a lot of different models and did a lot of tweaking to get to the top. Some interesting findings to take from this is the importance of diversity and how central the timestamp of a rating can be.
 
 \subsubsection{The Ensemble}
+% http://www.the-ensemble.com/
 
-\subsubsection{Grand Prize Team}
+A merger of the teams "Grand Prize Team" and "Opera Solutions and Vandelay United". They also managed to get a RMSE of 0.8567, and therefore a 10.09\% improvement as well. But lost since the "BellKor's Pragmatic Chaos"-team managed to submit their results 20 minutes earlier than "The Ensemble"-team.
+
+
 
 \subsubsection{Conclusion}
 
