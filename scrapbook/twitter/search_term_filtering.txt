@@ -1,0 +1,47 @@
+Section : Design?
+
+Text Filtering and Search Terms
+===============================
+In order to retrieve tweets with information content about a certain topic, they must be filtered from the pool of all tweets. A search query consists of several white space separated search terms. Twitter search retrieves tweets that contain all the search terms in the search query. The search terms can appear in any order in the retrieved tweet. This is true for all forms of tweet retrieval - REST Search API, Stream API and twitter web search. TODO: Reference to apis and twitter.com here
+
+Result Limiting
+---------------
+TODO: Choose upper limit for tweets retrieved based on document quality. Explain the selected upper limit in terms of the precision of a dataset where movie_document = followee(tweeter(movie_tweet))) and netflix_user = each_movie_rated(movie_rating_weight * movie_document_followees)). Max 100 tweets for now. Each twitter user has 208 follwers/followees on average
+
+Search Query Alternatives
+-------------------------
+Creating a dataset with high reall and high precision requires measuring and comparing the precision and recall of several search terms. By doing this, the various search terms can later be prioritized when retrieving tweets so that the dataset will have the highest quality possible.
+
+<movie title> <movie year>
+<movie title> movie
+<movie title> film
+
+Search Query Quality Measurement
+--------------------------------
+(TODO: Number of movies) will be selected from the netflix dataset at random. The mongo syntax in Listing below shows how a random movie is selected from the collection of movies.
+
+db.movies.find()[Math.floor(Math.random() * db.movies.count())]
+
+For each movie, each search query will be run. The tweets retrieved for each query will be deemed by a human as either relevant or irrelevant to the movie.
+
+A relevant tweet is about or closely related to the movie. The tweet can be either neutral or positive to the movie. The tweet is irrelevant if it is posted by a bot with no followees or if it is negative to the movie.
+
+The result total is the number of tweets retrieved by a search query. If the number is limited by the maximum number of tweets.
+
+The recall of a query is the number of relevant tweets retrieved.
+
+The result precision of a search query for a given movie is measured by dividing the recall by the total.
+
+The precision of a search query for a givem movie is measured by dividing the recall by the maximum number of returned tweets.
+
+The REST Search API and the Stream API should be able to represent the precision
+
+
+
+
+
+References 
+
+[1] Twitter Stats http://expandedramblings.com/index.php/march-2013-by-the-numbers-a-few-amazing-twitter-stats/
+
+[2] http://www.socialbakers.com/twitter/by-following/ TODO: Remove, not used
