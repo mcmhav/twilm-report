@@ -276,13 +276,71 @@ Listing~\ref{lst:arffEx} is an example of how an ARFF file is structured. It sta
 \centering
 \includegraphics[width = .25\textwidth]{image/twitter-logo.png}
 \end{wrapfigure}
+Twitter is a free social media network based on microblogging. In microblogging, a user can post a paragraph of a certain number of characters or less to his/her timeline. The user can also follow other users. Whenever the users that a given user is following posts something, the user can see these posts in his/her feed. This is the basis for many of todays most popular social media networks, including Twitter.
 
-TODO:
-Describes the existing stuff from twitter and twitter-api
 \subsection{Terminology}
+For more clarity, we define the terminology twitter uses. All words in \textbf{bold} are our own definitions for more easily describing how the various term relate to eachother.
+
+\subsubsection{Tweet}
+A tweet is a post containing max 140 characters. It can also refer to the verb ‘to tweet’, which means ‘to post a tweet’. \textbf{tweets} is an attribute of a user which returns a list of tweets that the users 
+  
+  \textbf{user.tweets -> [<tweet>]}
+\subsubsection{User}
+A user is someone with a twitter account. A user can post tweets. By following other users, twitter generates a feed for the user containing the tweets of all the users they follow. They also have certain information retrieval tools available, such as filtering tweets by a tag name, specific user or search term.
+
+\subsubsection{Tweeter}
+A user who tweets a tweet that is referenced in the same context. For instance: The best tweets are tweeted by the most popular tweeters
+
+
+\subsubsection{Follower}
+A follower is someone who follows a user. The follower will see the users tweets in their feed. \textbf{followers} is an attribute of a user which returns the list of users that are following that user.
+
+  \textbf{user.followers -> [<user>]}
+
+\subsubsection{Followee}
+A followee is someone who a user is following. The user will appear in the followees list of followers, and the followee will appear in the users list called ‘following’. We will refer to the list ‘following’ for a user as followees for clearer terminology. \textbf{followees} is an attribute of a user which returns the list of users that the user is following.
+
+  \textbf{user.followees -> [<user>]}
+
+\subsubsection{Hashtag}
+Hashtags are topic labels that are placed on tweets. They are made by typing \#topicname anywhere in the tweet. By navigating to \#topicname, a user will see a feed of all tweets containing \#tagname. \textbf{hashtags} is a an attribute of a tweet which returns the list of hashtags the tweet contains.
+
+  \textbf{tweet.hashtags -> [<hashtag>]}
+
+\noindent
+Hashtag also has the attribute tweets, which returns all tweets that have a certain hashtag. These hashtags are ordered by twitters algorithm which balances how recent the tweet is with the popularity of the tweeter.
+  
+  \textbf{hashtag.tweets -> [<tweet>]}
+
+\subsubsection{Usertag}
+Usertags are labels that are placed on tweets describing who the tweets are adressed to. They are made by typing @username anywhere in the tweet. This tweet will also show up in the feed of the user with name username. \textbf{usertags} is an attribute of a tweet which returns the list of users that the tweet is adressed to.
+
+\textbf{tweet.usertags -> [<user>]}
+
 \subsection{Twitter REST API}
+Twitters HTTP/HTTPS based REST API allows the application using it to perform many of the core functionalities of Twitter.
+
+\subsubsection{Usage}
+The API is divided into POST and GET requests. The POST requests makes changes to twitter. A POST request could be for posting a tweet, update a users profile etc. The GET requests retrieves data from twitter. A GET request could be used to retrieve followees or followers of a user, retrieve the tweets on the timeline of a user etc. \cite{twitter-rest-api}
+
+\subsubsection{Authentication}
+Twitters REST API uses an access token generated for the specific application in order to make a request. In addition, OAuth can be used if the session is on behalf of a specific user. Some requests such as posting a tweet can of course only be made on behalf of a user and thus requires OAuth. \cite{twitter-rest-api}
+
+\subsubsection{Rate Limit}
+The number of requests an application or a user can make is limited to a 15 minute window. Within this 15 minute window the each user can make 15 GET requests. This means that a user can retrieve the followees of 15 users withing the 15 minute window, but must wait until the 15 minutes have passed before retrieving more data. This means that large amounts of data can only be retrieved over long periods of time.
+
+If only the application access token is used and not OAuth, the application as a whole can make 15 GET requests within the window. \cite{twitter-rate-limiting}
+
+\subsection{Twitter Search API}
+Twitters REST API uses either an access token generated for the application in use or OAuth.
+
+\subsubsection{Authentication}
+\subsubsection{Rate Limit}
+
 \subsection{Twitter Stream API}
-\subsection{Crawling Twitter}
+\subsubsection{Authentication}
+
+\subsection{Crawling and Scraping Twitter}
 TODO: Add appendixes from scrapbook.
 This section will examine how to crawl Twitter using Twitters HTTPS Web Search. This will be examined by browsing twitter.com logged in as a user and examining it Google Chrome Developer Tools (GCDT)\cite{gcdt} as the site is being browsed and search requests are being made. The goal of this examination is to discover requests a webcrawler must be capable of making in order to search twitter and harvest tweets and users automatically.
 
@@ -294,11 +352,11 @@ TODO: URLE Reference.
 Searching for <URLE search query> can be done with the following request.
 TODO: Make <URLE-search-query> clearer in url
 
-  \url{https://twitter.com/search?q=<URLE-search-query>&src=typd}
+  \url{https://twitter.com/search?q=<URLE-search-query>&src=typd&f=realtime}
 
 In the rest of the discussion of search, we'll be using the following query as an example. This is a search request for the search query "The Dark Knight Rises 2012".
 
-  \url{https://twitter.com/search?q=the%20dark%20knight%202012&src=typd}
+  \url{https://twitter.com/search?q=the%20dark%20knight%202012&src=typd&f=realtime}
 
 Using the Google Chrome Developer Console [2] we can find the DOM elements on the search page that contain the tweets that have been returned, using the select element tool. We'll refer to this as the tweets element.
 
