@@ -22,7 +22,7 @@ Beyond this, the chapter will show the mythology the team chose to use and why t
 
 % \section{Set to work with (another name perhaps (or maybe completely removed))}
 % About Netflix
-\section{Movie recommendation}
+\section{Movie Recommendation}
 This is the prestudy for the movie recommendation part of the system. We will look at existing recommendations systems, datasets to be explored and how to explore this set.
 
 
@@ -45,7 +45,7 @@ Netflix is a on-demand Internet streaming media. It started out as a DVD-rental 
 This recommendation system is self-updating. It searches the Cinematch database for users who have rated the same movie, determents which of these again have rated a second movie and with this calculates likelihood that users who like the first also likes the second one.
 
 
-\subsection{The Dataset}
+\subsection{The Dataset}\label{subsec:netflixdata}
 % Pages used:
 % http://www.timelydevelopment.com/demos/NetflixPrize.aspx
 % http://dl.acm.org/citation.cfm?id=1536622&jmp=cit&coll=portal&dl=ACM#CIT
@@ -54,7 +54,18 @@ This recommendation system is self-updating. It searches the Cinematch database 
 % http://blog.jimjh.com/static/downloads/2013/05/12/netflix.pdf
 % http://en.wikipedia.org/wiki/Root-mean-square_deviation
 
-Netflix held a competition where the contest was made to help Netflix improve their movie recommendation system. The team that could beat Netflix's own collaborative filtering system by more than 10\% could win one million dollars. To measure the score root-mean-square deviation (RMSE) was used, which is used to measure the difference between the values predicted or estimated and the actual values observed. The RMSE of Cinematch~\ref{subsec:Cinematch} was at 0,9525.
+Netflix held a competition where the contest was made to help Netflix improve their movie recommendation system. The team that could beat Netflix's own collaborative filtering system by more than 10\% could win one million dollars. To measure the score root-mean-square error (RMSE) was used, which is used to measure the difference between the values predicted or estimated and the actual values observed. The RMSE of Cinematch~\ref{subsec:Cinematch} was at 0,9525.
+
+\subsubsection{Root-mean-square error RMSE}
+
+\begin{equation}\label{eq:rmse}
+RMSE = \sqrt {{\frac{{\sum\limits_{{i = 1}}^n {{{\left( {{y_i} - {{\hat{y}}_i}} \right)}^2}} }}{{n}}}}
+\end{equation}
+
+The equation for calculating the RMSE is show in figure~\ref{eq:rmse}. It calculates how far the estimated value is from the actual value. Here ${y_i}$ is the actual value and ${\hat{y}}$ is the estimated value. The square difference of all the values are averaged, where ${n}$ is the number of values, this result is rooted. This produces the average distance of all the values the estimate is from the actual.
+
+
+\subsubsection{Competition}
 
 For this competition Netflix produced a training dataset based on user ratings from their own database. It contains 100 480 507 ratings from 480 189 unique users on 17 770 movies. The data is split up into 17 770 files, one for each movie, where the data is a triplet of the form <user, rating, date-of-rating>. The user-field and rating-field is an integer, while the date-of-rating-field is on the ISO 8601 form, year-month-day. The different movies have different amounts of ratings, and the different users have rated different amounts of movies.
 
@@ -120,7 +131,7 @@ Average movie rating distribution is shown in figure~\ref{figure:avgmovierating}
 
 
 
-\subsection{What the top Netflix-Prize contestants did}
+\subsection{What the top Netflix-Prize contestants did}\label{subsec:thewinners}
 
 \subsubsection{BellKor's Pragmatic Chaos}
 % http://www.stat.osu.edu/~dmsl/GrandPrize2009_BPC_BellKor.pdf
@@ -179,44 +190,6 @@ After the competition was done "The Ensemble" tested a merger of their system wi
 
 \subsubsection{Conclusion}
 After looking at the two top contestants from the competition a pattern is starting to form. Diversity is key to be able to predict user-ratings at a top level.
-% End Classification
-
-
-\subsection{Classification and Algorithms to solve the problem}
-% About Classification
-% http://www.netflixprize.com/assets/GrandPrize2009_BPC_PragmaticTheory.pdf
-% http://www.netflixprize.com/assets/GrandPrize2009_BPC_BellKor.pdf
-% http://www.netflixprize.com/assets/GrandPrize2009_BPC_BigChaos.pdf
-% http://www2.research.att.com/~volinsky/netflix/Bellkor2008.pdf
-% http://public.research.att.com/~volinsky/netflix/cfworkshop.pdf
-% http://public.research.att.com/~volinsky/netflix/BellKorICDM07.pdf
-% http://www2.research.att.com/~volinsky/netflix/ProgressPrize2007BellKorSolution.pdf
-% http://public.research.att.com/~volinsky/netflix/sigkddexp.pdf
-% http://www.netflixprize.com//leaderboard
-% https://sites.google.com/site/xlvector/netflixprize/papers
-% http://www.slideshare.net/bmabey/svd-and-the-netflix-dataset-presentation
-% http://lenskit.grouplens.org/
-
-% https://github.com/cloudera/oryx
-
-TODO:
-There are two basic problems when analysing very large datasets:
-    - Writing the code correctly.
-    - The performance (i.e. speed at which it runs).
-
-
-Something about why and which classification alg to use
-% http://scenic.princeton.edu/network20q/wiki/index.php?title=Q4:_How_does_Netflix_recommend_movies%3F
-% http://blog.jimjh.com/static/downloads/2013/05/12/netflix.pdf
-There were 51 051 contestants on 41 305 different teams competing in the Netflix-Prize competition, and a lot of these contestants shared their solution through code repositories such as GitHub (--------------something about github here?--------------). Since many of these solution scored very well on the contest it was natural to explore these and use their solution to test potential improvement in collaboration with social media data.
-Here we explore some of the better solutions and how and why these could be used to our benefit.
-
-https://github.com/n8j/school/tree/master/DataMiningCSEP546/HW1
-
-
-
-BellKor's Pragmatic Chaos - RMSE = 0.8567
-\subsubsection{Conclusion}
 
 % End Netflix
 
@@ -233,15 +206,8 @@ BellKor's Pragmatic Chaos - RMSE = 0.8567
 \end{wrapfigure}
 
 
-Weka is a machine learning software written in Java. It can be used to visualize data through analyzing it with different kinds of algorithms. The Explorer, a graphical user interface, makes it easy to work with and explore data from different angles. It is a free software under the General Public License [].
-%http://en.wikipedia.org/wiki/GNU_General_Public_License
-Weka can handle several data mining tasks, including, data preprocessing, clustering, classification, regression and feature selection. The input data has to be a single flat file or relation, each data point must be described by a fixes number of attributes. The dataset can be accessed trough a SQL database. Can link database tables into a single datatable, which can be used for processing using Weka.
+Weka is a machine learning software written in Java. It can be used to visualize data through analyzing it with different kinds of algorithms. The Explorer, a graphical user interface, makes it easy to work with and explore data from different angles. It is a free software under the General Public License \cite{GNU}. Weka can handle several data mining tasks, including, data preprocessing, clustering, classification, regression and feature selection. The input data has to be a single flat file or relation, each data point must be described by a fixes number of attributes. The dataset can be accessed trough a SQL database. Can link database tables into a single datatable, which can be used for processing using Weka.
 
-\subsection{The Explorer}
-% http://www.cs.waikato.ac.nz/~ml/weka/gui_explorer.html
-% http://research.cs.queensu.ca/home/cisc333/tutorial/Weka.html
-% http://wiki.pentaho.com/display/DATAMINING/Time+Series+Analysis+and+Forecasting+with+Weka
-TODO: TABLE OF EXPLORER PROPERTIES? TOO MUCH?
 
 \subsection{ARFF}
 % http://www.cs.waikato.ac.nz/ml/weka/arff.html
@@ -263,6 +229,36 @@ Attribute Relationship File Format is the file type used to store data in a data
 \end{lstlisting}
 
 Listing~\ref{lst:arffEx} is an example of how an ARFF file is structured. It startes with a header, containing "@relation", "@attribute"s and the "@data". This header defines the name of the relation, the attributes in the dataset and the data. The "@data"-header contains arrays, where each array has values for the corresponding "@attribute"s values. If a array has no value for a particular attribute it is denoted as a question mark (?).
+
+\subsection{The Explorer}
+% http://www.cs.waikato.ac.nz/~ml/weka/gui_explorer.html
+% http://research.cs.queensu.ca/home/cisc333/tutorial/Weka.html
+% http://wiki.pentaho.com/display/DATAMINING/Time+Series+Analysis+and+Forecasting+with+Weka
+\begin{table}
+\centering
+\begin{tabularx}{1.0\textwidth}{ l p{9.3cm} }
+  \textbf{Components} & \textbf{Description} \\
+  \hline \\ [-1.5ex]
+  Preprocess & Here the user can import the data which is going to be analyzed. It is also possible to do some filtering on this data, this includes removing of values and transforming values. \\
+  \hline \\ [-1.5ex]
+  Classify & Here the user can apply classification and regression algorithms to the dataset. \\
+  \hline \\ [-1.5ex]
+  Associate & Here the user can have the association rule learners identify important relationships between attributes in the provided dataset. \\
+  \hline \\ [-1.5ex]
+  Cluster & Here the user can apply cluster algorithms to the dataset \\
+  \hline \\ [-1.5ex]
+  Select attributes & Here the user can identify the most predictive attributes in the dataset. \\
+  \hline \\ [-1.5ex]
+  Visualize & Here the user can get a visualization of the dataset, and of the different algorithms preformed on the dataset. \\
+\end{tabularx}
+\caption{Classification based on feature}
+\label{table:nosql-calssifications}
+\end{table}
+
+
+\subsection{Using Weka to analyze the netflix-data}
+
+
 % End Weka
 
 
@@ -402,6 +398,56 @@ Need to rate 20 movies
 \subsection{MovieTweetings}
 Does not need to rate movies lol
 \subsection{Twittomender}
+
+
+\section{Collaborative Filtering}
+% About Classification
+% http://www.netflixprize.com/assets/GrandPrize2009_BPC_PragmaticTheory.pdf
+% http://www.netflixprize.com/assets/GrandPrize2009_BPC_BellKor.pdf
+% http://www.netflixprize.com/assets/GrandPrize2009_BPC_BigChaos.pdf
+% http://www2.research.att.com/~volinsky/netflix/Bellkor2008.pdf
+% http://public.research.att.com/~volinsky/netflix/cfworkshop.pdf
+% http://public.research.att.com/~volinsky/netflix/BellKorICDM07.pdf
+% http://www2.research.att.com/~volinsky/netflix/ProgressPrize2007BellKorSolution.pdf
+% http://public.research.att.com/~volinsky/netflix/sigkddexp.pdf
+% http://www.netflixprize.com//leaderboard
+% https://sites.google.com/site/xlvector/netflixprize/papers
+% http://www.slideshare.net/bmabey/svd-and-the-netflix-dataset-presentation
+% http://lenskit.grouplens.org/
+
+% https://github.com/cloudera/oryx
+
+How to best make something out of the dataset
+How to produce the RMSE
+What is the RMSE
+
+
+TODO:
+There are two basic problems when analysing very large datasets:
+    - Writing the code correctly.
+    - The performance (i.e. speed at which it runs).
+
+
+
+Something about why and which classification alg to use
+% http://scenic.princeton.edu/network20q/wiki/index.php?title=Q4:_How_does_Netflix_recommend_movies%3F
+% http://blog.jimjh.com/static/downloads/2013/05/12/netflix.pdf
+There were 51 051 contestants on 41 305 different teams competing in the Netflix-Prize competition, and a lot of these contestants shared their solution through code repositories such as GitHub (--------------something about github here?--------------). Since many of these solution scored very well on the contest it was natural to explore these and use their solution to test potential improvement in collaboration with the social media data harvested from Twitter.
+
+Here we explore some of the better solutions and how and why these could be used to our benefit.
+Here we explore some of the better solutions and put together how these can be used to
+
+
+The moivie-suggestion algorithm:
+
+
+\subsection{Using the Netflix-data}
+The Netflix-data has, as mentioned in the section about the dataset \ref{subsec:netflixdata}, a set of ratings from users for each movie, and a time-stamp for these ratings. As vi saw from the study about the winning contestants \ref{subsec:thewinners}, we saw that this information alone let them produce a system which could predict movie-ratings with a RMSE of 0.8567. They saw
+
+\subsection{Using the Twitter-data}
+
+\subsection{Conclusion}
+
 
 
 
