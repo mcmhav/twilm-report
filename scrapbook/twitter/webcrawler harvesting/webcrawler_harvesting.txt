@@ -10,20 +10,20 @@ HTTPS Identification
 
 Searching
 =========
-This section will examine how twitters https search requests works. This will be done by browsing twitter.com logged in as a user and examining it Google Chrome Developer Tools (GCDT) [2] as the site is being browsed and search requests are being made.
+This section will examine how twitters https search requests works. This will be done by browsing twitter.com logged in as a user and examining it Google Chrome Developer Tools (GCDT)\cite as the site is being browsed and search requests are being made.
 
 The goal of this examination is to provide a basis for creating a webcrawler that can search twitter automatically.
 
 
 Initial search request
 ----------------------
-Tweets can be found using an HTTPS search request with the search query in the format URLE [1]. Searching for <URLE search query> can be done with the following request.
+Tweets can be found using an HTTPS search request with the search query in the format URLE [1]. Searching for all tweets about <URLE search query> can be done with the following request.
 
-	https://twitter.com/search?q=<URLE search query>&src=typd
+	https://twitter.com/search?q=<URLE search query>&src=typd&f=realtime
 
 In the rest of the discussion of search, we'll be using the following query as an example. This is a search request for the search query "The Dark Knight Rises 2012".
 
-	https://twitter.com/search?q=the%20dark%20knight%202012&src=typd
+	https://twitter.com/search?q=the%20dark%20knight%202012&src=typd&f=realtime
 
 Using the Google Chrome Developer Console [2] we can find the DOM elements on the search page that contain the tweets that have been returned, using the select element tool. We'll refer to this as the tweets container.
 
@@ -98,7 +98,9 @@ Extracting tweets from the results
 Now that all the dom elements containing tweets can be retrieved, the relevant data can be retrieved from each element.
 
 Relevant data
-	User - the user who posted the tweet
+	User
+		ID - The ID of the user who posted the tweet
+		Name - The name of the user who posted the tweet
 
 	Content
 		Text - the text contained in the tweet
@@ -108,7 +110,7 @@ Relevant data
 
 User
 ....
-The user can be found in the header of the tweet. Using the GCDT Select, it can be extracted from the page. It will be referred to as the user element.
+The user name can be found in the header of the tweet. Using the GCDT Select, it can be extracted from the page. It will be referred to as the user name element.
 
 	[pic 01_tweet_user_field]
 	Shows the user field in blue
@@ -117,14 +119,29 @@ The user can be found in the header of the tweet. Using the GCDT Select, it can 
 
 Using jQuery, a function can be created to count the occurances of the class "username js-action-profile-name".
 
-	> number_of_tweet_user_element_occurances = function(){ return $("span.username.js-action-profile-name").size() }
+	> number_of_tweet_user_name_element_occurances = function(){ return $("span.username.js-action-profile-name").size() }
 
 Correlating this with the number of tweets in the search result, shows that this is the right class to crawl for.
 
-	> number_of_tweet_user_element_occurances();
+	> number_of_tweet_user_name_element_occurances();
 	119
 	> number_of_tweets_in_search_results();
 	119
+
+The user ID can also be found in the header. The ID is contained in the attribute data-user-id. Using the GCDT Select, it can be extracted from the page. It will be referred to as the user id element.
+
+	<a class="account-group js-account-group js-action-profile js-user-profile-link js-nav" href="/username" data-user-id="userid">...</a>
+
+Using jQuery, a function can be created to count the occurances of the class "account-group js-account-group js-action-profile js-user-profile-link js-nav".
+
+	> number_of_tweet_user_id_element_occurances = function(){ return $("a.account-group.js-account-group.js-action-profile.js-user-profile-link.js-nav").size() }
+
+Correlating this with the number of tweets in the search result, shows that this is the right class to crawl for.
+
+	> number_of_tweet_user_id_element_occurances();
+	21
+	> number_of_tweets_in_search_results();
+	21
 
 Content
 ....
