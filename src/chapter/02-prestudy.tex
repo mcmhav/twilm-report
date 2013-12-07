@@ -446,7 +446,132 @@ As is shown, the attribute data-scroll-cursor is responsible for what goes in th
   https://twitter.com/i/search/timeline?q=the%20dark%20knight%202012&src=typd&include_available_features=1&include_entities=1&last_note_ts=0&scroll_cursor=TWEET-311337362556846081-399762568459612160
   \end{lstlisting}
 
+\subsection{Scraping Search Results}
 
+Each tweet element in the search results contains DOM elements of importance that can be scraped. These DOM elements are shown in table-\ref{table:important-tweet-element-elements}.
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{5.3\textwidth}{ lp{7cm} lp{5cm} }
+  \textbf{Element Name} & \textbf{Content}\\
+  \cline{0-1}
+  User ID & The ID of the user who posted the tweet \\
+  \cline{0-1}
+  User Name & The name of the user who posted the tweet \\
+  \cline{0-1}
+  Text & the text contained in the tweet
+\end{tabularx}
+\caption{Elements to be scraped from each tweet element that have been retrieved}
+\label{table:important-tweet-element-elements}
+\end{table}
+
+\subsubsection{User}
+The user name can be found in the header of the tweet. Using the GCDT Select, it can be extracted from the page. It will be referred to as the user name element.
+
+\begin{figure}[H]
+\includegraphics[width=4in]{image/tweet-user-field.png}
+\centering
+\caption{User name element (shown in blue) in a tweet retrieved by twitter web search}
+\label{figure:tweet-user-field}
+\end{figure}
+
+\begin{lstlisting}[caption={HTML of the user name element in a tweet},label={user-name-element-html},captionpos=b]
+  <span class=\"username js-action-profile-name\"><s>@</s><b>BatmanMemorabil</b></span>
+\end{lstlisting}
+
+\noindent
+Using jQuery, a function can be created to count the occurances of the class "username js-action-profile-name".
+
+\begin{lstlisting}[caption={Creating a function in GCDT Javascript Console for counting the occurance of user name elements on the twitter search result page},label={user-name-element-count-jquery-function},captionpos=b]
+  > number_of_tweet_user_name_element_occurances = function(){ return $("span.username.js-action-profile-name").size() }
+\end{lstlisting}
+
+\noindent
+In listing-\ref{user-elements-matches-tweets}, the number of user name elements in the dom tree is compared to the number of tweets in the search result. Since they are equal, it is likely that the right class is being scraped for the user name element.
+
+\begin{lstlisting}[caption={Running functions in GCDT Javascript Console to show that the number of user name elements matches the number of tweets},label={user-elements-matches-tweets},captionpos=b]
+  > number_of_tweet_user_name_element_occurances();
+  119
+  > number_of_tweets_in_search_results();
+  119
+\end{lstlisting}
+
+\noindent
+The user ID can also be found in the header. The ID is contained in the attribute data-user-id. Using the GCDT Select, it can be extracted from the page. It will be referred to as the user id element.
+
+\begin{lstlisting}[caption={TODO: Caption and label},label={},captionpos=b]
+  <a class="account-group js-account-group js-action-profile js-user-profile-link js-nav" href="/username" data-user-id="userid">...</a>
+\end{lstlisting}
+
+Using jQuery, a function can be created to count the occurances of the class "account-group js-account-group js-action-profile js-user-profile-link js-nav".
+
+\begin{lstlisting}[caption={TODO: Caption and label},label={},captionpos=b]
+  > number_of_tweet_user_id_element_occurances = function(){ return $("a.account-group.js-account-group.js-action-profile.js-user-profile-link.js-nav").size() }
+\end{lstlisting}
+
+Correlating this with the number of tweets in the search result, shows that this is the right class to crawl for.
+
+\begin{lstlisting}[caption={TODO: Caption and label},label={},captionpos=b]
+  > number_of_tweet_user_id_element_occurances();
+  21
+  > number_of_tweets_in_search_results();
+  21
+\end{lstlisting}
+
+Content
+....
+The text can be found in the center of the tweet in the same container as the URL. GCDT Select extracts it from the page. It will be referred to ass the tweet content element.
+
+  \begin{figure}[H]
+\includegraphics[width=4in]{image/tweet-user-field.png}
+\centering
+\caption{Text, URL and hastag field (shown in blue) in a tweet retrieved by twitter web search}
+\label{figure:tweet-user-field}
+\end{figure}
+
+\noindent
+This gives us the following dom element.
+
+\begin{lstlisting}[caption={TODO: Caption and label},label={},captionpos=b]
+  <p class="js-tweet-text tweet-text">
+    <strong>The Dark Knight</strong> Rises (DVD, <strong>2012</strong>)
+    <a href="http://t.co/p8pr9wqC4k" rel="nofollow" dir="ltr" data-expanded-url="http://ift.tt/17i5F5V" class="twitter-timeline-link" target="_blank" title="http://ift.tt/17i5F5V">
+      <span class="tco-ellipsis"></span>
+      <span class="invisible">http://</span>
+      <span class="js-display-url">ift.tt/17i5F5V</span>
+      <span class="invisible"></span>
+      <span class="tco-ellipsis">
+        <span class="invisible">&nbsp;</span>
+      </span>
+    </a>
+    <a href="/search?q=%23batman&amp;src=hash" data-query-source="hashtag_click" class="twitter-hashtag pretty-link js-nav" dir="ltr">
+      <s>#</s><b>batman</b>
+    </a>
+  </p>
+\end{lstlisting}
+
+Using jQuery, a function can be created to count the occurances of the class "js-tweet-text tweet-text".
+
+\begin{lstlisting}[caption={TODO: Caption and label},label={},captionpos=b]
+  > number_of_tweet_content_element_occurances = function(){ return $("p.js-tweet-text.tweet-text").size() }
+\end{lstlisting}
+
+Correlating this with the number of tweets in the search result, shows that this is the right class to crawl for.
+
+\begin{lstlisting}[caption={TODO: Caption and label},label={},captionpos=b]
+  > number_of_tweet_content_element_occurances();
+  119
+  > number_of_tweets_in_search_results();
+  119
+\end{lstlisting}
+
+Text
+....
+Everything in paragraphs with the class "js-tweet-text tweet-text" that is not a link, is the tweet text.
+
+\begin{lstlisting}[caption={TODO: Caption and label},label={},captionpos=b]
+  <strong>The Dark Knight</strong> Rises (DVD, <strong>2012</strong>)
+\end{lstlisting}
 
 \subsection{Datamining Twitter for Recommendations}
 % End Twitter
