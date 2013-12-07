@@ -265,7 +265,7 @@ Listing~\ref{lst:arffEx} is an example of how an ARFF file is structured. It sta
 
 
 % About Twitter
-\section{Twitter}
+\section{Twitter}\label{sec:twitter}
 
 \begin{wrapfigure}{r}{.30\textwidth}
 \vspace{-30pt}
@@ -451,21 +451,28 @@ As is shown, the attribute data-scroll-cursor is responsible for what goes in th
 
 
 \section{Similar solutions (Evaluation of State-of-the-art)}
-% http://crowdrec2013.noahlab.com.hk/papers/crowdrec2013_Dooms.pdf
 % http://movielens.umn.edu/login
 % http://www.grouplens.org/datasets/movielens/
 
-TODO:
 In this section, we will discuss similar solutions and their relevance to our project.
 
 If this is not state of the art stuff, maybe separate this and that
 
 
-\subsection{MovieLens}
+\subsection{MovieLens}\label{subsec:MovieLens}
 Need to rate 20 movies
+
 \subsection{MovieTweetings}
-Does not need to rate movies lol
+MovieTweetings use the social media to get a fresher dataset than using Netflix dataset, or MovieLens datasets~\ref{subsec:MovieLens}. At the time of writing the article they had more than 60 000 ratings, and about 500 new where added every day. They get these ratings from Twitter~\ref{sec:twitter}.   Does not need to rate movies.
+\cite{MovieTweetings}
+
 \subsection{Twittomender}
+\cite{twittomender}
+
+
+
+
+
 
 
 \section{Collaborative Filtering}
