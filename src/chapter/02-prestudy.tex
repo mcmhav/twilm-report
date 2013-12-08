@@ -342,50 +342,46 @@ To authenticate, the access token generated for the application can be used as w
 The number of requests that can be made are limited to 180 requests per 15 minute window for each OAuth. If the Search API is accessed using only the application access token, these limitations apply application-wide for any number of users.\cite{twitter-rate-limiting}
 
 \subsection{Stream API}
-\subsubsection{Authentication}
+
 
 \subsection{Crawling and Scraping Twitter}
 TODO: Add appendixes from scrapbook.
-This section will examine how to crawl Twitter using Twitters HTTPS Web Search. This will be examined by browsing twitter.com logged in as a user and examining it Google Chrome Developer Tools (GCDT)\cite{gcdt} as the site is being browsed and search requests are being made. The goal of this examination is to discover requests a webcrawler must be capable of making in order to search twitter and harvest tweets and users automatically.
+This section will examine how to crawl and scrape Twitters HTTPS Web Search. This will be examined by browsing twitter.com logged in as a user and examining it Google Chrome Developer Tools (GCDT)\cite{gcdt} as the site is being browsed and search requests are being made. The goal of this examination is to discover requests a webcrawler must be capable of making in order to search twitter and harvest tweets and users automatically and how a scraper can distinguish the dom elements that describe a tweet.
 
 
 \subsubsection{Search Request}
-TODO: Labels for all snippets in this section.
-Tweets can be found using an HTTPS search request with the search query in the format URLE [1]
-TODO: URLE Reference.
-Searching for <URLE search query> can be done with the following request.
-TODO: Make <URLE-search-query> clearer in url
+Tweets can be found using an HTTPS search request with the search query in the format URLE \cite{w3-urle-ref}
+Searching for <URLE search query> can be done with the HTTPS request shown in listing-\ref{listing:search-request}.
+In the rest of the discussion, we'll be using the search query "The Dark Knight Rises 2012". The search request for this search query parsed to URLE is shown in listing-\ref{listing:search-request-batman-urle}
 
-  \url{https://twitter.com/search?q=<URLE-search-query>&src=typd&f=realtime}
+  \begin{lstlisting}[caption={URL of a twitter HTTPS search request for <URLE-search-query>},label={listing:search-request},captionpos=b]
+  https://twitter.com/search?q=<URLE-search-query>&src=typd&f=realtime
+  \end{lstlisting}
 
-In the rest of the discussion of search, we'll be using the following query as an example. This is a search request for the search query "The Dark Knight Rises 2012".
+\begin{lstlisting}[caption={URL of a twitter HTTPS search request for "The Dark Knight Rises 2012" parsed to URLE},label={listing:search-request-batman-urle},captionpos=b]
+  https://twitter.com/search?q=the%20dark%20knight%202012&src=typd&f=realtime
+  \end{lstlisting}
 
-  \url{https://twitter.com/search?q=the%20dark%20knight%202012&src=typd&f=realtime}
+Using the Google Chrome Developer Console \cite{gcdt} we can find the DOM elements on the search page that contains all the tweets that have been returned, using the select element tool. The HTML of this element is shown in listing-\ref{listing:tweet-container-html}. Within it, each tweet is contained in an HTML element like the one in listing-\ref{listing:tweet-element-html}
 
-Using the Google Chrome Developer Console [2] we can find the DOM elements on the search page that contain the tweets that have been returned, using the select element tool. We'll refer to this as the tweets element.
-
-  \begin{lstlisting}[caption={Tweet Element},label={},captionpos=b]
+  \begin{lstlisting}[caption={HTML of the element containing all tweet elements},label={listing:tweet-container-html},captionpos=b]
   <ol class="stream-items js-navigable-stream" id="stream-items-id\">
   \end{lstlisting}
 
-The first element contained within the tweets element is a summary of the users who have posted the tweets returned by the search, and is not of interest.
-
-The rest of the li-elements in the tweets element contain tweets elements. They have the following format
-
-  \begin{lstlisting}[caption={Tweet Element},label={},captionpos=b]
+  \begin{lstlisting}[caption={HTML of a tweet element},label={listing:tweet-element-html},captionpos=b]
   <li class="js-stream-item stream-item stream-item expanding-stream-item" data-item-id="397530125715402752" id="stream-item-tweet-397530125715402752" data-item-type="tweet">...</li>
   \end{lstlisting}
 
-TODO: Create reference for jQuery
-Using jQuery [3] and the Javascript Console in GCDT \cite{gcdt}, we can determine how many tweets have been returned. To do this, we define a javascript function that selects the tweets element dom element, gets a list of it's children and counts the number of items in this list and subtract 1 for the user summary element.
+Using jQuery \cite{jquery} and the Javascript Console in GCDT \cite{gcdt}, it is possible to determine how many tweets have been returned. This is done by defining javascript function that selects the tweets elements and returns the number of elements in this list in listing-\ref{listing:tweet-count-function}. The function can be assured to work by counting the number of tweets displayed on the search result page and making sure that it matches the number returned by the function.
 
-  \begin{lstlisting}[caption={TODO: Caption},label={},captionpos=b]
+  \begin{lstlisting}[caption={Creating a function in GCDT Javascript Console for counting the occurance of tweets on the twitter search result page},label={listing:tweet-count-function},captionpos=b]
   > number_of_tweets_in_search_results = function(){ return $("li[data-item-type='tweet']").size(); }
   > number_of_tweets_in_search_results();
   15
   \end{lstlisting}
 
 \subsubsection{Scroll Search Results}
+TODO: Add captions and references
 In order to obtain more search results it is necessary to scroll to the bottom of the page for the browser to make an XHR request to retrieve more tweets. As the scrolling is done, XHR requests can be monitored in the Network tab of GCDT. Consecutive xhr requests are sent as scrolling is done several times.
 
   \begin{lstlisting}[caption={TODO: Caption},label={},captionpos=b]
@@ -428,7 +424,7 @@ Examining the requests attributes, they consists of the following variables and 
   variable scroll_cursor=TWEET-<18 character number>-<18 character number>
   \end{lstlisting}
 
-At this point a snapshot of the html page is taken [A3]. The only attribute that seems to variate with each request is scroll\_cursor attribute. This means that the piece of javascript code that is making the requests somehow has access to the information contained in this changing attribute. A quick dom tree search for 'TWEET-' shows us that scroll\_cursor is contained by a div with the class stream-container under under the attribute 'data-scroll-cursor' and 'data-refresh-cursor'.
+At this point a snapshot of the html page is taken [A3]. The only attribute that seems to variate with each request is scroll\_cursor attribute. This means that the piece of javascript code that is making the requests somehow has access to the information contained in this changing attribute. A quick DOM tree search for 'TWEET-' shows us that scroll\_cursor is contained by a div with the class stream-container under under the attribute 'data-scroll-cursor' and 'data-refresh-cursor'.
 
   \begin{lstlisting}[caption={TODO: Caption},label={},captionpos=b]
   <div class="stream-container" data-scroll-cursor="TWEET-311337362556846081-399762568459612160" data-refresh-cursor="TWEET-396773826303762432-399762568459612160">
@@ -451,18 +447,18 @@ Each tweet element in the search results contains DOM elements of importance tha
 \begin{tabularx}{5.3\textwidth}{ lp{7cm} lp{5cm} }
   \textbf{Element Name} & \textbf{Content}\\
   \cline{0-1}
-  User ID & The ID of the user who posted the tweet \\
-  \cline{0-1}
   User Name & The name of the user who posted the tweet \\
   \cline{0-1}
-  Text & the text contained in the tweet
+  User ID & The ID of the user who posted the tweet \\
+  \cline{0-1}
+  Tweet Text & The text contained in the tweet
 \end{tabularx}
-\caption{Elements to be scraped from each tweet element that have been retrieved}
+\caption{Elements to be scraped from each tweet element that has been retrieved}
 \label{table:important-tweet-element-elements}
 \end{table}
 
-\subsubsection{User}
-The user name can be found in the header of the tweet. Using the GCDT Select, it can be extracted from the page. It will be referred to as the user name element.
+\subsubsection{User Name}
+The user name can be found in the header of the tweet. Using the GCDT Select, it can be extracted from the page as shown in blue in figure-\ref{figure:tweet-user-field}. It will be referred to as the user name element.
 
 \begin{figure}[H]
 \includegraphics[width=4in]{image/tweet-user-field.png}
@@ -476,14 +472,12 @@ The user name can be found in the header of the tweet. Using the GCDT Select, it
 \end{lstlisting}
 
 \noindent
-Using jQuery, a function can be created to count the occurances of the class "username js-action-profile-name".
+Using jQuery, a function can be created to count the occurances of the class "username js-action-profile-name", as shown in \ref{user-name-element-count-jquery-function}. This function can then be used to compare the number of user name elements in the DOM tree to the number of tweets in the search result, as shown in listing-\ref{user-elements-matches-tweets}. Since they are equal, it is likely that the right class is being scraped for the user name element.
 
 \begin{lstlisting}[caption={Creating a function in GCDT Javascript Console for counting the occurance of user name elements on the twitter search result page},label={user-name-element-count-jquery-function},captionpos=b]
   > number_of_tweet_user_name_element_occurances = function(){ return $("span.username.js-action-profile-name").size() }
 \end{lstlisting}
 
-\noindent
-In listing-\ref{user-elements-matches-tweets}, the number of user name elements in the dom tree is compared to the number of tweets in the search result. Since they are equal, it is likely that the right class is being scraped for the user name element.
 
 \begin{lstlisting}[caption={Running functions in GCDT Javascript Console to show that the number of user name elements matches the number of tweets},label={user-elements-matches-tweets},captionpos=b]
   > number_of_tweet_user_name_element_occurances();
@@ -492,43 +486,38 @@ In listing-\ref{user-elements-matches-tweets}, the number of user name elements 
   119
 \end{lstlisting}
 
-\noindent
-The user ID can also be found in the header. The ID is contained in the attribute data-user-id. Using the GCDT Select, it can be extracted from the page. It will be referred to as the user id element.
+\subsubsection{User ID}
+The user ID can also be found in the header. It is contained in the attribute data-user-id. Using the GCDT Select, it can be scraped from the page. It will be referred to as the user id element. The HTML of this scraping is shown in listing-\ref{listing:user-id-element-html}
 
-\begin{lstlisting}[caption={TODO: Caption and label},label={},captionpos=b]
+\begin{lstlisting}[caption={HTML of the user id element in a tweet},label={listing:user-id-element-html},captionpos=b]
   <a class="account-group js-account-group js-action-profile js-user-profile-link js-nav" href="/username" data-user-id="userid">...</a>
 \end{lstlisting}
 
-Using jQuery, a function can be created to count the occurances of the class "account-group js-account-group js-action-profile js-user-profile-link js-nav".
+\noindent
+Using jQuery, a function can be created to count the occurances of the class used to specify the user id element, as shown in \ref{user-id-element-count-jquery-function}. This function can then be used to compare the number of user id elements in the DOM tree to the number of tweets in the search result, as shown in listing-\ref{user-id-elements-matches-tweets}. Since they are equal, it is likely that the right class is being scraped for the user id element.
 
-\begin{lstlisting}[caption={TODO: Caption and label},label={},captionpos=b]
+\begin{lstlisting}[caption={Creating a function in GCDT Javascript Console for counting the occurance of user id elements on the twitter search result page},label={user-id-element-count-jquery-function},captionpos=b]
   > number_of_tweet_user_id_element_occurances = function(){ return $("a.account-group.js-account-group.js-action-profile.js-user-profile-link.js-nav").size() }
 \end{lstlisting}
 
-Correlating this with the number of tweets in the search result, shows that this is the right class to crawl for.
-
-\begin{lstlisting}[caption={TODO: Caption and label},label={},captionpos=b]
+\begin{lstlisting}[caption={Running functions in GCDT Javascript Console to show that the number of user id elements matches the number of tweets},label={user-id-elements-matches-tweets},captionpos=b]
   > number_of_tweet_user_id_element_occurances();
   21
   > number_of_tweets_in_search_results();
   21
 \end{lstlisting}
 
-Content
-....
-The text can be found in the center of the tweet in the same container as the URL. GCDT Select extracts it from the page. It will be referred to ass the tweet content element.
+\subsubsection{Tweet Text}
+The tweet text can be found in the content of the tweet, as shown in blue in figure-\ref{figure:tweet-text-field}. Using the GCDT Select, it can be extracted from the page. It will be referred to as the tweet content element. The tweet content element contains several HTML elements from which the text can be scraped, as shown in listing-\ref{listing:tweet-content-element-html}.
 
   \begin{figure}[H]
-\includegraphics[width=4in]{image/tweet-user-field.png}
+\includegraphics[width=4in]{image/tweet-text-and-url-field.png}
 \centering
-\caption{Text, URL and hastag field (shown in blue) in a tweet retrieved by twitter web search}
-\label{figure:tweet-user-field}
+\caption{Tweet content element (shown in blue) in a tweet retrieved by twitter web search}
+\label{figure:tweet-text-field}
 \end{figure}
 
-\noindent
-This gives us the following dom element.
-
-\begin{lstlisting}[caption={TODO: Caption and label},label={},captionpos=b]
+\begin{lstlisting}[caption={HTML of the tweet content element in a tweet},label={listing:tweet-content-element-html},captionpos=b]
   <p class="js-tweet-text tweet-text">
     <strong>The Dark Knight</strong> Rises (DVD, <strong>2012</strong>)
     <a href="http://t.co/p8pr9wqC4k" rel="nofollow" dir="ltr" data-expanded-url="http://ift.tt/17i5F5V" class="twitter-timeline-link" target="_blank" title="http://ift.tt/17i5F5V">
@@ -546,30 +535,28 @@ This gives us the following dom element.
   </p>
 \end{lstlisting}
 
-Using jQuery, a function can be created to count the occurances of the class "js-tweet-text tweet-text".
+\noindent
+Using jQuery, a function can be created to count the occurances of the class "js-tweet-text tweet-text", which most likely describes all tweet content elements. The function is shown in listing-\ref{listing:tweet-content-element-count-function}. By comparing this number with the number of tweets in the search results and making sure it is equal, we can be confident that this class is describing the correct DOM element. The comparison is shown in 
+listing-\ref{listing:tweet-content-element-count-comparison}
 
-\begin{lstlisting}[caption={TODO: Caption and label},label={},captionpos=b]
+\begin{lstlisting}[caption={Creating a function in GCDT Javascript Console for counting the occurance of tweet content elements on the twitter search result page},label={listing:tweet-content-element-count-function},captionpos=b]
   > number_of_tweet_content_element_occurances = function(){ return $("p.js-tweet-text.tweet-text").size() }
 \end{lstlisting}
 
-Correlating this with the number of tweets in the search result, shows that this is the right class to crawl for.
-
-\begin{lstlisting}[caption={TODO: Caption and label},label={},captionpos=b]
+\begin{lstlisting}[caption={Running functions in GCDT Javascript Console to show that the number of tweet content elements matches the number of tweets},label={listing:tweet-content-element-count-comparison},captionpos=b]
   > number_of_tweet_content_element_occurances();
   119
   > number_of_tweets_in_search_results();
   119
 \end{lstlisting}
 
-Text
-....
-Everything in paragraphs with the class "js-tweet-text tweet-text" that is not a link, is the tweet text.
+\noindent
+First, in order to obtain the tweet text, everything that is not a link or contained in a link must be scraped from the tweet content element in listing-\ref{listing:tweet-content-element-html}. An example of the HTML of this scraping is shown in listing-\ref{listing:tweet-text-scrape}. Then, the tweet text is obtained by stripping the HTML of all tags.
 
-\begin{lstlisting}[caption={TODO: Caption and label},label={},captionpos=b]
+\begin{lstlisting}[caption={The HTML of scraping everything from listing-\ref{listing:tweet-content-element-html} that is not a link},label={listing:tweet-text-scrape},captionpos=b]
   <strong>The Dark Knight</strong> Rises (DVD, <strong>2012</strong>)
 \end{lstlisting}
 
-\subsection{Datamining Twitter for Recommendations}
 % End Twitter
 
 
