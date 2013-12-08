@@ -342,7 +342,18 @@ To authenticate, the access token generated for the application can be used as w
 The number of requests that can be made are limited to 180 requests per 15 minute window for each OAuth. If the Search API is accessed using only the application access token, these limitations apply application-wide for any number of users.\cite{twitter-rate-limiting}
 
 \subsection{Stream API}
+Twitters Stream API streams data from twitter as it is created to a client through a persistent HTTPS connection. It is ideal for gathering the most up-to-date tweets or gathering large amounts of data over long periods of time.
 
+\subsubsection{Usage}
+The client makes an initial GET request specifying the type of data it wants to receive. The request contains a list of up to 400 keywords. Any tweet that matches one or more of these keywords are considered part of the stream. The request can be directed to two endpoints: A public endpoints, which streams tweets from all users; or a user endpoint, which sterams tweets from a specific user.
+
+After the initial request is made, a persistent HTTP connection is opened. Then, the tweets that match the keywords in the initial request are streamed. The tweets keep streaming until the connection closes.
+
+\subsubsection{Authentication}
+Authentication for using the Stream API is done with OAuth. There is no application wide identification such as in the REST API and the Search API.
+
+\subsubsection{Limitations}
+There is no rate limit in the Stream API. However, there are a few cases in which the streaming will stop. For instance, If the client fails to receive the streamed data and twitters buffer builds up too many tweets, the connection will be closed. Also, if the client opens too many streams with the same credentials, the oldest connection will be closed.
 
 \subsection{Crawling and Scraping Twitter}
 TODO: Add appendixes from scrapbook.
