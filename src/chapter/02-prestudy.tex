@@ -588,8 +588,12 @@ If this is not state of the art stuff, maybe separate this and that
 Need to rate 20 movies
 
 \subsection{MovieTweetings}
-MovieTweetings use the social media to get a fresher dataset than using Netflix dataset, or MovieLens datasets~\ref{subsec:MovieLens}. At the time of writing the article they had more than 60 000 ratings, and about 500 new where added every day. They get these ratings from Twitter~\ref{sec:twitter}.   Does not need to rate movies.
-\cite{MovieTweetings}
+MovieTweetings is an application for fetching movie ratings through the Twitter API from Twitter. The application search for ratings forwarded from IMDB, a movie information webpage, and stored in an accessible
+
+use the social media to get a fresher dataset than using Netflix dataset, or MovieLens datasets~\ref{subsec:MovieLens}. At the time of writing the article they had more than 60 000 ratings, and about 500 new where added every day\cite{MovieTweetings}. They get these ratings from Twitter~\ref{sec:twitter}. The ratings fetched from Twitter are actually ratings from a movie rating and information page, IMDB, which are forwarded to the raters Twitter account. The Twitter API is queried daily to update their database.
+
+While querying the API for well structured tweets with ratings about movies are a good way to go when in search for a database with movie ratings, the data will be sparse. The data is not based on the users followers/followees, and will therefore not represent the social strength Twitter is capable of producing. A direct access to IMDB, rather than going through Twitter to get the rating information also seems like a simpler and more result-producing idea.
+
 
 \subsection{Twittomender}
 \cite{twittomender}
