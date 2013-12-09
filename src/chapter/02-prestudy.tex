@@ -13,11 +13,9 @@ Beyond this, the study will serve to outline which direction the project must ta
 
 % \section{Set to work with (another name perhaps (or maybe completely removed))}
 % About Netflix
-\section{Movie Recommendation}
-This is the prestudy for the movie recommendation part of the system. We will look at existing recommendations systems, datasets to be explored and how to explore this set.
 
 
-\subsection{Netflix}
+\section{Netflix}
 % http://en.wikipedia.org/wiki/Netflix
 % http://blog.jimjh.com/static/downloads/2013/05/12/netflix.pdf
 
@@ -26,6 +24,7 @@ This is the prestudy for the movie recommendation part of the system. We will lo
 \centering
 \includegraphics[width = .25\textwidth]{image/netflix-logo.png}
 \end{wrapfigure}
+This is the prestudy for the movie recommendation part of the system. We will look at existing recommendations systems, datasets to be explored and how to explore this set.
 
 Netflix is a on-demand Internet streaming media. It started out as a DVD-rental business, but moved over to a more Internet based business model in 1999 and have from then on had a great success in the subscription-based digital distribution service. To improve customer satisfaction they developed a personalized video-recommendation system called Cinematch. About 60\% of the Neflix users select their next movie or TV-show based on this recommendation\cite{hownetflixworks}, so it is important that this recommendation system manages to capture the users movie and TV-show preferences and feed back fitting movies and TV-shows.
 
@@ -121,65 +120,6 @@ Average movie rating distribution is shown in figure~\ref{figure:avgmovierating}
 
 
 
-\subsection{What the top Netflix-Prize contestants did}\label{subsec:thewinners}
-
-\subsubsection{BellKor's Pragmatic Chaos}
-% http://www.stat.osu.edu/~dmsl/GrandPrize2009_BPC_BellKor.pdf
-% http://www2.research.att.com/~volinsky/netflix/
-% http://www.netflixprize.com/assets/GrandPrize2009_BPC_PragmaticTheory.pdf
-% http://www.netflixprize.com/assets/GrandPrize2009_BPC_BigChaos.pdf
-% http://blog.revolutionanalytics.com/2009/09/bellkor-wins-netflix-prize.html
-% http://www.wired.com/business/2009/09/how-the-netflix-prize-was-won/
-% http://www.netflixprize.com//community/viewtopic.php?id=1537
-
-BellKor's Pragmatic Chaos, the prize winners of the Netflix-Prize competition, was a group of scientists from AT\&T Labs, Yahoo!, Pragmatic Theory and Commendo Research \& Consulting. They achieved a RMSE of 0.8567, which was 10.06\% better than Netflix's own Cinematch score.
-
-Models for the rating data is learned by fitting previously observed ratings, but since the model is to be used to predict feature ratings, overfitting the data. This achieved by regularizing the learned parameters. A regularization constant is used, and is set to L2 by default. This and other constant such as, step size and number of iterations are set manually through greedy manners. Where the algorithm is ran multiple times and constant value with best score is used. \cite{BellKor-PragmaticTheory}
-
-The winning algorithm was put together based on multiple different modeling techniques. Some of these modeling techniques are described in table~\ref{table:bellkor-models}
-
-\begin{table}[H]
-\caption{Some of the models the "The BellKor's Pragmatic Chaos"-team used \cite{BellKor-PragmaticTheory}}
-\centering
-\begin{tabular}{ p{3.2cm} p{9cm} }
-\hline
-  \textbf{Model} & \textbf{Description}\\
-  \hline \\ [-1.5ex]
-  Time of week rating & The team saw that a user-rating done in the weekends had a tendency to have a higher value than a rating done on a Monday. This also applies for multiple ratings done the same day, higher ratings does not necessarily imply that the movie is much better than a movie rated lower another day, the user might just be in a good mood. \\
-  \hline \\ [-1.5ex]
-  Close User ratings & Ratings done close to one another done by the same user implied that the user was rating based on the user's recollection of the rated movies, and not that the user just saw that movie, these ratings had to be handled in its own manner. This was because of the effect the faulty or old memories had on these ratings. The all time favorites/negatives are also usually in this bulk. While the movies which did not make much of an impression are forgotten. This helps us explain \ref{figure:avgmovierating}, where we saw that movies with the edge ratings (1 or 5) had a lower rating distribution. \\
-  \hline \\ [-1.5ex]
-  Baseline predictors & Some users has the tendency to rate on an overall average higher than other users.\\
-  \hline \\ [-1.5ex]
-  Movie like-ability & Movies can go in and out of popularity. This change usually happens over a extended period. \\
-  \hline \\ [-1.5ex]
-  Frequency term & The number of ratings a users gives on a specific day can help explains data-variability during that day. \\
-  \hline \\ [-1.5ex]
-  Matrix factorization with Temporal Dynamics & Use two sets pf static movie factors. Set one is used in all the models of the factors. Set two uses the movies rated by the user, normalizes the sum, and uses this as a user factor. \\
-  \hline \\ [-1.5ex]
-  Neighborhood model with Temporal Dynamics & Most common approach to collaborative filtering. They used a item-item model based on global optimization. To predict rating of a new item based of rating an old item two sets of weights where used. One where the values of the ratings where accounted for, and one disregarding rating values.
-  A situation where a user rates an old item and a new item close to each other both in time and rating, is a better indicator that these items can be related to each other, than if two items are rated similarly, but with a greater timespan between each other.Therefore a decaying relationship is introduced between items. This decreased RMSE from 0.9002 to 0.8870.\cite{BellKor-CF-TD} \\
-\end{tabular}
-\label{table:bellkor-models}
-\end{table}
-
-Interestingly, the bias model with tanking in the factor that users change rating-scale over time, resulted in a RMSE of 0.9555, which is almost as good as the Cinematch Netflix was already using. The learning with the different modeling techniques is done by a stochastic gradient descent algorithm running for 30 iterations. This is the only time they use an automatic parameter tuner. \cite{BellKor-2008-sol}
-
-As we can see from table~\ref{table:bellkor-models} the "BellKor's Pragmatic Chaos"-team used a lot of different models and did a lot of tweaking to get to the top. Some interesting findings to take from this is the importance of diversity and how central the timestamp of a rating can be.
-
-\subsubsection{The Ensemble}
-% http://www.the-ensemble.com/
-
-A merger of the teams "Grand Prize Team" and "Opera Solutions and Vandelay United". They also managed to get a RMSE of 0.8567, and therefore a 10.09\% improvement as well. But lost since the "BellKor's Pragmatic Chaos"-team managed to submit their results 20 minutes earlier than "The Ensemble"-team.
-
-The two merged teams, which made "The Ensemble" consisted of multiple smaller teams. They had all competed in the Netflix-Prize challenge, and had to put their heads and code together to get to the result they got to.
-
-"The Ensemble"-team used a huge variation of models, just as the "BellKor's Pragmatic Chaos"-team.
-
-After the competition was done "The Ensemble" tested a merger of their system with the "BellKor's Pragmatic Chaos"-system. The test RMSE of a 50/50 blend was 0.855476, which is a 10.19\% improvement. This is 0.10\% better then the teams managed to produce by themselves.
-
-\subsubsection{Conclusion}
-After looking at the two top contestants from the competition a pattern is starting to form. Diversity is key to be able to predict user-ratings at a top level.
 
 % End Netflix
 
@@ -574,18 +514,20 @@ First, in order to obtain the tweet text, everything that is not a link or conta
 
 
 
+\section{Similar Systems}
 
-\section{Similar solutions}
+
+\subsection{Recommender Systems}
 In this section, we will discuss similar solutions and their relevance to our project.
 
 
-\subsection{MovieLens}\label{subsec:MovieLens}
+\subsubsection{MovieLens}\label{subsec:MovieLens}
 MovieLens is a movie recommendation system. A user creates an account and gets movie recommendations based on the user's own ratings through MovieLens' collaborative filtering algorithm. They use a item-item based algorithm. They take the 20 movies which are most similar to the target movie and see how these 20 movies where rated.\cite{grouplens}
 
 The issue with using a strict item-item based correlation and the MovieLens recommendation system is that for a user with a low rating average, the user will very seldom get recommended movies with a top-average rating.
 
 
-\subsection{MovieTweetings}\label{subsec:MovieTweetings}
+\subsubsection{MovieTweetings}\label{subsec:MovieTweetings}
 MovieTweetings is an application for fetching movie ratings through the Twitter API from Twitter. The application search for ratings shared from IMDB, a movie information webpage, and stored. The user has the option of sharing the rating or not on Twitter, in the last case, the rating will not be caught by the MovieTweetings application.
 
 With the use of a social media they wish to get a fresher dataset than using Netflix dataset, or MovieLens datasets~\ref{subsec:MovieLens}. At the time of writing the article they had more than 60 000 ratings, and about 500 new where added every day\cite{MovieTweetings}. The Twitter API is queried daily to update their database.
@@ -593,7 +535,7 @@ With the use of a social media they wish to get a fresher dataset than using Net
 While querying the API for well structured tweets with ratings about movies are a good way to go when in search for a database with movie ratings, the data will be sparse. The data is not based on the users followers/followees, and will therefore not represent the social strength Twitter is capable of producing. A direct access to IMDB, rather than going through Twitter to get the rating information also seems like a simpler and more result-producing idea.
 
 
-\subsection{Twittomender}
+\subsubsection{Twittomender}
 Twittomender is a followee recommender for Twitter. Twitter uses a friend's friend approach for recommending new Twitter-friends. This does not necessarily produce the most relevant recommendations for a user. Twittomender takes a collaborative approach to the problem. Tweets of a user are used and compare with other users tweets to to find similarities and recommend new Twitter-friendships\cite{twittomender}.
 
 7 recommendation strategies, they are shown in table~\ref{table:to-strategies}.
@@ -624,19 +566,77 @@ After testing on 1000 users the best performing strategy was a collaborative-bas
 What we can take from this is the strength of a user's followees.
 
 
-\subsection{Probabilistic Neighborhood Selection}
+
+
+\subsection{Recommender Algorithms}
+\subsubsection{Probabilistic Neighborhood Selection}
 A often used approach when recommending items is a neighborhood-based collaborative filtering. This approach often has the issue that it over-specializes and makes concentrated biases when recommending. This can be handled with a probabilistic approach when selecting neighbors\cite{probcobfilter}.
 
-
-\subsection{Predicting User Ratings with Matrix Factorization}
-
+\subsubsection{Predicting User Ratings with Matrix Factorization}
 \cite{predusingmatrix}
 
 
 
+\subsection{What the top Netflix-Prize contestants did}\label{subsec:thewinners}
 
-% start Collaborative Filtering
-\section{Collaborative Filtering}
+\subsubsection{BellKor's Pragmatic Chaos}
+% http://www.stat.osu.edu/~dmsl/GrandPrize2009_BPC_BellKor.pdf
+% http://www2.research.att.com/~volinsky/netflix/
+% http://www.netflixprize.com/assets/GrandPrize2009_BPC_PragmaticTheory.pdf
+% http://www.netflixprize.com/assets/GrandPrize2009_BPC_BigChaos.pdf
+% http://blog.revolutionanalytics.com/2009/09/bellkor-wins-netflix-prize.html
+% http://www.wired.com/business/2009/09/how-the-netflix-prize-was-won/
+% http://www.netflixprize.com//community/viewtopic.php?id=1537
+
+BellKor's Pragmatic Chaos, the prize winners of the Netflix-Prize competition, was a group of scientists from AT\&T Labs, Yahoo!, Pragmatic Theory and Commendo Research \& Consulting. They achieved a RMSE of 0.8567, which was 10.06\% better than Netflix's own Cinematch score.
+
+Models for the rating data is learned by fitting previously observed ratings, but since the model is to be used to predict feature ratings, overfitting the data. This achieved by regularizing the learned parameters. A regularization constant is used, and is set to L2 by default. This and other constant such as, step size and number of iterations are set manually through greedy manners. Where the algorithm is ran multiple times and constant value with best score is used. \cite{BellKor-PragmaticTheory}
+
+The winning algorithm was put together based on multiple different modeling techniques. Some of these modeling techniques are described in table~\ref{table:bellkor-models}
+
+\begin{table}[H]
+\caption{Some of the models the "The BellKor's Pragmatic Chaos"-team used \cite{BellKor-PragmaticTheory}}
+\centering
+\begin{tabular}{ p{3.2cm} p{9cm} }
+\hline
+  \textbf{Model} & \textbf{Description}\\
+  \hline \\ [-1.5ex]
+  Time of week rating & The team saw that a user-rating done in the weekends had a tendency to have a higher value than a rating done on a Monday. This also applies for multiple ratings done the same day, higher ratings does not necessarily imply that the movie is much better than a movie rated lower another day, the user might just be in a good mood. \\
+  \hline \\ [-1.5ex]
+  Close User ratings & Ratings done close to one another done by the same user implied that the user was rating based on the user's recollection of the rated movies, and not that the user just saw that movie, these ratings had to be handled in its own manner. This was because of the effect the faulty or old memories had on these ratings. The all time favorites/negatives are also usually in this bulk. While the movies which did not make much of an impression are forgotten. This helps us explain \ref{figure:avgmovierating}, where we saw that movies with the edge ratings (1 or 5) had a lower rating distribution. \\
+  \hline \\ [-1.5ex]
+  Baseline predictors & Some users has the tendency to rate on an overall average higher than other users.\\
+  \hline \\ [-1.5ex]
+  Movie like-ability & Movies can go in and out of popularity. This change usually happens over a extended period. \\
+  \hline \\ [-1.5ex]
+  Frequency term & The number of ratings a users gives on a specific day can help explains data-variability during that day. \\
+  \hline \\ [-1.5ex]
+  Matrix factorization with Temporal Dynamics & Use two sets pf static movie factors. Set one is used in all the models of the factors. Set two uses the movies rated by the user, normalizes the sum, and uses this as a user factor. \\
+  \hline \\ [-1.5ex]
+  Neighborhood model with Temporal Dynamics & Most common approach to collaborative filtering. They used a item-item model based on global optimization. To predict rating of a new item based of rating an old item two sets of weights where used. One where the values of the ratings where accounted for, and one disregarding rating values.
+  A situation where a user rates an old item and a new item close to each other both in time and rating, is a better indicator that these items can be related to each other, than if two items are rated similarly, but with a greater timespan between each other.Therefore a decaying relationship is introduced between items. This decreased RMSE from 0.9002 to 0.8870.\cite{BellKor-CF-TD} \\
+\end{tabular}
+\label{table:bellkor-models}
+\end{table}
+
+Interestingly, the bias model with tanking in the factor that users change rating-scale over time, resulted in a RMSE of 0.9555, which is almost as good as the Cinematch Netflix was already using. The learning with the different modeling techniques is done by a stochastic gradient descent algorithm running for 30 iterations. This is the only time they use an automatic parameter tuner. \cite{BellKor-2008-sol}
+
+As we can see from table~\ref{table:bellkor-models} the "BellKor's Pragmatic Chaos"-team used a lot of different models and did a lot of tweaking to get to the top. Some interesting findings to take from this is the importance of diversity and how central the timestamp of a rating can be.
+
+\subsubsection{The Ensemble}
+% http://www.the-ensemble.com/
+
+A merger of the teams "Grand Prize Team" and "Opera Solutions and Vandelay United". They also managed to get a RMSE of 0.8567, and therefore a 10.09\% improvement as well. But lost since the "BellKor's Pragmatic Chaos"-team managed to submit their results 20 minutes earlier than "The Ensemble"-team.
+
+The two merged teams, which made "The Ensemble" consisted of multiple smaller teams. They had all competed in the Netflix-Prize challenge, and had to put their heads and code together to get to the result they got to.
+
+"The Ensemble"-team used a huge variation of models, just as the "BellKor's Pragmatic Chaos"-team.
+
+After the competition was done "The Ensemble" tested a merger of their system with the "BellKor's Pragmatic Chaos"-system. The test RMSE of a 50/50 blend was 0.855476, which is a 10.19\% improvement. This is 0.10\% better then the teams managed to produce by themselves.
+
+\subsubsection{Conclusion}
+After looking at the two top contestants from the competition a pattern is starting to form. Diversity is key to be able to predict user-ratings at a top level.
+
 % About Classification
 % http://www.netflixprize.com/assets/GrandPrize2009_BPC_PragmaticTheory.pdf
 % http://www.netflixprize.com/assets/GrandPrize2009_BPC_BellKor.pdf
@@ -674,13 +674,14 @@ Here we explore some of the better solutions and how and why these could be used
 Here we explore some of the better solutions and put together how these can be used to
 
 
-The moivie-suggestion algorithm:
 
 
-\subsection{Using the Netflix-data}
+
 The Netflix-data has, as mentioned in the section about the dataset \ref{subsec:netflixdata}, a set of ratings from users for each movie, and a time-stamp for these ratings. As vi saw from the study about the winning contestants \ref{subsec:thewinners}, we saw that this information alone let them produce a system which could predict movie-ratings with a RMSE of 0.8567. They saw
 
-\subsection{Using the Twitter-data}
+
+
+
 
 \subsection{Conclusion}
 % end Collaborative Filtering
