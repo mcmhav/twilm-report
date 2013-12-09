@@ -28,7 +28,6 @@ This is the prestudy for the movie recommendation part of the system. We will lo
 
 \subsection{Netflix}
 % http://en.wikipedia.org/wiki/Netflix
-% http://electronics.howdexstuffworks.com/netflix2.htm
 % http://blog.jimjh.com/static/downloads/2013/05/12/netflix.pdf
 
 \begin{wrapfigure}{r}{.30\textwidth}
@@ -37,7 +36,7 @@ This is the prestudy for the movie recommendation part of the system. We will lo
 \includegraphics[width = .25\textwidth]{image/netflix-logo.png}
 \end{wrapfigure}
 
-Netflix is a on-demand Internet streaming media. It started out as a DVD-rental business, but moved over to a more Internet based business model in 1999 and have from then on had a great success in the subscription-based digital distribution service. To improve customer satisfaction they developed a personalized video-recommendation system called Cinematch. About 60\% of the Neflix users select their next movie or TV-show based on this recommendation[------------------2---------------], so it is important that this recommendation system manages to capture the users movie and TV-show preferences and feed back fitting movies and TV-shows.
+Netflix is a on-demand Internet streaming media. It started out as a DVD-rental business, but moved over to a more Internet based business model in 1999 and have from then on had a great success in the subscription-based digital distribution service. To improve customer satisfaction they developed a personalized video-recommendation system called Cinematch. About 60\% of the Neflix users select their next movie or TV-show based on this recommendation\cite{hownetflixworks}, so it is important that this recommendation system manages to capture the users movie and TV-show preferences and feed back fitting movies and TV-shows.
 
 \subsubsection{Cinematch}
 \label{subsec:Cinematch}
@@ -69,7 +68,7 @@ The equation for calculating the RMSE is show in figure~\ref{eq:rmse}. It calcul
 
 For this competition Netflix produced a training dataset based on user ratings from their own database. It contains 100 480 507 ratings from 480 189 unique users on 17 770 movies. The data is split up into 17 770 files, one for each movie, where the data is a triplet of the form <user, rating, date-of-rating>. The user-field and rating-field is an integer, while the date-of-rating-field is on the ISO 8601 form, year-month-day. The different movies have different amounts of ratings, and the different users have rated different amounts of movies.
 
-With the training dataset the teams system was supposed to predict ratings on a "qualifying"-dataset, which contained 2 817 131 triplets with only user ids, movie ids and dates. This "qualifying"-datase must be disregarded since the actual ratings for this dataset was only know to the jury of the competition and is nowhere to be found. Instead a probe set is provided with 1 408 385 users which can be used to remove these from the training set to test predictions based on the test set. This probe set possesses similar statistical values as the qualifying set, so it will give a good prediction of how the result actually would have scored in the competition.
+With the training dataset the teams system was supposed to predict ratings on a "qualifying"-dataset, which contained 2 817 131 triplets with only user ids, movie ids and dates. This "qualifying"-datase must be disregarded since the actual ratings for this dataset was only know to the jury of the competition and is nowhere to be found. Instead a probe set is provided with 1 408 385 users which can be used to remove these from the training set to test predictions based on the test set. This probe set possesses similar statistical values as the qualifying set, so it will give a good prediction of how the result actually would have scored in the competition\cite{nfprizeset}.
 
 \begin{center}
 \begin{tabularx}{\textwidth}{ l X }
@@ -547,7 +546,7 @@ The tweet text can be found in the content of the tweet, as shown in blue in fig
 \end{lstlisting}
 
 \noindent
-Using jQuery, a function can be created to count the occurances of the class "js-tweet-text tweet-text", which most likely describes all tweet content elements. The function is shown in listing-\ref{listing:tweet-content-element-count-function}. By comparing this number with the number of tweets in the search results and making sure it is equal, we can be confident that this class is describing the correct DOM element. The comparison is shown in 
+Using jQuery, a function can be created to count the occurances of the class "js-tweet-text tweet-text", which most likely describes all tweet content elements. The function is shown in listing-\ref{listing:tweet-content-element-count-function}. By comparing this number with the number of tweets in the search results and making sure it is equal, we can be confident that this class is describing the correct DOM element. The comparison is shown in
 listing-\ref{listing:tweet-content-element-count-comparison}
 
 \begin{lstlisting}[caption={Creating a function in GCDT Javascript Console for counting the occurance of tweet content elements on the twitter search result page},label={listing:tweet-content-element-count-function},captionpos=b]
@@ -573,35 +572,67 @@ First, in order to obtain the tweet text, everything that is not a link or conta
 
 
 
-\section{Similar solutions (Evaluation of State-of-the-art)}
-% http://movielens.umn.edu/login
-% http://www.grouplens.org/datasets/movielens/
-
+\section{Similar solutions}
 In this section, we will discuss similar solutions and their relevance to our project.
-
-If this is not state of the art stuff, maybe separate this and that
 
 
 \subsection{MovieLens}\label{subsec:MovieLens}
-Need to rate 20 movies
+MovieLens is a movie recommendation system. A user creates an account and gets movie recommendations based on the user's own ratings through MovieLens' collaborative filtering algorithm. They use a item-item based algorithm. They take the 20 movies which are most similar to the target movie and see how these 20 movies where rated.\cite{grouplens}
 
-\subsection{MovieTweetings}
-MovieTweetings is an application for fetching movie ratings through the Twitter API from Twitter. The application search for ratings forwarded from IMDB, a movie information webpage, and stored in an accessible
+The issue with using a strict item-item based correlation and the MovieLens recommendation system is that for a user with a low rating average, the user will very seldom get recommended movies with a top-average rating.
 
-use the social media to get a fresher dataset than using Netflix dataset, or MovieLens datasets~\ref{subsec:MovieLens}. At the time of writing the article they had more than 60 000 ratings, and about 500 new where added every day\cite{MovieTweetings}. They get these ratings from Twitter~\ref{sec:twitter}. The ratings fetched from Twitter are actually ratings from a movie rating and information page, IMDB, which are forwarded to the raters Twitter account. The Twitter API is queried daily to update their database.
+
+\subsection{MovieTweetings}\label{subsec:MovieTweetings}
+MovieTweetings is an application for fetching movie ratings through the Twitter API from Twitter. The application search for ratings shared from IMDB, a movie information webpage, and stored. The user has the option of sharing the rating or not on Twitter, in the last case, the rating will not be caught by the MovieTweetings application.
+
+With the use of a social media they wish to get a fresher dataset than using Netflix dataset, or MovieLens datasets~\ref{subsec:MovieLens}. At the time of writing the article they had more than 60 000 ratings, and about 500 new where added every day\cite{MovieTweetings}. The Twitter API is queried daily to update their database.
 
 While querying the API for well structured tweets with ratings about movies are a good way to go when in search for a database with movie ratings, the data will be sparse. The data is not based on the users followers/followees, and will therefore not represent the social strength Twitter is capable of producing. A direct access to IMDB, rather than going through Twitter to get the rating information also seems like a simpler and more result-producing idea.
 
 
 \subsection{Twittomender}
-\cite{twittomender}
+Twittomender is a followee recommender for Twitter. Twitter uses a friend's friend approach for recommending new Twitter-friends. This does not necessarily produce the most relevant recommendations for a user. Twittomender takes a collaborative approach to the problem. Tweets of a user are used and compare with other users tweets to to find similarities and recommend new Twitter-friendships\cite{twittomender}.
+
+7 recommendation strategies, they are shown in table~\ref{table:to-strategies}.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{ l l }
+  \textbf{Type} &  \textbf{Strategy} \\
+  \hline \\ [-1.5ex]
+  Content-based &  \pbox{20cm}{ (1) Users own tweets \\
+                                (2) Followee’s tweets \\
+                                (3) Follower’s tweets \\
+                                (4) All tweets} \\
+  \hline \\ [-1.5ex]
+  Collaborative-based & \pbox{20cm}{  (5) Followee’s Ids \\
+                                      (6) Follower’s Ids \\
+                                      (7) All Ids }\\
+  \hline \\ [-1.5ex]
+\end{tabular}
+\caption{The 7 recommendation strategies used by Twittomender}
+\label{table:to-strategies}
+\end{table}
+
+The user interacts with the system through providing the system with their username on Twitter, the system produces a profile of the user based on tweets, and determines a score against other users based on most frequent terms amongst the users tweets. Each of the strategies are used from table~\ref{table:to-strategies} and top 20 from each are merged to a list where the most frequent users are returned as recommended users to explore for the user.
+
+After testing on 1000 users the best performing strategy was a collaborative-based approach, users and follower connection.
+
+What we can take from this is the strength of a user's followees.
+
+
+\subsection{Probabilistic Neighborhood Selection}
+A often used approach when recommending items is a neighborhood-based collaborative filtering. This approach often has the issue that it over-specializes and makes concentrated biases when recommending. This can be handled with a probabilistic approach when selecting neighbors\cite{probcobfilter}.
+
+
+\subsection{Predicting User Ratings with Matrix Factorization}
+
+\cite{predusingmatrix}
 
 
 
 
-
-
-
+% start Collaborative Filtering
 \section{Collaborative Filtering}
 % About Classification
 % http://www.netflixprize.com/assets/GrandPrize2009_BPC_PragmaticTheory.pdf
@@ -649,6 +680,7 @@ The Netflix-data has, as mentioned in the section about the dataset \ref{subsec:
 \subsection{Using the Twitter-data}
 
 \subsection{Conclusion}
+% end Collaborative Filtering
 
 
 
