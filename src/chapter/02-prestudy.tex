@@ -760,7 +760,7 @@ Even though MySQL has several of the properties needed for a recommendation syst
 
 CouchDB has some unique merits. The simple web UI and HTTP REST API are great for development and compatability with web applications. However, compared to mongoDB it scores low on performance both as a standalone database, and in the sense that it can not be sharded to increase performance horizontally if necessary. It also takes up more space than necessary and grows in size for every single modification, which is an unfortunate property for a database that should handle a large fault tolerant dataset.
 
-For these reasons mongoDB was chosen as the most appropriate alternative
+For these reasons mongoDB was chosen as the most appropriate alternative.
 
 
 \subsection{Programming languages}
@@ -771,11 +771,21 @@ Ruby is a dynamic, interpreted, open source programming language with a focus on
 
 Ruby has one of the largest and most well crafted packaging systems of any language today. Packages in ruby are referred to as gems. RubyGems.org hosts more than 66000 gems to date. Gems can easily be created with the gem development tools that come with ruby. Gems also have very advanced yet simple requirement specification through Gemfiles. The name of required gems and ranges of working versions are specified in the Gemfile. All required gems can then be fetched with a single command. Creating a new gem or publishing a gem are also single commands. This makes managing dependencies and reusing code in ruby a breeze.\cite{rubygems}
 
-\subsubsection{Python}
+Ruby is probably one of the most prevalent languages for modern web development. PHP is most likely still the most widely used, but ruby based web projects tend to be more managable due to the higher level frameworks and packages that are available.
 
+\subsubsection{Python}
+Python is a dynamic interpreted open source programming language. It is similar ruby in many ways. It has natural short typed syntax that is easy to read and write. For being an interpreted language, python is pretty fast. Python does not have an intuitive way of modifying existing parts of the language.\cite{python-about}
+
+Python has a packaging system that is easy to use called Python Package Index, PIP for short. PIP hosts more than 37500 packages to date and has a very simple requirement specification and installation that only requires a few commands. This makes managing dependencies with python very easy.\cite{pip}
+
+Python is widely used for a variety of cases. In particular science and web development. It also has some mature information retrieval libraries.
 
 \subsubsection{Conclusion}
+Python and Ruby are both great programming languages that fulfill the needs for writing modifiable code that can harvest and make predictions on data.
 
+Python is slightly faster and has more mature information retrieval libraries. Ruby has more general packages available for reuse and is somewhat more modifiable.
+
+The speed of python does not matter in the context of a web bottle neck. The algorithms in the information retrieval libraries must most likely be reimplemented to work with a database as these tend to do all predictions in memory. Because of this and because the authors have more experience with ruby, ruby was chosen over python.
 
 
 \section{Result Testing}
