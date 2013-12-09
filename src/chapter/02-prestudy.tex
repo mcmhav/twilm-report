@@ -4,19 +4,10 @@
 % http://www-03.ibm.com/press/us/en/pressrelease/42451.wss
 
 \minitoc
+\noindent
+This chapter studies various technologies, research and information that is relevant to the project goals. 
 
-Review of relevant literature;
-review of similar software products or tools.
-
-I “survey”-kapittelet presenter en oversikt over tidligere relevant arbeid inkludert artikler og evt. eksisterende produkter.
-Vurder kritisk styrker og svakheter av tidligere arbeid
-
-
-
-This chapter is ment to outline the preliminary study of our project. This includes
-    - what our technologies aims to achieve
-    - how we will use them to achieve this.
-Beyond this, the chapter will show the mythology the team chose to use and why this was a natural choice to go with. Research in software testing methods will be included and the best fit for this project. Since this is a prototype project, a considerable time is put into this part of the project, to assure the team makes good choices when it comes to technologies to use.
+Beyond this, the study will serve to outline which direction the project must take and what methodologies must be used. Since there span of possibilities and directions are broad and few studies with similar goals of sufficient quality and completeness exist, the study is lengthy and a large part of the project.
 
 \clearpage
 
@@ -700,13 +691,13 @@ The Netflix-data has, as mentioned in the section about the dataset \ref{subsec:
 \section{Development language and technologies}
 
 \subsection{Database}
-For the system we need some kind of persistent storage, a database where the harvested data from the Twitter-harvesting is stored so it only is needed to fetch once, and where the data from the Netflix-prize set is stored. This Database will be ran from a personal computer to start with, TODO: SOMETHING ABOUT THE HARVEST IS DONE; OR REFERING TO THE TWITTER CHAPTER, since it is not needed to be constantly running. For the database we are left with a decision between traditional SQL database or a so called NoSQL database. The differences are explained below.
+In order to easily retrieve data from the netflix prize dataset and store and retrieve data from twitter, it is useful to consider various kinds persistent storage or databases. There are three categories of options: Traditional file systems, SQL and NoSQL. Since traditional file systems are not designed for dynamically storing and retrieving data based on the structure of the data, they are not considered. The two options remaining are SQL and NoSQL which will be discussed and evaluated in the following sections.
 
 \subsubsection*{NoSQL}
 % http://en.wikipedia.org/wiki/NoSQL
-NoSQL databases can be defined as: being non-relational, distributed, open-source and horizontally scalable\cite{nosql}. NoSQL is meant for storing large amounts of data\cite{bigdata}, where all the data does not share the same attributes or schema. They are focusing on eventually consisten(BASE) instead of the SQL ACID \cite{pritchett}. The different kinds of NoSQL databases have different ways of classifying the database, some of the more used ones are: key-value, column, document, graph and relational.
+NoSQL databases can be defined as: being non-relational. In many cases they are also: Open-source, distributed and horizontally scalable\cite{nosql}. NoSQL is meant for storing large amounts of data\cite{bigdata}, where all the data does not share the same attributes or schema. They are focusing on eventually consistency (BASE) instead of the more traditional consistent atomic transactions (ACID) \cite{pritchett}. The different kinds of NoSQL databases have different ways of classifying the database, some of the more used ones are: key-value, column, document, graph and relational.
 
-\begin{table}
+\begin{table}[H]
 \centering
 \begin{adjustwidth}{-2cm}{}
 \begin{tabularx}{1.3\textwidth}{  l l l l l l }
@@ -723,159 +714,67 @@ NoSQL databases can be defined as: being non-relational, distributed, open-sourc
   Relational & variable & variable          & low       & moderate  & relational algebra\\
 \end{tabularx}
 \end{adjustwidth}
-\caption{Classification based on feature}
+\caption{Differences in features of NoSQL Database Types}
 \label{table:nosql-calssifications}
 \end{table}
 % http://www.slideshare.net/bscofield/nosql-death-to-relational-databases
-As we can see from table~\ref{table:nosql-calssifications} performance, scalability and flexibility are usually rated as high in all the categories. Relational algebra in the database will not be needed for the project to succeed so that category can be disregarded. High flexibility in the database would also be a feature sought after when going for NoSQL, so the column storage can also be eliminated from the equation. TODO: MAYBE SOMETHING MORE HERE lol the tree left are described well here : http://en.wikipedia.org/wiki/NoSQL
+As we can see from table~\ref{table:nosql-calssifications} performance, scalability and flexibility are usually rated as high in all the categories.
+
+TODO: Move this to conclusion section
+Relational algebra in the database will not be needed for the project to succeed so that category can be disregarded. High flexibility in the database would also be a feature sought after when going for NoSQL, so the column storage can also be eliminated from the equation. TODO: MAYBE SOMETHING MORE HERE lol the tree left are described well here : http://en.wikipedia.org/wiki/NoSQL
 % http://en.wikipedia.org/wiki/Comparison_of_structured_storage_software
 % http://www.mongodb.org/
 \cite{nosql-databases, nosql-article}
 
 
 \subsubsection*{SQL}
-SQL database is the most common way of storing data. The data is stored in columns and tables. The database can make relations between the tables id necessary, hence relational databases. A main focus in SQL databases is queries and optimizing these where there usually exists some king of structured language to fetch the wanted data. The basic operations, which can be found in most SQL databases, are SELECT, UPDATE, REMOVE and INSERT. This kind of database is schema defined and follows the ACID(atomicity, consistency, isolation, durability) principles.
+SQL databases are the most common way of storing structured data. The data is stored in columns and tables and is schema defined. This means that the attributes of the different datatypes are already defined and must be set whenever a datapoint is added to the database, even if it is NULL. The database can make relations between the tables id necessary, hence the name relational databases.
+Performing queries is the way users and applications modify and read a SQL database. They are simple operations such as SELECT, UPDATE and DELETE written in the SQL query language. On a higher level of abstraction are transactions. Transactions are more or less a collection of queries. SQL Databases follow the ACID(atomicity, consistency, isolation, durability) principles for transactions. This means that the state of the database will never appear partially modified by a transaction to a new transaction that is being executed. Consistency of transactions are great for ensuring consistency across the data, but come at a performance cost.
 \cite{ramakrishnan2003database}
 
-
-
-
 \subsubsection{Database Alternatives}
-TODO WHEN EXPLORED THE THREE NOSQL CATEGORIES LEFT, IF THEY ARE TO BE EXPLORED
-Below, some of the database implementation available to us are discussed. We mainly investigated document NoSQL databases and regular SQL databases. The most appealing options are introduced below.
-
+Recommender systems are in nature performance heavy. They are also statistical which makes them fault tolerant. For this reason we have valued performance over consistency. The dataset is likely to have nested structure as it will combine two different types of data. Being able to append and combine data based on the structure of the content thus has value.
+For these reasons the alternatives centered around NoSQL document stores, which are fast and have supports operations based on the structure of the document.
+MySQL, which is the faster of the SQL alternatives, was also considered.
 
 \subsubsection*{MongoDB}
-MongoDB is a large scale, high availability, robust system. It is a document NoSQL system, so instead of storing the data in tables as you would in MySQL, the data is stored in a document based fashion through for instance JSON with dynamic schemas. This makes the DB easier scalable horizontally. But the mongoDB still possesses the some of the great properties from relational databases, such as indexes, dynamic queries and updates. With mongoDB it is easy to map objects to programming language data types, which makes the DB easy to work with. The embedded documents and arrays makes the join operations less importance, which result in the ability to make reads and writes faster. JavaScripts can also be included in the queries. This makes mongoDB an efficient and high speed data base for storing objects and fetching to a system. MongoDB also has its own access console, where you can use scripting with Javascript language. \cite{mongodb-intro}
+MongoDB is a large scale, high availability, robust system. It is a NoSQL document store. Instead of storing the data in tables as in SQL, the data is stored in a BSON document. BSON stands for Binary JSON and is essentially a JSON document that is stored in binary instead of ASCII. A JSON document is a nested hash which can hold any number of attributes without depending on the other documents in the store. It is thus schemaless. Even though it is schemaless, MongoDB still possesses the some of the great properties from SQL databases, such as indexes, dynamic queries and updates. 
+
+MongoDB is implemented in C. It also has sharding which allows the database to scale horizontally. Custom queries and map-reduce queries can be written in JavaScript which has fast interpreters. This makes mongoDB an efficient and high speed data base for storing, modifying and fetching data with a nested document structure \cite{mongodb-intro}. In addition it has bindings to many different languages, which is a great advantage if some of the modules that need to access the database needs to be written in a language other than what it originally was written in.
 
 
 \subsubsection*{CouchDB}
-CouchDB stores the data in JSON documents(NoSQL) object-oriented, which can be accessed through HTTP. The data documents can be transformed and data fetched with JavaScript. CouchDB has a lot of built in features which makes web development with CouchDB easier. It scales well through replication and is a consistent system, where CouchDB prioritizes the data of the user. CouchDB is multiversion concurrency control based, this is good for intense versioning, offline databases which resync later and master to master replication. The interface to the database is REST based, which is a useful feature when you are developing a web- application.
+CouchDB is similar to MongoDB in the sense that it is a NoSQL Document store. It also has the same query capabilities as mongo and also uses JavaScript as a query language. In addition, CouchDB has a HTTP REST API which allows any web application to access it easily. CouchDB has a lot of built in features which makes web development with CouchDB easy. One of the greatest advantages is the intuitive web-based admin user-interface that is provided.
+CouchDB does not support sharding which makes it less horizontally scalable. An alternative to achieve this is to use CouchBase, which is the distributed version of CouchDB. CouchDB is implemented in erlang. While erlang is faster than it used to be, it is certainly slower than a similar system written in pure C. In addition, CouchDB stores a copy of every single document every time it is modified. This makes CouchDB grow in size with time.
 \cite{couchdb-about, couchdb-technical}
 
 
 \subsubsection*{MySQL}
-MySQL is the most popular database in the world of open databases. This is because of its high performance, reliability and ease of use. It should therefore be considered for the question of which database system to use. In opposition of the two database systems described above, MySQL is a relational database. This makes it more troublesome to work, with when it comes to JavaScript, than the other two. It is not as well integrated with JSON and will need parsing to be able to work with the clients. This alone is a hard negative towards MySQL.
+MySQL is one of the most popular database in the world of open databases. This is because of its high performance, reliability and ease of use. It should therefore be considered for the question of which database system to use. MySQL is an SQL based relational database, as opposed to the two NoSQL databases. It has bindings to most languages. It provides a much more advanced high level query language than a typical NoSQL document store. This is great for easily making complex queries during development, which is somewhat more tricky in NoSQL and JavaScript. However it is somewhat slower because of the interpretation of this high level language. The SQL database schema makes it more difficult to change the format of the data. MySQL also does not support JSON which is one of the most common standards for data retrieved from the web. This creates extra work with parsing JSON to the schema or invoking a mapper that has been created for this purpose.
 \cite{mysql-about}
 
 
-
-
-
 \subsubsection{Conclusion}
-One particular type of NoSQL databases that caught our attention early was the document NoSQL databases.
-The main characteristic of these databases is their schema- less structure.
-They also differ from SQL by generally not using a structured query language for data manipulation.
-They are easy to replicate and they offer simple APIs for the clients to communicate with.
-They are heavily customized for web- applications, and have gained much popularity in the modern web era.
-Most document NoSQL databases focus on quick replies to requests, as the query operation is by far the most common in a typical web- application.
-Because they typically are distributed, NoSQL databases are able to store enormous amounts of data, and they are often used within Big Data\cite{bigdata} applications like Hadoop\cite{hadoop}, which recently has become a very popular subject within the computer science community.
+Even though MySQL has several of the properties needed for a recommendation system, it lacks the speed of a NoSQL store, which is a huge advantage. The complex join capabilities are not strictly necessary and can be replicated in JS in any of the two NoSQL document stores.
 
-TODO: MAKE OUR OWN :p
-We decided to go for CouchDB in this project. We are working in a web domain, which CouchDB was designed for. While developing the console we will be working closely with JavaScript objects, and try to find ways of exposing these to the users. JavaScript objects are easily converted to JSON, the format used to store data in document NoSQL databases like MongoDB and CouchDB.  As we only have the need to store the actual objects and a limited amount of relations between them, using CouchDB will ease our work considerably, and allow us to do things which would not be possible with a regular SQL database. CouchDB imposes far less restrictions on how you store your data than traditional SQL does. As long as the data is represented in JSON, you can store pretty much store anything you like, even within the same database. This will give us great flexibility when it comes to adding information to specific objects, and also means that objects of the same type can contain different attributes without us needing to create a new schema or change anything in the database. It also gives the user great flexibility in the sense that they can add any information they would like to the different objects, and we the developers don't have to plan for it at all, the database does all this for us. The fact that the customer suggested to us that we could use a NoSQL database, also tipped the scale in direction of the NoSQL alternatives.
+CouchDB has some unique merits. The simple web UI and HTTP REST API are great for development and compatability with web applications. However, compared to mongoDB it scores low on performance both as a standalone database, and in the sense that it can not be sharded to increase performance horizontally if necessary. It also takes up more space than necessary and grows in size for every single modification, which is an unfortunate property for a database that should handle a large fault tolerant dataset.
 
-Relational databases is the traditional way to deploy databases and they are in widespread use. In many situations they are extremely useful. However relational databases requires you to morm your data up front, before you save anything to the database. Failing to comply with these restrictions will lead to failure, and it is sometimes difficult to create this kind of morm that actually fits real world data. Even though objects may share common attributes, there are bound to be some attributes that are different. This is difficult to plan for in advance, and its the main reason we will not be using a SQL database for this project. For the database, we originally chose to use MongoDB as our document NoSQL database. This was due to the fact that it was better documented and seemed better suited for the system as we originally planned it. Some of the features CouchDB offered wasn't thought of as necessary for the project at the time. During the implementation process we however came to the conclusion that CouchDB actually was a better fit. This was mostly due to its ability to act as an standalone system on a server without the need for other supporting server technologies like Node.js or ASP.NET. Also, the fact that it automaticly creates a RESTful API to access the database turned out to save us a lot of time. As a result of these discoveries we changed to CouchDb during the third sprint.
-
-
-
-
-
-
-
+For these reasons mongoDB was chosen as the most appropriate alternative
 
 
 \subsection{Programming languages}
-TODO something about the languages to use and why!
-Dependent on:
-    weka
-    twitter api
-    solution used to solve netflix api
-    database to choose
-    future thoughts
-
-
-Our main focus will be on the client part of the application, since this is the experimental part of our system, and it is this part that is visible to the user through the web browser. It is therefore important to choose a suitable technology for this.
+The main focus of our project is to harvest large amounts of data from the web, store it quickly in a database and do large computations on this data quickly. Because the design and implementation is likely to go through many iterations, it is important that the language chosen is most of all easy to modify. Performance of the language is also a valuable property.
 
 \subsubsection{Ruby}
-Ruby is a dynamic, interpreted, open source programming language with a focus on simplicity and productivity. It has an elegant syntax that is natural to read and easy to write, though it is . This is due to the fact that everything in Ruby is an object. Essential parts of Ruby can be removed or redefined, at will. Existing parts can be added upon. Ruby tries not to restrict the coder. This makes Ruby very flexible. \cite{ruby-about}
+Ruby is a dynamic, interpreted, open source programming language with a focus on simplicity and productivity. Even though it is some times difficult to interpret ruby because there are always a large number of different ways to achieve the same functionarlity, ruby has an elegant syntax that is natural to read and easy to write. This is due to the fact that everything in Ruby is an object. Essential parts of Ruby can be removed or redefined, at will. Existing parts can be added upon. Ruby tries not to restrict the coder. This makes Ruby very flexible. \cite{ruby-about}
 
 Ruby has one of the largest and most well crafted packaging systems of any language today. Packages in ruby are referred to as gems. RubyGems.org hosts more than 66000 gems to date. Gems can easily be created with the gem development tools that come with ruby. Gems also have very advanced yet simple requirement specification through Gemfiles. The name of required gems and ranges of working versions are specified in the Gemfile. All required gems can then be fetched with a single command. Creating a new gem or publishing a gem are also single commands. This makes managing dependencies and reusing code in ruby a breeze.\cite{rubygems}
 
+\subsubsection{Python}
 
-\subsubsection{JavaScript}
-
-JavaScript is a scripting language supported by all popular web browsers. Has extensive frameworks built around it and allows for rapid development. It is also possible to let the user write commands using JavaScript directly.
 
 \subsubsection{Conclusion}
-As a team, we have extensive experience with Java, and less with the other technologies. However, we all have at least some experience with JavaScript, and we believe that it is the better choice for this project: The DSL can be implemented by allowing the user to perform operations on the JavaScript objects using (a subset of) the JavaScript language itself. There are also excellent tools for transfer and storage of JavaScript objects. Furthermore, communication between JavaScript and HTML elements is easily achieved.
 
-
-
-
-
-
-\section{Software Testing}
-TODO: CHAPTER NOT THAT NECCESSARY PERHAPS?
-
-\subsection{Testing Methods}
-The purpose of software testing is to uncover software bugs in the system and to document that the system meet the requirements and functionality that was agreed upon for the system. Testing can be implemented at any stage in the development process, traditionally it is performed after the requirements have been defined and the implementation is completed. In agile development processes however, the testing is an ongoing process. The chosen development methodology will in most cases govern the type of testing implemented in a given project.
-\cite{sommerville2011software}
-
-Software testing methods are traditionally divided into white- and black- box testing. They differ mainly in how the test engineer derives test cases.
-
-\subsubsection{White- Box Testing}
-White- box testing focus on the internal structures of a system, and it uses this internal perspective to derive test cases. White- box testing is usually done at unit level, testing specific parts or components of the code. This kind of testing focus on how something is implemented and not necessarily why. Unit testing alone cannot verify the functionality of a piece of software is supposed to exhibit. It can uncover many errors or problems, but it might not detect unimplemented parts of the specification or missing requirements.
-
-\subsubsection{Black- Box Testing}
-Black- box testing handles the software as a black- box, meaning it observes the functionality the system exhibits and not the specifics on how it is implemented. The tester only needs to be aware of what the program is supposed to do, he doesn't need to know the specifics on how the functionality is implemented in the code. Black- box testing is typically performed to check if the functionality of the program is according to the agreed upon requirements, both functional and nonfunctional. Black- box testing is usually done at the component, system and release levels of testing. The main advantage of black- box testing is that no programming knowledge is needed to actually perform the tests. This way you can hire someone outside the development team who has had nothing to do with the implementation of the code to write and perform the tests, and you achieve as little ownership of the code as possible. An argument can be made though that this lack of insight in the specifics of the source code will result in repeated testing of some parts of the code, while other parts could be left untested.
-
-\subsubsection{Test Driven Development}
-The principle behind TDD is to develop the code incrementally, along with test for that increment. You don’t move on until the code passes its test. The tests are to be written before you actually implement the new functionality. The process helps programmers clarify their ideas of what a code segment is actually supposed to do. The process is often used in agile development methods.
-Benefits from TDD include:
-\begin{itemize}
-
-\item Code coverage, every code segment should be covered at least one test.
-
-\item Regression testing, check to see if changes in the code have not introduced new bugs.
-
-\item Simplified debugging, when a test fails it should be obvious where the problem lies, no need for a debug tool.
-
-\item System documentation, the tests themselves act as a form of documentation that describe what the code should be doing.
-
-\end{itemize}
-
-\cite{beck2003test-driven}
-
-\subsubsection{Automated Tests}
-Automated offers the ability to automatically do regression tests, i.e. testing to uncover if any new code has broken a test that previously passed. If we opt for manual testing regression testing will be very time consuming as every test done so far has to be done over again. With an automated testing framework this job will be a lot easier as you can run a great number of tests in a matter of seconds. Most development languages offers libraries for automated testing.
-
-
-\subsection{Testing Levels}
-Testing can be done at many different levels and in different stages in the development process. Following is the most common partitioning of testing levels and a description on each of them.
-
-\subsubsection{Unit Testing}
-Unit testing aims to check specific components, such as methods and objects. Typically you will be testing objects, and you should provide test coverage of all the features of that object. Its important to choose effective unit test cases, that reflect normal operation and they should show that the specific component works. Abnormal inputs should also be included to check if these are processed correctly.
-
-\subsubsection{Component Testing}
-Tests bigger components of the system, and their interfaces(communication with other components). Made up of several interacting objects. Component testing is mainly a tool to check if component interfaces behaves according to its specification.
-
-\subsubsection{System Testing}
-In a given development project there may be several reusable components that have been developed separately and COTS systems, that has to be integrated with newly developed components. The complete system composing of the different parts is tested at this level. Components developed by different team members or groups may also be integrated and tested at this stage.
-
-\subsubsection{Release Testing}
-Release testing is the process of testing a particular release of the system that is intended for use outside of the development team. Often a separate team that has not been involved in the development perform this testing. These kind of tests should focus on finding bugs in the complete system. The objective is to prove to the customer that the product is good enough. This kind of testing could either be based on the requirements of the system or on user scenarios.
-
-\subsubsection{User Testing}
-This is a stage in the testing process in which users or customers provide feedback and advice. This could be an informal process where end- users experiment with a new system too see if they like it and that it conforms to their specific needs. Testing on end- users is essential for achieving success in a software process as replicating the exact working environment the system will be used in is difficult to achieve during development. The end users can help provide feedback on how specific functionality will work in an actual work environment.
-
-Another form of user testing involves the customer and its called acceptance testing. Its a process where the customer formally tests a system to decide whether or not it should be accepted, where acceptance implies that payment for the system should be made. Acceptance testing is performed after the release testing phase.
-
-\subsection{Conclusion}
-The concept of TDD is to develop exhaustive tests that specify the system, and then writing code with the goal of satisfying the tests. This is useful in systems where the key functionality is in the form of program logic that can be verified to conform to the specification. It is difficult to write such exhaustive tests in applications that rely heavily on GUIs, network connections and database systems because of the added complexity and heterogeneousness that these features involve. In addition, our prototype's exact specifications are likely to change during development, requiring large amounts of test rewriting in the case of TDD, because the tests will be more numerous and because the tests must be more strict. As a result we have opted not to use TDD in this project. We will however be utilizing unit tests with an automated testing framework where it is appropriate and will harvest some of the advantages linked to TDD, like the automated regression testing.
-
-We will be writing unit tests throughout the implementation process and run these continuously. These tests will not be included in the report as test cases. The test cases will rather comprise of component and system tests. Component tests will be used to test specific components and their functionality as well as their interaction with other components. System tests will be used on the system as a whole to check if it meets the agreed upon requirements. These test cases will be derived from the requirements. We will also try include some acceptance tests to include the customer in the testing process.
-
-We will be utilizing user testing and involve end users to get feedback on the entire system or specific functions. This testing will mainly be used to get feedback on the domain scripting language and how easy it is to understand and use. Preferably it will be done continuously throughout the development process. It is important to involve users as the goal of this project is to ease their workflow. As we are not working with an existing system thats actually in use, there will not exist any real users of this system with experience using it. We will therefore mainly be using our fellow students as test subjects, as they are readily available and technically competent enough to understand the concept and act as superusers. In addition the customer has stated that it will encourage employees from the entire company to us give feedback if we ask for it. Specific solutions can be sent to the customer representative which in turn will relay it to experts on the area it concerns.
 
 
 \section{Result Testing}
