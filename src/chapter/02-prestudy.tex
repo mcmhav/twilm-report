@@ -575,19 +575,7 @@ After testing on 1000 users the best performing strategy was a collaborative-bas
 What we can take from this is the strength of a user's followees.
 
 
-
-
-\subsection{Recommender Algorithms}
-\subsubsection{Probabilistic Neighborhood Selection}
-A often used approach when recommending items is a neighborhood-based collaborative filtering. This approach often has the issue that it over-specializes and makes concentrated biases when recommending. This can be handled with a probabilistic approach when selecting neighbors\cite{probcobfilter}.
-
-\subsubsection{Predicting User Ratings with Matrix Factorization}
-\cite{predusingmatrix}
-
-
-
 \subsection{What the top Netflix-Prize contestants did}\label{subsec:thewinners}
-
 \subsubsection{BellKor's Pragmatic Chaos}
 % http://www.stat.osu.edu/~dmsl/GrandPrize2009_BPC_BellKor.pdf
 % http://www2.research.att.com/~volinsky/netflix/
@@ -620,7 +608,7 @@ The winning algorithm was put together based on multiple different modeling tech
   \hline \\ [-1.5ex]
   Frequency term & The number of ratings a users gives on a specific day can help explains data-variability during that day. \\
   \hline \\ [-1.5ex]
-  Matrix factorization with Temporal Dynamics & Use two sets pf static movie factors. Set one is used in all the models of the factors. Set two uses the movies rated by the user, normalizes the sum, and uses this as a user factor. \\
+  Matrix factorization with Temporal Dynamics (SVD) & Single value decomposition use two sets pf static movie factors. Set one is used in all the models of the factors. Set two uses the movies rated by the user, normalizes the sum, and uses this as a user factor. \\
   \hline \\ [-1.5ex]
   Neighborhood model with Temporal Dynamics & Most common approach to collaborative filtering. They used a item-item model based on global optimization. To predict rating of a new item based of rating an old item two sets of weights where used. One where the values of the ratings where accounted for, and one disregarding rating values.
   A situation where a user rates an old item and a new item close to each other both in time and rating, is a better indicator that these items can be related to each other, than if two items are rated similarly, but with a greater timespan between each other.Therefore a decaying relationship is introduced between items. This decreased RMSE from 0.9002 to 0.8870.\cite{BellKor-CF-TD} \\
@@ -646,7 +634,26 @@ After the competition was done "The Ensemble" tested a merger of their system wi
 \subsubsection{Conclusion}
 After looking at the two top contestants from the competition a pattern is starting to form. Diversity is key to be able to predict user-ratings at a top level.
 
-% About Classification
+While both the teams managed to produce a 10\% improvement over the original netflix algorithm, it was never taken into use\cite{nfbeyond5}. Even though SVD and and RBM lowers the RMSE to 0.88 alone, are they not as applicable as wanted. The actual rating amount is 50 times bigger than the training set, and for SVD to give an accurate value, it has to be recalculated for each new rating, which is not applicable in a world where live recommendation is expected\cite{nfbeyond5}.
+
+
+\subsection{Recommender Algorithms}
+\subsubsection{Probabilistic Neighborhood Selection}
+A often used approach when recommending items is a neighborhood-based collaborative filtering. This approach often has the issue that it over-specializes and makes concentrated biases when recommending. When trying to estimate an unknown value, the nearest neighbors tend to produce a recommendation list with known items. The taste of the user is often multidimensional when it comes to movies, and these can be unknown to the k nearest neighbors to the user\cite{umana}. This can be handled with a probabilistic approach when selecting neighbors\cite{probcobfilter}. The approach does not estimate an unknown value based on the weighted averages of the k nearest neighbors, but rather on k probabilistically selected neighbors\cite{optaplanner}. Another way of handling this issue is suggesting the least similar neighbors and their dislikes\cite{furthestneighbor}. This approach was proved to be less accurate when calculating the RMSE\cite{probcobfilter}, and will therefore not be explored further.
+
+KNN is linear in the size of the training set, and therefore an efficient classification algorithm\cite{introtoIR}.
+
+
+\subsubsection{Matrix Factorization}
+There are several matrix factorization algorithms. Amongst them single value decomposition (SVD) and alternating least squares (ALS) are valid candidates. As we saw from Bellkor's solution~\ref{subsec:thewinners} single value decomposition was used, and was a good addition to their blend. The issue with this algorithm is that it is rather computationally expensive and re-computation is needed to be done when new ratings are added, and therefore not very applicable to a live recommendation system.
+
+ALS is a simpler and a very parallelizable matrix factorization algorithm, more so than SVD, but with many of the benefits that matrix factorization brings\cite{predusingmatrix}. This makes it an interesting algorithm to look at.
+
+This algorithm can be used to populate sparse matrices, just like the one from Netflix where the matrix is made up from users and movies. A rating matrix, $R$, is produced based on the use of two much smaller matrices. A number of "features" are set for each of the two smaller matrices $U$ and $M$, one for the users and one for the movies. The idea is to get $U^\top M$ as close to the real $R$. $U$ and $M$ are computed in two steps. This is easily parallelizable since solving for $U$ is independent of the other users, therefore the columns of $U$ can be computed in parallel. The information is gathered, and $M$ is updated, communication between movies is not necessary\cite{myrrix}.
+
+
+
+\subsection{Conclusion}
 % http://www.netflixprize.com/assets/GrandPrize2009_BPC_PragmaticTheory.pdf
 % http://www.netflixprize.com/assets/GrandPrize2009_BPC_BellKor.pdf
 % http://www.netflixprize.com/assets/GrandPrize2009_BPC_BigChaos.pdf
@@ -659,13 +666,10 @@ After looking at the two top contestants from the competition a pattern is start
 % https://sites.google.com/site/xlvector/netflixprize/papers
 % http://www.slideshare.net/bmabey/svd-and-the-netflix-dataset-presentation
 % http://lenskit.grouplens.org/
-
 % https://github.com/cloudera/oryx
 
 How to best make something out of the dataset
 How to produce the RMSE
-What is the RMSE
-
 
 TODO:
 There are two basic problems when analysing very large datasets:
@@ -679,21 +683,12 @@ Something about why and which classification alg to use
 % http://blog.jimjh.com/static/downloads/2013/05/12/netflix.pdf
 There were 51 051 contestants on 41 305 different teams competing in the Netflix-Prize competition, and a lot of these contestants shared their solution through code repositories such as GitHub (--------------something about github here?--------------). Since many of these solution scored very well on the contest it was natural to explore these and use their solution to test potential improvement in collaboration with the social media data harvested from Twitter.
 
-Here we explore some of the better solutions and how and why these could be used to our benefit.
 Here we explore some of the better solutions and put together how these can be used to
-
-
-
 
 
 The Netflix-data has, as mentioned in the section about the dataset \ref{subsec:netflixdata}, a set of ratings from users for each movie, and a time-stamp for these ratings. As vi saw from the study about the winning contestants \ref{subsec:thewinners}, we saw that this information alone let them produce a system which could predict movie-ratings with a RMSE of 0.8567. They saw
 
-
-
-
-
-\subsection{Conclusion}
-% end Collaborative Filtering
+% end similar systems
 
 
 
