@@ -5,7 +5,7 @@
 
 \minitoc
 \noindent
-This chapter studies various technologies, research and information that is relevant to the project goals. 
+This chapter studies various technologies, research and information that is relevant to the project goals.
 
 Beyond this, the study will serve to outline which direction the project must take and what methodologies must be used. Since there span of possibilities and directions are broad and few studies with similar goals of sufficient quality and completeness exist, the study is lengthy and a large part of the project.
 
@@ -642,7 +642,8 @@ ALS is a simpler and a very parallelizable matrix factorization algorithm, more 
 
 This algorithm can be used to populate sparse matrices, just like the one from Netflix where the matrix is made up from users and movies. A rating matrix, $R$, is produced based on the use of two much smaller matrices. A number of "features" are set for each of the two smaller matrices $U$ and $M$, one for the users and one for the movies. The idea is to get $U^\top M$ as close to the real $R$. $U$ and $M$ are computed in two steps. This is easily parallelizable since solving for $U$ is independent of the other users, therefore the columns of $U$ can be computed in parallel. The information is gathered, and $M$ is updated, communication between movies is not necessary\cite{myrrix}.
 
-
+asdasdf
+asdfsadfadfa
 
 \subsection{Conclusion}
 % http://www.netflixprize.com/assets/GrandPrize2009_BPC_PragmaticTheory.pdf
@@ -734,7 +735,7 @@ For these reasons the alternatives centered around NoSQL document stores, which 
 MySQL, which is the faster of the SQL alternatives, was also considered.
 
 \subsubsection*{MongoDB}
-MongoDB is a large scale, high availability, robust system. It is a NoSQL document store. Instead of storing the data in tables as in SQL, the data is stored in a BSON document. BSON stands for Binary JSON and is essentially a JSON document that is stored in binary instead of ASCII. A JSON document is a nested hash which can hold any number of attributes without depending on the other documents in the store. It is thus schemaless. Even though it is schemaless, MongoDB still possesses the some of the great properties from SQL databases, such as indexes, dynamic queries and updates. 
+MongoDB is a large scale, high availability, robust system. It is a NoSQL document store. Instead of storing the data in tables as in SQL, the data is stored in a BSON document. BSON stands for Binary JSON and is essentially a JSON document that is stored in binary instead of ASCII. A JSON document is a nested hash which can hold any number of attributes without depending on the other documents in the store. It is thus schemaless. Even though it is schemaless, MongoDB still possesses the some of the great properties from SQL databases, such as indexes, dynamic queries and updates.
 
 MongoDB is implemented in C. It also has sharding which allows the database to scale horizontally. Custom queries and map-reduce queries can be written in JavaScript which has fast interpreters. This makes mongoDB an efficient and high speed data base for storing, modifying and fetching data with a nested document structure \cite{mongodb-intro}. In addition it has bindings to many different languages, which is a great advantage if some of the modules that need to access the database needs to be written in a language other than what it originally was written in.
 
