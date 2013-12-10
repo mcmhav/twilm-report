@@ -45,7 +45,7 @@ This recommendation system is self-updating. It searches the Cinematch database 
 
 Netflix held a competition where the contest was made to help Netflix improve their movie recommendation system. The team that could beat Netflix's own collaborative filtering system by more than 10\% could win one million dollars. To measure the score root-mean-square error (RMSE) was used, which is used to measure the difference between the values predicted or estimated and the actual values observed. The RMSE of Cinematch~\ref{subsec:Cinematch} was at 0,9525.
 
-\subsubsection{Root-mean-square error RMSE}
+\subsubsection{Root-mean-square error RMSE}\label{subsubsec:rmse}
 
 \begin{equation}\label{eq:rmse}
 RMSE = \sqrt {{\frac{{\sum\limits_{{i = 1}}^n {{{\left( {{y_i} - {{\hat{y}}_i}} \right)}^2}} }}{{n}}}}
@@ -575,14 +575,6 @@ What we can take from this is the strength of a user's followees.
 
 \subsection{What the top Netflix-Prize contestants did}\label{subsec:thewinners}
 \subsubsection{BellKor's Pragmatic Chaos}
-% http://www.stat.osu.edu/~dmsl/GrandPrize2009_BPC_BellKor.pdf
-% http://www2.research.att.com/~volinsky/netflix/
-% http://www.netflixprize.com/assets/GrandPrize2009_BPC_PragmaticTheory.pdf
-% http://www.netflixprize.com/assets/GrandPrize2009_BPC_BigChaos.pdf
-% http://blog.revolutionanalytics.com/2009/09/bellkor-wins-netflix-prize.html
-% http://www.wired.com/business/2009/09/how-the-netflix-prize-was-won/
-% http://www.netflixprize.com//community/viewtopic.php?id=1537
-
 BellKor's Pragmatic Chaos, the prize winners of the Netflix-Prize competition, was a group of scientists from AT\&T Labs, Yahoo!, Pragmatic Theory and Commendo Research \& Consulting. They achieved a RMSE of 0.8567, which was 10.06\% better than Netflix's own Cinematch score.
 
 Models for the rating data is learned by fitting previously observed ratings, but since the model is to be used to predict feature ratings, overfitting the data. This achieved by regularizing the learned parameters. A regularization constant is used, and is set to L2 by default. This and other constant such as, step size and number of iterations are set manually through greedy manners. Where the algorithm is ran multiple times and constant value with best score is used. \cite{BellKor-PragmaticTheory}
@@ -659,9 +651,6 @@ The ALS~\ref{subsubsec:matrixfac} proved to be a very parallelizable algorithm, 
 
 The probabilistic neighborhood selection is a form of K-NN has a good runtime and produced a respectable RMSE. This is a well know approach to collaborative filtering, and there is a lot of documentations on different ways of selecting neighbors and implementation. This seems like the way to go as a start to produce recommendations on bigger datasets.
 % end similar systems
-
-
-
 
 
 
@@ -765,7 +754,9 @@ The speed of python does not matter in the context of a web bottle neck. The alg
 
 
 \section{Result Testing}
-TODO: HERER OR IN THE REQ-CHAP?
+Root-mean-square error (RMSE)~\ref{subsubsec:rmse} is a way of testing estimated value against the actual value. This is how they measured the correctness of the submitted solutions in the Netflix prize competition. To explore the correctness and improvement of the solution, this seems like a good way to go. The recommendation system will be ran on both the netflix-dataset alone and on the netflix-dataset merged with the twitter-data.
+
+A reduction in the RMSE value will then indicate an improvement, and indicate the gain from the collaboration of movie data and social media data.
 
 \section{Evaluation (maybe)}
 TODO:
