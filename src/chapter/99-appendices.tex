@@ -9,7 +9,7 @@
 
 \chapter{Requirements}\label{app:req}
 \section{Functional Requirements}
-\begin{itemize}
+\begin{enumerate}[label=\bfseries FR \arabic*:]
   \item The system must be able to harvest tweets and/or users from Twitter that are related to a movie in the netflix-dataset
   \item The system must be able to harvest tweet.user from Twitter
   \item The system must be able to harvest user.followees from Twitter
@@ -23,9 +23,23 @@
   \item The system must be able to track the progress of data-building
   \item The system must be able to track the progress of prediction
   \item The system must be able to cost efficiently predict a rating of a movie for a given user
-\end{itemize}
+\end{enumerate}
+
+
+
+
 
 \section{Non Functional Requirements}
+\begin{enumerate}[label=\bfseries NFR \arabic*:]
+  \item The system must be able to cost efficiently predict a rating of a movie for a given user
+  \item The system must be able to store all the data from neflix dataset
+  \item The system must be able to store all the data harvested from twitter
+  \item The system must be able to store all the data from predictions
+  \item The system storage must be able to scale
+  \item The system storage must have a low response time
+  \item The system storage must support replication for easy fault recovery
+  \item The system's modules must have a low coupling
+\end{enumerate}
 
 
 
