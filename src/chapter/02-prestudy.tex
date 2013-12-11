@@ -301,6 +301,8 @@ Authentication for using the Stream API is done with OAuth. There is no applicat
 \subsubsection{Limitations}
 There is no rate limit in the Stream API. However, there are a few cases in which the streaming will stop. For instance, If the client fails to receive the streamed data and twitters buffer builds up too many tweets, the connection will be closed. Also, if the client opens too many streams with the same credentials, the oldest connection will be closed.
 
+It also takes the Stream API a very long time to create a dense dataset. By a few searches for movie titles that are less watched, it can easily be determined that many of them have only a few tweets posted about them over the span of years. This means that it would take at least a year for the Stream API to deliver any datapoints about the movie.
+
 \subsection{Crawling and Scraping Twitter}
 TODO: Add appendixes from scrapbook.
 This section will examine how to crawl and scrape Twitters HTTPS Web Search. This will be examined by browsing twitter.com logged in as a user and examining it Google Chrome Developer Tools (GCDT)\cite{gcdt} as the site is being browsed and search requests are being made. The goal of this examination is to discover requests a webcrawler must be capable of making in order to search twitter and harvest tweets and users automatically and how a scraper can distinguish the dom elements that describe a tweet.
@@ -754,13 +756,21 @@ This section will sum up what we saw after doing the prestudy.
 The Netflix-dataset is very sparse. With about 480 000 users and 17 770 movies there would have been a total of more than 8.5 billion ratings, but the dataset only contains ca 100 million ratings, so algorithms which can handle this kind of sparsity must be used, such as alternating least squares and k nearest neighbors. The standard way to evaluate the correctness of a solution in these kinds of problems are RMSE.
 
 \subsection{Twitter}
-many different data types can be retrieved from twitter
-Several ways to access twitter data with different advantages
-Stream good, time consuming
-REST good, time consuming
-Search OK, incomplete and time consuming
-Scraping best not legal
-conclusion make all access channels available to maximize throughput and data availability
+There are many different data types that can be retrieved from Twitter. The most dominating types and attributes are: Tweets, users, followees and followers.
+
+There are several ways to access and retrieve this data. The REST API has the capability to retrieve the complete set of followees and followers for any given user. It lacks speed as it only allows 15 requests per 15 minute window.
+
+The Streaming API is also great in the sense of data completeness. It has the capability of capturing all tweets for any given topic described by keywords. It is however slow in the sense that it takes years to build a dense dataset because less popular films are rarely tweeted about.
+
+The Search API is great in the sense that it has looser limitations than the REST API. It can process a total of 180 requests per client per 15 minute window. It is however, like the Stream API limited in time span. The Search API only has a week worth of data. There is also no guarantee from Twitters side for which time window the Search API reflects and thus no guarantee for the completeness of data. This renders the Search API almost completely similar in terms of data gathering capability to the Stream API, but inferior in certainty of data completeness. A slight advantage for Search over Stream is that keeping a persistent connection is not required which makes it easier to maintain.
+
+Scraping is the best solution in terms of data completeness and time consumption. It achieves what the Stream API is capable of achieving in years in mere days. However, it is a more complicated and error prone procedure as the scraping must be done by the client and the content being scraped is not under its control. The scraping procedure itself is more difficult to test than to just utilize an existing api. This makes Scraping more prone to sparseness and errors in the dataset. However, the speed with which an entire site can be crawled and scraped compared to the years it takes the Stream API to collect a dataset of the same density, makes it easy to test run a scraper, correct errors as they are found and run the scraper over again.
+
+All of the previously mentioned APIs have the advantage that all the data gathered by them can be be aggregated and analyzed. Aggregations and analysis of data obtained by these means can be legally used to create services, including movie recommenders.
+
+One problem with scraping is that it is not allowed by Twitter without their consent. As Twitters consent has not been granted to scrape Twitter for the purposes of this project, a dataset based on scraping can not be gathered. The data can certainly not be used to legally create services like movie recommenders.
+
+All of the techniques for gathering data from Twitter discussed have pros and cons in terms of how dense of a dataset they build, how likely the dataset is to contain errors, how long they take to run and the legallity of how the data collection. As APIs exist for all techniques except scraping, the barrier for utilizing them are low. Implementing them and having them available has a low cost in terms of development time and each API increases the richness of available data. Implementing a scraper is also a good idea in case consent from Twitter is obtained as it has superior performance compared to any of the other techniques considered.
 
 \subsection{Similar systems}
 When it comes to recommendation systems it is important to weigh quality of result versus time it takes to produce this result. If it is too time-consuming the result might end up being outdated. Netflix did not implement the winner solution even though the winner managed to score 10\% better than the Netflix-system. This was mainly because of the time it took for the predictions to be calculated and Netflix need to have a live system.
