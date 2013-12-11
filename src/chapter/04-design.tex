@@ -56,15 +56,25 @@ The Prediction Models model what the ratings that the Predictor predicts using t
 
 
 \subsection{Process View}
-The process view describes the actions that the components of the architecture engage in over time and how there actions relate to other components.
+The process view describes the actions that the components of the architecture engage in over time and how there actions relate to other components. See figure-\ref{figure:process-view}
+
+\begin{figure}[H]
+\centerline{\includegraphics[width=7in]{image/architecture-process-view.png}}
+\caption{Process view showing the actions taken by various components as time passes and which components they affect. Time is moving downward. An arrow implies that data is sent from one component to another.}
+\label{figure:process-view}
+\end{figure}
+
+\subsubsection{Harvest Phase}
+\subsubsection{Datset Building Phase}
+\subsubsection{Prediction Phase}
 
 \subsection{Development View}
-describes the mapping(s) of the software onto the hardware. reflects hardware distribution if present
+The development view describes how the various technologies and implementeations are dependent on one another. A layered approach is used to depict this in figure-\ref{figure:development-view}
 
 \begin{figure}[H]
 \centerline{\includegraphics[width=4.5in]{image/architecture-development-view.png}}
 \caption{Development view showing the technology stack. Each technology block is dependent on the technology block(s) below it.}
-\label{figure:development-view-notation}
+\label{figure:development-view}
 \end{figure}
 
 \subsection{Physical View}
