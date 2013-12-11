@@ -7,11 +7,11 @@
 \pagenumbering{Roman}
 \setcounter{page}{1}
 
-\chapter{Requirements}
-\chapter{Design}
-\chapter{Implementation Documentation}
+\chapter{Requirements}\label{app:req}
+\chapter{Design}\label{app:design}
+\chapter{Implementation Documentation}\label{app:impl}
 
-\chapter{Test Cases}
+\chapter{Test Cases}\label{app:test}
 
 \begin{table}[H]
 \caption{Test Case TID01}
@@ -20,20 +20,15 @@
 \hline
  Item            & Description                                                              \\
 \hline \\ [-2.0ex]
- Description     & Storing objects in a database on the central server                        \\
+ Description     & Storing objects in a database on the central server \\
  Tester          & Øystein Heimark                  \\
  Preconditions   & There needs to be a server running with a connection to a database available \\
- Feature         & Test the ability to store objects permanently on the server from the client  \vspace{3pt}                     \\
+ Feature         & Test the ability to store objects permanently on the server from the client  \vspace{3pt}   \\
 \hline \\ [-1.5ex]
  Execution steps & \pbox{13cm}{1. Open a new client \\ 2. Call the appropriate method for storing a new object with a given set of attributes from the client. \\ 3. List the content of the database and observe if the new object is indeed stored with its correct attributes. } \vspace{3pt} \\
 \hline \\ [-1.5ex]
- Expected result & The object is stored in the database with the correct attributes                                          \\
+ Expected result & The object is stored in the database with the correct attributes \\
 \hline
 \end{tabular}
 \label{table:testcasetid01}
 \end{table}
-
-
-
-
-\clearpage

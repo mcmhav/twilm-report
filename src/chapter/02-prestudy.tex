@@ -518,14 +518,12 @@ First, in order to obtain the tweet text, everything that is not a link or conta
 % End Twitter
 
 
-
+% Start similar systems
 \section{Similar Systems}
+In this section, similar systems will be discussed. Their usability in this project will also be evaluated.
 
 
 \subsection{Recommender Systems}
-In this section, we will discuss similar solutions and their relevance to our project.
-
-
 \subsubsection{MovieLens}\label{subsec:MovieLens}
 MovieLens is a movie recommendation system. A user creates an account and gets movie recommendations based on the user's own ratings through MovieLens' collaborative filtering algorithm. They use a item-item based algorithm. They take the 20 movies which are most similar to the target movie and see how these 20 movies where rated.\cite{grouplens}
 
@@ -595,7 +593,9 @@ The winning algorithm was put together based on multiple different modeling tech
 \textbf{Neighborhood model with Temporal Dynamics}  Most common approach to collaborative filtering. They used a item-item model based on global optimization. To predict rating of a new item based of rating an old item two sets of weights where used. One where the values of the ratings where accounted for, and one disregarding rating values.
 A situation where a user rates an old item and a new item close to each other both in time and rating, is a better indicator that these items can be related to each other, than if two items are rated similarly, but with a greater timespan between each other.Therefore a decaying relationship is introduced between items. This decreased RMSE from 0.9002 to 0.8870.\cite{BellKor-CF-TD}
 
-\textbf{Clustering}  In a cluster the average value is the predictor for the user/movie pairs in the cluster. Where the movie-set and user-set are divided randomly into 128 bins, and created $128*128=16384$ clusters. This was their only usage of clustering, they found that it had no measurable impact on the accuracy of the final blend\cite{pragmatictheory-sol}. \\\\
+\textbf{Clustering}  In a cluster the average value is the predictor for the user/movie pairs in the cluster. Where the movie-set and user-set are divided randomly into 128 bins, and created $128*128=16384$ clusters. This was their only usage of clustering, they found that it had no measurable impact on the accuracy of the final blend\cite{pragmatictheory-sol}.
+
+\textbf{Anchoring}  There is a order of when to watch some movies. For instance, some squeals are usually watched in the order they where made, and should be predicted that way. \\\\
 
 
 Interestingly, the bias model with tanking in the factor that users change rating-scale over time, resulted in a RMSE of 0.9555, which is almost as good as the Cinematch Netflix was already using. The learning with the different modeling techniques is done by a stochastic gradient descent algorithm running for 30 iterations. This is the only time they use an automatic parameter tuner. \cite{BellKor-2008-sol}
