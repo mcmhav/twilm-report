@@ -21,42 +21,25 @@ TODO: something about how twitter's api is slow, scraping, 2 lines.
 An interesting find was that most of the recommendation systems for the Netflix prize had a more stationary ground to them, they only tried to get the RMSE as low as possible, not considering the fact that ratings would be constantly updated, and therefore a requirement to do live recommending with new input-information would require the already heavy computations to be run constantly on all the data often, which is less than feasible.
 
 
-\section{Functional Requirements}
+\section{Functional Requirements}\label{section:functional-requirements}
 This section will look at how the functional requirements where gathered, and look at some of the more central ones. For a full list of the functional requirements see appendix~\ref{app:req}.
-
-
 \begin{itemize}
   \item The system must be able to harvest tweets and/or users from Twitter that are related to a movie in the netflix-dataset
-  \item The system must be able to harvest tweet.user from Twitter
-  \item The system must be able to harvest user.followees from Twitter
-  \item The system must be able to harvest user.followers from Twitter
-  \item The system must be able to harvest user.tweets from Twitter
-
   \item The system must be able to supplement netflix-dataset with tweets and/or users from Twitter that are related to a movie in the netflix-dataset
-  \item The system must be able to learn recommendations based on the netflix-twitter-mixed dataset
-  \item The system must be able to produce a test-dataset
-  \item The system must be able to test recommendation based on the netflix dataset and produce a RMSE
-  \item The system must be able to test recommendation based on the netflix-twitter-mixed dataset and produce a RMSE
-  \item The system must be able to track the progress of harvesting
-  \item The system must be able to track the progress of data-building
-  \item The system must be able to track the progress of prediction
-  \item The system must be able to give user-based recommendation
-  \item The system must be able to
-  \item The system must be able to
-  \item The system must be able to
-  \item The system must be able to
-  \item The system must be able to
-  \item The system must be able to
+  \item The system must be able to predict ratings of the movies for all users in any dataset that reflects the netflix dataset
+  \item The system must be able to cost efficiently predict a rating of a movie for a given user
 \end{itemize}
 
-\section{Non Functional Requirements}
 
+\section{Non Functional Requirements}
 \begin{itemize}
   \item System should improve the RMSE
 \end{itemize}
 
 
+
 \section{Requirements Evaluation}
+
 
 
 \section{Prioritized Requirements}
