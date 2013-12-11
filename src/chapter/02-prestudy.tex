@@ -112,7 +112,7 @@ Rating distribution is shown in figure~\ref{figure:ratingdistr}. 1/3 of the rati
 \end{figure}
 
 
-Average rating distribution is shown in figure~\ref{figure:avgratingdistr}. The upper graph shows average rating distribution of the customers, while the bottom one shows the distribution per movie. Both graphs have quite similar form. Both customers and movies peak at a rating of 3,5, which is natural. The second second highest point is for the customers at 4 and movies at 3, which is interesting to see. TO ANALYSE MORE!
+Average rating distribution is shown in figure~\ref{figure:avgratingdistr}. The upper graph shows average rating distribution of the customers, while the bottom one shows the distribution per movie. Both graphs have quite similar form. Both customers and movies peak at a rating of 3,5, which is natural. The second second highest point is for the customers at 4 and movies at 3, which is interesting to see. TODO: TO ANALYSE MORE!
 
 
 \begin{figure}[H]
@@ -564,9 +564,9 @@ Twittomender is a followee recommender for Twitter. Twitter uses a friend's frie
 
 The user interacts with the system through providing the system with their username on Twitter, the system produces a profile of the user based on tweets, and determines a score against other users based on most frequent terms amongst the users tweets. Each of the strategies are used from table~\ref{table:to-strategies} and top 20 from each are merged to a list where the most frequent users are returned as recommended users to explore for the user.
 
-After testing on 1000 users the best performing strategy was a collaborative-based approach, users and follower connection.
+After testing on 1000 users the best performing strategy was a collaborative-based approach, users and follower connection, recommendation strategy (6).
 
-What we can take from this is the strength of a user's followees.
+What we can take from this is the strength of a user relationships.
 
 
 \subsection{What the top Netflix-Prize contestants did}\label{subsec:thewinners}
@@ -748,6 +748,27 @@ Root-mean-square error (RMSE)~\ref{subsubsec:rmse} is a way of testing estimated
 
 A reduction in the RMSE value will then indicate an improvement, and indicate the gain from the collaboration of movie data and social media data.
 
-\section{Evaluation (maybe)}
-TODO:
+\section{Evaluation}
 To sum up what we saw after the prestudy
+
+\subsection{Netflix}
+Sparse
+multiple information retrieval techniques to predict ratings on the data
+Big data
+RMSE is the standard way of measuring the correctness of a solution
+
+\subsection{Twitter}
+many different data types can be retrieved from twitter
+Several ways to access twitter data with different advantages
+Stream good, time consuming
+REST good, time consuming
+Search OK, incomplete and time consuming
+Scraping best not legal
+conclusion make all access channels available to maximize throughput and data availability
+
+\subsection{Similar systems}
+When it comes to recommendation systems it is important to weigh quality of result versus time it takes to produce this result. If it is too time-consuming the data
+Netflix did not implement the winner solution even though it managed to score 10\% better than their own system. This was mainly because of the time it took for the predictions to be calculated and Netflix need to have a live system.
+Collaborative-based important, datasets utilizing user relationship like followers and followees tend to give the best results in twitter-based recommendations.
+
+The group the user is a
