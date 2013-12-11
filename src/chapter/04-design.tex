@@ -60,16 +60,21 @@ The process view describes the actions that the components of the architecture e
 
 \begin{figure}[H]
 \centerline{\includegraphics[width=7in]{image/architecture-process-view.png}}
-\caption{Process view showing the actions taken by various components as time passes and which components they affect. Time is moving downward. An arrow implies that data is sent from one component to another.}
+\caption{Process view showing the actions taken by various components as time passes and which components they affect. Time is moving downward. An arrow implies that data is sent from one component to another. The data being sent can be a function call, an object or any other type available to the component taking the action.}
 \label{figure:process-view}
 \end{figure}
 
 \subsubsection{Harvest Phase}
+The harvest phase is responsible for gathering data from Twitter. First, the harvester retrieves an initial model from either netflix models or twitter models. Then, it uses one or more fields to harvest data from Twitter that is related to the initial model. This can be tweets containing the movie title in the tweet.text, tweet.users for these tweets, users.each.followees and so forth, as outlined in the functional requirements related to harvesting in section~\ref{section:functional-requirements}. At last, the harvested data is stored as twitter models.
+
 \subsubsection{Datset Building Phase}
+The dataset building phase is responsible for building a dataset using the data gathered from Twitter in the harvest phase. First, the dataset builder retrieves a netflix model, which is likely to be a movie. Then, it retrieves twitter models that are relevant for the netflix model and consolidates them into a set of datapoints that expresses this netflix model. At last, the datapoints are stored along with the netflix model it expresses in the dataset model. In this way, the functional requirement in section~\ref{section:functional-requirements} for supplementing the netflix-dataset with data from twitter is fulfilled.
+
 \subsubsection{Prediction Phase}
+The prediction phase is responsible for using the dataset model to predict the ratings of the probe in the netflix model and calculate the RMSE. First, the predictor retrieves a datapoint from the probe. Then, it gathers the relevant datapoints it needs from the dataset model in order to make a prediction. After this step, the rating has been predicted and the contribution to the RMSE score is calculated and. The RMSE contribution is summed in the predictor and kept until all ratings have been predicted. At last, the predicted rating is stored in the prediciton model. When all ratings have been predicted and all the RMSE contributions have been added to the prediction model, the RMSE can be calculated and stored. Thus, the functional requirements in section~\ref{section:functional-requirements} related to giving and testing predictions are fulfilled.
 
 \subsection{Development View}
-The development view describes how the various technologies and implementeations are dependent on one another. A layered approach is used to depict this in figure-\ref{figure:development-view}
+The development view describes how the various technologies and implementeations are dependent on one another. A layered approach is used to depict this in figure-\ref{figure:development-view}. It shows how the commercial off-the-shelf software COTS is dependent on the underlying language they are built in. Also, it shows how the modules implemented in this project are dependent on the various COTS.
 
 \begin{figure}[H]
 \centerline{\includegraphics[width=4.5in]{image/architecture-development-view.png}}
@@ -78,7 +83,13 @@ The development view describes how the various technologies and implementeations
 \end{figure}
 
 \subsection{Physical View}
-describes the mapping(s) of the software onto the hardware. reflects hardware distribution if present
+The physical view describes the mapping(s) of the software onto hardware, as seen in figure~\ref{figure:development-view}. The NoSQL database communicate with the Twilm implementation. These are both stored on a single computer. This computer has internet access. The Twilm implementation uses the internet access to reach Twitter.
+
+\begin{figure}[H]
+\centerline{\includegraphics[width=4.5in]{image/architecture-physical-view.png}}
+\caption{Physical view showing the components of the system mapped onto hardware. Only a single computer with internet access to Twitter runs the entire system.}
+\label{figure:development-view}
+\end{figure}
 
 \subsection{Scenarios}
 
