@@ -48,12 +48,17 @@ The Dataset Models reflects the Netflix Models after they have been mapped to fu
 The Prediction Models model what the ratings that the Predictor predicts using the Datast Models and the Probe in Netflix Models.
 
 \subsubsection{Farm}
+Farm is the module responsible for accessing and gathering data from Twitter.
 
+The fields access Twitters data. Most fields implement one of Twitters existing APIs. There is also a Scrape field for accessing Twitters web search and scraping the results. It is important to note that Twitter does not allow this without explicit consent. Each field is implemented in such a way that it delivers a subset of the Twitter data types that are outlined in the functional requirements in section~\ref{section:functional-requirements}. The fields combined delivers all the Twitter data types in the requirements. The reason for dividing the access over several fields is that some of the fields are unsuitable for gathering certain Twitter data types.
+
+The harvesters uses the fields to gather and store Twitter data that matches a model that already exists in either the netflix model or the twitter model. It is used for finding say tweets for a movie using the scraper field, followees for a user using the rest field or users for a movie using the stream field.
 
 \subsubsection{Dataset Builder}
+The dataset builder is responsible for building a dataset that reflects the netflix dataset using the data gathered from twitter by the harvesters. This new dataset is stored in dataset model.
 
 \subsubsection{Predictor}
-
+The predictor is responsible for predicting movie ratings for a collection of users. The predictor does so by for a test set and comparing it to several entries in a dataset. The test set is usually the probe in the netflix models. The dataset that the test set is compared to, is either the dataset model or the netflix model. The predictor also gradually calculates RMSE as it is predicting ratings.
 
 \subsection{Process View}
 The process view describes the actions that the components of the architecture engage in over time and how there actions relate to other components. See figure-\ref{figure:process-view}
@@ -85,13 +90,22 @@ The development view describes how the various technologies and implementeations
 \subsection{Physical View}
 The physical view describes the mapping(s) of the software onto hardware, as seen in figure~\ref{figure:development-view}. The NoSQL database communicate with the Twilm implementation. These are both stored on a single computer. This computer has internet access. The Twilm implementation uses the internet access to reach Twitter.
 
+The NoSQL database can also be decoupled from the computer running Twilm and set up on several computers with replication, as shown in figure~\ref{figure:development-view}. This fulfills the system storage replication requirement in the non functional requirements in section~\ref{section:non-functional-requirements}.
+
 \begin{figure}[H]
 \centerline{\includegraphics[width=4.5in]{image/architecture-physical-view.png}}
 \caption{Physical view showing the components of the system mapped onto hardware. Only a single computer with internet access to Twitter runs the entire system.}
 \label{figure:development-view}
 \end{figure}
 
-\subsection{Scenarios}
+\begin{figure}[H]
+\centerline{\includegraphics[width=4.5in]{image/architecture-physical-view-distributed.png}}
+\caption{Distributed physical view showing the components of the system mapped onto hardware using database replication.}
+\label{figure:development-view}
+\end{figure}
+
+
+\section{Scenarios}
 
 \section{Component Design}
 
