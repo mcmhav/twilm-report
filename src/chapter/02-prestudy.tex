@@ -76,7 +76,7 @@ With the training dataset the teams system was supposed to predict ratings on a 
 \begin{figure}[H]
 \includegraphics[width=5in]{image/sub-distr-nf.png}
 \centering
-\caption{Distribution of different submission amount, their score and the most used algorithms to produce the RMSE score. As we can see from the figure, one of the better performing algorithms are singular value decomposition (SVD). Approaches like using the average movie rating to suggest ratings and the average ratings for users, was often used, but did not produce a good recommendation (RMSE reduction from the Cinematch score by 10-12\%)}
+\caption[Distribution of different submission]{Distribution of different submission amount, their score and the most used algorithms to produce the RMSE score. As we can see from the figure, one of the better performing algorithms are singular value decomposition (SVD). Approaches like using the average movie rating to suggest ratings and the average ratings for users, was often used, but did not produce a good recommendation (RMSE reduction from the Cinematch score by 10-12\%)}
 \label{figure:sub-distr-nf}
 \end{figure}
 
@@ -104,15 +104,14 @@ Rating distribution is shown in figure~\ref{figure:ratingdistr}. 1/3 of the rati
 \label{figure:avgratingdistr}
 \end{figure}
 
+Average rating distribution is shown in figure~\ref{figure:avgratingdistr}. The red(upper) graph shows average rating distribution of the customers, while the orange(bottom) one shows the distribution per movie. Both graphs have quite similar form. Both customers and movies peak at a rating of 3,5, which is natural. The second second highest point is for the customers at 4 and movies at 3, which is interesting to see. TODO: TO ANALYSE MORE!
+
 \begin{figure}[H]
 \includegraphics[width=5in]{image/avgratdistrover.png}
 \centering
 \caption{Average rating distribution}
 \label{figure:avgratdistrover}
 \end{figure}
-
-
-Average rating distribution is shown in figure~\ref{figure:avgratingdistr}. The upper graph shows average rating distribution of the customers, while the bottom one shows the distribution per movie. Both graphs have quite similar form. Both customers and movies peak at a rating of 3,5, which is natural. The second second highest point is for the customers at 4 and movies at 3, which is interesting to see. TODO: TO ANALYSE MORE!
 
 
 \begin{figure}[H]
@@ -749,13 +748,10 @@ Root-mean-square error (RMSE)~\ref{subsubsec:rmse} is a way of testing estimated
 A reduction in the RMSE value will then indicate an improvement, and indicate the gain from the collaboration of movie data and social media data.
 
 \section{Evaluation}
-To sum up what we saw after the prestudy
+This section will sum up what we saw after doing the prestudy.
 
 \subsection{Netflix}
-Sparse
-multiple information retrieval techniques to predict ratings on the data
-Big data
-RMSE is the standard way of measuring the correctness of a solution
+The Netflix-dataset is very sparse. With about 480 000 users and 17 770 movies there would have been a total of more than 8.5 billion ratings, but the dataset only contains ca 100 million ratings, so algorithms which can handle this kind of sparsity must be used, such as alternating least squares and k nearest neighbors. The standard way to evaluate the correctness of a solution in these kinds of problems are RMSE.
 
 \subsection{Twitter}
 many different data types can be retrieved from twitter
@@ -767,8 +763,8 @@ Scraping best not legal
 conclusion make all access channels available to maximize throughput and data availability
 
 \subsection{Similar systems}
-When it comes to recommendation systems it is important to weigh quality of result versus time it takes to produce this result. If it is too time-consuming the data
-Netflix did not implement the winner solution even though it managed to score 10\% better than their own system. This was mainly because of the time it took for the predictions to be calculated and Netflix need to have a live system.
+When it comes to recommendation systems it is important to weigh quality of result versus time it takes to produce this result. If it is too time-consuming the result might end up being outdated. Netflix did not implement the winner solution even though the winner managed to score 10\% better than the Netflix-system. This was mainly because of the time it took for the predictions to be calculated and Netflix need to have a live system.
 Collaborative-based important, datasets utilizing user relationship like followers and followees tend to give the best results in twitter-based recommendations.
 
 The group the user is a
+For a big dataset and low computational time k nearest neighbors has proven to be a good way to go.
