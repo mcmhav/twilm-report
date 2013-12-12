@@ -6,71 +6,55 @@
 \setcounter{page}{1}
 \pagenumbering{arabic}
 
-Context;  motivation  for the project;  problem statement;  outline of
-dissertation.
+Context;  motivation  for the project;  problem statement;  outline of dissertation.
 
-I introduksjonskapittelet, forklar kort
-konteksten med og motivasjonen bak arbeidet
-ditt, forklar problemet som du prøver å løse og
-forklar hvorfor dette problemet er verdt å løse.
+I introduksjonskapittelet, forklar kort konteksten med og motivasjonen bak arbeidet ditt, forklar problemet som du prøver å løse og forklar hvorfor dette problemet er verdt å løse.
 
-
-Denne oppgaven dreier seg om filmanbefalinger basert på sosiale media og sosialnettverk. Vi skal ta i utangspunkt i en samling av data om brukere, deres nettverk, samt en samling av filmer med tilhørende "ratings", og utvikle en tekst- og datagruvedriftmetode ("text and data mining method")  og/eller maskinlæringsmetode for å produsere gode anbefalinger.
-
-Oppgaven vil kreve at man setter seg inn i metoder for å hente ut kunnskap fra en samling av ustrukturerte data (i.e. Information and knowledge extraction). Det er en stor fordel med en god programmering- og algoritmiskforståelse.
-
-
-Wonsole is a student project under the TDT4290 course in IDI, NTNU. The project is intended to give all its students experience in a customer guided IT- project and the feel of managing a project in a group. Every phase of a typical IT- project will be covered. This report will serve as documentation of our work. This includes our work progress, the technologies we used, our research findings and so on. The introduction chapter is meant to describe the project, our goals and briefly the involved parties.
+This chapter will give an overview of what this project is about, and give the purpose and motivation behind this project. It will also outline the project for easy chapter understanding, and let the reader know where different parts of the project is located in this paper. The paper serves as a documentation of the work done.
 
 \clearpage
 
 
 \section{Purpose}
-\section{Motivation}
-\section{Context}
+The goal of this project is to explore the correlation between social media and movie recommendation, and put down the cornerstones for such a system. The system is intended to produce ratings for movies based on a social media network (Twitter) and a set of movies with movie-ratings (Netflix-dataset). The social media network will be harvested for movies based on the movies from the movie-dataset, then these two datasets will be combined to open the possibility of TODO: maybe do this one together btw :P
 
-\section{Project}
-This is a proof of concept project. The underlying task is to research and develop a system where power users can benefit from a console.  The concept aims to ease the workload of a power user who is working with object editing, and to see how the efficiency of a console might prove to improve the work. The power user is usually a user who often works with the system over a longer time, and is in depth familiar with the system. We will research already existing systems of this kind, and look at the possibilities and advantages of such a system in a chosen domain.
-
-We have chosen a library as our domain, and this will be used to explore and test the concept. The library domain is chosen since it possesses potential for the existence of power users and multiple input forms which could be made more efficient through a console. This domain also opens the opportunity to test our system on for instance employees on campus, which is important for the proving of the concept.
 \subsubsection{Goals}
 \begin{enumerate}
-  \item Provide extensive documentation and a successful presentation of the end product.
-  \item Create a working prototype of a system where a scripting console is embedded into a modern web interface. The console should provide access to viewing and modifying the underlying data objects of the system's domain via a Domain Specific Language(DSL).
-  \item Investigate the ramifications of the added functionality, in terms of usability and technical aspects.
+  \item Produce well documented reasons to why some directions are preferred before other when dealing with social media and movie recommendation.
+  \item Create a working harvester to gather needed data from social media.
+  \item Investigate different algorithms to predict ratings on the extended dataset.
 \end{enumerate}
 
-It is important to note that the report is in focus. It will be the cornerstone of the prototype, to not just ease further development, but also to amplify the reasons for the choices we make.
+The report is the cornerstone of this system, and is meant to ease further development and explain reasons to why some directions are to be preferred before other directions.
 
 
-\section{Structure of Report}
-This report describes the development of bringing the scripting experience to the power user.
-The report is structured after the course of the project, and gives the reader insight into the development of the system.
+\section{Motivation}
+Social media networks are well established networks, they possess and produce big amounts of data on a daily basis. On Twitter, a social media site, 9 100 messages are posted every second~\cite{twitt-stats}, and on Facebook, another social media site, 1 million links are shared every 20 minuets~\cite{face-stats}. With this amount of data produced conclusions and predictions can be made through gathering the data and performing collaborative filtering on this data. One of the potential predictions to draw from this is movie ratings predictions. Hence the motivation for utilizing the vast amount of data for movie rating predictions.
+
+
+\section{Context}
+The coming chapters describes the course of the project in order of the structure. And how social media can be used in correlation with movie recommendation. Table~\ref{table-reportstructure} gives a short insight to the content of the different chapters.
 
 \begin{table}
 \centering
 \begin{tabularx}{\textwidth}{ l X l }
   \textbf{Chapter}      & \textbf{Description} \\
   \hline \\ [-1.5ex]
-  Chapter 1   & The introduction chapter introduces the problem to the reader, introduce the members and stakeholders of this project and explain the motivation for doing this project. After reading this chapter, the reader will be left with an overall view of the projects outline and goals. \vspace*{0.7ex} \\
+  Chapter 1 & The Introduction chapter gives an overview of the project to the reader, and explains the tasks the project is meant to solve. \\
   \hline \\ [-1.5ex]
-  Chapter 2                   & The Preliminary Study chapter describes the work and research done, and road taken to the choices we made. This includes technologies, methodologies, testing and version control. \\
+  Chapter 2 & The Preliminary Study chapter describes work and research done, and how and why the choices made were made. This includes information about different technologies, such as Netflix and Twitter, how they can be used, different algorithms to work with and similar solutions. \\
   \hline \\ [-1.5ex]
-  Chapter 3          & The Project management chapter deals with how the team will work to reach the desired goal. This includes the structure of the team, the plan for the project, constraints the team and project is put under and quality assurance. \\
+  Chapter 3 & The Requirements chapter describes how the requirements where acquired and the major functional and non functional requirements of the system and why these are important for the system. \\
   \hline \\ [-1.5ex]
-  Chapter 4   & The Requirements chapter describes the backlog and rationale for this. Use cases for the system is also placed in this chapter together with user stories. \\
+  Chapter 4 & The Design chapter explores how the system is structured, and describes the different parts of the system and how they correlates. \\
   \hline \\ [-1.5ex]
-  Chapter 5                    & The Test Plan chapter contains the approach for testing with the overall test plan for the project, and the test scheduling. \\
+  Chapter 5 & The Implementation chapter explores in detail the implementation of gathering of twitter information. TODO: something more?  \\
   \hline \\ [-1.5ex]
-  Chapter 6              & The Architecture chapter explains the structure of the system, how it is put together and why it is put together the way it is. \\
+  Chapter 6 & Evaluation chapter includes how the research went, what to take from the results drawn from the research done and issues during the project. \\
   \hline \\ [-1.5ex]
-  Chapter 7 - 10              & In the sprint chapters the reader can see how the product has developed during the time of the project. This includes planning, architecture, the implementation, testing and evaluation of the sprint. \\
+  Chapter 7 & The Conclusion chapter sums up the project and describes the findings and reflections around this. It also explores further work to be done. \\
   \hline \\ [-1.5ex]
-  Chapter 11              & Evaluation chapter includes the team's view on the team dynamics, relationship with the customer, issues during the project, the planning and the quality assurance. \\
-  \hline \\ [-1.5ex]
-  Chapter 12              & Conclusion chapter sums up the project and describes the findings and reflections around this. \\
-  \hline \\ [-1.5ex]
-  Appendix              & The appendix contains tables, templates, the test cases and more. \\
+  Appendix & The appendix contains extended information such as a full list of the requirements and in depth design. \\
 \end{tabularx}
 \caption{Structure of Report}
 \label{table-reportstructure}
