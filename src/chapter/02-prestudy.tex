@@ -24,9 +24,10 @@ Beyond this, the study will serve to outline which direction the project must ta
 \centering
 \includegraphics[width = .25\textwidth]{image/netflix-logo.png}
 \end{wrapfigure}
-This is the prestudy for the movie recommendation part of the system. We will look at existing recommendations systems, datasets to be explored and how to explore this set.
+This is the prestudy for the movie recommendation part of the system. We will look into what Netflix is, at the datasets and its statistics, and how to explore it.
 
-Netflix is a on-demand Internet streaming media. It started out as a DVD-rental business, but moved over to a more Internet based business model in 1999 and have from then on had a great success in the subscription-based digital distribution service. To improve customer satisfaction they developed a personalized video-recommendation system called Cinematch. About 60\% of the Neflix users select their next movie or TV-show based on this recommendation\cite{hownetflixworks}, so it is important that this recommendation system manages to capture the users movie and TV-show preferences and feed back fitting movies and TV-shows.
+\subsubsection{About Netflix}
+Netflix is a on-demand Internet streaming media. It started out as a DVD-rental business, but moved over to a more Internet based business model in 1999 and have from then on had a great success in the subscription-based digital distribution service. To improve customer satisfaction they developed a personalized video-recommendation system called Cinematch. About 60\% of the Neflix users select their next movie or TV-show based on this recommendation~\cite{hownetflixworks}, so it is important that this recommendation system manages to capture the users movie and TV-show preferences and feed back fitting movies and TV-shows.
 
 \subsubsection{Cinematch}
 \label{subsec:Cinematch}
@@ -35,15 +36,7 @@ This recommendation system is self-updating. It searches the Cinematch database 
 
 
 \subsection{The Dataset}\label{subsec:netflixdata}
-% Pages used:
-% http://www.timelydevelopment.com/demos/NetflixPrize.aspx
-% http://dl.acm.org/citation.cfm?id=1536622&jmp=cit&coll=portal&dl=ACM#CIT
-% http://www.the-ensemble.com/content/netflix-prize-movie-similarity-visualization
-% http://en.wikipedia.org/wiki/Netflix_Prize
-% http://blog.jimjh.com/static/downloads/2013/05/12/netflix.pdf
-% http://en.wikipedia.org/wiki/Root-mean-square_deviation
-
-Netflix held a competition where the contest was made to help Netflix improve their movie recommendation system. The team that could beat Netflix's own collaborative filtering system by more than 10\% could win one million dollars. To measure the score root-mean-square error (RMSE) was used, which is used to measure the difference between the values predicted or estimated and the actual values observed. The RMSE of Cinematch~\ref{subsec:Cinematch} was at 0,9525.
+Netflix held a competition where the contest was made to help Netflix improve their movie recommendation system. The team that could beat Netflix's own collaborative filtering system by more than 10\% could win one million dollars. To measure the score root-mean-square error (RMSE) was used, which is used to measure the difference between the values predicted or estimated and the actual values observed. The RMSE of Cinematch~\ref{subsec:Cinematch} was at 0.9525.
 
 \subsubsection{Root-mean-square error RMSE}\label{subsubsec:rmse}
 
@@ -51,7 +44,7 @@ Netflix held a competition where the contest was made to help Netflix improve th
 RMSE = \sqrt {{\frac{{\sum\limits_{{i = 1}}^n {{{\left( {{y_i} - {{\hat{y}}_i}} \right)}^2}} }}{{n}}}}
 \end{equation}
 
-The equation for calculating the RMSE is show in figure~\ref{eq:rmse}. It calculates how far the estimated value is from the actual value. Here ${y_i}$ is the actual value and ${\hat{y}}$ is the estimated value. The square difference of all the values are averaged, where ${n}$ is the number of values, this result is rooted. This produces the average distance of all the estimate values from the all the actual values.
+The equation for calculating the RMSE is show in figure~\ref{eq:rmse}. It calculates how far the estimated value is from the actual value. Here ${y_i}$ is the actual value and ${\hat{y}}$ is the estimated value. The square difference of all the values are averaged, where ${n}$ is the number of values, this result is rooted. This produces the average distance of all the estimate values from the all the actual values~\cite{rmse}.
 
 
 \subsubsection{Competition}

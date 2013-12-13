@@ -40,16 +40,8 @@ Relater arbeidet til tidligere relevant arbeid.
 
 
 \section{Future Work}
-TODO
-Foreslår videre arbeid som du tror vil være verdt.
 
-Outliers  normalizing dataset building
-Try different algorithms (implement, test score lol)
-    runtime
-    runtime vs score
-    paralleization
-Learn from userratings - sweet sauce
-
+\subsection{Prediction algorithms}
 There is a lot of potential future work to be done regarding social media and general recommendation. In the domain of movie recommendation the exploration of different recommendation and prediction algorithms is an interesting field. The most central regarding this work and algorithms is:
 \begin{itemize}
     \item Runtime
@@ -60,6 +52,28 @@ There is a lot of potential future work to be done regarding social media and ge
 \end{itemize}
 Runtime and score was just touched during this research, but opened for some interesting future work to be done, with well established testing potential through RMSE when comparing different approaches.
 
+Just when it comes to the prediction approach taken in this research different versions should be explored. Variants of k-NN can be used to select neighbors. Other interesting subjects for future work includes: How to handle outliers in a good way regarding the data, best approach to value neighbors, and exploring different heuristics for good $k$ values.
+
+
+\subsection{Data modeling}
+TODO
+Outliers  normalizing dataset building
+
+
+\subsection{Learners}
+Comparing the actual ratings users are giving a movie with the predicted ratings, and having the system learn from these values. This would allow the system to not only depend on the harvested ratings and Netflix ratings, but get an extra source of prediction.
+
+Future work in this field would include:
+\begin{itemize}
+    \item Exploring how to weigh a correct or faulty prediction
+    \item If a long term learning system will be of any help
+    \item Cost of having the system learn versus the score gained
+    \item Potential scaling issues with learning
+\end{itemize}
+
+
+\subsection{Twitter harvesting}
+TODO
 
 
 \section{Summary}
