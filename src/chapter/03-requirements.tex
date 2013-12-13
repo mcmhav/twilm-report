@@ -4,13 +4,7 @@
 
 \minitoc
 
-How requirements  were  captured;
-  discussion  of  major requirements
-(referring  to  Appendix  A for details).
-
-I “Requirement”-kapittelet forklar hvordan du satt opp kravene.
-Men ikke ha med en fullstendig oversikt over kravene her!
-
+This chapter will describe the capturing of the requirements and go into depth on most central ones.
 
 \clearpage
 
@@ -24,14 +18,18 @@ An interesting find was that most of the recommendation systems for the Netflix 
 \section{Functional Requirements}\label{section:functional-requirements}
 This section will look at the major functional requirements, and see why these are central to the system. For a full list of the functional requirements see appendix~\ref{app:req}.
 \begin{description}
-  \item[FR1] The system must be able to harvest tweets and/or users from Twitter that are related to a movie in the netflix-dataset
-  \item[FR6] The system must be able to supplement netflix-dataset with tweets and/or users from Twitter that are related to a movie in the netflix-dataset
-  \item[FR7] The system must be able to predict ratings of the movies for all users in any dataset that reflects the netflix dataset
+  \item[FR1] The system must be able to harvest tweets and/or users from Twitter that are related to a movie in the Netflix-dataset
+  \item[FR6] The system must be able to supplement Netflix-dataset with tweets and/or users from Twitter that are related to a movie in the Netflix-dataset
+  \item[FR7] The system must be able to predict ratings of the movies for all users in any dataset that reflects the Netflix dataset
 \end{description}
 
-TODO: something about each
+TODO: check it out MAFAKKA
 \subsubsection{FR1}
+Since this is a research on the use of social media to recommend and predict movie ratings, it is important that the system can access this information in a structured and well formed way. The gathered data must be relevant to the system and the movies existing in the system. This is because the amount of available data is vast, and unnecessary data will just produce static to the dataset, which will not provide helpful information to the prediction system.
+
 \subsubsection{FR6}
+The Netflix-dataset consists of a set of movies and a set of users with ratings to these movies, this set is quite sparse as explored in~\ref{subsec:netflixdata}. By harvesting tweets from twitter this level of sparseness is expected to be reduced, and therefore increase the accuracy of the data. With a more complete set of data, and less sparseness, the algorithms to produce prediction of ratings will perform better~\cite{grobelnikDataSparsityIssues}. So the system must be able to merge the data from Netflix and the harvested data from Twitter so predictions can be made on the complete dataset.
+
 \subsubsection{FR7}
 The system will be made up from multiple datasets, and it is important that these datasets are in the for that they can be made predictions on. With this comes the importance of predicting ratings of movies for all the users, so it is not just one user who can get movie recommendations. The dataset will be evergrowing, as new tweets will be added to the database continuously.
 
@@ -46,5 +44,10 @@ This section will look into the major function requirement, and see why this is 
 The main concern with the efficiency of the system is that if it takes too much time to calculate the rating of the system then the rating wont be of much help to the user. For instance if a user is rating a movie highly, and the rating of this movie will lead to higher certainty predictions for other movies, then the system must be able to efficiently apply this new information to the predictions, and the system must therefore be efficient since the dataset is big.
 
 
+TODO: check if agreeing with order lizm
 \section{Prioritized Requirements}
+The order of the major functional requirements from section~\ref{section:functional-requirements} is the prioritized order also. \textbf{FR1} and \textbf{FR6} must be in the order they are numbered since the next will not work without the one before, meaning, the harvested data is needed to be able to supplement the Netflix data with Twitter data.
 
+The \textbf{NFR1} is after this, since it is important that the system has a good response time, but this will not matter without the actual data.
+
+\textbf{FR7} comes after this, since it is necessary to have a merged Netflix-Twitter dataset to be able to do a collaborative filtering on social media data.
