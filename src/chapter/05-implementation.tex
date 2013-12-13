@@ -34,7 +34,7 @@ Thus, the system can harvest tweets and users from Twitter related to movies in 
 
 Because a dataset could not be retrieved from Twitter due to time constraints on the API based fields and legal constraints on the Scrape field there was no complete set of twitter data points to build a dataset with. The dataset building algorithm was not implemented. Thus, this requirement was not implemented, but remains a task for further work.
 
-\subsection{FR7}
+\subsection{FR7}\label{subsec:FR7}
 \begin{quotation}
 \em The system must be able to predict ratings of the movies for all users in any dataset that reflects the Netflix dataset %not to edit, unless edit for all
 \end{quotation}
@@ -46,6 +46,7 @@ Since the data from twitter is not gathered and combined with the Netflix-data t
 \em The system must be able to cost efficiently predict a rating of a movie for a given user %not to edit, unless edit for all
 \end{quotation}
 
+This requirement is not implemented, but taken into account when prediction algorithm was chosen. This is as \ref{subsec:FR7}, a task for further work and research.
 
 
 \section{Data structures}\label{impl:Data structures}
@@ -58,3 +59,5 @@ fremhev noen nye/originale funksjoner.
 
 \section{Testing}\label{impl:Testing}
 Også diskuter hvordan du har tenkt å utføre testen din (validering og evaluering).
+
+Testing of the RMSE score of the system is not tested since the needed data was not acquired from twitter~\ref{sec:twitter}, neither is the merging of the Netflix-dataset with the Twitter-data for the same reason.
