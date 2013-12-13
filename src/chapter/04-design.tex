@@ -75,7 +75,7 @@ The harvest phase is responsible for gathering data from Twitter. First, the har
 \subsubsection{Datset Building Phase}
 The dataset building phase is responsible for building a dataset using the data gathered from Twitter in the harvest phase. First, the dataset builder retrieves a netflix model, which is likely to be a movie. Then, it retrieves twitter models that are relevant for the netflix model and consolidates them into a set of datapoints that expresses this netflix model. At last, the datapoints are stored along with the netflix model it expresses in the dataset model. In this way, the functional requirement in section~\ref{section:functional-requirements} for supplementing the netflix-dataset with data from twitter is fulfilled.
 
-\subsubsection{Prediction Phase}
+\subsubsection{Prediction Phase}\label{subsubsec:predict-phase}
 The prediction phase is responsible for using the dataset model to predict the ratings of the probe in the netflix model and calculate the RMSE. First, the predictor retrieves a datapoint from the probe. Then, it gathers the relevant datapoints it needs from the dataset model in order to make a prediction. After this step, the rating has been predicted and the contribution to the RMSE score is calculated and. The RMSE contribution is summed in the predictor and kept until all ratings have been predicted. At last, the predicted rating is stored in the prediciton model. When all ratings have been predicted and all the RMSE contributions have been added to the prediction model, the RMSE can be calculated and stored. Thus, the functional requirements in section~\ref{section:functional-requirements} related to giving and testing predictions are fulfilled.
 
 \subsection{Development View}
@@ -114,7 +114,22 @@ The dataset building algorithm retrieves and iterates over a list of netflix use
 \subsubsection{Consolidating}
 	Once we have twitter data points that are related to a movie a user has rated, these data points must be consolidated with the users data points. The user data points is a hash of twitter data points that point to a number indicating indicating whether or not the user is positively or negatively interested in this twitter data point. Each twitter data point related to the movie the user has rated is added to this hash and scaled by whether or not the user liked it. After twitter data points have been added to the user data points for all movies the user has rated, they are normalized to a scale of \[0, 1\] for each user. The user is now expressed in the dataset entirely by twitter data points rated from 0 to 1.
 
-\subsection{kNN Prediction}
-As concluded in the preliminary study the most suitable algorithms to produce predictions for this kind a dataset has proven to be a k-nearest neighbors (k-NN) approach. This is because it will allow a low response time, but yet has produced good prediction results on the Netflix-dataset~\ref{subsec:sim-sys-conc}.
+\subsection{Prediction}
+As mentioned in \ref{subsubsec:predict-phase} the system must produce a prediction on the dataset. As concluded in the preliminary study the most suitable algorithms to produce these predictions for this kind of dataset has proven to be a k-nearest neighbors (k-NN) approach. This is because it will allow a low response time, but yet has produced good prediction results on the Netflix-dataset~\ref{subsec:sim-sys-conc}.
 
+There are many approaches to gather and select the neighbors to calculate predictions, but the approach which seems promising is the probabilistic neighborhood selection~\cite{probcobfilter}, and will be used.
 
+The prediction algorithm design is split into 3 parts. The last part depends on if the prediction was issued because a user rated a movie, or a movie prediction rating was requested.
+
+\begin{description}
+    \item[First - Retrieval part] \hfill \\
+    The system will retrieve the datapoints closest to the point to predict. These points are retrieved with a k-NN algorithm, which utilizes a probabilistic selection of neighbors.
+
+    \item[Second - Conclusion part] \hfill \\
+    The neighbors returned are evaluated, a prediction based on the datapoints and a confidence measure is produced on this prediction.
+
+    \item[Third - Learning part] \hfill \\
+    If a user rated a movie, the actual rating is compared with the predicted rating, and the datapoints are weighted regarding of the accuracy of the rating.
+\end{description}
+
+TODO: add figure based on dataset building, lol
