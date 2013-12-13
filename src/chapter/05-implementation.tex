@@ -48,10 +48,31 @@ Since the data from twitter is not gathered and combined with the Netflix-data t
 
 
 \section{Data structures}\label{impl:Data structures}
-algoritmeneog datastrukturene,
+\subsection{NoSQL Database Mapping}
+In order to achieve synchronization with mongoDB, the datamapper MongoMapper is used. MongoMapper ensures that an database record that is associated with an object is automatically updated when one of the objects attributes are changed. In the case of Twilm, these are all classes in the module Models.
+
+The attributes are referred to as keys in MongoMapper. Instead of declaring variables in a regular ruby fashion, mongomapper keys are declared. An example of a key used in the implementation for a TwitterUser is "key name".
+
+MongoMappers relationship descriptors are also utilized. When an object is pointing to many instances of another object, the descriptor many can be used instead of declaring a regular variable. When an object is pointing to one instance of another object, the keyword one is used. An example used in the implementation for TwitterUser is "many twitter\_tweets" and conversely, "one twitter\_user" in TwitterTweet.
+
+Validations in mongomapper are used to ensure that certain keys and relationships are not stored with nil values. In the implementation, validations are used wherever there is a key that should always be stored. An example is "validates\_presence\_of text" in TwitterTweet.
+
+
+\subsection{Data structure: Netflix}
+\subsubsection{User}
+\subsubsection{Movie}
+
+\subsection{Data structure: Twitter}
+\subsubsection{Tweet}
+\subsubsection{User}
+
+\subsection{Data structure: Dataset}
+Not implemented.
+\subsection{Data structure: Prediction}
+Not implemented.
 
 \section{Functional Modules}\label{impl:Functional Modules}
-fremhev noen nye/originale funksjoner.
+
 \subsection{FunctionalFields}
 \subsection{Harvesters}
 
