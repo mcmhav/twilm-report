@@ -39,7 +39,7 @@ TODO
 Relater arbeidet til tidligere relevant arbeid.
 
 
-\section{Further Development}
+\section{Future Work}
 TODO
 Foreslår videre arbeid som du tror vil være verdt.
 
@@ -50,13 +50,16 @@ Try different algorithms (implement, test score lol)
     paralleization
 Learn from userratings - sweet sauce
 
-As a result of new requirements from the customer and new possibilities discovered during the development, we ended up creating something different than what we set out to do. Instead of focusing on a single application incorporating a console, what we actually have created is a tool for developers. Meaning that our product can be picked up by almost anyone with basic experience in programming and used to create an application in almost any domain. So in essence what we have rmivered is a platform for developers to use and not a product in the form of a library system. As a library system our final product is not finished, on the other hand it is nearly finished as a development tool. It functions as a baseline for developers, creating almost endless possibilities. Its flexibility ensures that it can be suited to any domain and to specific needs. In here lies the true potential of our system and this is where future efforts should be focused.
+There is a lot of potential future work to be done regarding social media and general recommendation. In the domain of movie recommendation the exploration of different recommendation and prediction algorithms is an interesting field. The most central regarding this work and algorithms is:
+\begin{itemize}
+    \item Runtime
+    \item Score
+    \item Runtime versus score (RMSE)
+    \item Parallelization
+    \item Scalability
+\end{itemize}
+Runtime and score was just touched during this research, but opened for some interesting future work to be done, with well established testing potential through RMSE when comparing different approaches.
 
-Although the goal of this project ultimately didn’t include finishing the library system, it is still something we would like to do. Many of the challenges presented in the library domain holds for a multitude of other domains as well, and if solved it would make our solution more valuable. For the system to be able to serve as a production library system domain specific limitations on the actions available to the user has to be imposed. At the current state of the system it is possible for the user to input harmful code that breaks the system, for example by creating recursive functions that end up being called in an infinite loop. This kind of behavior should not be allowed. At the same time the flexibility the system presents the user is one of its best features, so it is not easy to know where to draw the line. The user should not be limited too much, as that would erase many of the advantages of our current system. How the functionality should be restricted is a topic open for a great deal of discussion, which is beyond the scope of this project. With great power comes great responsibility, meaning that for now we trust the users to not intentionally harm the system.
-
-We feel there are improvements yet to be made to the console, such as increasing its usability. We wanted to include functionality that is available in most standard consoles, like for instance auto completion of commands; This was included in the prototype from Sprint 2, but due to the extensive changes required by the customer, time constraints and the prioritizations requested by the customer, this was not carried over to the latest prototype. This would be work for the future.
-
-Although the performance and scalability of the server was not a concern in this project, it should be mentioned that CouchDB is designed to scale. Meaning that it offers tools to easily replicate the databases to multiple servers, ensuring that users can be fed data from multiple servers instead of one central one. This solution avoids one single point of failure and divides the workload. Also it offers great performance on queries to the database. CouchDB was made with this in mind, since for most web- applications the query operation is by far the most common one. While of course still a major challenge, we think that scaling an hypothetical finished version of our system, would be eased by the fact that we chose CouchDB. Also the performance of the database should persist even with a large amount of simultaneous users.
 
 
 \section{Summary}
