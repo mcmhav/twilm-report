@@ -106,13 +106,19 @@ The NoSQL database can also be decoupled from the computer running Twilm and set
 
 \section{Algorithm Design}
 \subsection{Dataset Building}
-The dataset building algorithm retrieves and iterates over a list of netflix useres in a test set. This test set is normally the probe provided in the netflix dataset. It then consolidates twitter data with netflix data by buliding a dataset for the user based on twitter data points related to the movies the user has reated.
+The dataset building algorithm retrieves and iterates over a list of netflix useres in a test set. This test set is normally the probe provided in the netflix dataset. It then consolidates twitter data with netflix data by buliding a dataset for the user based on twitter data points related to the movies the user has reated. An illustration of this process and its beginning and resulting data structures can be seen in figure~\ref{figure:dataset-building-algorithm}
+
+\begin{figure}[H]
+\centerline{\includegraphics[width=6in]{image/design-algorithm-dataset-building.png}}
+\caption{Illustration of the dataset building algorithm. The algorithm retrieves data about a netflix user and consolidates it with the twitter data points related to the movies the user has rated.}
+\label{figure:dataset-building-algorithm}
+\end{figure}
 
 \subsubsection{Retrieval}
 	Each netflix user that is not present in the test set is retrieved and iterated over. For each of these users movie ratings, the dataset movie containing the twitter data points that are relevant to the movie the user has rated is retrieved. If the dataset does not yet contain this movie, the relevant twitter data points are retrieved from the twitter model and added to the dataset movie.
 
 \subsubsection{Consolidating}
-	Once we have twitter data points that are related to a movie a user has rated, these data points must be consolidated with the users data points. The user data points is a hash of twitter data points that point to a number indicating indicating whether or not the user is positively or negatively interested in this twitter data point. Each twitter data point related to the movie the user has rated is added to this hash and scaled by whether or not the user liked it. After twitter data points have been added to the user data points for all movies the user has rated, they are normalized to a scale of \[0, 1\] for each user. The user is now expressed in the dataset entirely by twitter data points rated from 0 to 1.
+	Once we have twitter data points that are related to a movie a user has rated, these data points must be consolidated with the users data points. The user data points is a hash of twitter data points that point to a number indicating indicating whether or not the user is positively or negatively interested in this twitter data point. Each twitter data point related to the movie the user has rated is added to this hash and scaled by whether or not the user liked it. After twitter data points have been added to the user data points for all movies the user has rated, they are normalized to a scale of [0, 1] for each user. The user is now expressed in the dataset entirely by twitter data points rated from 0 to 1.
 
 \subsection{Prediction}
 As mentioned in \ref{subsubsec:predict-phase} the system must produce a prediction on the dataset. As concluded in the preliminary study the most suitable algorithms to produce these predictions for this kind of dataset has proven to be a k-nearest neighbors (k-NN) approach. This is because it will allow a low response time, but yet has produced good prediction results on the Netflix-dataset~\ref{subsec:sim-sys-conc}.
