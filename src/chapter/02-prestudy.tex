@@ -635,7 +635,7 @@ ALS is a simpler and a very parallelizable matrix factorization algorithm, more 
 This algorithm can be used to populate sparse matrices, just like the one from Netflix where the matrix is made up from users and movies. A rating matrix, $R$, is produced based on the use of two much smaller matrices. A number of "features" are set for each of the two smaller matrices $U$ and $M$, one for the users and one for the movies. The idea is to get $U^\top M$ as close to the real $R$. $U$ and $M$ are computed in two steps. This is easily parallelizable since solving for $U$ is independent of the other users, therefore the columns of $U$ can be computed in parallel. The information is gathered, and $M$ is updated, communication between movies is not necessary~\cite{myrrix}. With this algorithm a 0.9278 was produced, which is a 2\% improvement over Cinematch~\cite{predusingmatrix}. Runtime to produce this score was 2 hours on a high-end system~\cite{alsMPI}.
 
 
-\subsection{Conclusion}
+\subsection{Conclusion}\label{subsec:sim-sys-conc}
 There are two basic problems when analyzing very large datasets: Writing the code correctly and the performance (i.e. speed at which it runs). As we saw from~\ref{subsubsec:matrixfac}, matrix factorization was one of the algorithms which preformed the best on the Netflix dataset. This is also shown in figure~\ref{figure:sub-distr-nf}. But the issue with it is if we want new ratings to be included in the recommendation system, then we need to recompute all recommendations, which is not ideally for a live recommendation system, where recommendation should include as much information as possible to be accurate.
 
 The ALS~\ref{subsubsec:matrixfac} proved to be a very parallelizable algorithm, and a potential good alternative to SVD when doing live recommendation. But this requires a lot of computational power to make it live updating and will not be feasible to run on a low-end personal computer when wanting live results. But could prove to be a potential algorithm to use if one where to scale up to a high-end system.
@@ -749,7 +749,7 @@ Root-mean-square error (RMSE)~\ref{subsubsec:rmse} is a way of testing estimated
 
 A reduction in the RMSE value will then indicate an improvement, and indicate the gain from the collaboration of movie data and social media data.
 
-\section{Evaluation}
+\section{Evaluation}\label{sec:prestrud-eval}
 This section will sum up what we saw after doing the prestudy.
 
 \subsection{Netflix}
