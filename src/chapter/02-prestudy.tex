@@ -755,7 +755,7 @@ This section will sum up what we saw after doing the prestudy.
 \subsection{Netflix}
 The Netflix-dataset is very sparse. With about 480 000 users and 17 770 movies there would have been a total of more than 8.5 billion ratings, but the dataset only contains ca 100 million ratings, so algorithms which can handle this kind of sparsity must be used, such as alternating least squares and k nearest neighbors. The standard way to evaluate the correctness of a solution in these kinds of problems are RMSE.
 
-\subsection{Twitter}
+\subsection{Twitter}\label{sec:prestrud-eval-twitter}
 There are many different data types that can be retrieved from Twitter. The most dominating types and attributes are: Tweets, users, followees and followers.
 
 There are several ways to access and retrieve this data. The REST API has the capability to retrieve the complete set of followees and followers for any given user. It lacks speed as it only allows 15 requests per 15 minute window.
