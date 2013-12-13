@@ -6,7 +6,6 @@
 
 This chapter discusses the major requirements, and implementation of the different algorithms and datastructures in the system. And is meant for the reader to get insight into what was actually implemented.
 
-TODO: Something about each section after done
 \clearpage
 
 \section{Major Requirements}\label{impl:Major Requirements}
@@ -167,14 +166,50 @@ HarvestFolloweesForTwitterUsersWithREST uses the field REST to harvest followees
 
 
 \section{Testing}\label{impl:Testing}
-\subsection{Data structure testing}
+\subsection{Data Structures}
+The data structures were tested by creating, saving and cross checking with the database that they were being saved correctly. No formal unit testing was employed as the structures were fairly simple in structure to the point where formal test would only be testing the underlying technology. The following steps were taken to test the data structures.
 
+	\begin{itemize}
+	\item Create instances of each structures
+	\item Save instance
+	\item Confirm with mongoDB console
+	\end{itemize}
+
+First, an instance of each data structure with all the valid fields filled out correctly was first created. For example TwitterTweet. The lack of errors confirmed that the instances were created correctly.
+
+Then, the instance was then saved using mongomappers document function save! which updates mongoDB with the document reflected in the object.
+
+At last, the mongoDB console was opened and a query was made to make sure that the object had been created. Each field was then cross checked with the keys of the corresponding data structure instance to make sure they all matched.
 
 \subsection{Fields}
+The fields were tested by creating each field, calling the retrieval functions and making sure the retrieved items stored correctly in mongoDB. No formal functional testing was employed as the fields were fairly simple in functionality to the point where formal test would only be testing the underlying technology. The following steps were taken to test the fields.
 
+	\begin{itemize}
+	\item Create instances of each field
+	\item Run functions available to harvester
+	\item Confirm that a valid models returned and saved
+	\end{itemize}
+
+First, an instance of each field was created in order to make sure that the fields could be created properly and connect to their APIs without complications. An example would be "rest = REST.new", which would create an instance of the field REST.
+
+Then, all the functions in the field available to the harvester for retrieving twitter data points were run in order to see that they were returning valid TwitterTweets or TwitterUsers. An example would be calling rest.followees(some\_twitter\_user) and see if it returned a list of TwitterUsers.
+
+At last, the twitter data points returned by each function was saved by calling save! on each of them. Queries for mongoDB were then constructed to retrieve these items from the database. The items returned were then cross checked to see that they matched the data in each of the twitter data points.
 
 \subsection{Harvesters}
+The harvesters were tested by creating the harvesters and making sure that they were storing the items that they retrieved in the database. No formal functional testing was employed as the harvesters were fairly simple in functionality to the point where formal test would only be testing the underlying technology. The following steps were taken to test the harvesters.
 
+	\begin{itemize}
+	\item Create instances of harvesters
+	\item Output each item retrieved to the console
+	\item Confirm with mongoDB console that models stored
+	\end{itemize}
+
+First, an instance of each harvester was created to make sure that there weren't any initialization errors. An example of this is "harvester = HarvestFolloweesForTwitterUsersWithREST.new"
+
+Then, test code would print each item retrieved to the console. For the example, each item retrieved would be a list of TwitterUsers.
+
+At last, mongoDB console queries were made to retrieve these items from the database to make sure that all objects were stored by the harvester and that the objects were the same.
 
 \subsection{Not tested}
 Testing of the RMSE score of the system is not tested since the needed data was not acquired from twitter~\ref{sec:twitter}, neither is the merging of the Netflix-dataset with the Twitter-data for the same reason, which is the dataset building from the requirement in~\ref{subsec:FR6}.
