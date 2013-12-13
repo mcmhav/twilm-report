@@ -129,13 +129,17 @@ The prediction algorithm design is split into 3 parts. The last part depends on 
 
 \begin{description}
     \item[First - Retrieval part] \hfill \\
-    The system will retrieve the datapoints closest to the point to predict. These points are retrieved with a k-NN algorithm, which utilizes a probabilistic selection of neighbors.
+    The system will retrieve the datapoints closest to the point to predict. These points are retrieved with a k-NN algorithm, which utilizes a probabilistic selection when selecting neighbors.
 
-    \item[Second - Conclusion part] \hfill \\
+    \item[Second - Evaluation part] \hfill \\
     The neighbors returned are evaluated, a prediction based on the datapoints and a confidence measure is produced on this prediction.
 
     \item[Third - Learning part] \hfill \\
     If a user rated a movie, the actual rating is compared with the predicted rating, and the datapoints are weighted regarding of the accuracy of the rating.
 \end{description}
 
-TODO: add figure based on dataset building, lol
+\begin{figure}[H]
+\centerline{\includegraphics[width=3.5in]{image/pred-alg.png}}
+\caption[Prediction algorithm parts]{The prediction algorithm design and the parts it is separated into. The dataset consist of users on the form described. With the given point neighbors are selected from the dataset, and sent to the evaluation part. Here a prediction is produced.}
+\label{figure:pred-alg}
+\end{figure}
