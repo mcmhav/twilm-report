@@ -113,21 +113,58 @@ This datastructure is not implemented due to the fact that it is only needed by 
 
 \subsection{Fields}
 \subsubsection{Scrape}
-Implemented
-uses gem anemone
+Scrape is implemented using Anemone, a ruby gem that does event based crawling. Anemone is initialized with a url. It then retrieves the first page and extracts the urls from this page and append them to the crawler queue. It then initializes up to 4 threads that each grab urls from the crawler queue. It crawls the url and adds the pages to the page queue as they come in. When the last page is popped from the page queue without any new urls to crawl, Anemone finishes.
+
+In the implementation, Anemone is initialized with a twitter search query, like in Search Request in section~\ref{sec:pre-twitter-crawl-scrape}
+The primary events in Anemone that are used by scrape follow.
+
+	\begin{itemize}
+	\item on\_every\_page
+	\item focus\_crawl
+	\item after\_crawl
+	\end{itemize}
+
+The event on\_every\_page is triggered every time Anemone extracts a page from the page queue. The process passed to this event gets the page as a Nokogiri page. Nokogiri is a ruby gem for parsing XML. The knowledge of the structure of the search result page from the prestudy in section~\ref{sec:pre-twitter-crawl-scrape} is used together with XPATH in Nokogiri to retrieve a list of TwitterTweets from the page. The TwitterTweets are stored in mongoDB automatically with MongoMapper.
+
+The event focus\_crawl is triggered after every page and is responsible for delivering the list of URLs to anemone that should be put in the crawler queue. The scroll cursor and scroll cursor URL mentioned in section~\ref{sec:pre-twitter-crawl-scrape} under Scroll Search Results is retrieved from the page and pushed to the crawler queue. If there is no scroll cursor, Scrape prompts the harvester for another item to generate an initial search url for a new item.
+
+The event after\_crawl is triggered after no more urls can be generated. This should not happen unless the harvester has no more items that should be crawled. However, in something goes wrong, the event asks the harvester for a new item and keeps crawling.
+
 \subsubsection{Stream}
-Implemented separately.
-uses gem tweetstream
+Stream is implemented separately from the twilm projects due to quicker development iteration. It is based on the gem tweetstream which is a full implementation of the Twitter Stream API. It connects to twitter with OAuth for Twilm and the personal Twitter user account of one of the authors. The OAuth details are hardcoded into the application.
+
+Stream is initialized by a harvester with a list of keywords. The keyword list retrieves all tweets that contain one or more of the keywords. The key to using Stream correctly is to define the keywords so that they return a set where the tweets wanted are a subset of this set. For netflix movies, this could be either one of the following
+
+	\begin{itemize}
+	\item movie
+	\item film
+	\item (list of all release years)
+	\end{itemize}
+
 \subsubsection{Search}
-Inferior to stream section \ref{sec:prestrud-eval-twitter}
+Search is similar but inferior to Stream, as discussed in section~\ref{sec:prestrud-eval-twitter}. It is therefore not implemented.
+
 \subsubsection{REST}
-Implemented
-uses gem twitter
+REST is implemented using the ruby gem twitter. This gem is a full implementation of the Twitter REST API.
+
+REST is contacted by a harvester to retrieve an item. The requests are functions defined in the fields class as follows.
+
+	\begin{itemize}
+	\item function followees(TwitterUser) returns [TwitterUser]
+	\item function followers(TwitterUser) returns [TwitterUser]
+	\item function twitter\_user(twitter\_user\_id) returns TwitterUser
+	\item function tweets(TwitterUser) returns [TwitterTweets]
+	\end{itemize}
+
+Once an object has been retrieved from the Twitter REST API it is returned to the harvester that made the call to the function.
+
 \subsection{Harvesters}
-NetflixMovieTweetScrape
-TwitterUserFolloweeREST
-\subsubsection{NetflixMovieTweetScrape}
-\subsubsection{TwitterUserFolloweeREST}
+\subsubsection{HarvestTwitterTweetForNetflixMoviesWithScrape}
+HarvestTwitterTweetForNetflixMovieWithScrape uses the field Scrape to harvest TwitterTweets related to all NetflixMovies. It iterates over NetFlixMovie.all. For the first NetflixMovie, it calls Scrape. The rest of the list is bound to a call back function next\_item\_to\_scrape. Scrape then knows to call this function to retrieve the next item when it is done with each item.
+
+\subsubsection{HarvestFolloweesForTwitterUsersWithREST}
+HarvestFolloweesForTwitterUsersWithREST uses the field REST to harvest followees for all TwitterUsers. It iterates over TwitterUser.all. For each TwitterUser, REST.followees(TwitterUser) is called. The list returned is merged with TwitterUser.followees and TwitterUser is saved.
+
 
 \section{Testing}\label{impl:Testing}
 Også diskuter hvordan du har tenkt å utføre testen din (validering og evaluering).
