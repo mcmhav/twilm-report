@@ -61,22 +61,73 @@ Validations in mongomapper are used to ensure that certain keys and relationship
 
 
 \subsection{Data structure: Netflix}
+
 \subsubsection{User}
+The NetflixUser datastructure models the users in the netflix prize dataset. The implementation reflects the netflix movies the user has rated and also holds a cached average of these ratings. The implementation can be seen in figure~\ref{figure:datastructure-netflix-user}.
+
+	\begin{figure}[H]
+	\includegraphics[width=4in]{image/datastructure-netflix-user.png}
+	\centering
+	\caption{The implemented datastructure of a NetflixUser. Curly brackets denote a hash. Square brackets denote a list of items of a certain type. Text encapsulated in smaller than bigger than denotes keys in the object it is declared in or other objects. Black keys are required, while grey keys are not required.}
+	\label{figure:datastructure-netflix-user}
+	\end{figure}
+
 \subsubsection{Movie}
+The NetflixUser datastructure models the movies in the netflix prize dataset. The implementation have the keys title and year which reflects the title of the movie and the year it was released. It also reflects the netflix users that have rated the movie and the rating itself. The implementation can be seen in figure~\ref{figure:datastructure-netflix-movie}.
+
+	\begin{figure}[H]
+	\includegraphics[width=4in]{image/datastructure-netflix-movie.png}
+	\centering
+	\caption{The implemented datastructure of a NetflixMovie. Curly brackets denote a hash. Square brackets denote a list of items of a certain type. Text encapsulated in smaller than bigger than denotes keys in the object it is declared in or other objects. Black keys are required, while grey keys are not required.}
+	\label{figure:datastructure-netflix-movie}
+	\end{figure}
 
 \subsection{Data structure: Twitter}
-\subsubsection{Tweet}
+
 \subsubsection{User}
+The TwitterUser datastructure models users harvested from Twitter. The implementation have the key name which reflects the users nickname on Twitter. It also reflects the optional many relationship to TwitterTweets which referes to a collection of Tweets posted by the user. The TwitterUser's relationship to other TwitterUsers are reflected in the optional many relationships followees and followers. The key related\_to\_netflix\_movie refers to which NetflixMovie the user was harvested and is a twitter data point for. The implementation can be seen in figure~\ref{figure:datastructure-twitter-user}.
+
+	\begin{figure}[H]
+	\includegraphics[width=4in]{image/datastructure-twitter-user.png}
+	\centering
+	\caption{The implemented datastructure of a TwitterUser. Curly brackets denote a hash. Square brackets denote a list of items of a certain type. Text encapsulated in smaller than bigger than denotes keys in the object it is declared in or other objects. Black keys are required, while grey keys are not required.}
+	\label{figure:datastructure-twitter-user}
+	\end{figure}
+
+\subsubsection{Tweet}
+The TwitterUser datastructure models tweets harvested from Twitter. The implementation have the key text which reflects the text content of the Tweet, and the key by\_twitter\_user which reflects which user posted the tweet. The key related\_to\_netflix\_movie refers to which NetflixMovie the user was harvested and is a twitter data point for. The implementation can be seen in figure~\ref{figure:datastructure-twitter-user}.
+
+	\begin{figure}[H]
+	\includegraphics[width=4in]{image/datastructure-twitter-tweet.png}
+	\centering
+	\caption{The implemented datastructure of a TwitterTweet. Curly brackets denote a hash. Square brackets denote a list of items of a certain type. Text encapsulated in smaller than bigger than denotes keys in the object it is declared in or other objects. Black keys are required, while grey keys are not required.}
+	\label{figure:datastructure-twitter-user}
+	\end{figure}
 
 \subsection{Data structure: Dataset}
-Not implemented.
+This datastructure is not implemented due to the fact that it is only needed by the dataset building algorithm in section~\ref{algorithm-design:dataset-building} which is not implemented.
 \subsection{Data structure: Prediction}
-Not implemented.
+This datastructure is not implemented due to the fact that it is only needed by the prediction algorithm in section~\ref{algorithm-design:prediction} which is not implemented.
 
 \section{Functional Modules}\label{impl:Functional Modules}
 
-\subsection{FunctionalFields}
+\subsection{Fields}
+\subsubsection{Scrape}
+Implemented
+uses gem anemone
+\subsubsection{Stream}
+Implemented separately.
+uses gem tweetstream
+\subsubsection{Search}
+Inferior to stream section \ref{sec:prestrud-eval-twitter}
+\subsubsection{REST}
+Implemented
+uses gem twitter
 \subsection{Harvesters}
+NetflixMovieTweetScrape
+TwitterUserFolloweeREST
+\subsubsection{NetflixMovieTweetScrape}
+\subsubsection{TwitterUserFolloweeREST}
 
 \section{Testing}\label{impl:Testing}
 Også diskuter hvordan du har tenkt å utføre testen din (validering og evaluering).
