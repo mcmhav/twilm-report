@@ -15,6 +15,12 @@ TODO: Something about each section after done
 \em The system must be able to harvest tweets and/or users from Twitter that are related to a movie in the Netflix-dataset %not to edit, unless edit for all
 \end{quotation}
 
+The fields Scrape and REST are implemented. Scrape can harvest tweets and users related to a movie title. REST can retrieve users related to users that relate to tweets about movies. Stream is implemented in a side project for quick iteration and hands-on testing. It can retrieve tweets related to movie titles.
+
+The harvesters implemented are: NetflixMovieTweetScrape and TwitterUserFolloweeREST. NetflixMovieTweetScrape iterates through all netflix movies and uses the field Scrape to harvest tweets related to each netflix movie. TwitterUserFolloweeREST iterates over all twitter users in storage and uses the field REST to harvest followees for this user.
+
+Thus, the system can harvest tweets and users from Twitter related to movies in the netflix dataset and the requirement is therefore implemented.
+
 \subsection{FR6}
 \begin{quotation}
 \em The system must be able to supplement Netflix-dataset with tweets and/or users from Twitter that are related to a movie in the Netflix-dataset %not to edit, unless edit for all
