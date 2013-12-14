@@ -235,7 +235,7 @@ Usertags are labels that are placed on tweets describing who the tweets are adre
 
 \textbf{tweet.usertags -> [<user>]}
 
-\subsection{Legal Considerations}
+\subsection{Legal Considerations}\label{sec:pre-twitter-legal}
 Collect and use a data set from twitter, a company whose currency is information, must be done in a way that complies with their rules and terms of service. This section considers how an automated system can collect information from twitter and what an automated system can use it for.
 
 \subsubsection{API Terms}
@@ -247,7 +247,7 @@ If you provide downloadable datasets of Twitter Content or an API that returns T
 Crawling the Services is permissible if done in accordance with the provisions of the robots.txt \cite{twitter-robots-txt} file, however, scraping the Services without the prior consent of Twitter is expressively prohibited \cite{twitter-tos}. It is thus possible to crawl Twitter as long as only the page is being indexed and it is done in accordance with robots.txt. Scraping the pages for tweets and other data can only be done with the prior consent of Twitter. Twitter has been contacted about whether or not data can be scraped for analysis in context of movie recommendations for a thesis. A decision maker with the authority to grant this kind of consent at Twitter has yet to reply to the request.
 
 
-\subsection{REST API}
+\subsection{REST API}\label{sec:pre-twitter-rest}
 Twitters HTTP/HTTPS based REST API allows the application using it to perform many of the core functionalities of Twitter. The fully reflects Twitter's content.
 
 \subsubsection{Usage}
@@ -261,7 +261,7 @@ The number of requests an application or a user can make is limited to a 15 minu
 
 If only the application access token is used and not OAuth, the application as a whole can make 15 GET requests within the window. \cite{twitter-rate-limiting}
 
-\subsection{Search API}
+\subsection{Search API}\label{sec:pre-twitter-search}
 Twitters Search API is a REST API that is used for searching for tweets that match a search query.
 
 \subsubsection{Usage}
