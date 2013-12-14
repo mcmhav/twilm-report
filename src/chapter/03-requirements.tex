@@ -11,7 +11,7 @@ This chapter will describe the capturing of the requirements and go into depth o
 \section{Capturing the Requirements}
 Based on the initial task at hand and the findings in the prestudy and, the requirements had a basis to get formed on. The initial task gave a coarse grained overview of how the requirements of the system should look like. The prestudy on similar solutions made what was feasible to do and what would be impractical to do clearer. For instance runtime of different recommendation algorithms and their ability to be parallelized. The prestudy on Twitter made it clear how Twitter can be explored and how it can be done in a timely manner.
 
-TODO: something about how twitter's api is slow, scraping, 2 lines.
+TODO:fr something about how twitter's api is slow, scraping, 2 lines.
 An interesting find was that most of the recommendation systems for the Netflix prize had a more stationary ground to them, they only tried to get the RMSE as low as possible, not considering the fact that ratings would be constantly updated, and therefore a requirement to do live recommending with new input-information would require the already heavy computations to be run constantly on all the data often, which is less than feasible.
 
 
@@ -23,7 +23,7 @@ This section will look at the major functional requirements, and see why these a
   \item[FR7] The system must be able to predict ratings of the movies for all users in any dataset that reflects the Netflix dataset
 \end{description}
 
-TODO: check it out MAFAKKA
+TODO:fr check it out MAFAKKA
 \subsubsection{FR1}
 Since this is a research on the use of social media to recommend and predict movie ratings, it is important that the system can access this information in a structured and well formed way. The gathered data must be relevant to the system and the movies existing in the system. This is because the amount of available data is vast, and unnecessary data will just produce static to the dataset, which will not provide helpful information to the prediction system.
 
@@ -44,7 +44,7 @@ This section will look into the major function requirement, and see why this is 
 The main concern with the efficiency of the system is that if it takes too much time to calculate the rating of the system then the rating wont be of much help to the user. For instance if a user is rating a movie highly, and the rating of this movie will lead to higher certainty predictions for other movies, then the system must be able to efficiently apply this new information to the predictions, and the system must therefore be efficient since the dataset is big.
 
 
-TODO: check if agreeing with order lizm
+TODO:fr check if agreeing with order lizm
 \section{Prioritized Requirements}
 The order of the major functional requirements from section~\ref{section:functional-requirements} is the prioritized order also. \textbf{FR1} and \textbf{FR6} must be in the order they are numbered since the next will not work without the one before, meaning, the harvested data is needed to be able to supplement the Netflix data with Twitter data.
 
