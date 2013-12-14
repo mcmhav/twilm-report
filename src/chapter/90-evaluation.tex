@@ -65,7 +65,7 @@ The reason was mainly that the Stream API which was the best option for harvesti
 
 The Search API suffered from only delivering tweets within the time span of a single week. There was no explanation of what determined this interval. It was determined that the Search API would not produce better results than the Stream API. See section~\ref{sec:pre-twitter-search}.
 
-The REST API showed promise in harvesting Twitter user relationships, but turned out to be limited to only 15 requests per 15 minute window, or rather one request per minute. If an average of 10 tweets were harvested per movie, it would take 123 days to harvest followers for all tweets harvested. This further complicated the retrieval of the dataset. See section~\ref{sec:pre-twitter-rest}.
+The REST API showed promise in harvesting Twitter user relationships, but turned out to be limited to only 15 requests per 15 minute window, or rather one request per minute. If an average of 10 tweets were harvested per movie, it would take 123 days to harvest followers for all tweets harvested. It would take another 123 days to harvest the followees. This further complicated the retrieval of the dataset. See section~\ref{sec:pre-twitter-rest}.
 
 \subsubsection{Legal Issues}
 The scraping technique seemed the most promising. It was not formally tested as scraping is not allowed by Twitter and consent from Twitter to employ this technique could not be obtained. See section~\ref{sec:pre-twitter-legal}.

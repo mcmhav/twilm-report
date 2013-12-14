@@ -28,15 +28,22 @@ We spent a lot of time on the preliminary study and doing research to build the 
     \label{tab:reached-goals}
 \end{table}
 
-\subsection{The harvester}
+\subsection{The fields}
 \subsubsection{Done}
-TODO:fr Something about amanda or whatevah - the scraper
+The fields Stream, Scraper and REST were designed and implemented. Scraper could not be tested due to legal considerations.
 \subsubsection{Not Done}
-TODO:fr - Twitter harvested
+Search was not implemented due to the fact that it was deemed to be similar but inferior to Stream.
+
+\subsection{The harvesters}
+\subsubsection{Done}
+The harvesters NetflixMovieTweetScrape
+and TwitterUserFolloweeREST were designed and implemented.
+\subsubsection{Not Done}
+TwitterUserFollowerREST was not implemented. It was useful in theory but not in practice due to the rate limit.
 
 \subsection{The database}
 \subsubsection{Done}
-The choice of database was a good match to the data harvested from Twitter. MongoDB is a easily scalable database, with easy replication possibilities. The data from Twitter consists of different kinds of field, and would therefore have been more troublesome to work with in a SQL database. MongoDB, as other document oriented NoSQL databases, stores the data as JavaScript Object Notation, which is the same notation as fetched from Twitter ? TODO:fr, chech this fact lol. And there would therefore not be needed any parsing from the Twitter harvesting to the database.
+The choice of database was a good match to the data harvested from Twitter. MongoDB is a easily scalable database and fast, with easy replication possibilities. The data from Twitter consists of different kinds of fields, and would therefore have been more troublesome to work with in a SQL database. MongoDB, as other document oriented NoSQL databases, stores the data as JavaScript Object Notation, which is the same notation as fetched from the Twitter APIs. There are modules for data conversion to and from JSON for any thinkable datastructure.
 
 \subsubsection{Not Done}
 
