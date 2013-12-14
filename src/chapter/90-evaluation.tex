@@ -10,18 +10,32 @@ This chapter will be used to evaluate the work and the results drawn from the re
 
 
 \section{Development Process}
-TODO
-This section will explain the usage of the chosen development methodology, and the good and bad parts with using this methodology.
+The development process used in the project was not modelled after any particular rigid paradigm of development, but instead followed the natural workflow of the individual programmers. Even though a particular type of predetermined workflow was not applied, there were clear tendencies in how the development happened.
+
+The team started out with less rigid requirements. In the beginning of the project, they were something along the lines of: Store the netflix movies in an accessible database, retrieve tweets about movies from twitter and store them in the same database.
+
+Each of these requirements were attacked by gathering ruby gems that seemed like they would be suitable for fulfilling the requirement. A proof of concept implementing the requirement was then created in an environment separate from other parts of the project.
+
+As time progressed and more requirements were fulfilled the implementations of the requirements were fused into a larger project. As this project increased in complexity, and the requirements were fulfilled, more requirements emerged. They were implemented and added to the larger code base.
+
+At one point, the code base was beginning to get complex and fusing implementations of requirements into this code base was getting difficult. This implied the need of an architecture. A basic architecture was created and the code was refactored. This process continued looping. An illustration can be seen in figure~\ref{figure:development-cycle}
+
+\begin{figure}[H]
+\includegraphics[width=4in]{image/evaluation-development-cycle.png}
+\centering
+\caption[]{The development cycle that emerged naturally from the individual developers workflow.}
+\label{figure:development-cycle}
+\end{figure}
 
 \subsection*{Good}
-As mentioned above, Scrum allowed us be flexible and made it easy to change the direction the system was taking. This would have been troublesome without an agile development methodology. Traditional methods such as the Waterfall morm are rigid and designed to include only one design phase, one implementation phase, etc. This would have stopped us from being able to handle the redirection we did between sprint two and three towards a more dynamic system. Scrum let us to scale down in each sprint, focusing on smaller tasks. It also made the involvement of all the members in each aspect of the project easy, since Scrum opened a forum where we shared with each other.
+The approach taken was very much a learn as you go-approach. Building an architecture as a first step in the design process can be a good choice. This approach is easier if the architects have extensive knowledge of the systems involved. As this was not the case, the approach allowed the developers to build their knowledge of the existing systems and gems as they went along. Once a knowledge base was reached, a more informed basic architecture could be created.
 
-Our execution of the Scrum process was far from perfect, as was to be expected since none of us had any prior experience in using it. But we learned as we went, and feel the experiences we have accumulated in this project will help us in the years to come. Scrum is the development process of choice in most projects concerning IT and we are bound to face this development morm in the future. This project provided us with first hand experience in the importance of constantly following up the customer to be able to rmiver a product that meets their expectations.
+Doing some implementation early on also reduced the number of pointless goals. If a goal or requirement is created without knowledge of the systems involved, it is likely that the goal will not be reached or that it takes the design in a direction that does not solve other larger goals and requirements.
 
 \subsection*{Bad}
-The Scrum process imposes a lot of rules, activities and meetings, which was time consuming. The overhead produced by each meeting, each demo presentation, etc, could in some cases have been better spent towards other activities instead. Without all this overhead we would have gotten more time to focus on the implementation, and maybe include more features in the product.
+The project went through some major refactoring during development when the architecture was first designed. This was a difficult and time consuming task. An improvement could be made in doing this sooner, but not too soon.
 
-
+Implementing the requirements outside of the code base made integration more difficult than if the requirement had been implemented within the code base in the first place.
 
 \section{Result Evaluation}
 TODO
