@@ -11,34 +11,35 @@ This chapter will describe the final version of our product and what we have fou
 \section{Final Product}
 STATUS - beskriv status for ditt arbeid
 sammenlignet med hva du opprinnelig ønsket å oppnå.
-TODO
-We spent a lot of time on the preliminary study and doing research to build the ground for our work. This was to decide which direction to take amongst the vast amount possibilities. We see this as well spent time. Similar solutions~\ref{sec:similarsys} was of great help, and let us understand how different approaches had been done by previous systems and what worked from them.
+
+We spent a lot of time on the preliminary study and doing research to build the ground for our work. This was to decide which direction to take amongst the vast amount possibilities. We see this as well spent time. Similar solutions~\ref{sec:similarsys} was of great help, and let us understand how different approaches had been done by previous systems and what worked from them. This section will look more in depth into the status of the different parts, and conclusions made around them.
 
 \begin{table}[H]
     \centering
-    \begin{tabular}{ l l }
-        \hline
-        \textbf{Implement harvester} &  \ding{51}k \\ \hline
-        \textbf{Gathering data} & \ding{55} \\ \hline
-        \textbf{Constructing dataset} & 17 770 \\ \hline
-        \textbf{Implement prediction system} & 2 817 131 \\ \hline
-        \textbf{Calculate RMSE test score} & 1 408 385 \\ \hline
-        \textbf{Comparing RMSE scores} & 1 408 385 \\ \hline
+    \begin{tabular}{ l | l }
+        \textbf{Expectations} & \textbf{Fulfilled} \\ \hline
+        Implement harvester & \cmark \\ \hline
+        Gathering data & \xmark \\ \hline
+        Constructing dataset & \xmark \\ \hline
+        Implement prediction system & \xmark \\ \hline
+        Comparing RMSE scores & \xmark \\
     \end{tabular}
-    % \captionof{table}[Netflix-dataset statistics]{The data statistics from the dataset provided by Netflix in the Netflix Prize competition}\label{tab:nfDatasetStat}
+    \captionof{table}[Goals]{This is a table of the goals. The fulfilled goals are marked with a \cmark. and the unfulfilled are marked with a \xmark}
+    \label{tab:reached-goals}
 \end{table}
 
 \subsection{The harvester}
 \subsubsection{Done}
-TODO Something about amanda or whatevah - the scraper
+TODO:fr Something about amanda or whatevah - the scraper
 \subsubsection{Not Done}
-TODO - Twitter harvested
+TODO:fr - Twitter harvested
 
 \subsection{The database}
 \subsubsection{Done}
 The choice of database was a good match to the data harvested from Twitter. MongoDB is a easily scalable database, with easy replication possibilities. The data from Twitter consists of different kinds of field, and would therefore have been more troublesome to work with in a SQL database. MongoDB, as other document oriented NoSQL databases, stores the data as JavaScript Object Notation, which is the same notation as fetched from Twitter ? TODO, chech this fact lol. And there would therefore not be needed any parsing from the Twitter harvesting to the database.
 
 \subsubsection{Not Done}
+
 
 \subsection{The predictor}
 \subsubsection{Done}
@@ -64,8 +65,14 @@ MovieTweetings~\ref{subsec:MovieTweetings} had an interesting take on harvesting
 
 
 \section{Future Work}
+\subsection{Twitter harvesting}
+TODO
+
+
+
 \subsection{Prediction algorithms}
 There is a lot of potential future work to be done regarding social media and general recommendation. In the domain of movie recommendation the exploration of different recommendation and prediction algorithms is an interesting field. The most central points regarding this work and algorithms are:
+
 \begin{itemize}
     \item Runtime
     \item Score (RMSE)
@@ -73,18 +80,21 @@ There is a lot of potential future work to be done regarding social media and ge
     \item Parallelization
     \item Scalability
 \end{itemize}
-Runtime and score was just touched during this research, but opened for some interesting future work to be done, with well established testing potential through RMSE when comparing different approaches. This has opened a world of testing potential, where the main goal would be to find the prefect algorithm/algorithms to predict ratings, which was thoroughly explored in the Netflix-prize competition, but then only on a subset of data, with few restrictions. When adding restrictions such as runtime other solutions will emerge, these solutions could prove to be interesting to explore in depth.
 
-When focusing in on the prediction approach taken in this research, different versions should be explored. Variants of k-NN can be used to select neighbors. Other interesting subjects for future work includes:
+Runtime and score was just touched during this research, but opened for some interesting future work to be done, with well established testing potential through RMSE when comparing different approaches. This has opened a world of testing potential, where the main goal would be to find the most suiting algorithm/algorithms to predict ratings, which was thoroughly explored in the Netflix-prize competition, but then only on a subset of data, with few restrictions. When adding restrictions such as runtime, other solutions will emerge, these solutions could prove to be interesting to explore in depth.
+
+When focusing in on the prediction approach taken in this research, different variants of k-NN should be explored. The different variants can be used to select neighbors. Other interesting subjects for future work includes:
+
 \begin{itemize}
     \item How to handle outliers in a good way regarding the data
-    \item Best approach to value neighbors
+    \item Best approach to value/weigh neighbors
     \item Exploring different heuristics for good $k$ values.
 \end{itemize}
 
+
+
 \subsection{Data modeling}
-TODO
-Outliers  normalizing dataset building
+The approach taken in this study for building the dataset with the Netflix-dataset and the data from Twitter can get issues with outliers, and must be research further. If the data is blindly normalized, outliers might shift datapoints away form their actual position, and construct a shifted illusion of their value.
 
 
 \subsection{Learners}
@@ -99,5 +109,3 @@ Future work in this field would include:
 \end{itemize}
 
 
-\subsection{Twitter harvesting}
-TODO
