@@ -37,24 +37,33 @@ sammenlignet med hva du opprinnelig ønsket å oppnå.
 
 
 \section{Related Work}
-Relater arbeidet til tidligere relevant arbeid.
 As we saw from the preliminary study on similar systems~\ref{sec:similarsys}, there are some systems with similar characteristics as the approach taken in this project. They were of great help when exploring how to attack the issues that comes along with recommending movies, gathering information from social media and exploring big amounts of data.
+
+For Twitter Twittomender~\cite{twittomender}, and their approach and research on how to find interesting friends, and thereby finding relevant users to harvest from, was especially helpful.
+
+Papers on different recommendation algorithms and their produced runtime and root-mean-square error, such as \cite{bigchaos-sol,alsMPI,BellKor-CF-TD} was great help when deciding a suitable algorithm to use for rating predictions.
+
+MovieTweetings~\ref{subsec:MovieTweetings} had an interesting take on harvesting and storing of tweets, but their approach on gathering tweets might be too strict, and would seem to reject a lot of potential tweets with the same information gain as the ones they store, but not being on the same form.
 
 
 \section{Future Work}
 \subsection{Prediction algorithms}
-There is a lot of potential future work to be done regarding social media and general recommendation. In the domain of movie recommendation the exploration of different recommendation and prediction algorithms is an interesting field. The most central regarding this work and algorithms is:
+There is a lot of potential future work to be done regarding social media and general recommendation. In the domain of movie recommendation the exploration of different recommendation and prediction algorithms is an interesting field. The most central points regarding this work and algorithms are:
 \begin{itemize}
     \item Runtime
-    \item Score
+    \item Score (RMSE)
     \item Runtime versus score (RMSE)
     \item Parallelization
     \item Scalability
 \end{itemize}
-Runtime and score was just touched during this research, but opened for some interesting future work to be done, with well established testing potential through RMSE when comparing different approaches.
+Runtime and score was just touched during this research, but opened for some interesting future work to be done, with well established testing potential through RMSE when comparing different approaches. This has opened a world of testing potential, where the main goal would be to find the prefect algorithm/algorithms to predict ratings, which was thoroughly explored in the Netflix-prize competition, but then only on a subset of data, with few restrictions. When adding restrictions such as runtime other solutions will emerge, these solutions could prove to be interesting to explore in depth.
 
-Just when it comes to the prediction approach taken in this research different versions should be explored. Variants of k-NN can be used to select neighbors. Other interesting subjects for future work includes: How to handle outliers in a good way regarding the data, best approach to value neighbors, and exploring different heuristics for good $k$ values.
-
+When focusing in on the prediction approach taken in this research, different versions should be explored. Variants of k-NN can be used to select neighbors. Other interesting subjects for future work includes:
+\begin{itemize}
+    \item How to handle outliers in a good way regarding the data
+    \item Best approach to value neighbors
+    \item Exploring different heuristics for good $k$ values.
+\end{itemize}
 
 \subsection{Data modeling}
 TODO
@@ -75,12 +84,3 @@ Future work in this field would include:
 
 \subsection{Twitter harvesting}
 TODO
-
-
-\section{Summary}
-TODO
-The objective of this project was to demonstrate the need for scripting in a web- application, showing that it can add value to the user experience. We feel like we have accomplished this objective. We have shown what is possible to achieve with the technologies we had chosen, and what advantages they provided us with compared to more traditional technologies. We have demonstrated the flexibility of our system, which can be suited to almost any need and any domain without changing the core functionality. The system is in no way complete as a library system, but that wasn’t really a priority for this project. The rmivery we made ended up being a platform for developers with almost endless possibilities. We feel we have proved that the concept of a console in a web- application is useful, and that was the tasks at hand.
-
-As far as we can see, there exists no similar systems in the world today. We feel we have created something new, something of great value. We have utilized new emerging technologies, with a lot of advantages over more traditional solutions. There is however still some work left to be done before a system based on our work can be used in a production environment. Our system presents a new way of thinking, in that it explicitly restricts functionality instead of explicitly adding functionality. It is way of thinking we think has a lot of potential, yet it requires more research on some of its aspects before we can draw definitive conclusions on its implications. Our product is not finished, but what we have created can be picked up by anyone. With more development and research we think it can be something that holds commercial business value.
-
-
