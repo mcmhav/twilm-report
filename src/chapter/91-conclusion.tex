@@ -9,24 +9,36 @@ This chapter will describe the final version of our product and what we have fou
 \clearpage
 
 \section{Final Product}
-STATUS
+STATUS - beskriv status for ditt arbeid
 TODO
+We spent a lot of time on the preliminary study and doing research to build the ground for our work. This was to decide which direction to take amongst the vast amount possibilities. We see this as well spent time. Similar solutions~\ref{sec:similarsys} was of great help, and let us understand how different approaches had been done by previous systems and what worked from them.
 
-\subsection{Chosen Technologies}
-We spent a lot of time on the pre- study and on research in this project, and we feel it was well worth the effort. Also our customer helped us a lot, and offered great suggestions and guidance throughout the project. The technologies we ended up using were not only new and exciting, but were also a great fit together. JavaScript, jQuery, JSON, HTML and CSS are robust and mature web technologies in use all over the world today. Coupled with CouchDB, which was designed from the ground with web- applications in mind, they make a powerful collection of technologies that work well together.
+\subsection{The harvestere}
+TODO Something about amanda or whatevah - the scraper
 
-Probably the most important decision on technology we were left with after the pre- study was whether to go for a traditional database management system like MySQL, or choose a more unconventional NoSQL system. The customer did not specify any requirements concerning the performance or stability of the server in this project, and indicated that the specifics on the server implementation was not that important to them. As a result we wanted it to be as simple as possible. After a detailed look at the needs for this project we ended up choosing a NoSQL database in the form of CouchDB. The reason for this was that CouchDB provided us with many advantages that a traditional relational database could not. Our system is heavily centered around JavaScript objects and their attributes. CouchDB, and other document oriented NoSQL systems, stores data in the form of objects directly in JSON format, which is a simple textual notation for JavaScript objects. This implied a minimal amount of work getting the client and server to communicate. If we had opted to use a traditional SQL system for the database we would have needed more extensive server side technologies, like PHP or ASP.NET to handle the database and to do database-object parsing. All of this was avoided by choosing CouchDB, which is able to work without any extra server software, and automatically creates a RESTful api to interact with the database.
+\subsection{The database}
+The choice of database was a good match to the data harvested from Twitter. MongoDB is a easily scalable database, with easy replication possibilities. The data from Twitter consists of different kinds of field, and would therefore have been more troublesome to work with in a SQL database. MongoDB, as other document oriented NoSQL databases, stores the data as JavaScript Object Notation, which is the same notation as fetched from Twitter ? TODO, chech this fact lol. And there would therefore not be needed any parsing from the Twitter harvesting to the database.
 
+\subsection{The predictor}
+The prediction part was never implemented TODO: refer to something about why. But research around good prediction candidates has been made, and is and interesting topic for future work.
 
 
 \section{Findings}
-TODO
-Oppsummer hva du har oppnådd,
+It was interesting to see from the research done how many different approaches there are to take when suggesting user ratings, and the importance of diversity when calculating the predictions is key. There is no one model when suggesting movies to users, which will be perfect for all. Even the top two winners of the Netflix-prize competition scored better when their solutions were merged together. Even though the winners managed to produce a 10\% better score than the Netflix's own system, the winners solution was not taken into production. The algorithms used to recommend at the winners level would be too time consuming to use on the complete data, and would not work well with the constant updating values of the actual Netflix users ratings, whereas the Netflix-prize competitors where working on a unknown but stationary set of users and ratings.
+
+TODO - Twitter
+
+\subsection{Goals reached}
+TODO - discuss the goals...
+The goals reached was
+
+\subsection{Goals unreached}
 sammenlignet med hva du opprinnelig ønsket å oppnå.
 
+
 \section{Related Work}
-TODO
 Relater arbeidet til tidligere relevant arbeid.
+As we saw from the preliminary study on similar systems~\ref{sec:similarsys}, there are some systems with similar characteristics as the approach taken in this project. They were of great help when exploring how to attack the issues that comes along with recommending movies, gathering information from social media and exploring big amounts of data.
 
 
 \section{Future Work}
