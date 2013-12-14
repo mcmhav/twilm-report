@@ -73,8 +73,13 @@ MovieTweetings~\ref{subsec:MovieTweetings} had an interesting take on harvesting
 
 \section{Future Work}
 \subsection{Twitter harvesting}
-TODO:fr
+The stream field is not integrated into the larger code base. This is something that would improve the quality of the Twitter harvesting framework.
 
+The Twitter harvesting framework is sufficient for harvesting data about movies. It would be an interesting direction for further work to generalize the framework to be able to harvest supplemental data for any given dataset.
+
+It would also be interesting to make the framework more general in the sense that new fields could easily be implemented. In this way it would be easy to supplement a dataset with data from several different sources.
+
+Once a larger framework for data harvesting existed, more advanced distributed database systems such as Hadoop could be used to recieve and store the data. These systems have much greater capability in aggregating data than document stores and would open for much broader prediction capabilities.
 
 
 \subsection{Prediction algorithms}
