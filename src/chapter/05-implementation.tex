@@ -6,7 +6,6 @@
 
 This chapter discusses the major requirements, and implementation of the different algorithms and datastructures in the system. And is meant for the reader to get insight into what was actually implemented.
 
-TODO: Something about each section after done
 \clearpage
 
 \section{Major Requirements}\label{impl:Major Requirements}
@@ -27,7 +26,7 @@ NetflixMovieTweetScrape iterates through all netflix movies and uses the field S
 
 Thus, the system can harvest tweets and users from Twitter related to movies in the netflix dataset and the requirement is therefore implemented.
 
-\subsection{FR6}
+\subsection{FR6}\label{subsec:FR6}
 \begin{quotation}
 \em The system must be able to supplement Netflix-dataset with tweets and/or users from Twitter that are related to a movie in the Netflix-dataset %not to edit, unless edit for all
 \end{quotation}
@@ -213,7 +212,7 @@ Then, test code would print each item retrieved to the console. For the example,
 At last, mongoDB console queries were made to retrieve these items from the database to make sure that all objects were stored by the harvester and that the objects were the same.
 
 \subsection{Not tested}
-Testing of the RMSE score of the system is not tested since the needed data was not acquired from twitter~\ref{sec:twitter}, neither is the dataset building of the Netflix-dataset with the Twitter-data for the same reason.
+Testing of the RMSE score of the system is not tested since the needed data was not acquired from twitter~\ref{sec:twitter}, neither is the merging of the Netflix-dataset with the Twitter-data for the same reason, which is the dataset building from the requirement in~\ref{subsec:FR6}.
 
-\subsection{Code Testing}
-
+\subsubsection{The code}
+The testing of implemented code is not done. This is because the implemented code is of such a nature that the extra work to produce the testing would be rendered redundant in comparison with the gain from the actual testing.
