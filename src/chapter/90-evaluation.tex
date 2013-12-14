@@ -38,24 +38,24 @@ The project went through some major refactoring during development when the arch
 Implementing the requirements outside of the code base made integration more difficult than if the requirement had been implemented within the code base in the first place.
 
 \section{Result Evaluation}
-TODO
+The two types of testing used in the project were testing the assumptions in the preliminary study and one time testing of code functionallity
 
+\subsubsection{Testing of preliminary study}
+The testing in the preliminary study was done by browsing twitter for data and aggregating the results in excel or using the google chrome developer console.
 
+In section~\ref{sec:pre-stream-api-testing}, the Stream API was tested to show what kind coverage of the netflix dataset can be expected by running the Stream API to harvest tweets. The test was done by manually exploring Twitter web search. This process is prone to human error. However, since the important results were statistical approximations, this type of error can be ignored. The results showed that getting coverage for the entire netflix data set would take years. The sample size is relatively small and the results could have been better if an automated test was employed. However, the test served primarily as a loose indicator for whether or not the Stream API would serve the purpose as a main channel for harvesting tweets that would cover the dataset. A sample size of 20 assessing 3 different time spans seemed sufficient enough for this. The Stream API was thus concluded to not be suitable for the project, but could complement the requirements in the future and was thus implemented, but not focused on.
+
+In section~\ref{sec:pre-twitter-crawl-scrape}, the Crawling and Scraping techniques were tested gradually as they were discovered. The tests used jQuery functions to establish that there was a correspondance between the number of tweets shown on the twitter search result page and the number of subelements that were to be extracted on from each tweet the twitter search result page. The results showed correspondance even as the number of tweets on the page increased gradually. This implied that the technique for selecting the subelements was most likely correct. This was further confirmed by running the implementation and observing that the tweets that were extracted from the page were actually the same as shown in the browser.
+
+\subsubsection{Testing of code functionality}
+The testing of code functionality is described in section~\ref{impl:Testing}. While not as solid as systematic unit and functional testing, the technique verifies at a single point in time that the different parts of the implementation are doing what they should be doing. Though there naturally was more bug fixing, the technique served the needs of the project. The code base ended up being relatively small and thus the amount of manual testing applied was managable. For a larger project this would not have been feasible as the workload would have increased beoynd the point of being managable
+
+\subsubsection{Types of testing not used}
+Testing the predictions with RMSE was one of the main requirements of the project, but was not implemented as predictions could not be made due to the lack of a dataset from Twitter due to constraints and limitations of the Twitter APIs and legal constrains on scraping Twitter.
 
 \section{Issues}
-TODO
 
-\subsection*{Group size}
-The biggest issue the team encountered was that the team size ended at four. The intended group size for the project was five to seven, which should have produced an extra 325 - 975 work hours, which is a considerable amount of hours. We managed to come out on top of this situation because of a set of responses and effects of having a small group.
-
-\subsubsection*{Ease of communication}
-Since we were of such a small size the communication was tight and keeping everyone updated was easy to achieve. This made production efficiency high since there was not done any double work.
-
-\subsubsection*{The team members}
-Taking responsibility came more naturally with such a small group as ours. The members stepped up their game and rmivered when it was needed. The general goal of the team was to rmiver a good result. This together with a great chemistry between the members made producing a good result with a small group size achievable.
-
-\subsubsection*{Risk handling}
-Since we were dealing with a prototype project, we always had in mind that requirements could change, and therefore had ease of modifiability in the back of our mind, while developing the system.
+\subsection*{Lack of Twitter dataset}
 
 
 

@@ -291,7 +291,7 @@ There is no rate limit in the Stream API. However, there are a few cases in whic
 
 It also takes the Stream API a very long time to create a dense dataset. By a few searches for movie titles that are less watched, it can easily be determined that many of them have only a few tweets posted about them over the span of years. This means that it would take at least a year for the Stream API to deliver any datapoints about the movie.
 
-\subsubsection{Testing API Capability}
+\subsubsection{Testing API Capability}\label{sec:pre-stream-api-testing}
 To further understand what kind of dataset the Stream API would produce with regards to time, a sample of 20 random movies were selected from the netflix prize dataset. The mongoDB shell command used to retrieve this sample can be seen in listing~\ref{code:mongo-select-random-movie}. Then, the movie titles and year were searched for using Twitter web search. Values were recorded for how many tweets were available for a search for a given movie within the last month, half a year and a full year. Values for how many days ago the last tweet for each movie was posted were also recorded. The results can be seen in table~\ref{table:stream-api-test-data}
 
 \begin{lstlisting}[caption={The mongoDB console command used to generate a random selection of movies},label={code:mongo-select-random-movie},captionpos=b]
