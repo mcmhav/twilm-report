@@ -645,9 +645,9 @@ After testing on 1000 users the best performing strategy was a collaborative-bas
 What can be concluded from this is that there is data in a user's relationships that indicates interest or more precisely a willingness to subscribe. In particular for followers recommended as followees.
 
 
-\subsection{What the top Netflix-Prize contestants did}\label{subsec:thewinners}
+\subsection{What the top Netflix Prize contestants did}\label{subsec:thewinners}
 \subsubsection{BellKor's Pragmatic Chaos}
-BellKor's Pragmatic Chaos, the Prize winners of the Netflix-Prize competition, was a group of scientists from AT\&T Labs, Yahoo!, Pragmatic Theory and Commendo Research \& Consulting. They achieved a RMSE of 0.8567, which was 10.06\% better than Netflix's own Cinematch score.
+BellKor's Pragmatic Chaos, the Prize winners of the Netflix Prize competition, was a group of scientists from AT\&T Labs, Yahoo!, Pragmatic Theory and Commendo Research \& Consulting. They achieved a RMSE of 0.8567, which was 10.06\% better than Netflix's own Cinematch score.
 
 TODO:mr fiks den følgende setningen. vanskelig å tolke.
 Models for the rating data is learned by fitting previously observed ratings, but since the model is to be used to predict feature ratings, overfitting the data. This achieved by regularizing the learned parameters.
@@ -690,7 +690,7 @@ The "BellKor's Pragmatic Chaos"-team used a lot of different models and did a lo
 % http://www.the-ensemble.com/
 The Ensemble is a merge of the teams "Grand Prize Team" and "Opera Solutions and Vandelay United". They also managed to get an RMSE of 0.8567, and therefore a 10.09\% improvement as well. But since the "BellKor's Pragmatic Chaos"-team managed to submit their results 20 minutes earlier than "The Ensemble"-team, they lost the competition.
 
-The two merged teams that composed "The Ensemble" consisted of multiple smaller teams. They had all competed in the Netflix-Prize challenge, and all put their heads together and collaborated to get the kind of results they got
+The two merged teams that composed "The Ensemble" consisted of multiple smaller teams. They had all competed in the Netflix Prize challenge, and all put their heads together and collaborated to get the kind of results they got
 
 "The Ensemble"-team used a large selection of different models, just as the "BellKor's Pragmatic Chaos"-team.
 
@@ -826,37 +826,34 @@ The speed of python does not matter in the context of a web bottle neck. The alg
 
 
 \section{Result Testing}
-Root-mean-square error RMSE~\ref{subsubsec:rmse} is a way of testing estimated value against the actual value. This is how they measured the correctness of the submitted solutions in the Netflix Prize competition. To explore the correctness and improvement of the solution, this seems like a good way to go. The recommendation system will be ran on both the Netflix Dataset alone and on the Netflix Dataset merged with the twitter-data.
+Root-mean-square error RMSE~\ref{subsubsec:rmse} is a way of testing estimated value against the actual value. This is how they measured the correctness of the submitted solutions in the Netflix Prize competition. To explore the correctness and improvement of the solution, this seems like a good way to go. The recommendation system will be ran on both the Netflix dataset alone and on the Netflix dataset merged with the Twitter data.
 
 A reduction in the RMSE value will then indicate an improvement, and indicate the gain from the collaboration of movie data and social media data.
 
 \section{Evaluation}\label{sec:prestrud-eval}
-This section will sum up what we saw after doing the prestudy.
+This section will evaluate the various topics discussed in the prestudy.
 
 \subsection{Netflix}
-The Netflix Prize dataset is very sparse. With about 480 000 users and 17 770 movies there would have been a total of more than 8.5 billion ratings, but the dataset only contains ca 100 million ratings, so algorithms which can handle this kind of sparsity must be used, such as alternating least squares and k nearest neighbors. The standard way to evaluate the correctness of a solution in these kinds of problems are RMSE.
+The Netflix Prize dataset is very sparse. With about 480 000 users and 17 770 movies there would have been a total of more than 8.5 billion ratings if the dataset was dense, but the dataset only contains around 100 million ratings. Algorithms that can handle this kind of sparsity must be used, such as alternating least squares and k nearest neighbors. The standard way to evaluate the correctness of a solution in these types of problems are RMSE.
 
 \subsection{Twitter}\label{sec:prestrud-eval-twitter}
 There are many different data types that can be retrieved from Twitter. The most dominating types and attributes are: Tweets, users, followees and followers.
 
 There are several ways to access and retrieve this data. The REST API has the capability to retrieve the complete set of followees and followers for any given user. It lacks speed as it only allows 15 requests per 15 minute window.
 
-The Streaming API is also great in the sense of data completeness. It has the capability of capturing all tweets for any given topic described by keywords. It is however slow in the sense that it takes a long time to build a dense dataset because less popular films are rarely tweeted about. In the study we see that even running the Stream API for over a year will only produce more than one tweet for about 65\% of the movies in the dataset. This is not satisfactory.
+The Streaming API is also great in the sense of data completeness. It has the capability of capturing all tweets for any given topic described by keywords. However, it is slow in the sense that it takes a long time to build a dense dataset because less popular films are rarely tweeted about. In the study we see that even running the Stream API for over a year will only produce more than one tweet for about 65\% of the movies in the dataset. This is not satisfactory.
 
 The Search API is great in the sense that it has looser limitations than the REST API. It can process a total of 180 requests per client per 15 minute window. It is however, like the Stream API limited in time span. The Search API only has a week worth of data. There is also no guarantee from Twitters side for which time window the Search API reflects and thus no guarantee for the completeness of data. This renders the Search API almost completely similar in terms of data gathering capability to the Stream API, but inferior in certainty of data completeness. A slight advantage for Search over Stream is that keeping a persistent connection is not required which makes it easier to maintain.
 
-Scraping is the best solution in terms of data completeness and time consumption. It achieves what the Stream API is capable of achieving in years in mere days. However, it is a more complicated and error prone procedure as the scraping must be done by the client and the content being scraped is not under its control. The scraping procedure itself is more difficult to test than to just utilize an existing api. This makes Scraping more prone to sparseness and errors in the dataset. However, the speed with which an entire site can be crawled and scraped compared to the years it takes the Stream API to collect a dataset of the same density, makes it easy to test run a scraper, correct errors as they are found and run the scraper over again.
+Scraping is the best solution in terms of data completeness and time consumption. It achieves what the Stream API is capable of achieving in years in mere days. However, it is a more complicated and error prone procedure as the scraping must be done by the client and the content being scraped is not under its control. The scraping procedure itself is more difficult to test than to just utilize an existing API. This makes Scraping more prone to sparseness and errors in the dataset. However, the speed with which an entire site can be crawled and scraped compared to the years it takes the Stream API to collect a dataset of the same density, makes it easy to test run a scraper, correct errors as they are found and run the scraper over again.
 
 All of the previously mentioned APIs have the advantage that all the data gathered by them can be be aggregated and analyzed. Aggregations and analysis of data obtained by these means can be legally used to create services, including movie recommenders.
 
 One problem with scraping is that it is not allowed by Twitter without their consent. As Twitters consent has not been granted to scrape Twitter for the purposes of the project, a dataset based on scraping can not be gathered. The data can certainly not be used to legally create services like movie recommenders.
 
-All of the techniques for gathering data from Twitter discussed have pros and cons in terms of how dense of a dataset they build, how likely the dataset is to contain errors, how long they take to run and the legallity of how the data collection. As APIs exist for all techniques except scraping, the barrier for utilizing them are low. Implementing them and having them available has a low cost in terms of development time and each API increases the richness of available data. Implementing a scraper is also a good idea in case consent from Twitter is obtained as it has superior performance compared to any of the other techniques considered.
+All of the techniques for gathering data from Twitter discussed have pros and cons in terms of how dense of a dataset they build, how likely the dataset is to contain errors, how long they take to run and the legality of how the data collection. As APIs exist for all techniques except scraping, the barrier for utilizing them are low. Implementing them and having them available has a low cost in terms of development time and each API increases the richness of available data. Implementing a scraper is also a good idea in case consent from Twitter is obtained as it has superior performance compared to any of the other techniques considered.
 
 \subsection{Similar systems}
-When it comes to recommendation systems it is important to weigh quality of result versus time it takes to produce this result. If it is too time-consuming the result might end up being outdated. Netflix did not implement the winner solution even though the winner managed to score 10\% better than the Netflix-system. This was mainly because of the time it took for the predictions to be calculated and Netflix need to have a live system.
+When it comes to recommendation systems it is important to weigh quality of result versus the time it takes to produce this result. If it is too time-consuming the result might end up being outdated. Netflix did not implement the winner solution even though the winner managed to score 10\% better than the Netflix system. This was mainly because of the time it took for the predictions to be calculated and Netflix need to have a live system.
 
-TODO:fr Collaborative-based important, datasets utilizing user relationship like followers and followees tend to give the best results in twitter-based recommendations.
-
-The group the user is a
-For a big dataset and low computational time k nearest neighbors has proven to be a good way to go.
+For a big dataset and low computational time k nearest neighbors has proven to be a good approach.
