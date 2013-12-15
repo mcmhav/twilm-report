@@ -190,17 +190,17 @@ Weka can let the user utilize its many machine-learnings algorithms in an easy a
 \centering
 \includegraphics[width = .25\textwidth]{image/twitter-logo.png}
 \end{wrapfigure}
-Twitter is a free social media network based on microblogging. In microblogging, a user can post a paragraph of a certain number of characters or less to his/her timeline. The user can also follow other users. Whenever the users that a given user is following posts something, the user can see these posts in his/her feed. This is the basis for many of todays most popular social media networks, including Twitter.
+Twitter is a free social media network based on microblogging. In microblogging, a user can post a paragraph of a certain number of characters or less to his/her timeline. The user can also follow other users. Whenever the users that a given user is following posts something, the user can see these posts in his/her feed. This is the basis for many of todays most popular social media networks.
 
 \subsection{Terminology}
-For more clarity, we define the terminology twitter uses. All words in \textbf{bold} are our own definitions for more easily describing how the various term relate to eachother.
+For more clarity, we define the terminology Twitter uses. All words in \textbf{bold} are our own definitions for more easily describing how the various term relate to eachother.
 
 \subsubsection{Tweet}
 A tweet is a post containing max 140 characters. It can also refer to the verb ‘to tweet’, which means ‘to post a tweet’. \textbf{tweets} is an attribute of a user which returns a list of tweets that the users
 
   \textbf{user.tweets -> [<tweet>]}
 \subsubsection{User}
-A user is someone with a twitter account. A user can post tweets. By following other users, twitter generates a feed for the user containing the tweets of all the users they follow. They also have certain information retrieval tools available, such as filtering tweets by a tag name, specific user or search term.
+A user is someone with a Twitter account. A user can post tweets. By following other users, Twitter generates a feed for the user containing the tweets of all the users they follow. They also have certain information retrieval tools available, such as filtering tweets by a tag name, specific user or search term.
 
 \subsubsection{Tweeter}
 A user who tweets a tweet that is referenced in the same context. For instance: The best tweets are tweeted by the most popular tweeters
@@ -232,7 +232,7 @@ Usertags are labels that are placed on tweets describing who the tweets are adre
 \textbf{tweet.usertags -> [<user>]}
 
 \subsection{Legal Considerations}\label{sec:pre-twitter-legal}
-Collect and use a data set from twitter, a company whose currency is information, must be done in a way that complies with their rules and terms of service. This section considers how an automated system can collect information from twitter and what an automated system can use it for.
+Collect and use a data set from twitter, a company whose currency is information, must be done in a way that complies with their rules and terms of service. This section considers how an automated system can collect information from Twitter and what an automated system can use it for.
 
 \subsubsection{API Terms}
 You may use the Twitter API and Twitter Content in connection with the products or services you provide (your "Service") to search, display, analyze, retrieve, view, and submit information to or on Twitter \cite{twitter-api-terms}. This means that data can be gathered within the limitations set by the API to gather a dataset and analyze it.
@@ -272,7 +272,7 @@ To authenticate, the access token generated for the application can be used as w
 The number of requests that can be made are limited to 180 requests per 15 minute window for each OAuth. If the Search API is accessed using only the application access token, these limitations apply application-wide for any number of users.\cite{twitter-rate-limiting}
 
 \subsection{Stream API}
-Twitters Stream API streams data from twitter as it is created to a client through a persistent HTTPS connection. It is ideal for gathering the most up-to-date tweets or gathering large amounts of data over long periods of time.
+Twitters Stream API streams data from Twitter as it is created to a client through a persistent HTTPS connection. It is ideal for gathering the most up-to-date tweets or gathering large amounts of data over long periods of time.
 
 \subsubsection{Usage}
 The client makes an initial GET request specifying the type of data it wants to receive. The request contains a list of up to 400 keywords. Any tweet that matches one or more of these keywords are considered part of the stream. The request can be directed to two endpoints: A public endpoints, which streams tweets from all users; or a user endpoint, which sterams tweets from a specific user.
@@ -377,7 +377,7 @@ Hera Pheri&1975&&0&0&0
 
 \subsection{Crawling and Scraping Twitter}\label{sec:pre-twitter-crawl-scrape}
 TODO: Add appendixes from scrapbook.
-This section will examine how to crawl and scrape Twitters HTTPS Web Search. This will be examined by browsing twitter.com logged in as a user and examining it Google Chrome Developer Tools (GCDT)\cite{gcdt} as the site is being browsed and search requests are being made. The goal of this examination is to discover requests a webcrawler must be capable of making in order to search twitter and harvest tweets and users automatically and how a scraper can distinguish the dom elements that describe a tweet.
+This section will examine how to crawl and scrape Twitters HTTPS Web Search. This will be examined by browsing twitter.com logged in as a user and examining it Google Chrome Developer Tools (GCDT)\cite{gcdt} as the site is being browsed and search requests are being made. The goal of this examination is to discover requests a webcrawler must be capable of making in order to search Twitter and harvest tweets and users automatically and how a scraper can distinguish the dom elements that describe a tweet.
 
 
 \subsubsection{Search Request}
@@ -385,11 +385,11 @@ Tweets can be found using an HTTPS search request with the search query in the f
 Searching for <URLE search query> can be done with the HTTPS request shown in listing-\ref{listing:search-request}.
 In the rest of the discussion, we'll be using the search query "The Dark Knight Rises 2012". The search request for this search query parsed to URLE is shown in listing-\ref{listing:search-request-batman-urle}
 
-  \begin{lstlisting}[caption={URL of a twitter HTTPS search request for <URLE-search-query>},label={listing:search-request},captionpos=b]
+  \begin{lstlisting}[caption={URL of a Twitter HTTPS search request for <URLE-search-query>},label={listing:search-request},captionpos=b]
   https://twitter.com/search?q=<URLE-search-query>&src=typd&f=realtime
   \end{lstlisting}
 
-\begin{lstlisting}[caption={URL of a twitter HTTPS search request for "The Dark Knight Rises 2012" parsed to URLE},label={listing:search-request-batman-urle},captionpos=b]
+\begin{lstlisting}[caption={URL of a Twitter HTTPS search request for "The Dark Knight Rises 2012" parsed to URLE},label={listing:search-request-batman-urle},captionpos=b]
   https://twitter.com/search?q=the%20dark%20knight%202012&src=typd&f=realtime
   \end{lstlisting}
 
@@ -405,7 +405,7 @@ Using the Google Chrome Developer Console \cite{gcdt} we can find the DOM elemen
 
 Using jQuery \cite{jquery} and the Javascript Console in GCDT \cite{gcdt}, it is possible to determine how many tweets have been returned. This is done by defining javascript function that selects the tweets elements and returns the number of elements in this list in listing-\ref{listing:tweet-count-function}. The function can be assured to work by counting the number of tweets displayed on the search result page and making sure that it matches the number returned by the function.
 
-  \begin{lstlisting}[caption={Creating a function in GCDT Javascript Console for counting the occurance of tweets on the twitter search result page},label={listing:tweet-count-function},captionpos=b]
+  \begin{lstlisting}[caption={Creating a function in GCDT Javascript Console for counting the occurance of tweets on the Twitter search result page},label={listing:tweet-count-function},captionpos=b]
   > number_of_tweets_in_search_results = function(){ return $("li[data-item-type='tweet']").size(); }
   > number_of_tweets_in_search_results();
   15
@@ -494,7 +494,7 @@ The user name can be found in the header of the tweet. Using the GCDT Select, it
 \begin{figure}[H]
 \includegraphics[width=4in]{image/tweet-user-field.png}
 \centering
-\caption{User name element (shown in blue) in a tweet retrieved by twitter web search}
+\caption{User name element (shown in blue) in a tweet retrieved by Twitter web search}
 \label{figure:tweet-user-field}
 \end{figure}
 
@@ -505,7 +505,7 @@ The user name can be found in the header of the tweet. Using the GCDT Select, it
 \noindent
 Using jQuery, a function can be created to count the occurances of the class "username js-action-profile-name", as shown in \ref{user-name-element-count-jquery-function}. This function can then be used to compare the number of user name elements in the DOM tree to the number of tweets in the search result, as shown in listing-\ref{user-elements-matches-tweets}. Since they are equal, it is likely that the right class is being scraped for the user name element.
 
-\begin{lstlisting}[caption={Creating a function in GCDT Javascript Console for counting the occurance of user name elements on the twitter search result page},label={user-name-element-count-jquery-function},captionpos=b]
+\begin{lstlisting}[caption={Creating a function in GCDT Javascript Console for counting the occurance of user name elements on the Twitter search result page},label={user-name-element-count-jquery-function},captionpos=b]
   > number_of_tweet_user_name_element_occurances = function(){ return $("span.username.js-action-profile-name").size() }
 \end{lstlisting}
 
@@ -527,7 +527,7 @@ The user ID can also be found in the header. It is contained in the attribute da
 \noindent
 Using jQuery, a function can be created to count the occurances of the class used to specify the user id element, as shown in \ref{user-id-element-count-jquery-function}. This function can then be used to compare the number of user id elements in the DOM tree to the number of tweets in the search result, as shown in listing-\ref{user-id-elements-matches-tweets}. Since they are equal, it is likely that the right class is being scraped for the user id element.
 
-\begin{lstlisting}[caption={Creating a function in GCDT Javascript Console for counting the occurance of user id elements on the twitter search result page},label={user-id-element-count-jquery-function},captionpos=b]
+\begin{lstlisting}[caption={Creating a function in GCDT Javascript Console for counting the occurance of user id elements on the Twitter search result page},label={user-id-element-count-jquery-function},captionpos=b]
   > number_of_tweet_user_id_element_occurances = function(){ return $("a.account-group.js-account-group.js-action-profile.js-user-profile-link.js-nav").size() }
 \end{lstlisting}
 
@@ -544,7 +544,7 @@ The tweet text can be found in the content of the tweet, as shown in blue in fig
   \begin{figure}[H]
 \includegraphics[width=4in]{image/tweet-text-and-url-field.png}
 \centering
-\caption{Tweet content element (shown in blue) in a tweet retrieved by twitter web search}
+\caption{Tweet content element (shown in blue) in a tweet retrieved by Twitter web search}
 \label{figure:tweet-text-field}
 \end{figure}
 
@@ -570,7 +570,7 @@ The tweet text can be found in the content of the tweet, as shown in blue in fig
 Using jQuery, a function can be created to count the occurances of the class "js-tweet-text tweet-text", which most likely describes all tweet content elements. The function is shown in listing-\ref{listing:tweet-content-element-count-function}. By comparing this number with the number of tweets in the search results and making sure it is equal, we can be confident that this class is describing the correct DOM element. The comparison is shown in
 listing-\ref{listing:tweet-content-element-count-comparison}
 
-\begin{lstlisting}[caption={Creating a function in GCDT Javascript Console for counting the occurance of tweet content elements on the twitter search result page},label={listing:tweet-content-element-count-function},captionpos=b]
+\begin{lstlisting}[caption={Creating a function in GCDT Javascript Console for counting the occurance of tweet content elements on the Twitter search result page},label={listing:tweet-content-element-count-function},captionpos=b]
   > number_of_tweet_content_element_occurances = function(){ return $("p.js-tweet-text.tweet-text").size() }
 \end{lstlisting}
 

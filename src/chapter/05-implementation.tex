@@ -22,7 +22,7 @@ The harvesters implemented are
 \item TwitterUserFolloweeREST
 \end{itemize}
 
-NetflixMovieTweetScrape iterates through all netflix movies and uses the field Scrape to harvest tweets related to each netflix movie. TwitterUserFolloweeREST iterates over all twitter users in storage and uses the field REST to harvest followees for this user.
+NetflixMovieTweetScrape iterates through all netflix movies and uses the field Scrape to harvest tweets related to each netflix movie. TwitterUserFolloweeREST iterates over all Twitter users in storage and uses the field REST to harvest followees for this user.
 
 Thus, the system can harvest tweets and users from Twitter related to movies in the netflix dataset and the requirement is therefore implemented.
 
@@ -31,14 +31,14 @@ Thus, the system can harvest tweets and users from Twitter related to movies in 
 \em The system must be able to supplement Netflix Prize dataset with tweets and/or users from Twitter that are related to a movie in the Netflix Prize dataset %not to edit, unless edit for all
 \end{quotation}
 
-Because a dataset could not be retrieved from Twitter due to time constraints on the API based fields and legal constraints on the Scrape field there was no complete set of twitter data points to build a dataset with. The dataset building algorithm was not implemented. Thus, this requirement was not implemented, but remains a task for further work.
+Because a dataset could not be retrieved from Twitter due to time constraints on the API based fields and legal constraints on the Scrape field there was no complete set of Twitter data points to build a dataset with. The dataset building algorithm was not implemented. Thus, this requirement was not implemented, but remains a task for further work.
 
 \subsection{FR7}\label{subsec:FR7}
 \begin{quotation}
 \em The system must be able to predict ratings of the movies for all users in any dataset that reflects the Netflix Prize dataset %not to edit, unless edit for all
 \end{quotation}
 
-Since the data from twitter is not gathered and combined with the Netflix-data this requirement is not implemented, but rather a task for further work.
+Since the data from Twitter is not gathered and combined with the Netflix-data this requirement is not implemented, but rather a task for further work.
 
 \subsection{NFR1}
 \begin{quotation}
@@ -84,7 +84,7 @@ The NetflixUser datastructure models the movies in the netflix prize dataset. Th
 \subsection{Data structure: Twitter}
 
 \subsubsection{User}
-The TwitterUser datastructure models users harvested from Twitter. The implementation have the key name which reflects the users nickname on Twitter. It also reflects the optional many relationship to TwitterTweets which referes to a collection of Tweets posted by the user. The TwitterUser's relationship to other TwitterUsers are reflected in the optional many relationships followees and followers. The key related\_to\_netflix\_movie refers to which NetflixMovie the user was harvested and is a twitter data point for. The implementation can be seen in figure~\ref{figure:datastructure-twitter-user}.
+The TwitterUser datastructure models users harvested from Twitter. The implementation have the key name which reflects the users nickname on Twitter. It also reflects the optional many relationship to TwitterTweets which referes to a collection of Tweets posted by the user. The TwitterUser's relationship to other TwitterUsers are reflected in the optional many relationships followees and followers. The key related\_to\_netflix\_movie refers to which NetflixMovie the user was harvested and is a Twitter data point for. The implementation can be seen in figure~\ref{figure:datastructure-twitter-user}.
 
 	\begin{figure}[H]
 	\includegraphics[width=4in]{image/datastructure-twitter-user.png}
@@ -94,7 +94,7 @@ The TwitterUser datastructure models users harvested from Twitter. The implement
 	\end{figure}
 
 \subsubsection{Tweet}
-The TwitterUser datastructure models tweets harvested from Twitter. The implementation have the key text which reflects the text content of the Tweet, and the key by\_twitter\_user which reflects which user posted the tweet. The key related\_to\_netflix\_movie refers to which NetflixMovie the user was harvested and is a twitter data point for. The implementation can be seen in figure~\ref{figure:datastructure-twitter-user}.
+The TwitterUser datastructure models tweets harvested from Twitter. The implementation have the key text which reflects the text content of the Tweet, and the key by\_twitter\_user which reflects which user posted the tweet. The key related\_to\_netflix\_movie refers to which NetflixMovie the user was harvested and is a Twitter data point for. The implementation can be seen in figure~\ref{figure:datastructure-twitter-user}.
 
 	\begin{figure}[H]
 	\includegraphics[width=4in]{image/datastructure-twitter-tweet.png}
@@ -114,7 +114,7 @@ This datastructure is not implemented due to the fact that it is only needed by 
 \subsubsection{Scrape}
 Scrape is implemented using Anemone, a ruby gem that does event based crawling. Anemone is initialized with a url. It then retrieves the first page and extracts the urls from this page and append them to the crawler queue. It then initializes up to 4 threads that each grab urls from the crawler queue. It crawls the url and adds the pages to the page queue as they come in. When the last page is popped from the page queue without any new urls to crawl, Anemone finishes.
 
-In the implementation, Anemone is initialized with a twitter search query, like in Search Request in section~\ref{sec:pre-twitter-crawl-scrape}
+In the implementation, Anemone is initialized with a Twitter search query, like in Search Request in section~\ref{sec:pre-twitter-crawl-scrape}
 The primary events in Anemone that are used by scrape follow.
 
 	\begin{itemize}
@@ -130,7 +130,7 @@ The event focus\_crawl is triggered after every page and is responsible for deli
 The event after\_crawl is triggered after no more urls can be generated. This should not happen unless the harvester has no more items that should be crawled. However, in something goes wrong, the event asks the harvester for a new item and keeps crawling.
 
 \subsubsection{Stream}
-Stream is implemented separately from the twilm projects due to quicker development iteration. It is based on the gem tweetstream which is a full implementation of the Twitter Stream API. It connects to twitter with OAuth for Twilm and the personal Twitter user account of one of the authors. The OAuth details are hardcoded into the application.
+Stream is implemented separately from the twilm projects due to quicker development iteration. It is based on the gem tweetstream which is a full implementation of the Twitter Stream API. It connects to Twitter with OAuth for Twilm and the personal Twitter user account of one of the authors. The OAuth details are hardcoded into the application.
 
 Stream is initialized by a harvester with a list of keywords. The keyword list retrieves all tweets that contain one or more of the keywords. The key to using Stream correctly is to define the keywords so that they return a set where the tweets wanted are a subset of this set. For netflix movies, this could be either one of the following
 
@@ -192,9 +192,9 @@ The fields were tested by creating each field, calling the retrieval functions a
 
 First, an instance of each field was created in order to make sure that the fields could be created properly and connect to their APIs without complications. An example would be "rest = REST.new", which would create an instance of the field REST.
 
-Then, all the functions in the field available to the harvester for retrieving twitter data points were run in order to see that they were returning valid TwitterTweets or TwitterUsers. An example would be calling rest.followees(some\_twitter\_user) and see if it returned a list of TwitterUsers.
+Then, all the functions in the field available to the harvester for retrieving Twitter data points were run in order to see that they were returning valid TwitterTweets or TwitterUsers. An example would be calling rest.followees(some\_twitter\_user) and see if it returned a list of TwitterUsers.
 
-At last, the twitter data points returned by each function was saved by calling save! on each of them. Queries for mongoDB were then constructed to retrieve these items from the database. The items returned were then cross checked to see that they matched the data in each of the twitter data points.
+At last, the Twitter data points returned by each function was saved by calling save! on each of them. Queries for mongoDB were then constructed to retrieve these items from the database. The items returned were then cross checked to see that they matched the data in each of the Twitter data points.
 
 \subsection{Harvesters}
 The harvesters were tested by creating the harvesters and making sure that they were storing the items that they retrieved in the database. No formal functional testing was employed as the harvesters were fairly simple in functionality to the point where formal test would only be testing the underlying technology. The following steps were taken to test the harvesters.
