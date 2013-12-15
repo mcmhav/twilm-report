@@ -9,10 +9,7 @@ This chapter will describe the capturing of the requirements and go into depth o
 \clearpage
 
 \section{Capturing the Requirements}
-Based on the initial task at hand and the findings in the prestudy, the requirements had a basis to get formed on. The initial task gave a coarse grained overview of how the requirements of the system should look like. The prestudy on similar solutions made it clearer what was feasible to do and what would be impractical to do. For instance runtime of different recommendation algorithms and their ability to be parallelized. The prestudy on Twitter made it clear how Twitter can be explored and how it can be done in a timely manner. It also showed the difficulties in gathering sufficient data from the APIs and that scraping would work but could not be done due to legal considerations.
-
-Due to the nature of the Netflix Price competition most of the recommendation systems only tried to get the RMSE as low as possible. Not considering the fact that ratings would constantly be updated. This lead to the use of a lot of time consuming and computationally heavy algorithms. Since Netflix is doing live recommending, and is actively using user ratings, many of the recommendation algorithms would require major changes in system structure to work efficiently. Therefore is it important that the system uses an efficient algorithm to predict ratings.
-
+Based on the initial task at hand and the findings in the prestudy, the requirements had a basis to get formed on. The initial task gave an overview of how the requirements of the system should look like. The prestudy on similar solutions made it clearer what was feasible to do and what would be impractical to do. For instance runtime of different recommendation algorithms and their ability to be parallelized. The prestudy on Twitter made it clear how Twitter can be explored and how it can be done in a timely manner. It also showed the difficulties in gathering sufficient data from the APIs and that scraping would work but could not be done due to legal considerations.
 
 \section{Functional Requirements}\label{section:functional-requirements}
 This section will look at the major functional requirements, and see why these are central to the system. For a full list of the functional requirements see appendix~\ref{app:req}.
