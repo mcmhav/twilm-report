@@ -9,27 +9,24 @@ This chapter will describe the final version of our product and what we have fou
 \clearpage
 
 \section{Final Product}
-STATUS - beskriv status for ditt arbeid
-sammenlignet med hva du opprinnelig ønsket å oppnå.
-
 We spent a lot of time on the preliminary study and doing research to build the ground for our work. This was to decide which direction to take amongst the vast amount possibilities. We see this as well spent time. Similar solutions~\ref{sec:similarsys} was of great help, and let us understand how different approaches had been done by previous systems and what worked from them. This section will look more in depth into the status of the different parts, and conclusions made around them.
 
 \begin{table}[H]
     \centering
-    \begin{tabularx}{5.3\textwidth}{ | p{8cm} | p{2cm} | }
+    \begin{tabularx}{5.3\textwidth}{ p{8cm} | p{2cm} }
         \textbf{Expectations} & \textbf{Fulfilled} \\
         \cline{0-1}
-        Understand how data from Twitter can be used for recommendations and predictions & \cmark \\
+        Understand how data from Twitter can be used for recommendations and predictions. & \cmark \\
         \cline{0-1}
-        Implement harvesting of data from Twitter & \cmark \\
+        Implement harvesting of data from Twitter. & \cmark \\
         \cline{0-1}
-        Gather data from Twitter & \xmark \\
+        Gather data from Twitter. & \xmark \\
         \cline{0-1}
-        Supplement the Netflix Prize dataset with data from Twitter & \xmark \\
+        Supplement the Netflix Prize dataset with data from Twitter. & \xmark \\
         \cline{0-1}
-        Implement a Netflix Prize movie rating prediction system & \xmark \\
+        Implement a Netflix Prize movie rating prediction system. & \xmark \\
         \cline{0-1}
-        Compare RMSE scores & \xmark \\
+        Compare RMSE scores. & \xmark \\
     \end{tabularx}
     \captionof{table}[Fulfilled Goals]{Main goals to be fulfilled. The fulfilled goals are marked with a \cmark, and the unfulfilled are marked with a \xmark}
     \label{tab:reached-goals}
@@ -50,9 +47,7 @@ TwitterUserFollowerREST was not implemented. It was useful in theory but not in 
 
 \subsection{The database}
 \subsubsection{Done}
-The choice of database was a good match to the data harvested from Twitter. MongoDB is a easily scalable database and fast, with easy replication possibilities. The data from Twitter consists of different kinds of fields, and would therefore have been more troublesome to work with in a SQL database. MongoDB, as other document oriented NoSQL databases, stores the data as JS Object Notation, which is the same notation as fetched from the Twitter APIs. There are modules for data conversion to and from JSON for any thinkable datastructure.
-
-\subsubsection{Not Done}
+The choice of database was a good match to the data harvested from Twitter. MongoDB is a easily scalable database and fast, with easy replication possibilities. The data from Twitter consists of different kinds of fields, and would therefore have been more troublesome to work with in a SQL database. MongoDB, as other document oriented NoSQL databases, stores the data as JS Object Notation, which is the same notation as fetched from the Twitter APIs. There are modules for data conversion to and from JSON for any thinkable data structure.
 
 
 \subsection{The predictor}
