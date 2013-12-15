@@ -227,52 +227,52 @@ Hashtag also has the attribute tweets, which returns all tweets that have a cert
   \textbf{hashtag.tweets -> [<tweet>]}
 
 \subsubsection{Usertag}
-Usertags are labels that are placed on tweets describing who the tweets are adressed to. They are made by typing @username anywhere in the tweet. This tweet will also show up in the feed of the user with name username. \textbf{usertags} is an attribute of a tweet which returns the list of users that the tweet is adressed to.
+Usertags are labels that are placed on tweets describing who the tweets are addressed to. They are made by typing @username anywhere in the tweet. This tweet will also show up in the feed of the user with name username. \textbf{usertags} is an attribute of a tweet which returns the list of users that the tweet is addressed to.
 
 \textbf{tweet.usertags -> [<user>]}
 
 \subsection{Legal Considerations}\label{sec:pre-twitter-legal}
-Collect and use a data set from twitter, a company whose currency is information, must be done in a way that complies with their rules and terms of service. This section considers how an automated system can collect information from Twitter and what an automated system can use it for.
+Collecting and using a data set from Twitter, a company whose currency is information, must be done in a way that complies with their rules and terms of service. This section considers the legal considerations of gathering data from Twitter with an automated system.
 
 \subsubsection{API Terms}
-You may use the Twitter API and Twitter Content in connection with the products or services you provide (your "Service") to search, display, analyze, retrieve, view, and submit information to or on Twitter \cite{twitter-api-terms}. This means that data can be gathered within the limitations set by the API to gather a dataset and analyze it.
+You may use the Twitter API and Twitter Content in connection with the products or services you provide (your "Service") to search, display, analyze, retrieve, view, and submit information to or on Twitter \cite{twitter-api-terms}. This means that data can be gathered from Twitter and analyzed as long as the Twitter API is being used.
 
 If you provide downloadable datasets of Twitter Content or an API that returns Twitter Content, you may only return IDs (including tweet IDs and user IDs) \cite{twitter-api-terms}. A system that utilizes the API to gather and analyze a dataset can be built and run legally as long as the dataset is not made available, or the dataset only contains IDs.
 
 \subsubsection{General Terms of Service}
-Crawling the Services is permissible if done in accordance with the provisions of the robots.txt \cite{twitter-robots-txt} file, however, scraping the Services without the prior consent of Twitter is expressively prohibited \cite{twitter-tos}. It is thus possible to crawl Twitter as long as only the page is being indexed and it is done in accordance with robots.txt. Scraping the pages for tweets and other data can only be done with the prior consent of Twitter. Twitter has been contacted about whether or not data can be scraped for analysis in context of movie recommendations for a thesis. A decision maker with the authority to grant this kind of consent at Twitter has yet to reply to the request.
+Crawling the Services is permissible if done in accordance with the provisions of the file twitter.com/robots.txt \cite{twitter-robots-txt}. However, scraping the Services without the prior consent of Twitter is expressively prohibited \cite{twitter-tos}. It is thus possible to crawl Twitter as long as the page is only being indexed and it is done in accordance with twitter.com/robots.txt. Scraping the pages for tweets and other data can only be done with the prior consent of Twitter. Twitter has been contacted about whether or not data can be scraped for analysis in context of movie recommendations for this project. A decision maker with the authority to grant this kind of consent at Twitter has not replied to the request.
 
 
 \subsection{REST API}\label{sec:pre-twitter-rest}
-Twitters HTTP/HTTPS based REST API allows the application using it to perform many of the core functionalities of Twitter. The fully reflects Twitter's content.
+Twitter's HTTP/HTTPS based REST API allows the application using it to perform many of the core functionalities of Twitter. This API fully reflects Twitter's content.
 
 \subsubsection{Usage}
-The API is divided into POST and GET requests. The POST requests makes changes to twitter. A POST request could be for posting a tweet, update a users profile etc. The GET requests retrieves data from twitter. A GET request could be used to retrieve followees or followers of a user, retrieve the tweets on the timeline of a user etc. The data is returned as JSON. \cite{twitter-rest-api}
+The API is divided into POST and GET requests. The POST requests makes changes to Twitter. A POST request could be made for posting a tweet. Another POST request could be made to update a user's profile. The GET requests retrieves data from Twitter. A GET request could be made to retrieve the followees or followers of a user. Another GET request could be made retrieve the tweets on the time line of a user. The data is returned as JSON. \cite{twitter-rest-api}
 
 \subsubsection{Authentication}
-Twitters REST API uses an access token generated for the specific application in order to make a request. In addition, OAuth can be used if the session is on behalf of a specific user. Some requests such as posting a tweet can of course only be made on behalf of a user and thus requires OAuth. \cite{twitter-rest-api}
+Twitter's REST API uses an access token generated for the specific application in order to make a request. In addition, OAuth can be used if the session is on behalf of a specific user. Some requests such as posting a tweet can of course only be made on behalf of a user and thus requires OAuth. \cite{twitter-rest-api}
 
 \subsubsection{Rate Limit}
-The number of requests an application or a user can make is limited to a 15 minute window. Within this 15 minute window the each user can make 15 GET requests. This means that a user can retrieve the followees of 15 users withing the 15 minute window, but must wait until the 15 minutes have passed before retrieving more data. This means that large amounts of data can only be retrieved over long periods of time.
+The number of requests an application or a user can make is limited to a 15 minute window. Within this 15 minute window the each user can make 15 GET requests. This means that a user can retrieve the followees of 15 users withing the 15 minute window, but must wait until the 15 minutes have passed before retrieving more data. The effective request rate limit is 1 request per minute. This means that large amounts of data can only be retrieved over long periods of time.
 
-If only the application access token is used and not OAuth, the application as a whole can make 15 GET requests within the window. \cite{twitter-rate-limiting}
+If only the application access token is used and not OAuth, the application as a whole can make 15 GET requests within the 15 minute window. \cite{twitter-rate-limiting}
 
 \subsection{Search API}\label{sec:pre-twitter-search}
-Twitters Search API is a REST API that is used for searching for tweets that match a search query.
+Twitter's Search API is a REST API that is used for searching for tweets that match a search query.
 
 \subsubsection{Usage}
-The Search API uses only GET requests. Each GET request contains the search query as well as other parameters such as location to specify the search further. The API will return tweets that contain any of the words in the search query in any order. The tweets are returned as JSON.\cite{twitter-rest-api}
+The Search API uses only GET requests. Each GET request contains the search query as well as other parameters such as location to specify the search further. The API will return tweets that contain all the words in the search query in any order. The tweets are returned as JSON.\cite{twitter-rest-api}
 
-It is important to note that not all tweets are indexed in the Search API. Only a selected number of tweets, possibly within only a certain time frame are available. The tweets returned by the Search API are thus only a subset of all tweets.\cite{twitter-search-api-timeframe}
+It is important to note that not all tweets are indexed in the Search API. Only a selected number of tweets within the time frame of one week are available. The tweets returned by the Search API are thus only a subset of all tweets.\cite{twitter-search-api-timeframe}
 
 \subsubsection{Authentication}
 To authenticate, the access token generated for the application can be used as well as OAuth. This is the same as the REST API. \cite{twitter-rest-api}
 
 \subsubsection{Rate Limit}
-The number of requests that can be made are limited to 180 requests per 15 minute window for each OAuth. If the Search API is accessed using only the application access token, these limitations apply application-wide for any number of users.\cite{twitter-rate-limiting}
+The number of requests that can be made are limited to 180 requests per 15 minute window for each OAuth. In effect, the request rate limit is 12 requests per minute. If the Search API is accessed using only the application access token, these limitations apply application-wide for any number of users.\cite{twitter-rate-limiting}
 
 \subsection{Stream API}
-Twitters Stream API streams data from Twitter as it is created to a client through a persistent HTTPS connection. It is ideal for gathering the most up-to-date tweets or gathering large amounts of data over long periods of time.
+Twitter's Stream API streams data from Twitter as it is created to a client through a persistent HTTPS connection. It is ideal for gathering the most up-to-date tweets or gathering large amounts of data over long periods of time.
 
 \subsubsection{Usage}
 The client makes an initial GET request specifying the type of data it wants to receive. The request contains a list of up to 400 keywords. Any tweet that matches one or more of these keywords are considered part of the stream. The request can be directed to two endpoints: A public endpoints, which streams tweets from all users; or a user endpoint, which sterams tweets from a specific user.
@@ -720,7 +720,7 @@ The probabilistic neighborhood selection is a form of K-NN has a good runtime an
 \section{Development language and technologies}
 
 \subsection{Database}
-In order to easily retrieve data from the netflix prize dataset and store and retrieve data from twitter, it is useful to consider various kinds persistent storage or databases. There are three categories of options: Traditional file systems, SQL and NoSQL. Since traditional file systems are not designed for dynamically storing and retrieving data based on the structure of the data, they are not considered. The two options remaining are SQL and NoSQL which will be discussed and evaluated in the following sections.
+In order to easily retrieve data from the netflix prize dataset and store and retrieve data from Twitter, it is useful to consider various kinds persistent storage or databases. There are three categories of options: Traditional file systems, SQL and NoSQL. Since traditional file systems are not designed for dynamically storing and retrieving data based on the structure of the data, they are not considered. The two options remaining are SQL and NoSQL which will be discussed and evaluated in the following sections.
 
 \subsubsection*{NoSQL}
 % http://en.wikipedia.org/wiki/NoSQL
