@@ -650,10 +650,10 @@ What can be concluded from this is that there is data in a user's relationships 
 \subsubsection{BellKor's Pragmatic Chaos}
 BellKor's Pragmatic Chaos, the Prize winners of the Netflix Prize competition, was a group of scientists from AT\&T Labs, Yahoo!, Pragmatic Theory and Commendo Research \& Consulting. They achieved a RMSE of 0.8567, which was 10.06\% better than Netflix's own Cinematch score.
 
-TODO:mr fiks den følgende setningen. vanskelig å tolke.
-Models for the rating data is learned by fitting previously observed ratings, but since the model is to be used to predict feature ratings, overfitting the data. This achieved by regularizing the learned parameters.
+Models for the rating the data is learned by fitting previously observed ratings, but since the model is to be used to predict future ratings, overfitting the data must be avoided. This achieved by adding an error to the learned parameter, also known as regularizing the learned parameter.
+
 TODO:mr fiks hva er L2? hva er regularization?
-A regularization constant is used, and is set to L2 by default. This and other constant such as, step size and number of iterations are set manually.
+A regularization constant is used, and is tweaked . This and other constant such as, step size and number of iterations are set manually.
 TODO:mr fiks den følgende setningen. Ikke en full setning
 When the algorithm is run multiple times and constant value with best score is used. \cite{BellKor-CF-TD}
 
