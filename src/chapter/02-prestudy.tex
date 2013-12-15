@@ -63,7 +63,7 @@ With the training dataset the teams system was supposed to predict ratings on a 
 \textbf{Qualifying set} & 2 817 131 \\ \hline
 \textbf{Probe set} & 1 408 385 \\ \hline
 \end{tabular}
-\captionof{table}[Netflix dataset statistics]{The data statistics from the dataset provided by Netflix in the Netflix Prize competition}\label{tab:nfDatasetStat}
+\captionof{table}[Netflix Prize dataset statistics]{The data statistics from the dataset provided by Netflix in the Netflix Prize competition}\label{tab:nfDatasetStat}
 \end{table}
 
 \begin{figure}[H]
@@ -610,7 +610,7 @@ The issue with using a strict item-item based correlation and the MovieLens reco
 \subsubsection{MovieTweetings}\label{subsec:MovieTweetings}
 MovieTweetings is an application for fetching movie ratings through the Twitter API from Twitter. The application search for ratings shared from IMDB, a movie information webpage, and stored. The user has the option of sharing the rating or not on Twitter, in the last case, the rating will not be caught by the MovieTweetings application.
 
-With the use of a social media they wish to get a fresher dataset than using Netflix dataset, or MovieLens datasets~\ref{subsec:MovieLens}. At the time of writing the article they had more than 60 000 ratings, and about 500 new where added every day\cite{MovieTweetings}. The Twitter API is queried daily to update their database.
+With the use of a social media they wish to get a fresher dataset than using Netflix Prize dataset, or MovieLens datasets~\ref{subsec:MovieLens}. At the time of writing the article they had more than 60 000 ratings, and about 500 new where added every day\cite{MovieTweetings}. The Twitter API is queried daily to update their database.
 
 While querying the API for well structured tweets with ratings about movies are a good way to go when in search for a database with movie ratings, the data will be sparse. The data is not based on the users followers/followees, and will therefore not represent the social strength Twitter is capable of producing. A direct access to IMDB, rather than going through Twitter to get the rating information also seems like a simpler and more result-producing idea.
 
@@ -704,7 +704,7 @@ KNN is linear in the size of the training set, and therefore an efficient classi
 
 
 \subsubsection{Matrix Factorization}\label{subsubsec:matrixfac}
-There are several matrix factorization algorithms. Amongst them single value decomposition (SVD) and alternating least squares (ALS) are valid candidates. As we saw from Bellkor's solution~\ref{subsec:thewinners} single value decomposition was used, and was a good addition to their blend. The issue with this algorithm is that it is rather computationally expensive and re-computation is needed to be done when new ratings are added, and therefore not very applicable to a live recommendation system. SVD performs well on sparse matrices, which the Netflix dataset is~\cite{grobelnikDataSparsityIssues}.
+There are several matrix factorization algorithms. Amongst them single value decomposition (SVD) and alternating least squares (ALS) are valid candidates. As we saw from Bellkor's solution~\ref{subsec:thewinners} single value decomposition was used, and was a good addition to their blend. The issue with this algorithm is that it is rather computationally expensive and re-computation is needed to be done when new ratings are added, and therefore not very applicable to a live recommendation system. SVD performs well on sparse matrices, which the Netflix Prize dataset is~\cite{grobelnikDataSparsityIssues}.
 
 ALS is a simpler and a very parallelizable matrix factorization algorithm, more so than SVD, but with many of the benefits that matrix factorization brings~\cite{predusingmatrix}. This makes it an interesting algorithm to look at.
 
@@ -712,7 +712,7 @@ This algorithm can be used to populate sparse matrices, just like the one from N
 
 
 \subsection{Conclusion}\label{subsec:sim-sys-conc}
-There are two basic problems when analyzing very large datasets: Writing the code correctly and the performance (i.e. speed at which it runs). As we saw from~\ref{subsubsec:matrixfac}, matrix factorization was one of the algorithms which preformed the best on the Netflix dataset. This is also shown in figure~\ref{figure:sub-distr-nf}. But the issue with it is if we want new ratings to be included in the recommendation system, then we need to recompute all recommendations, which is not ideally for a live recommendation system, where recommendation should include as much information as possible to be accurate.
+There are two basic problems when analyzing very large datasets: Writing the code correctly and the performance (i.e. speed at which it runs). As we saw from~\ref{subsubsec:matrixfac}, matrix factorization was one of the algorithms which preformed the best on the Netflix Prize dataset. This is also shown in figure~\ref{figure:sub-distr-nf}. But the issue with it is if we want new ratings to be included in the recommendation system, then we need to recompute all recommendations, which is not ideally for a live recommendation system, where recommendation should include as much information as possible to be accurate.
 
 The ALS~\ref{subsubsec:matrixfac} proved to be a very parallelizable algorithm, and a potential good alternative to SVD when doing live recommendation. But this requires a lot of computational power to make it live updating and will not be feasible to run on a low-end personal computer when wanting live results. But could prove to be a potential algorithm to use if one where to scale up to a high-end system.
 
@@ -829,7 +829,7 @@ A reduction in the RMSE value will then indicate an improvement, and indicate th
 This section will sum up what we saw after doing the prestudy.
 
 \subsection{Netflix}
-The Netflix dataset is very sparse. With about 480 000 users and 17 770 movies there would have been a total of more than 8.5 billion ratings, but the dataset only contains ca 100 million ratings, so algorithms which can handle this kind of sparsity must be used, such as alternating least squares and k nearest neighbors. The standard way to evaluate the correctness of a solution in these kinds of problems are RMSE.
+The Netflix Prize dataset is very sparse. With about 480 000 users and 17 770 movies there would have been a total of more than 8.5 billion ratings, but the dataset only contains ca 100 million ratings, so algorithms which can handle this kind of sparsity must be used, such as alternating least squares and k nearest neighbors. The standard way to evaluate the correctness of a solution in these kinds of problems are RMSE.
 
 \subsection{Twitter}\label{sec:prestrud-eval-twitter}
 There are many different data types that can be retrieved from Twitter. The most dominating types and attributes are: Tweets, users, followees and followers.
