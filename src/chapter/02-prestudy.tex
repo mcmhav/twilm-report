@@ -114,7 +114,7 @@ Average rating distribution is shown in figure~\ref{figure:avgratingdistr}. The 
 \label{figure:avgmovierating}
 \end{figure}
 
-Average movie rating distribution is shown in figure~\ref{figure:avgmovierating}. For the edge ratings 1 and 5 have the least standard deviation. This implies that when a movie has many ratings, it usually is rated high. The same is implied for low ratings, while for the middle ratings 2 to 4, we see that the ratings variate more, and quite similarly for each rating. This implies that the middle ratings are harder to classify. More precisely, when a movie has a rating of 3 the average rating-shift is almost 1.1.
+Average movie rating distribution is shown in figure~\ref{figure:avgmovierating}. For the edge ratings 1 and 5 have the least standard deviation. This implies that when a movie has many ratings, it usually is rated high. The same is implied for low ratings, while for the middle ratings 2 to 4, it is evident that the ratings variate more, and quite similarly for each rating. This implies that the middle ratings are harder to classify. More precisely, when a movie has a rating of 3 the average rating-shift is almost 1.1.
 % End Netflix
 
 
@@ -193,7 +193,7 @@ Weka can let the user utilize its many machine-learnings algorithms in an easy a
 Twitter is a free social media network based on microblogging. In microblogging, a user can post a paragraph of a certain number of characters or less to his/her timeline. The user can also follow other users. Whenever the users that a given user is following posts something, the user can see these posts in his/her feed. This is the basis for many of todays most popular social media networks.
 
 \subsection{Terminology}
-For more clarity, we define the terminology Twitter uses. All words in \textbf{bold} are our own definitions for more easily describing how the various terms relate to each other.
+This section defines terminology related to Twitter. All words in \textbf{bold} are definitions constructed for this project in particular for more easily describing how the various Twitter terms relate to each other.
 
 \subsubsection{Tweet}
 A tweet is a post containing max 140 characters. It can also refer to the verb ‘to tweet’, which means ‘to post a tweet’. \textbf{tweets} is an attribute of a user which returns a list of tweets that the users
@@ -212,7 +212,7 @@ A follower is someone who follows a user. The follower will see the users tweets
   \textbf{user.followers -> [<user>]}
 
 \subsubsection{Followee}
-A followee is someone who a user is following. The user will appear in the followees list of followers, and the followee will appear in the users list with the name following. We will refer to the following list for a user as followees for clarity. \textbf{followees} is an attribute of a user which returns the list of users that the user is following.
+A followee is someone who a user is following. The user will appear in the followees list of followers, and the followee will appear in the users list with the name following. The following list for a user will be referred to as followees for clarity. \textbf{followees} is an attribute of a user which returns the list of users that the user is following.
 
   \textbf{user.followees -> [<user>]}
 
@@ -843,7 +843,7 @@ There are many different data types that can be retrieved from Twitter. The most
 
 There are several ways to access and retrieve this data. The REST API has the capability to retrieve the complete set of followees and followers for any given user. It lacks speed as it only allows 15 requests per 15 minute window.
 
-The Streaming API is also great in the sense of data completeness. It has the capability of capturing all tweets for any given topic described by keywords. However, it is slow in the sense that it takes a long time to build a dense dataset because less popular films are rarely tweeted about. In the study we see that even running the Stream API for over a year will only produce more than one tweet for about 65\% of the movies in the dataset. This is not satisfactory.
+The Streaming API is also great in the sense of data completeness. It has the capability of capturing all tweets for any given topic described by keywords. However, it is slow in the sense that it takes a long time to build a dense dataset because less popular films are rarely tweeted about. In the study it is shown that even running the Stream API for over a year will only produce more than one tweet for about 65\% of the movies in the dataset. This is not satisfactory.
 
 The Search API is great in the sense that it has looser limitations than the REST API. It can process a total of 180 requests per client per 15 minute window. It is however, like the Stream API limited in time span. The Search API only has a week worth of data. There is also no guarantee from Twitter's side for which time window the Search API reflects and thus no guarantee for the completeness of data. This renders the Search API almost completely similar in terms of data gathering capability to the Stream API, but inferior in certainty of data completeness. A slight advantage for Search over Stream is that keeping a persistent connection is not required which makes it easier to maintain.
 
