@@ -12,18 +12,18 @@ This chapter will give an overview of what this project is about, and give the p
 
 
 \section{Purpose}
-The goal of this project is to explore the correlation between social media and movie recommendation, and put down the cornerstones for such a system. The system is intended to produce ratings for movies based on a social media network (Twitter) and a set of movies with movie-ratings (Netflix-dataset). The social media network will be harvested for movies based on the movies from the movie-dataset, then these two datasets will be combined to open the possibility of TODO: maybe do this one together btw :P
+The goal of this project is to explore the correlation between social media and movie recommendation, and put down the cornerstones for such a system. The system is intended to produce ratings for movies based on a social media network (Twitter) and a set of movies with movie-ratings (Netflix dataset). The social media network will be harvested for movies based on the movies from the movie-dataset, then these two datasets will be combined to open the possibility of movie recommendation.
 
 \begin{table}[H]
     \centering
     \begin{tabular}{ l }
         \textbf{Goals} \\ \hline
-        Research on social media for recommendations \\
+        Understand how social media can be used for recommendations \\
         Implement harvesting \\
-        Gathering data \\
-        Constructing dataset \\
+        Gather data from Twitter \\
+        Supplement Netflix dataset with data from Twitter \\
         Implement prediction system \\
-        Comparing RMSE scores \\
+        Compare RMSE scores \\
     \end{tabular}
     \captionof{table}[Main goals]{The main goals of the research}
     \label{tab:main-goals}
@@ -33,7 +33,7 @@ The report is the cornerstone of this system, and is meant to ease further devel
 
 
 \section{Motivation}
-Social media networks are well established networks, they possess and produce big amounts of data on a daily basis. On Twitter, a social media site, 9 100 messages are posted every second~\cite{twitt-stats}, and on Facebook, another social media site, 1 million links are shared every 20 minuets~\cite{face-stats}. With this amount of data produced conclusions and predictions can be made through gathering the data and performing collaborative filtering on this data. One of the potential predictions to draw from this is movie ratings predictions. Hence the motivation for utilizing the vast amount of data for movie rating predictions.
+Social media networks are well established networks, they possess and produce big amounts of data on a daily basis. On Twitter, a social media site, 9 100 messages are posted every second~\cite{twitt-stats}, and on Facebook, another social media site, 1 million links are shared every 20 minuets~\cite{face-stats}. With this amount of data produced conclusions and predictions can be made through gathering the data and performing collaborative filtering on this data. One of the potential ways this data can be used is movie rating predictions. Hence the motivation for utilizing the vast amount of data for movie rating predictions.
 
 
 \section{Context}
@@ -46,7 +46,7 @@ The coming chapters describes the course of the project in order of the structur
   \hline \\ [-1.5ex]
   Chapter 1 & The Introduction chapter gives an overview of the project to the reader, and explains the tasks the project is meant to solve. \\
   \hline \\ [-1.5ex]
-  Chapter 2 & The Preliminary Study chapter describes work and research done, and how and why the choices made were made. This includes information about different technologies, such as Netflix and Twitter, how they can be used, different algorithms to work with and similar solutions. \\
+  Chapter 2 & The Preliminary Study chapter describes knowledge, research and technology that is relevant to the project, and how and why some of them were prioritized over others. This includes information about different technologies, such as Netflix and Twitter, how they can be used, different algorithms to work with and similar solutions. \\
   \hline \\ [-1.5ex]
   Chapter 3 & The Requirements chapter describes how the requirements where acquired and the major functional and non functional requirements of the system and why these are important for the system. \\
   \hline \\ [-1.5ex]
@@ -58,7 +58,7 @@ The coming chapters describes the course of the project in order of the structur
   \hline \\ [-1.5ex]
   Chapter 7 & The Conclusion chapter sums up the project and describes the findings and reflections around this. It also explores further work to be done. \\
   \hline \\ [-1.5ex]
-  Appendix & The appendix contains extended information such as a full list of the requirements and in depth design. \\
+  Appendix & The appendix contains extended information such as a full list of the requirements. \\
 \end{tabularx}
 \caption{Structure of Report}
 \label{table-reportstructure}
