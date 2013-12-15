@@ -11,14 +11,14 @@ This chapter will describe the capturing of the requirements and go into depth o
 \section{Capturing the Requirements}
 Based on the initial task at hand and the findings in the prestudy and, the requirements had a basis to get formed on. The initial task gave a coarse grained overview of how the requirements of the system should look like. The prestudy on similar solutions made what was feasible to do and what would be impractical to do clearer. For instance runtime of different recommendation algorithms and their ability to be parallelized. The prestudy on Twitter made it clear how Twitter can be explored and how it can be done in a timely manner. It also showed the difficulties in gathering sufficient data from the APIs and that scraping would work but could not be done due to legal considerations.
 
-An interesting find was that most of the recommendation systems for the Netflix prize had a more stationary ground to them, they only tried to get the RMSE as low as possible, not considering the fact that ratings would be constantly updated, and therefore a requirement to do live recommending with new input-information would require the already heavy computations to be run constantly on all the data often, which is less than feasible.
+An interesting find was that most of the recommendation systems for the Netflix Prize had a more stationary ground to them, they only tried to get the RMSE as low as possible, not considering the fact that ratings would be constantly updated, and therefore a requirement to do live recommending with new input-information would require the already heavy computations to be run constantly on all the data often, which is less than feasible.
 
 
 \section{Functional Requirements}\label{section:functional-requirements}
 This section will look at the major functional requirements, and see why these are central to the system. For a full list of the functional requirements see appendix~\ref{app:req}.
 \begin{description}
-  \item[FR1] The system must be able to harvest tweets and/or users from Twitter that are related to a movie in the Netflix-dataset
-  \item[FR6] The system must be able to supplement Netflix-dataset with tweets and/or users from Twitter that are related to a movie in the Netflix-dataset
+  \item[FR1] The system must be able to harvest tweets and/or users from Twitter that are related to a movie in the Netflix dataset
+  \item[FR6] The system must be able to supplement Netflix dataset with tweets and/or users from Twitter that are related to a movie in the Netflix dataset
   \item[FR7] The system must be able to predict ratings of the movies for all users in any dataset that reflects the Netflix dataset
 \end{description}
 
@@ -26,7 +26,7 @@ This section will look at the major functional requirements, and see why these a
 Since this is a research project on the use of social media to recommend and predict movie ratings, it is important that the system can access this information in a structured way. The gathered data must be releated to the the movies existing in the netflix dataset. This is because the amount of available data is vast. Unnecessary data will just produce static to the dataset, which is bad for the prediction system.
 
 \subsubsection{FR6}
-The Netflix-dataset consists of a set of movies and a set of users with ratings to these movies, this set is quite sparse as explored in~\ref{subsec:netflixdata}. By harvesting tweets from twitter this level of sparseness is expected to be reduced, and therefore increase the accuracy of the data. With a more complete set of data, and less sparseness, the algorithms to produce prediction of ratings will perform better~\cite{grobelnikDataSparsityIssues}. So the system must be able to merge the data from Netflix and the harvested data from Twitter so predictions can be made on the complete dataset.
+The Netflix dataset consists of a set of movies and a set of users with ratings to these movies, this set is quite sparse as explored in~\ref{subsec:netflixdata}. By harvesting tweets from twitter this level of sparseness is expected to be reduced, and therefore increase the accuracy of the data. With a more complete set of data, and less sparseness, the algorithms to produce prediction of ratings will perform better~\cite{grobelnikDataSparsityIssues}. So the system must be able to merge the data from Netflix and the harvested data from Twitter so predictions can be made on the complete dataset.
 
 \subsubsection{FR7}
 The system will be made up from multiple datasets, and it is important that these datasets are in the for that they can be made predictions on. With this comes the importance of predicting ratings of movies for all the users, so it is not just one user who can get movie recommendations. The dataset will be evergrowing, as new tweets will be added to the database continuously.

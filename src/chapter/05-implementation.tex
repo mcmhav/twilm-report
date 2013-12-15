@@ -11,7 +11,7 @@ This chapter discusses the major requirements, and implementation of the differe
 \section{Major Requirements}\label{impl:Major Requirements}
 \subsection{FR1}
 \begin{quotation}
-\em The system must be able to harvest tweets and/or users from Twitter that are related to a movie in the Netflix-dataset %not to edit, unless edit for all
+\em The system must be able to harvest tweets and/or users from Twitter that are related to a movie in the Netflix dataset %not to edit, unless edit for all
 \end{quotation}
 
 The fields Scrape and REST are implemented. Scrape can harvest tweets and users related to a movie title. REST can retrieve users related to users that relate to tweets about movies. Stream is implemented in a side project for quick iteration and hands-on testing. It can retrieve tweets related to movie titles.
@@ -28,7 +28,7 @@ Thus, the system can harvest tweets and users from Twitter related to movies in 
 
 \subsection{FR6}\label{subsec:FR6}
 \begin{quotation}
-\em The system must be able to supplement Netflix-dataset with tweets and/or users from Twitter that are related to a movie in the Netflix-dataset %not to edit, unless edit for all
+\em The system must be able to supplement Netflix dataset with tweets and/or users from Twitter that are related to a movie in the Netflix dataset %not to edit, unless edit for all
 \end{quotation}
 
 Because a dataset could not be retrieved from Twitter due to time constraints on the API based fields and legal constraints on the Scrape field there was no complete set of twitter data points to build a dataset with. The dataset building algorithm was not implemented. Thus, this requirement was not implemented, but remains a task for further work.
@@ -212,7 +212,7 @@ Then, test code would print each item retrieved to the console. For the example,
 At last, mongoDB console queries were made to retrieve these items from the database to make sure that all objects were stored by the harvester and that the objects were the same.
 
 \subsection{Not tested}
-Testing of the RMSE score of the system is not tested since the needed data was not acquired from twitter~\ref{sec:twitter}, neither is the merging of the Netflix-dataset with the Twitter-data for the same reason, which is the dataset building from the requirement in~\ref{subsec:FR6}.
+Testing of the RMSE score of the system is not tested since the needed data was not acquired from twitter~\ref{sec:twitter}, neither is the merging of the Netflix dataset with the Twitter-data for the same reason, which is the dataset building from the requirement in~\ref{subsec:FR6}.
 
 \subsubsection{The code}
 The testing of implemented code is not done. This is because the implemented code is of such a nature that the extra work to produce the testing would be rendered redundant in comparison with the gain from the actual testing.

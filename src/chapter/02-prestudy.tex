@@ -63,7 +63,7 @@ With the training dataset the teams system was supposed to predict ratings on a 
 \textbf{Qualifying set} & 2 817 131 \\ \hline
 \textbf{Probe set} & 1 408 385 \\ \hline
 \end{tabular}
-\captionof{table}[Netflix-dataset statistics]{The data statistics from the dataset provided by Netflix in the Netflix Prize competition}\label{tab:nfDatasetStat}
+\captionof{table}[Netflix dataset statistics]{The data statistics from the dataset provided by Netflix in the Netflix Prize competition}\label{tab:nfDatasetStat}
 \end{table}
 
 \begin{figure}[H]
@@ -704,7 +704,7 @@ KNN is linear in the size of the training set, and therefore an efficient classi
 
 
 \subsubsection{Matrix Factorization}\label{subsubsec:matrixfac}
-There are several matrix factorization algorithms. Amongst them single value decomposition (SVD) and alternating least squares (ALS) are valid candidates. As we saw from Bellkor's solution~\ref{subsec:thewinners} single value decomposition was used, and was a good addition to their blend. The issue with this algorithm is that it is rather computationally expensive and re-computation is needed to be done when new ratings are added, and therefore not very applicable to a live recommendation system. SVD performs well on sparse matrices, which the Netflix-dataset is~\cite{grobelnikDataSparsityIssues}.
+There are several matrix factorization algorithms. Amongst them single value decomposition (SVD) and alternating least squares (ALS) are valid candidates. As we saw from Bellkor's solution~\ref{subsec:thewinners} single value decomposition was used, and was a good addition to their blend. The issue with this algorithm is that it is rather computationally expensive and re-computation is needed to be done when new ratings are added, and therefore not very applicable to a live recommendation system. SVD performs well on sparse matrices, which the Netflix dataset is~\cite{grobelnikDataSparsityIssues}.
 
 ALS is a simpler and a very parallelizable matrix factorization algorithm, more so than SVD, but with many of the benefits that matrix factorization brings~\cite{predusingmatrix}. This makes it an interesting algorithm to look at.
 
@@ -821,7 +821,7 @@ The speed of python does not matter in the context of a web bottle neck. The alg
 
 
 \section{Result Testing}
-Root-mean-square error (RMSE)~\ref{subsubsec:rmse} is a way of testing estimated value against the actual value. This is how they measured the correctness of the submitted solutions in the Netflix prize competition. To explore the correctness and improvement of the solution, this seems like a good way to go. The recommendation system will be ran on both the netflix-dataset alone and on the netflix-dataset merged with the twitter-data.
+Root-mean-square error (RMSE)~\ref{subsubsec:rmse} is a way of testing estimated value against the actual value. This is how they measured the correctness of the submitted solutions in the Netflix Prize competition. To explore the correctness and improvement of the solution, this seems like a good way to go. The recommendation system will be ran on both the netflix-dataset alone and on the netflix-dataset merged with the twitter-data.
 
 A reduction in the RMSE value will then indicate an improvement, and indicate the gain from the collaboration of movie data and social media data.
 
@@ -829,7 +829,7 @@ A reduction in the RMSE value will then indicate an improvement, and indicate th
 This section will sum up what we saw after doing the prestudy.
 
 \subsection{Netflix}
-The Netflix-dataset is very sparse. With about 480 000 users and 17 770 movies there would have been a total of more than 8.5 billion ratings, but the dataset only contains ca 100 million ratings, so algorithms which can handle this kind of sparsity must be used, such as alternating least squares and k nearest neighbors. The standard way to evaluate the correctness of a solution in these kinds of problems are RMSE.
+The Netflix dataset is very sparse. With about 480 000 users and 17 770 movies there would have been a total of more than 8.5 billion ratings, but the dataset only contains ca 100 million ratings, so algorithms which can handle this kind of sparsity must be used, such as alternating least squares and k nearest neighbors. The standard way to evaluate the correctness of a solution in these kinds of problems are RMSE.
 
 \subsection{Twitter}\label{sec:prestrud-eval-twitter}
 There are many different data types that can be retrieved from Twitter. The most dominating types and attributes are: Tweets, users, followees and followers.
