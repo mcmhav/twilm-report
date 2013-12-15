@@ -801,14 +801,14 @@ For these reasons mongoDB was chosen as the most appropriate alternative.
 
 
 \subsection{Programming languages}
-The main focus of our project is to harvest large amounts of data from the web, store it quickly in a database and do large computations on this data quickly. Because the design and implementation is likely to go through many iterations, it is important that the language chosen is most of all easy to modify. Performance of the language is also a valuable property.
+The goals of the project involve harvesting large amounts of data from the web, store it quickly in a database and do large computations on this data quickly. Because the design and implementation is likely to go through many iterations, it is important that the language chosen is most of all easy to modify. Performance of the language is also a valuable property.
 
 \subsubsection{Ruby}
-Ruby is a dynamic, interpreted, open source programming language with a focus on simplicity and productivity. Even though it is some times difficult to interpret ruby because there are always a large number of different ways to achieve the same functionarlity, ruby has an elegant syntax that is natural to read and easy to write. This is due to the fact that everything in Ruby is an object. Essential parts of Ruby can be removed or redefined, at will. Existing parts can be added upon. Ruby tries not to restrict the coder. This makes Ruby very flexible. \cite{ruby-about}
+Ruby is a dynamic, interpreted, open source programming language with a focus on simplicity and productivity. Even though it is sometimes difficult to interpret ruby because there are always a large number of different ways to achieve the same functionality, ruby has an elegant syntax that is natural to read and easy to write. This is due to the fact that everything in Ruby is an object. Essential parts of Ruby can be removed or redefined, at will. Existing parts can be added upon. Ruby tries not to restrict the coder. This makes Ruby very flexible. \cite{ruby-about}
 
 Ruby has one of the largest and most well crafted packaging systems of any language today. Packages in ruby are referred to as gems. RubyGems.org hosts more than 66000 gems to date. Gems can easily be created with the gem development tools that come with ruby. Gems also have very advanced yet simple requirement specification through Gemfiles. The name of required gems and ranges of working versions are specified in the Gemfile. All required gems can then be fetched with a single command. Creating a new gem or publishing a gem are also single commands. This makes managing dependencies and reusing code in ruby a breeze.\cite{rubygems}
 
-Ruby is probably one of the most prevalent languages for modern web development. PHP is most likely still the most widely used, but ruby based web projects tend to be more managable due to the higher level frameworks and packages that are available.
+Ruby is probably one of the most prevalent languages for modern web development. PHP is most likely still the most widely used, but ruby based web projects tend to be more manageable due to the higher level frameworks and packages that are available.
 
 \subsubsection{Python}
 Python is a dynamic interpreted open source programming language. It is similar ruby in many ways. It has natural short typed syntax that is easy to read and write. For being an interpreted language, python is pretty fast. Python does not have an intuitive way of modifying existing parts of the language.\cite{python-about}
@@ -826,7 +826,7 @@ The speed of python does not matter in the context of a web bottle neck. The alg
 
 
 \section{Result Testing}
-Root-mean-square error (RMSE)~\ref{subsubsec:rmse} is a way of testing estimated value against the actual value. This is how they measured the correctness of the submitted solutions in the Netflix Prize competition. To explore the correctness and improvement of the solution, this seems like a good way to go. The recommendation system will be ran on both the netflix-dataset alone and on the netflix-dataset merged with the twitter-data.
+Root-mean-square error RMSE~\ref{subsubsec:rmse} is a way of testing estimated value against the actual value. This is how they measured the correctness of the submitted solutions in the Netflix Prize competition. To explore the correctness and improvement of the solution, this seems like a good way to go. The recommendation system will be ran on both the Netflix Dataset alone and on the Netflix Dataset merged with the twitter-data.
 
 A reduction in the RMSE value will then indicate an improvement, and indicate the gain from the collaboration of movie data and social media data.
 
