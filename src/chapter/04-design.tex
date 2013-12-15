@@ -3,18 +3,14 @@
 \chapter{Design}
 
 \minitoc
-This chapter the architecture and components in the architecture, how they were designed, and how they fulfill the requirements of the project.
+TODO: awesome chap description here
+This chapter describes the architecture and components in the architecture, how they were designed, and how they fulfill the requirements of the project.
 
 
 \clearpage
 
-
-\section{Definitions}
-
-
 \section{Architecture}
-The architecture of the project is based on The 4+1 View
-Model of Software Architecture \cite{Kruchten}. The views are used reflect the structural aspects, temporal aspects, technological development aspects and physical aspects of the project.
+The architecture of the project is based on The 4+1 View Model of Software Architecture \cite{Kruchten}. The views are used to reflect the structural aspects, temporal aspects, technological development aspects and physical aspects of the project.
 
 The architecture uses a custom simplified version of the 4+1 notation that better fits the descriptive needs for the project.
 
@@ -24,20 +20,20 @@ The logical view describes the components of the architecture and how they relat
 
 \begin{figure}[H]
 \centerline{\includegraphics[width=2.5in]{image/architecture-logical-view-notation.png}}
-\caption{Notation for the logical view.}
+\caption[Notation for the logical view]{Notation for the logical view.}
 \label{figure:logical-view-notation}
 \end{figure}
 
 \begin{center}
 \begin{figure}[H]
 \centerline{\includegraphics[width=7in]{image/architecture-logical-view.png}}
-\caption{Logical view of the project. See figure-\ref{figure:logical-view-notation} for notation.}
+\caption[Logical view of the project]{Logical view of the project. See figure-\ref{figure:logical-view-notation} for notation.}
 \label{figure:logical-view}
 \end{figure}
 \end{center}
 
 \subsubsection{Models}
-Models is the module responsible for holding the different datamodels that are used in the project. It is found in the upper left part of the logical view in figure-\ref{figure:logical-view}. All classes in this module are mapped to and reflect the database.
+Models is the module responsible for holding the different data models that are used in the project. It is found in the upper left part of the logical view in figure-\ref{figure:logical-view}. All classes in this module are mapped to and reflect the database.
 
 The Netflix Models model the Netflix Prize dataset. Each user has a list of movie ratings and each movie has a list of user ratings. The probe is a list of movies with empty user ratings that need to be predicted.
 
@@ -58,25 +54,25 @@ The harvesters uses the fields to gather and store Twitter data that matches a m
 The dataset builder is responsible for building a dataset that reflects the Netflix dataset using the data gathered from Twitter by the harvesters. This new dataset is stored in dataset model.
 
 \subsubsection{Predictor}
-The predictor is responsible for predicting movie ratings for a collection of users. The predictor does so by for a test set and comparing it to several entries in a dataset. The test set is usually the probe in the Netflix models. The dataset that the test set is compared to, is either the dataset model or the Netflix model. The predictor also gradually calculates RMSE as it is predicting ratings.
+The predictor is responsible for predicting movie ratings for a collection of users. The predictor does this by taking a test set and comparing it to several entries in a dataset. The test set is usually the probe in the Netflix models. The dataset that the test set is compared to, is either the dataset model or the Netflix model. The predictor also gradually calculates RMSE as it is predicting ratings.
 
 \subsection{Process View}
-The process view describes the actions that the components of the architecture engage in over time and how there actions relate to other components. See figure-\ref{figure:process-view}
+The process view describes the actions that the components of the architecture are engaged in over time, and how their actions relate to other components. See figure-\ref{figure:process-view}
 
 \begin{figure}[H]
 \centerline{\includegraphics[width=7in]{image/architecture-process-view.png}}
-\caption{Process view showing the actions taken by various components as time passes and which components they affect. Time is moving downward. An arrow implies that data is sent from one component to another. The data being sent can be a function call, an object or any other type available to the component taking the action.}
+\caption[Process View]{Process view showing the actions taken by various components as time passes and which components they affect. Time is moving downward. An arrow implies that data is sent from one component to another. The data being sent can be a function call, an object or any other type available to the component taking the action.}
 \label{figure:process-view}
 \end{figure}
 
 \subsubsection{Harvest Phase}
 The harvest phase is responsible for gathering data from Twitter. First, the harvester retrieves an initial model from either Netflix models or Twitter models. Then, it uses one or more fields to harvest data from Twitter that is related to the initial model. This can be tweets containing the movie title in the tweet.text, tweet.users for these tweets, users.each.followees and so forth, as outlined in the functional requirements related to harvesting in section~\ref{section:functional-requirements}. At last, the harvested data is stored as Twitter models.
 
-\subsubsection{Datset Building Phase}
-The dataset building phase is responsible for building a dataset using the data gathered from Twitter in the harvest phase. First, the dataset builder retrieves a Netflix model, which is likely to be a movie. Then, it retrieves Twitter models that are relevant for the Netflix model and consolidates them into a set of datapoints that expresses this Netflix model. At last, the datapoints are stored along with the Netflix model it expresses in the dataset model. In this way, the functional requirement in section~\ref{section:functional-requirements} for supplementing the netflix-dataset with data from Twitter is fulfilled.
+\subsubsection{Dataset Building Phase}
+The dataset building phase is responsible for building a dataset using the data gathered from Twitter in the harvest phase. First, the dataset builder retrieves a Netflix model, which is likely to be a movie. Then, it retrieves Twitter models that are relevant for the Netflix model and consolidates them into a set of data points that expresses this Netflix model. At last, the data points are stored along with the Netflix model it expresses in the dataset model. In this way, the functional requirement in section~\ref{section:functional-requirements} for supplementing the netflix-dataset with data from Twitter is fulfilled.
 
 \subsubsection{Prediction Phase}\label{subsubsec:predict-phase}
-The prediction phase is responsible for using the dataset model to predict the ratings of the probe in the Netflix model and calculate the RMSE. First, the predictor retrieves a datapoint from the probe. Then, it gathers the relevant datapoints it needs from the dataset model in order to make a prediction. After this step, the rating has been predicted and the contribution to the RMSE score is calculated and. The RMSE contribution is summed in the predictor and kept until all ratings have been predicted. At last, the predicted rating is stored in the prediciton model. When all ratings have been predicted and all the RMSE contributions have been added to the prediction model, the RMSE can be calculated and stored. Thus, the functional requirements in section~\ref{section:functional-requirements} related to giving and testing predictions are fulfilled.
+The prediction phase is responsible for using the dataset model to predict the ratings of the probe in the Netflix model and calculate the RMSE. First, the predictor retrieves a datapoint from the probe. Then, it gathers the relevant data points it needs from the dataset model in order to make a prediction. After this step, the rating has been predicted and the contribution to the RMSE score is calculated and. The RMSE contribution is summed in the predictor and kept until all ratings have been predicted. At last, the predicted rating is stored in the prediction model. When all ratings have been predicted and all the RMSE contributions have been added to the prediction model, the RMSE can be calculated and stored. Thus, the functional requirements in section~\ref{section:functional-requirements} related to giving and testing predictions are fulfilled.
 
 \subsection{Development View}
 The development view describes how the various technologies and implementeations are dependent on one another. A layered approach is used to depict this in figure-\ref{figure:development-view}. It shows how the commercial off-the-shelf software COTS is dependent on the underlying language they are built in. Also, it shows how the modules implemented in the project are dependent on the various COTS.
@@ -129,13 +125,13 @@ The prediction algorithm design is split into 3 parts. The last part depends on 
 
 \begin{description}
     \item[First - Retrieval part] \hfill \\
-    The system will retrieve the datapoints closest to the point to predict. These points are retrieved with a k-NN algorithm, which utilizes a probabilistic selection when selecting neighbors.
+    The system will retrieve the data points closest to the point to predict. These points are retrieved with a k-NN algorithm, which utilizes a probabilistic selection when selecting neighbors.
 
     \item[Second - Evaluation part] \hfill \\
-    The neighbors returned are evaluated, a prediction based on the datapoints and a confidence measure is produced on this prediction.
+    The neighbors returned are evaluated, a prediction based on the data points and a confidence measure is produced on this prediction.
 
     \item[Third - Learning part] \hfill \\
-    If a user rated a movie, the actual rating is compared with the predicted rating, and the datapoints are weighted regarding of the accuracy of the rating.
+    If a user rated a movie, the actual rating is compared with the predicted rating, and the data points are weighted regarding of the accuracy of the rating.
 \end{description}
 
 \begin{figure}[H]

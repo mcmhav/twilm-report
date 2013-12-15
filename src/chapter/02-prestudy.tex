@@ -5,9 +5,9 @@
 
 \minitoc
 \noindent
-This chapter documents the various technologies, research and information that are relevant to the project goals.
+This chapter studies various technologies, research and information that is relevant to the project goals.
 
-Beyond this, the study will serve to outline which direction the project should take and what methodologies should be used. Since the span of possibilities and directions is broad and few studies with similar goals and sufficient quality and completeness exist, the study is lengthy and a large part of the project.
+Beyond this, the study will serve to outline which direction the project must take and what methodologies must be used. Since there span of possibilities and directions are broad and few studies with similar goals of sufficient quality and completeness exist, the study is lengthy and a large part of the project.
 
 \clearpage
 
@@ -24,19 +24,19 @@ Beyond this, the study will serve to outline which direction the project should 
 \centering
 \includegraphics[width = .25\textwidth]{image/netflix-logo.png}
 \end{wrapfigure}
-This is the prestudy for the movie recommendation and movie rating prediction part of the system. It describes what Netflix is, its datasets, its statistics, and how to use them it.
+This is the prestudy for the movie recommendation part of the system. We will look into what Netflix is, at the datasets and its statistics, and how to explore it.
 
 \subsubsection{About Netflix}
-Netflix is an subscription based on-demand Internet media streaming service. It started out as a DVD-rental business, but changed to an Internet based business in 1999 and has since then been very successful in the media industry. To improve customer satisfaction they developed a personalized movie recommendation system called Cinematch. About 60\% of the Neflix users select their next movie or TV-show based on these recommendations~\cite{hownetflixworks}, so it is important that the system manages to capture the users movie and TV-show preferences and make good predictions about what the users want to watch.
+Netflix is a on-demand Internet streaming media. It started out as a DVD-rental business, but moved over to a more Internet based business model in 1999 and have from then on had a great success in the subscription-based digital distribution service. To improve customer satisfaction they developed a personalized video-recommendation system called Cinematch. About 60\% of the Neflix users select their next movie or TV-show based on this recommendation~\cite{hownetflixworks}, so it is important that this recommendation system manages to capture the users movie and TV-show preferences and feed back fitting movies and TV-shows.
 
 \subsubsection{Cinematch}
 \label{subsec:Cinematch}
 % http://electronics.howstuffworks.com/netflix2.htm
-Cinematch is a self-updating recommendation system. It works by searching the Cinematch database for users who have rated the same movie. Then, it finds the non-overlapping movie ratings for these users. At last, it calculates the likelihood that one of the users might like a movie that the user has not seen but that has been rated by the other user.
+This recommendation system is self-updating. It searches the Cinematch database for users who have rated the same movie, determents which of these again have rated a second movie and with this calculates likelihood that users who like the first also likes the second one.
 
 
-\subsection{The Netflix Prize Dataset}\label{subsec:netflixdata}
-Netflix held a competition to help Netflix improve their movie recommendation system. The team that could beat Netflix's own collaborative filtering system by more than 10\% won one million dollars. To measure the score root-mean-square error RMSE was used. RMSE is used to measure the difference between the values predicted or estimated and the actual values observed. The RMSE of Cinematch~\ref{subsec:Cinematch} was at 0.9525.
+\subsection{The Dataset}\label{subsec:netflixdata}
+Netflix held a competition where the contest was made to help Netflix improve their movie recommendation system. The team that could beat Netflix's own collaborative filtering system by more than 10\% could win one million dollars. To measure the score root-mean-square error (RMSE) was used, which is used to measure the difference between the values predicted or estimated and the actual values observed. The RMSE of Cinematch~\ref{subsec:Cinematch} was at 0.9525.
 
 \subsubsection{Root-mean-square error RMSE}\label{subsubsec:rmse}
 
@@ -44,14 +44,14 @@ Netflix held a competition to help Netflix improve their movie recommendation sy
 RMSE = \sqrt {{\frac{{\sum\limits_{{i = 1}}^n {{{\left( {{y_i} - {{\hat{y}}_i}} \right)}^2}} }}{{n}}}}
 \end{equation}
 
-The equation for calculating the RMSE is show in figure~\ref{eq:rmse}. It calculates how far the estimated value is from the actual value. Here ${y_i}$ is the actual value and ${\hat{y}}$ is the estimated value. The square difference of all the values are averaged by dividing by ${n}$. This produces the average distance of all the estimate values from the all the actual values~\cite{rmse}.
+The equation for calculating the RMSE is show in figure~\ref{eq:rmse}. It calculates how far the estimated value is from the actual value. Here ${y_i}$ is the actual value and ${\hat{y}}$ is the estimated value. The square difference of all the values are averaged, where ${n}$ is the number of values, this result is rooted. This produces the average distance of all the estimate values from the all the actual values~\cite{rmse}.
 
 
 \subsubsection{Competition}
 
-For this competition Netflix produced a training dataset based on user ratings from their own database. It contains 100 480 507 ratings by 480 189 unique users of 17 770 movies. The data is split up into 17 770 files, one for each movie, where the data is a triplet of the form <user, rating, date-of-rating>. The user-field and rating-field is an integer, while the date-of-rating-field is on the ISO 8601 form, year-month-day. The number of ratings is different from movie to movie and from user to user.
+For this competition Netflix produced a training dataset based on user ratings from their own database. It contains 100 480 507 ratings from 480 189 unique users on 17 770 movies. The data is split up into 17 770 files, one for each movie, where the data is a triplet of the form <user, rating, date-of-rating>. The user-field and rating-field is an integer, while the date-of-rating-field is on the ISO 8601 form, year-month-day. The different movies have different amounts of ratings, and the different users have rated different amounts of movies rated.
 
-With the training dataset, the teams system were supposed to predict ratings on a qualifying dataset, which contains 2 817 131 triplets with only user ids, movie ids and dates. This qualifying dataset must be disregarded since the actual ratings for this dataset was only know to the jury of the competition and is nowhere to be found. Instead, a probe set is provided with 1 408 385 users which can be used to remove these from the training set to test predictions based on the probe set. This probe set possesses similar statistical values to the qualifying set. Predictions based on the probe thus gives a good estimate of how the result actually would have scored in the competition\cite{nfprizeset}.
+With the training dataset the teams system was supposed to predict ratings on a "qualifying"-dataset, which contained 2 817 131 triplets with only user ids, movie ids and dates. This "qualifying"-datase must be disregarded since the actual ratings for this dataset was only know to the jury of the competition and is nowhere to be found. Instead a probe set is provided with 1 408 385 users which can be used to remove these from the training set to test predictions based on the test set. This probe set possesses similar statistical values as the qualifying set, so it will give a good prediction of how the result actually would have scored in the competition\cite{nfprizeset}.
 
 \begin{table}[H]
 \centering
@@ -69,7 +69,7 @@ With the training dataset, the teams system were supposed to predict ratings on 
 \begin{figure}[H]
 \includegraphics[width=5in]{image/sub-distr-nf.png}
 \centering
-\caption[Distribution of different submission]{Distribution of different submission amounts, their score and the most used algorithms to produce the RMSE score. One of the algorithms with better performance is singular value decomposition (SVD). Average movie rating algorithms were often used, but did not produce good recommendations, reducing the Cinematch score by 10-12\%)}
+\caption[Distribution of different submission]{Distribution of different submission amount, their score and the most used algorithms to produce the RMSE score. As we can see from the figure, one of the better performing algorithms are singular value decomposition (SVD). Approaches like using the average movie rating to suggest ratings and the average ratings for users, was often used, but did not produce a good recommendation (RMSE reduction from the Cinematch score by 10-12\%)}
 \label{figure:sub-distr-nf}
 \end{figure}
 
@@ -79,16 +79,16 @@ With the training dataset, the teams system were supposed to predict ratings on 
 % http://en.wikipedia.org/wiki/Latent_semantic_indexing
 % http://www.timelydevelopment.com/demos/NetflixPrize.aspx
 
-To better understand the dataset, some statistics about the dataset were produced.
+To better understand the dataset, some statistics about the dataset was produced.
 
 \begin{figure}[H]
 \includegraphics[width=5in]{image/ratingdistr.png}
 \centering
-\caption{Distribution of movie ratings given}
+\caption{Rating distribution}
 \label{figure:ratingdistr}
 \end{figure}
 
-The distribution of ratings given is shown in figure~\ref{figure:ratingdistr}. One third of the ratings given are 4. Ratings 1 and 2 only make up for 13\% of the rating distribution. 3 and 5 are quite similarly represented with 28\% and 26\% respectively. It can from this be assumed that higher ratings should be predicted more often than not.
+Rating distribution is shown in figure~\ref{figure:ratingdistr}. 1/3 of the ratings are 4, and rating 1 and 2 only makes up for 13\% of the rating distribution. 3 and 5 are quite similarly represented with 28\% and 26\% respectively. It can from this be assumed a greater prediction towards the higher ratings, and predictions towards lower ratings should not be done lightly.
 
 \begin{figure}[H]
 \includegraphics[width=5in]{image/avgratingdistr.png}
@@ -97,7 +97,7 @@ The distribution of ratings given is shown in figure~\ref{figure:ratingdistr}. O
 \label{figure:avgratingdistr}
 \end{figure}
 
-Average rating distribution is shown in figure~\ref{figure:avgratingdistr}. The upper red graph shows average rating distribution of the users, while the bottom orange graph shows the distribution per movie. Both graphs have quite similar form. Both customers and movies peak at a rating of 3,5, which is natural. The second highest point is for the customers at 4, and for the movies at 3. The actual average user rating of all movies is closer to 3.7.
+Average rating distribution is shown in figure~\ref{figure:avgratingdistr}. The red(upper) graph shows average rating distribution of the customers, while the orange(bottom) one shows the distribution per movie. Both graphs have quite similar form. Both customers and movies peak at a rating of 3,5, which is natural. The second highest point is for the customers at 4, and for the movies at 3. The actual average user rating of all movies is closer to 3.7.
 
 \begin{figure}[H]
 \includegraphics[width=5in]{image/avgratdistrover.png}
@@ -114,8 +114,9 @@ Average rating distribution is shown in figure~\ref{figure:avgratingdistr}. The 
 \label{figure:avgmovierating}
 \end{figure}
 
-Average movie rating distribution is shown in figure~\ref{figure:avgmovierating}. For the edge ratings 1 and 5 have the least standard deviation. This implies that when a movie has many ratings, it usually is rated high. The same is implied for low ratings, while for the middle ratings 2 to 4, we see that the ratings variate more, and quite similarly for each rating. This implies that the middle ratings are harder to classify. More precisely, when a movie has a rating of 3 the average rating-shift is almost 1.1.
+Average movie rating distribution is shown in figure~\ref{figure:avgmovierating}. Here we see that for the edge ratings (rating 1 or 5) has the least standard deviation, so when a movie is highly rated it usually is rated high, and the same goes for low ratings, while for the middle ratings (2 to 4) we see that it variates more, and quite similarly. So the middle ratings are harder to classify, in other words, when a movie has a rating of 3, the average rating-shift is almost 1.1.
 % End Netflix
+
 
 
 % About Weka
@@ -182,6 +183,9 @@ Listing~\ref{lst:arffEx} is an example of how an ARFF file is structured. It sta
 Weka can let the user utilize its many machine-learnings algorithms in an easy and convenient way. It opens for easy implementations of the algorithms though both just input of a file and get a result back, or though incorporating the algorithms in code.
 % End Weka
 
+
+
+
 % About Twitter
 \section{Twitter}\label{sec:twitter}
 
@@ -190,20 +194,20 @@ Weka can let the user utilize its many machine-learnings algorithms in an easy a
 \centering
 \includegraphics[width = .25\textwidth]{image/twitter-logo.png}
 \end{wrapfigure}
-Twitter is a free social media network based on microblogging. In microblogging, a user can post a paragraph of a certain number of characters or less to his/her timeline. The user can also follow other users. Whenever the users that a given user is following posts something, the user can see these posts in his/her feed. This is the basis for many of todays most popular social media networks.
+Twitter is a free social media network based on microblogging. In microblogging, a user can post a paragraph of a certain number of characters or less to his/her timeline. The user can also follow other users. Whenever the users that a given user is following posts something, the user can see these posts in his/her feed. This is the basis for many of todays most popular social media networks, including Twitter.
 
 \subsection{Terminology}
-For more clarity, we define the terminology Twitter uses. All words in \textbf{bold} are our own definitions for more easily describing how the various terms relate to each other.
+For more clarity, we define the terminology twitter uses. All words in \textbf{bold} are our own definitions for more easily describing how the various term relate to eachother.
 
 \subsubsection{Tweet}
 A tweet is a post containing max 140 characters. It can also refer to the verb ‘to tweet’, which means ‘to post a tweet’. \textbf{tweets} is an attribute of a user which returns a list of tweets that the users
 
   \textbf{user.tweets -> [<tweet>]}
 \subsubsection{User}
-A user is someone with a Twitter account. A user can post tweets. By following other users, Twitter generates a feed for the user containing the tweets of all the users they follow. They also have certain information retrieval tools available, such as filtering tweets by a tag name, specific user or search term.
+A user is someone with a twitter account. A user can post tweets. By following other users, twitter generates a feed for the user containing the tweets of all the users they follow. They also have certain information retrieval tools available, such as filtering tweets by a tag name, specific user or search term.
 
 \subsubsection{Tweeter}
-A user who tweets a tweet that is referenced in the same context. For example: The best tweets are tweeted by the most popular tweeters
+A user who tweets a tweet that is referenced in the same context. For instance: The best tweets are tweeted by the most popular tweeters
 
 
 \subsubsection{Follower}
@@ -212,70 +216,70 @@ A follower is someone who follows a user. The follower will see the users tweets
   \textbf{user.followers -> [<user>]}
 
 \subsubsection{Followee}
-A followee is someone who a user is following. The user will appear in the followees list of followers, and the followee will appear in the users list with the name following. We will refer to the following list for a user as followees for clarity. \textbf{followees} is an attribute of a user which returns the list of users that the user is following.
+A followee is someone who a user is following. The user will appear in the followees list of followers, and the followee will appear in the users list called ‘following’. We will refer to the list ‘following’ for a user as followees for clearer terminology. \textbf{followees} is an attribute of a user which returns the list of users that the user is following.
 
   \textbf{user.followees -> [<user>]}
 
 \subsubsection{Hashtag}
-Hashtags are topic labels that are placed on tweets by the tweeter. They are made by typing \#tagname anywhere in the tweet when composing it. By navigating to \#tagname, a user will see a feed of all tweets containing \#tagname. \textbf{hashtags} is a an attribute of a tweet which returns the list of hashtags that the tweet contains.
+Hashtags are topic labels that are placed on tweets. They are made by typing \#topicname anywhere in the tweet. By navigating to \#topicname, a user will see a feed of all tweets containing \#tagname. \textbf{hashtags} is a an attribute of a tweet which returns the list of hashtags the tweet contains.
 
   \textbf{tweet.hashtags -> [<hashtag>]}
 
 \noindent
-Hashtag also has the attribute tweets, which returns all tweets that have a certain hashtag. These hashtags are ordered by Twitter's algorithm which balances how recent the tweet is with the popularity of the tweeter.
+Hashtag also has the attribute tweets, which returns all tweets that have a certain hashtag. These hashtags are ordered by twitters algorithm which balances how recent the tweet is with the popularity of the tweeter.
 
   \textbf{hashtag.tweets -> [<tweet>]}
 
 \subsubsection{Usertag}
-Usertags are labels that are placed on tweets describing who the tweets are addressed to. They are made by typing @username anywhere in the tweet. This tweet will also show up in the feed of the user with name username. \textbf{usertags} is an attribute of a tweet which returns the list of users that the tweet is addressed to.
+Usertags are labels that are placed on tweets describing who the tweets are adressed to. They are made by typing @username anywhere in the tweet. This tweet will also show up in the feed of the user with name username. \textbf{usertags} is an attribute of a tweet which returns the list of users that the tweet is adressed to.
 
 \textbf{tweet.usertags -> [<user>]}
 
 \subsection{Legal Considerations}\label{sec:pre-twitter-legal}
-Collecting and using a data set from Twitter, a company whose currency is information, must be done in a way that complies with their rules and terms of service. This section considers the legal considerations of gathering data from Twitter with an automated system.
+Collect and use a data set from twitter, a company whose currency is information, must be done in a way that complies with their rules and terms of service. This section considers how an automated system can collect information from twitter and what an automated system can use it for.
 
 \subsubsection{API Terms}
-You may use the Twitter API and Twitter Content in connection with the products or services you provide (your "Service") to search, display, analyze, retrieve, view, and submit information to or on Twitter \cite{twitter-api-terms}. This means that data can be gathered from Twitter and analyzed as long as the Twitter API is being used.
+You may use the Twitter API and Twitter Content in connection with the products or services you provide (your "Service") to search, display, analyze, retrieve, view, and submit information to or on Twitter \cite{twitter-api-terms}. This means that data can be gathered within the limitations set by the API to gather a dataset and analyze it.
 
 If you provide downloadable datasets of Twitter Content or an API that returns Twitter Content, you may only return IDs (including tweet IDs and user IDs) \cite{twitter-api-terms}. A system that utilizes the API to gather and analyze a dataset can be built and run legally as long as the dataset is not made available, or the dataset only contains IDs.
 
 \subsubsection{General Terms of Service}
-Crawling the Services is permissible if done in accordance with the provisions of the file twitter.com/robots.txt \cite{twitter-robots-txt}. However, scraping the Services without the prior consent of Twitter is expressively prohibited \cite{twitter-tos}. It is thus possible to crawl Twitter as long as the page is only being indexed and it is done in accordance with twitter.com/robots.txt. Scraping the pages for tweets and other data can only be done with the prior consent of Twitter. Twitter has been contacted about whether or not data can be scraped for analysis in context of movie recommendations for this project. A decision maker with the authority to grant this kind of consent at Twitter has not replied to the request.
+Crawling the Services is permissible if done in accordance with the provisions of the robots.txt \cite{twitter-robots-txt} file, however, scraping the Services without the prior consent of Twitter is expressively prohibited \cite{twitter-tos}. It is thus possible to crawl Twitter as long as only the page is being indexed and it is done in accordance with robots.txt. Scraping the pages for tweets and other data can only be done with the prior consent of Twitter. Twitter has been contacted about whether or not data can be scraped for analysis in context of movie recommendations for a thesis. A decision maker with the authority to grant this kind of consent at Twitter has yet to reply to the request.
 
 
 \subsection{REST API}\label{sec:pre-twitter-rest}
-Twitter's HTTP/HTTPS based REST API allows the application using it to perform many of the core functionalities of Twitter. This API fully reflects Twitter's content.
+Twitters HTTP/HTTPS based REST API allows the application using it to perform many of the core functionalities of Twitter. The fully reflects Twitter's content.
 
 \subsubsection{Usage}
-The API is divided into POST and GET requests. The POST requests makes changes to Twitter. A POST request could be made for posting a tweet. Another POST request could be made to update a user's profile. The GET requests retrieves data from Twitter. A GET request could be made to retrieve the followees or followers of a user. Another GET request could be made retrieve the tweets on the time line of a user. The data is returned as JSON. \cite{twitter-rest-api}
+The API is divided into POST and GET requests. The POST requests makes changes to twitter. A POST request could be for posting a tweet, update a users profile etc. The GET requests retrieves data from twitter. A GET request could be used to retrieve followees or followers of a user, retrieve the tweets on the timeline of a user etc. The data is returned as JSON. \cite{twitter-rest-api}
 
 \subsubsection{Authentication}
-Twitter's REST API uses an access token generated for the specific application in order to make a request. In addition, OAuth can be used if the session is on behalf of a specific user. Some requests such as posting a tweet can of course only be made on behalf of a user and thus requires OAuth. \cite{twitter-rest-api}
+Twitters REST API uses an access token generated for the specific application in order to make a request. In addition, OAuth can be used if the session is on behalf of a specific user. Some requests such as posting a tweet can of course only be made on behalf of a user and thus requires OAuth. \cite{twitter-rest-api}
 
 \subsubsection{Rate Limit}
-The number of requests an application or a user can make is limited to a 15 minute window. Within this 15 minute window the each user can make 15 GET requests. This means that a user can retrieve the followees of 15 users withing the 15 minute window, but must wait until the 15 minutes have passed before retrieving more data. The effective request rate limit is 1 request per minute. This means that large amounts of data can only be retrieved over long periods of time.
+The number of requests an application or a user can make is limited to a 15 minute window. Within this 15 minute window the each user can make 15 GET requests. This means that a user can retrieve the followees of 15 users withing the 15 minute window, but must wait until the 15 minutes have passed before retrieving more data. This means that large amounts of data can only be retrieved over long periods of time.
 
-If only the application access token is used and not OAuth, the application as a whole can make 15 GET requests within the 15 minute window. \cite{twitter-rate-limiting}
+If only the application access token is used and not OAuth, the application as a whole can make 15 GET requests within the window. \cite{twitter-rate-limiting}
 
 \subsection{Search API}\label{sec:pre-twitter-search}
-Twitter's Search API is a REST API that is used for searching for tweets that match a search query.
+Twitters Search API is a REST API that is used for searching for tweets that match a search query.
 
 \subsubsection{Usage}
-The Search API uses only GET requests. Each GET request contains the search query as well as other parameters such as location to specify the search further. The API will return tweets that contain all the words in the search query in any order. The tweets are returned as JSON.\cite{twitter-rest-api}
+The Search API uses only GET requests. Each GET request contains the search query as well as other parameters such as location to specify the search further. The API will return tweets that contain any of the words in the search query in any order. The tweets are returned as JSON.\cite{twitter-rest-api}
 
-It is important to note that not all tweets are indexed in the Search API. Only a selected number of tweets within the time frame of one week are available. The tweets returned by the Search API are thus only a subset of all tweets.\cite{twitter-search-api-timeframe}
+It is important to note that not all tweets are indexed in the Search API. Only a selected number of tweets, possibly within only a certain time frame are available. The tweets returned by the Search API are thus only a subset of all tweets.\cite{twitter-search-api-timeframe}
 
 \subsubsection{Authentication}
 To authenticate, the access token generated for the application can be used as well as OAuth. This is the same as the REST API. \cite{twitter-rest-api}
 
 \subsubsection{Rate Limit}
-The number of requests that can be made are limited to 180 requests per 15 minute window for each OAuth. In effect, the request rate limit is 12 requests per minute. If the Search API is accessed using only the application access token, these limitations apply application-wide for any number of users.\cite{twitter-rate-limiting}
+The number of requests that can be made are limited to 180 requests per 15 minute window for each OAuth. If the Search API is accessed using only the application access token, these limitations apply application-wide for any number of users.\cite{twitter-rate-limiting}
 
 \subsection{Stream API}
-Twitter's Stream API streams data from Twitter as it is created to a client through a persistent HTTPS connection. It is ideal for gathering the most up-to-date tweets or gathering large amounts of data over long periods of time.
+Twitters Stream API streams data from twitter as it is created to a client through a persistent HTTPS connection. It is ideal for gathering the most up-to-date tweets or gathering large amounts of data over long periods of time.
 
 \subsubsection{Usage}
-The client makes an initial GET request specifying the type of data it wants to receive. The request contains a list of up to 400 keywords. Any tweet that matches one or more of these keywords are considered part of the stream. The request can be directed to two endpoints: A public endpoints, which streams tweets from all users; or a user endpoint, which streams tweets from a specific user.
+The client makes an initial GET request specifying the type of data it wants to receive. The request contains a list of up to 400 keywords. Any tweet that matches one or more of these keywords are considered part of the stream. The request can be directed to two endpoints: A public endpoints, which streams tweets from all users; or a user endpoint, which sterams tweets from a specific user.
 
 After the initial request is made, a persistent HTTP connection is opened. Then, the tweets that match the keywords in the initial request are streamed. The tweets keep streaming until the connection closes.
 
@@ -283,18 +287,18 @@ After the initial request is made, a persistent HTTP connection is opened. Then,
 Authentication for using the Stream API is done with OAuth. There is no application wide identification such as in the REST API and the Search API.
 
 \subsubsection{Limitations}
-There is no rate limit in the Stream API. However, there are a few cases in which the streaming will stop. For instance, If the client fails to receive the streamed data and Twitter's buffer builds up too many tweets, the connection will be closed. Also, if the client opens too many streams with the same credentials, the oldest connection will be closed.
+There is no rate limit in the Stream API. However, there are a few cases in which the streaming will stop. For instance, If the client fails to receive the streamed data and twitters buffer builds up too many tweets, the connection will be closed. Also, if the client opens too many streams with the same credentials, the oldest connection will be closed.
 
 It also takes the Stream API a very long time to create a dense dataset. By a few searches for movie titles that are less watched, it can easily be determined that many of them have only a few tweets posted about them over the span of years. This means that it would take at least a year for the Stream API to deliver any data points about the movie.
 
 \subsubsection{Testing API Capability}\label{sec:pre-stream-api-testing}
-To further understand what kind of dataset the Stream API would produce over time, a sample of 20 random movies were selected from the Netflix Prize dataset. The mongoDB console command used to retrieve this sample can be seen in listing~\ref{code:mongo-select-random-movie}. Then, the movie titles and release year were searched for using Twitter web search. Values were recorded for how many tweets were available for a search for a given movie within the last month, half a year and a full year. Values for how many days ago the last tweet for each movie was posted were also recorded. The results can be seen in table~\ref{table:stream-api-test-data}
+To further understand what kind of dataset the Stream API would produce with regards to time, a sample of 20 random movies were selected from the netflix prize dataset. The mongoDB shell command used to retrieve this sample can be seen in listing~\ref{code:mongo-select-random-movie}. Then, the movie titles and year were searched for using Twitter web search. Values were recorded for how many tweets were available for a search for a given movie within the last month, half a year and a full year. Values for how many days ago the last tweet for each movie was posted were also recorded. The results can be seen in table~\ref{table:stream-api-test-data}
 
 \begin{lstlisting}[caption={The mongoDB console command used to generate a random selection of movies},label={code:mongo-select-random-movie},captionpos=b]
 db.netflix_movies.find().limit(-1).skip(Math.random()*18000).next()
 \end{lstlisting}
 
-The data recorded in table~\ref{table:stream-api-test-data} was then aggregated to show the coverage of tweets for a given time period. The aggregation can be seen in table~\ref{table:stream-api-test-data}. If the Stream API is run for one year, about 65\% of the movies in the Netflix dataset will have one tweet or more. If more than 8 tweets are needed for a movie, the Stream API will only produce this number of tweets for about 45\% of the movies.
+The data recorded in table~\ref{table:stream-api-test-data} was then aggregated to show the coverage of tweets for a given time period. The aggregation can be seen in table~\ref{table:stream-api-test-data}. If the Stream API is run for one year, about 65\% of the movies in the netflix dataset will have one tweet or more. If more than 8 tweets are needed for a movie, the Stream API will only produce this number of tweets for about 45\% of the movies.
 
 \begin{table}[H]
 \centering
@@ -376,25 +380,26 @@ Hera Pheri&1975&&0&0&0
 
 
 \subsection{Crawling and Scraping Twitter}\label{sec:pre-twitter-crawl-scrape}
-This section will examine how to crawl and scrape Twitter's Web Search. This will be done by browsing twitter.com and examining the pages in Google Chrome Developer Tools GCDT\cite{gcdt} as the site is being browsed and search requests are being made. The goal of this examination is to discover requests a web crawler must be capable of making in order to search Twitter and harvest tweets and users automatically and how a scraper can distinguish the DOM elements that describe a tweet.
+TODO: Add appendixes from scrapbook.
+This section will examine how to crawl and scrape Twitters HTTPS Web Search. This will be examined by browsing twitter.com logged in as a user and examining it Google Chrome Developer Tools (GCDT)\cite{gcdt} as the site is being browsed and search requests are being made. The goal of this examination is to discover requests a webcrawler must be capable of making in order to search twitter and harvest tweets and users automatically and how a scraper can distinguish the dom elements that describe a tweet.
 
 
 \subsubsection{Search Request}
-Tweets can be found using an HTTP search request with the search query in the format URLE \cite{w3-urle-ref}.
-Searching for <URLE search query> can be done with the HTTP request is shown in listing-\ref{listing:search-request}.
-In the rest of the discussion, the search query "The Dark Knight Rises 2012" will be used. The search request for this search query parsed to URLE is shown in listing-\ref{listing:search-request-batman-urle}
+Tweets can be found using an HTTPS search request with the search query in the format URLE \cite{w3-urle-ref}
+Searching for <URLE search query> can be done with the HTTPS request shown in listing-\ref{listing:search-request}.
+In the rest of the discussion, we'll be using the search query "The Dark Knight Rises 2012". The search request for this search query parsed to URLE is shown in listing-\ref{listing:search-request-batman-urle}
 
-  \begin{lstlisting}[caption={URL of a Twitter HTTP search request for <URLE-search-query>},label={listing:search-request},captionpos=b]
-  http://twitter.com/search?q=<URLE-search-query>&src=typd&f=realtime
+  \begin{lstlisting}[caption={URL of a twitter HTTPS search request for <URLE-search-query>},label={listing:search-request},captionpos=b]
+  https://twitter.com/search?q=<URLE-search-query>&src=typd&f=realtime
   \end{lstlisting}
 
-\begin{lstlisting}[caption={URL of a Twitter HTTP search request for "The Dark Knight Rises 2012" parsed to URLE},label={listing:search-request-batman-urle},captionpos=b]
-  http://twitter.com/search?q=the%20dark%20knight%202012&src=typd&f=realtime
+\begin{lstlisting}[caption={URL of a twitter HTTPS search request for "The Dark Knight Rises 2012" parsed to URLE},label={listing:search-request-batman-urle},captionpos=b]
+  https://twitter.com/search?q=the%20dark%20knight%202012&src=typd&f=realtime
   \end{lstlisting}
 
-Using the GCDT \cite{gcdt} the DOM element on the search page that contains all the tweets that have been returned can be found using the select element tool. The HTML of this element is shown in listing-\ref{listing:tweet-container-html}. Within it, each tweet is contained in a DOM element like the one in listing-\ref{listing:tweet-element-html}
+Using the Google Chrome Developer Console \cite{gcdt} we can find the DOM elements on the search page that contains all the tweets that have been returned, using the select element tool. The HTML of this element is shown in listing-\ref{listing:tweet-container-html}. Within it, each tweet is contained in an HTML element like the one in listing-\ref{listing:tweet-element-html}
 
-  \begin{lstlisting}[caption={HTML of the DOM element containing all tweet elements},label={listing:tweet-container-html},captionpos=b]
+  \begin{lstlisting}[caption={HTML of the element containing all tweet elements},label={listing:tweet-container-html},captionpos=b]
   <ol class="stream-items js-navigable-stream" id="stream-items-id\">
   \end{lstlisting}
 
@@ -402,55 +407,50 @@ Using the GCDT \cite{gcdt} the DOM element on the search page that contains all 
   <li class="js-stream-item stream-item stream-item expanding-stream-item" data-item-id="397530125715402752" id="stream-item-tweet-397530125715402752" data-item-type="tweet">...</li>
   \end{lstlisting}
 
-Using jQuery \cite{jquery} and the JavaScript JS Console in GCDT \cite{gcdt}, it is possible to determine how many tweets have been returned. This is done by defining a JS function that selects the tweets elements and returns the number of elements in the list in listing-\ref{listing:tweet-count-function}. The function can be assured to work by counting the number of tweets displayed on the search result page and making sure that it matches the number returned by the function.
+Using jQuery \cite{jquery} and the Javascript Console in GCDT \cite{gcdt}, it is possible to determine how many tweets have been returned. This is done by defining javascript function that selects the tweets elements and returns the number of elements in this list in listing-\ref{listing:tweet-count-function}. The function can be assured to work by counting the number of tweets displayed on the search result page and making sure that it matches the number returned by the function.
 
-  \begin{lstlisting}[caption={Creating a function in GCDT JS Console for counting the occurance of tweets on the Twitter search result page},label={listing:tweet-count-function},captionpos=b]
+  \begin{lstlisting}[caption={Creating a function in GCDT Javascript Console for counting the occurance of tweets on the twitter search result page},label={listing:tweet-count-function},captionpos=b]
   > number_of_tweets_in_search_results = function(){ return $("li[data-item-type='tweet']").size(); }
   > number_of_tweets_in_search_results();
   15
   \end{lstlisting}
 
 \subsubsection{Scroll Search Results}
-In order to obtain more search results, it is necessary to scroll to the bottom of the page for the browser to make an XHR request to retrieve more tweets. As the scrolling is done, XHR requests can be monitored in the Network Console of GCDT. Consecutive XHR requests are sent as scrolling is done several times. This is shown in listing~\ref{lst:scrolling-gcdt}
+TODO: Add captions and references and use \$ for direct reference.
+In order to obtain more search results it is necessary to scroll to the bottom of the page for the browser to make an XHR request to retrieve more tweets. As the scrolling is done, XHR requests can be monitored in the Network tab of GCDT. Consecutive xhr requests are sent as scrolling is done several times.
 
-  \begin{lstlisting}[caption={GCDT JS Console and Network Console showing the effects of scrolling to the bottom of the Twitter search result page several times.},label={lst:scrolling-gcdt},captionpos=b]
-  JS Console:
+  \begin{lstlisting}[caption={TODO: Caption},label={},captionpos=b]
+  Javascript Console:
   > number_of_tweets_in_search_results();
   15
-
-  (Scrolling to the bottom of the page)
 
   Network Console > XHR:
   Request URL:https://twitter.com/i/search/timeline?q=the%20dark%20knight%202012&src=typd&include_available_features=1&include_entities=1&last_note_ts=0&scroll_cursor=TWEET-360758159364734978-399762568459612160
 
 
-  JS Console:
+  Javascript Console:
   > number_of_tweets_in_search_results();
   35
-
-  (Scrolling to the bottom of the page)
 
   Network Console > XHR:
   Request URL:https://twitter.com/i/search/timeline?q=the%20dark%20knight%202012&src=typd&include_available_features=1&include_entities=1&last_note_ts=0&oldest_unread_id=0&scroll_cursor=TWEET-338938038694584320-399762568459612160
 
-  JS Console:
+  Javascript Console:
   > number_of_tweets_in_search_results();
   50
-
-  (Scrolling to the bottom of the page)
 
   Network Console > XHR:
   Request URL:https://twitter.com/i/search/timeline?q=the%20dark%20knight%202012&src=typd&include_available_features=1&include_entities=1&last_note_ts=0&oldest_unread_id=0&scroll_cursor=TWEET-316893896573607937-399762568459612160
 
-  JS Console:
+  Javascript Console:
   > number_of_tweets_in_search_results();
   65
   \end{lstlisting}
 
-As the requests are sent and processed, tweets are appended to the tweets element. All that is needed in order to keep receiving tweets is to keep sending requests of this pattern. 
-The attributes of the XHR requests consist of the variables and constants shown in listing~\ref{lst:scrolling-xhr-variables}
+As the requests are sent and processed, tweets are appended to the tweets element. All that is needed in order to keep receiving tweets is to keep sending requests of this pattern.
+Examining the attributes of the XHR requests, they consists of the following variables and constants.
 
-  \begin{lstlisting}[caption={Variables and constants of the XHR requests sent when scrolling to the bottom of the Twitter search result page.},label={lst:scrolling-xhr-variables},captionpos=b]
+  \begin{lstlisting}[caption={TODO: Caption},label={},captionpos=b]
   constant src=typd
   constant include_available_features=1
   constant include_entities=1
@@ -459,24 +459,23 @@ The attributes of the XHR requests consist of the variables and constants shown 
   variable scroll_cursor=TWEET-<18 character number>-<18 character number>
   \end{lstlisting}
 
-The only attribute that seems to variate with each request is scroll\_cursor attribute. This means that the piece of JS code that is making the requests somehow has access to the information contained in this changing attribute. A DOM tree search for 'TWEET-' shows that scroll\_cursor is contained by a div with the class stream-container under the attribute 'data-scroll-cursor' and 'data-refresh-cursor' as seen in listing~\ref{lst:scroll-cursor}
+At this point a snapshot of the HTML page is taken [A3]. The only attribute that seems to variate with each request is scroll\_cursor attribute. This means that the piece of javascript code that is making the requests somehow has access to the information contained in this changing attribute. A DOM tree search for 'TWEET-' shows us that scroll\_cursor is contained by a div with the class stream-container under under the attribute 'data-scroll-cursor' and 'data-refresh-cursor'.
 
-  \begin{lstlisting}[caption={The div element of the Twitter search result that contains the scroll cursor which is used in the XHR requests made to retrieve more tweets when scrolling to the bottom of the page.},label={lst:scroll-cursor},captionpos=b]
+  \begin{lstlisting}[caption={TODO: Caption},label={},captionpos=b]
   <div class="stream-container" data-scroll-cursor="TWEET-311337362556846081-399762568459612160" data-refresh-cursor="TWEET-396773826303762432-399762568459612160">
   \end{lstlisting}
 
-By scrolling to the bottom of the page again, a request with scroll-cursor information from one of these attributes is sent.
-As shown in listing~\ref{lst:xhr-scroll-cursor-request}, the attribute data-scroll-cursor is responsible for what goes in the attribute scroll-cursor.
+By making another scroll to the bottom of the page, a request with scroll-cursor information from one of these attributes is sent.
+As is shown, the attribute data-scroll-cursor is responsible for what goes in the attribute scroll-cursor.
 
-  \begin{lstlisting}[caption={XHR request made when scrolling to the bottom of the page showing that the scroll cursor has been extracted from the div element in listing~\ref{lst:scroll-cursor}},label={lst:xhr-scroll-cursor-request},captionpos=b]
+  \begin{lstlisting}[caption={TODO: Caption},label={},captionpos=b]
   Network Console > XHR:
   https://twitter.com/i/search/timeline?q=the%20dark%20knight%202012&src=typd&include_available_features=1&include_entities=1&last_note_ts=0&scroll_cursor=TWEET-311337362556846081-399762568459612160
   \end{lstlisting}
 
 \subsubsection{Scraping Search Results}
 
-Each tweet element in the search results contains DOM elements of importance that can be scraped.
-These DOM elements are shown in table-\ref{table:important-tweet-element-elements}.
+Each tweet element in the search results contains DOM elements of importance that can be scraped. These DOM elements are shown in table-\ref{table:important-tweet-element-elements}.
 
 \begin{table}[H]
 \centering
@@ -494,12 +493,12 @@ These DOM elements are shown in table-\ref{table:important-tweet-element-element
 \end{table}
 
 \subsubsection{User Name}
-The user name can be found in the header of the tweet. Using GCDT Select, it can be extracted from the page as shown in blue in figure-\ref{figure:tweet-user-field}. It will be referred to as the user name element. The HTML of this element is shown in listing~\ref{user-name-element-html}.
+The user name can be found in the header of the tweet. Using the GCDT Select, it can be extracted from the page as shown in blue in figure-\ref{figure:tweet-user-field}. It will be referred to as the user name element.
 
 \begin{figure}[H]
 \includegraphics[width=4in]{image/tweet-user-field.png}
 \centering
-\caption{User name element (shown in blue) in a tweet retrieved by Twitter web search}
+\caption{User name element (shown in blue) in a tweet retrieved by twitter web search}
 \label{figure:tweet-user-field}
 \end{figure}
 
@@ -510,12 +509,12 @@ The user name can be found in the header of the tweet. Using GCDT Select, it can
 \noindent
 Using jQuery, a function can be created to count the occurances of the class "username js-action-profile-name", as shown in \ref{user-name-element-count-jquery-function}. This function can then be used to compare the number of user name elements in the DOM tree to the number of tweets in the search result, as shown in listing-\ref{user-elements-matches-tweets}. Since they are equal, it is likely that the right class is being scraped for the user name element.
 
-\begin{lstlisting}[caption={Creating a function in GCDT JS Console for counting the occurance of user name elements on the Twitter search result page},label={user-name-element-count-jquery-function},captionpos=b]
+\begin{lstlisting}[caption={Creating a function in GCDT Javascript Console for counting the occurance of user name elements on the twitter search result page},label={user-name-element-count-jquery-function},captionpos=b]
   > number_of_tweet_user_name_element_occurances = function(){ return $("span.username.js-action-profile-name").size() }
 \end{lstlisting}
 
 
-\begin{lstlisting}[caption={Running functions in GCDT JS Console to show that the number of user name elements matches the number of tweets},label={user-elements-matches-tweets},captionpos=b]
+\begin{lstlisting}[caption={Running functions in GCDT Javascript Console to show that the number of user name elements matches the number of tweets},label={user-elements-matches-tweets},captionpos=b]
   > number_of_tweet_user_name_element_occurances();
   119
   > number_of_tweets_in_search_results();
@@ -532,11 +531,11 @@ The user ID can also be found in the header. It is contained in the attribute da
 \noindent
 Using jQuery, a function can be created to count the occurances of the class used to specify the user id element, as shown in \ref{user-id-element-count-jquery-function}. This function can then be used to compare the number of user id elements in the DOM tree to the number of tweets in the search result, as shown in listing-\ref{user-id-elements-matches-tweets}. Since they are equal, it is likely that the right class is being scraped for the user id element.
 
-\begin{lstlisting}[caption={Creating a function in GCDT JS Console for counting the occurance of user id elements on the Twitter search result page},label={user-id-element-count-jquery-function},captionpos=b]
+\begin{lstlisting}[caption={Creating a function in GCDT Javascript Console for counting the occurance of user id elements on the twitter search result page},label={user-id-element-count-jquery-function},captionpos=b]
   > number_of_tweet_user_id_element_occurances = function(){ return $("a.account-group.js-account-group.js-action-profile.js-user-profile-link.js-nav").size() }
 \end{lstlisting}
 
-\begin{lstlisting}[caption={Running functions in GCDT JS Console to show that the number of user id elements matches the number of tweets},label={user-id-elements-matches-tweets},captionpos=b]
+\begin{lstlisting}[caption={Running functions in GCDT Javascript Console to show that the number of user id elements matches the number of tweets},label={user-id-elements-matches-tweets},captionpos=b]
   > number_of_tweet_user_id_element_occurances();
   21
   > number_of_tweets_in_search_results();
@@ -549,7 +548,7 @@ The tweet text can be found in the content of the tweet, as shown in blue in fig
   \begin{figure}[H]
 \includegraphics[width=4in]{image/tweet-text-and-url-field.png}
 \centering
-\caption{Tweet content element (shown in blue) in a tweet retrieved by Twitter web search}
+\caption{Tweet content element (shown in blue) in a tweet retrieved by twitter web search}
 \label{figure:tweet-text-field}
 \end{figure}
 
@@ -575,11 +574,11 @@ The tweet text can be found in the content of the tweet, as shown in blue in fig
 Using jQuery, a function can be created to count the occurances of the class "js-tweet-text tweet-text", which most likely describes all tweet content elements. The function is shown in listing-\ref{listing:tweet-content-element-count-function}. By comparing this number with the number of tweets in the search results and making sure it is equal, we can be confident that this class is describing the correct DOM element. The comparison is shown in
 listing-\ref{listing:tweet-content-element-count-comparison}
 
-\begin{lstlisting}[caption={Creating a function in GCDT JS Console for counting the occurance of tweet content elements on the Twitter search result page},label={listing:tweet-content-element-count-function},captionpos=b]
+\begin{lstlisting}[caption={Creating a function in GCDT Javascript Console for counting the occurance of tweet content elements on the twitter search result page},label={listing:tweet-content-element-count-function},captionpos=b]
   > number_of_tweet_content_element_occurances = function(){ return $("p.js-tweet-text.tweet-text").size() }
 \end{lstlisting}
 
-\begin{lstlisting}[caption={Running functions in GCDT JS Console to show that the number of tweet content elements matches the number of tweets},label={listing:tweet-content-element-count-comparison},captionpos=b]
+\begin{lstlisting}[caption={Running functions in GCDT Javascript Console to show that the number of tweet content elements matches the number of tweets},label={listing:tweet-content-element-count-comparison},captionpos=b]
   > number_of_tweet_content_element_occurances();
   119
   > number_of_tweets_in_search_results();
@@ -649,7 +648,7 @@ What we can take from this is the strength of a user relationships.
 
 \subsection{What the top Netflix-Prize contestants did}\label{subsec:thewinners}
 \subsubsection{BellKor's Pragmatic Chaos}
-BellKor's Pragmatic Chaos, the Prize winners of the Netflix-Prize competition, was a group of scientists from AT\&T Labs, Yahoo!, Pragmatic Theory and Commendo Research \& Consulting. They achieved a RMSE of 0.8567, which was 10.06\% better than Netflix's own Cinematch score.
+BellKor's Pragmatic Chaos, the prize winners of the Netflix-Prize competition, was a group of scientists from AT\&T Labs, Yahoo!, Pragmatic Theory and Commendo Research \& Consulting. They achieved a RMSE of 0.8567, which was 10.06\% better than Netflix's own Cinematch score.
 
 Models for the rating data is learned by fitting previously observed ratings, but since the model is to be used to predict feature ratings, overfitting the data. This achieved by regularizing the learned parameters. A regularization constant is used, and is set to L2 by default. This and other constant such as, step size and number of iterations are set manually through greedy manners. Where the algorithm is ran multiple times and constant value with best score is used. \cite{BellKor-CF-TD}
 
@@ -694,7 +693,7 @@ After the competition was done "The Ensemble" tested a merger of their system wi
 \subsubsection{Conclusion}
 After looking at the two top contestants from the competition a pattern is starting to form. Diversity is key to be able to predict user-ratings at a top level.
 
-While both the teams managed to produce a 10\% improvement over the original Netflix algorithm, it was never taken into use~\cite{nfbeyond5}. Even though SVD and and RBM lowers the RMSE to 0.88 alone, are they not as applicable as wanted. The actual rating amount is 50 times bigger than the training set, and for SVD to give an accurate value, it has to be recalculated for each new rating, which is not applicable in a world where live recommendation is expected~\cite{nfbeyond5}.
+While both the teams managed to produce a 10\% improvement over the original netflix algorithm, it was never taken into use~\cite{nfbeyond5}. Even though SVD and and RBM lowers the RMSE to 0.88 alone, are they not as applicable as wanted. The actual rating amount is 50 times bigger than the training set, and for SVD to give an accurate value, it has to be recalculated for each new rating, which is not applicable in a world where live recommendation is expected~\cite{nfbeyond5}.
 
 
 \subsection{Recommender Algorithms}
@@ -725,7 +724,7 @@ The probabilistic neighborhood selection is a form of K-NN has a good runtime an
 \section{Development language and technologies}
 
 \subsection{Database}
-In order to easily retrieve data from the Netflix Prize dataset and store and retrieve data from Twitter, it is useful to consider various kinds persistent storage or databases. There are three categories of options: Traditional file systems, SQL and NoSQL. Since traditional file systems are not designed for dynamically storing and retrieving data based on the structure of the data, they are not considered. The two options remaining are SQL and NoSQL which will be discussed and evaluated in the following sections.
+In order to easily retrieve data from the netflix prize dataset and store and retrieve data from twitter, it is useful to consider various kinds persistent storage or databases. There are three categories of options: Traditional file systems, SQL and NoSQL. Since traditional file systems are not designed for dynamically storing and retrieving data based on the structure of the data, they are not considered. The two options remaining are SQL and NoSQL which will be discussed and evaluated in the following sections.
 
 \subsubsection*{NoSQL}
 % http://en.wikipedia.org/wiki/NoSQL
@@ -774,17 +773,17 @@ MySQL, which is the faster of the SQL alternatives, was also considered.
 \subsubsection*{MongoDB}
 MongoDB is a large scale, high availability, robust system. It is a NoSQL document store. Instead of storing the data in tables as in SQL, the data is stored in a BSON document. BSON stands for Binary JSON and is essentially a JSON document that is stored in binary instead of ASCII. A JSON document is a nested hash which can hold any number of attributes without depending on the other documents in the store. It is thus schemaless. Even though it is schemaless, MongoDB still possesses the some of the great properties from SQL databases, such as indexes, dynamic queries and updates.
 
-MongoDB is implemented in C. It also has sharding which allows the database to scale horizontally. Custom queries and map-reduce queries can be written in JS which has fast interpreters. This makes mongoDB an efficient and high speed data base for storing, modifying and fetching data with a nested document structure \cite{mongodb-intro}. In addition it has bindings to many different languages, which is a great advantage if some of the modules that need to access the database needs to be written in a language other than what it originally was written in.
+MongoDB is implemented in C. It also has sharding which allows the database to scale horizontally. Custom queries and map-reduce queries can be written in JavaScript which has fast interpreters. This makes mongoDB an efficient and high speed data base for storing, modifying and fetching data with a nested document structure \cite{mongodb-intro}. In addition it has bindings to many different languages, which is a great advantage if some of the modules that need to access the database needs to be written in a language other than what it originally was written in.
 
 
 \subsubsection*{CouchDB}
-CouchDB is similar to MongoDB in the sense that it is a NoSQL Document store. It also has the same query capabilities as mongo and also uses JS as a query language. In addition, CouchDB has a HTTP REST API which allows any web application to access it easily. CouchDB has a lot of built in features which makes web development with CouchDB easy. One of the greatest advantages is the intuitive web-based admin user-interface that is provided.
+CouchDB is similar to MongoDB in the sense that it is a NoSQL Document store. It also has the same query capabilities as mongo and also uses JavaScript as a query language. In addition, CouchDB has a HTTP REST API which allows any web application to access it easily. CouchDB has a lot of built in features which makes web development with CouchDB easy. One of the greatest advantages is the intuitive web-based admin user-interface that is provided.
 CouchDB does not support sharding which makes it less horizontally scalable. An alternative to achieve this is to use CouchBase, which is the distributed version of CouchDB. CouchDB is implemented in erlang. While erlang is faster than it used to be, it is certainly slower than a similar system written in pure C. In addition, CouchDB stores a copy of every single document every time it is modified. This makes CouchDB grow in size with time.
 \cite{couchdb-about, couchdb-technical}
 
 
 \subsubsection*{MySQL}
-MySQL is one of the most popular database in the world of open databases. This is because of its high performance, reliability and ease of use. It should therefore be considered for the question of which database system to use. MySQL is an SQL based relational database, as opposed to the two NoSQL databases. It has bindings to most languages. It provides a much more advanced high level query language than a typical NoSQL document store. This is great for easily making complex queries during development, which is somewhat more tricky in NoSQL and JS. However it is somewhat slower because of the interpretation of this high level language. The SQL database schema makes it more difficult to change the format of the data. MySQL also does not support JSON which is one of the most common standards for data retrieved from the web. This creates extra work with parsing JSON to the schema or invoking a mapper that has been created for this purpose.
+MySQL is one of the most popular database in the world of open databases. This is because of its high performance, reliability and ease of use. It should therefore be considered for the question of which database system to use. MySQL is an SQL based relational database, as opposed to the two NoSQL databases. It has bindings to most languages. It provides a much more advanced high level query language than a typical NoSQL document store. This is great for easily making complex queries during development, which is somewhat more tricky in NoSQL and JavaScript. However it is somewhat slower because of the interpretation of this high level language. The SQL database schema makes it more difficult to change the format of the data. MySQL also does not support JSON which is one of the most common standards for data retrieved from the web. This creates extra work with parsing JSON to the schema or invoking a mapper that has been created for this purpose.
 \cite{mysql-about}
 
 
@@ -839,13 +838,13 @@ There are several ways to access and retrieve this data. The REST API has the ca
 
 The Streaming API is also great in the sense of data completeness. It has the capability of capturing all tweets for any given topic described by keywords. It is however slow in the sense that it takes a long time to build a dense dataset because less popular films are rarely tweeted about. In the study we see that even running the Stream API for over a year will only produce more than one tweet for about 65\% of the movies in the dataset. This is not satisfactory.
 
-The Search API is great in the sense that it has looser limitations than the REST API. It can process a total of 180 requests per client per 15 minute window. It is however, like the Stream API limited in time span. The Search API only has a week worth of data. There is also no guarantee from Twitter's side for which time window the Search API reflects and thus no guarantee for the completeness of data. This renders the Search API almost completely similar in terms of data gathering capability to the Stream API, but inferior in certainty of data completeness. A slight advantage for Search over Stream is that keeping a persistent connection is not required which makes it easier to maintain.
+The Search API is great in the sense that it has looser limitations than the REST API. It can process a total of 180 requests per client per 15 minute window. It is however, like the Stream API limited in time span. The Search API only has a week worth of data. There is also no guarantee from Twitters side for which time window the Search API reflects and thus no guarantee for the completeness of data. This renders the Search API almost completely similar in terms of data gathering capability to the Stream API, but inferior in certainty of data completeness. A slight advantage for Search over Stream is that keeping a persistent connection is not required which makes it easier to maintain.
 
 Scraping is the best solution in terms of data completeness and time consumption. It achieves what the Stream API is capable of achieving in years in mere days. However, it is a more complicated and error prone procedure as the scraping must be done by the client and the content being scraped is not under its control. The scraping procedure itself is more difficult to test than to just utilize an existing api. This makes Scraping more prone to sparseness and errors in the dataset. However, the speed with which an entire site can be crawled and scraped compared to the years it takes the Stream API to collect a dataset of the same density, makes it easy to test run a scraper, correct errors as they are found and run the scraper over again.
 
 All of the previously mentioned APIs have the advantage that all the data gathered by them can be be aggregated and analyzed. Aggregations and analysis of data obtained by these means can be legally used to create services, including movie recommenders.
 
-One problem with scraping is that it is not allowed by Twitter without their consent. As Twitter's consent has not been granted to scrape Twitter for the purposes of the project, a dataset based on scraping can not be gathered. The data can certainly not be used to legally create services like movie recommenders.
+One problem with scraping is that it is not allowed by Twitter without their consent. As Twitters consent has not been granted to scrape Twitter for the purposes of the project, a dataset based on scraping can not be gathered. The data can certainly not be used to legally create services like movie recommenders.
 
 All of the techniques for gathering data from Twitter discussed have pros and cons in terms of how dense of a dataset they build, how likely the dataset is to contain errors, how long they take to run and the legallity of how the data collection. As APIs exist for all techniques except scraping, the barrier for utilizing them are low. Implementing them and having them available has a low cost in terms of development time and each API increases the richness of available data. Implementing a scraper is also a good idea in case consent from Twitter is obtained as it has superior performance compared to any of the other techniques considered.
 
