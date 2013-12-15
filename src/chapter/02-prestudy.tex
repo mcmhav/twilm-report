@@ -285,10 +285,10 @@ Authentication for using the Stream API is done with OAuth. There is no applicat
 \subsubsection{Limitations}
 There is no rate limit in the Stream API. However, there are a few cases in which the streaming will stop. For instance, If the client fails to receive the streamed data and Twitter's buffer builds up too many tweets, the connection will be closed. Also, if the client opens too many streams with the same credentials, the oldest connection will be closed.
 
-It also takes the Stream API a very long time to create a dense dataset. By a few searches for movie titles that are less watched, it can easily be determined that many of them have only a few tweets posted about them over the span of years. This means that it would take at least a year for the Stream API to deliver any datapoints about the movie.
+It also takes the Stream API a very long time to create a dense dataset. By a few searches for movie titles that are less watched, it can easily be determined that many of them have only a few tweets posted about them over the span of years. This means that it would take at least a year for the Stream API to deliver any data points about the movie.
 
 \subsubsection{Testing API Capability}\label{sec:pre-stream-api-testing}
-To further understand what kind of dataset the Stream API would produce with regards to time, a sample of 20 random movies were selected from the Netflix Prize dataset. The mongoDB shell command used to retrieve this sample can be seen in listing~\ref{code:mongo-select-random-movie}. Then, the movie titles and year were searched for using Twitter web search. Values were recorded for how many tweets were available for a search for a given movie within the last month, half a year and a full year. Values for how many days ago the last tweet for each movie was posted were also recorded. The results can be seen in table~\ref{table:stream-api-test-data}
+To further understand what kind of dataset the Stream API would produce over time, a sample of 20 random movies were selected from the Netflix Prize dataset. The mongoDB console command used to retrieve this sample can be seen in listing~\ref{code:mongo-select-random-movie}. Then, the movie titles and release year were searched for using Twitter web search. Values were recorded for how many tweets were available for a search for a given movie within the last month, half a year and a full year. Values for how many days ago the last tweet for each movie was posted were also recorded. The results can be seen in table~\ref{table:stream-api-test-data}
 
 \begin{lstlisting}[caption={The mongoDB console command used to generate a random selection of movies},label={code:mongo-select-random-movie},captionpos=b]
 db.netflix_movies.find().limit(-1).skip(Math.random()*18000).next()
@@ -376,26 +376,25 @@ Hera Pheri&1975&&0&0&0
 
 
 \subsection{Crawling and Scraping Twitter}\label{sec:pre-twitter-crawl-scrape}
-TODO: Add appendixes from scrapbook.
-This section will examine how to crawl and scrape Twitter's HTTPS Web Search. This will be examined by browsing twitter.com logged in as a user and examining it Google Chrome Developer Tools (GCDT)\cite{gcdt} as the site is being browsed and search requests are being made. The goal of this examination is to discover requests a webcrawler must be capable of making in order to search Twitter and harvest tweets and users automatically and how a scraper can distinguish the dom elements that describe a tweet.
+This section will examine how to crawl and scrape Twitter's Web Search. This will be done by browsing twitter.com and examining the pages in Google Chrome Developer Tools GCDT\cite{gcdt} as the site is being browsed and search requests are being made. The goal of this examination is to discover requests a web crawler must be capable of making in order to search Twitter and harvest tweets and users automatically and how a scraper can distinguish the DOM elements that describe a tweet.
 
 
 \subsubsection{Search Request}
-Tweets can be found using an HTTPS search request with the search query in the format URLE \cite{w3-urle-ref}
-Searching for <URLE search query> can be done with the HTTPS request shown in listing-\ref{listing:search-request}.
-In the rest of the discussion, we'll be using the search query "The Dark Knight Rises 2012". The search request for this search query parsed to URLE is shown in listing-\ref{listing:search-request-batman-urle}
+Tweets can be found using an HTTP search request with the search query in the format URLE \cite{w3-urle-ref}.
+Searching for <URLE search query> can be done with the HTTP request is shown in listing-\ref{listing:search-request}.
+In the rest of the discussion, the search query "The Dark Knight Rises 2012" will be used. The search request for this search query parsed to URLE is shown in listing-\ref{listing:search-request-batman-urle}
 
-  \begin{lstlisting}[caption={URL of a Twitter HTTPS search request for <URLE-search-query>},label={listing:search-request},captionpos=b]
-  https://twitter.com/search?q=<URLE-search-query>&src=typd&f=realtime
+  \begin{lstlisting}[caption={URL of a Twitter HTTP search request for <URLE-search-query>},label={listing:search-request},captionpos=b]
+  http://twitter.com/search?q=<URLE-search-query>&src=typd&f=realtime
   \end{lstlisting}
 
-\begin{lstlisting}[caption={URL of a Twitter HTTPS search request for "The Dark Knight Rises 2012" parsed to URLE},label={listing:search-request-batman-urle},captionpos=b]
-  https://twitter.com/search?q=the%20dark%20knight%202012&src=typd&f=realtime
+\begin{lstlisting}[caption={URL of a Twitter HTTP search request for "The Dark Knight Rises 2012" parsed to URLE},label={listing:search-request-batman-urle},captionpos=b]
+  http://twitter.com/search?q=the%20dark%20knight%202012&src=typd&f=realtime
   \end{lstlisting}
 
-Using the Google Chrome Developer Console \cite{gcdt} we can find the DOM elements on the search page that contains all the tweets that have been returned, using the select element tool. The HTML of this element is shown in listing-\ref{listing:tweet-container-html}. Within it, each tweet is contained in an HTML element like the one in listing-\ref{listing:tweet-element-html}
+Using the GCDT \cite{gcdt} the DOM element on the search page that contains all the tweets that have been returned can be found using the select element tool. The HTML of this element is shown in listing-\ref{listing:tweet-container-html}. Within it, each tweet is contained in a DOM element like the one in listing-\ref{listing:tweet-element-html}
 
-  \begin{lstlisting}[caption={HTML of the element containing all tweet elements},label={listing:tweet-container-html},captionpos=b]
+  \begin{lstlisting}[caption={HTML of the DOM element containing all tweet elements},label={listing:tweet-container-html},captionpos=b]
   <ol class="stream-items js-navigable-stream" id="stream-items-id\">
   \end{lstlisting}
 
@@ -403,50 +402,55 @@ Using the Google Chrome Developer Console \cite{gcdt} we can find the DOM elemen
   <li class="js-stream-item stream-item stream-item expanding-stream-item" data-item-id="397530125715402752" id="stream-item-tweet-397530125715402752" data-item-type="tweet">...</li>
   \end{lstlisting}
 
-Using jQuery \cite{jquery} and the Javascript Console in GCDT \cite{gcdt}, it is possible to determine how many tweets have been returned. This is done by defining javascript function that selects the tweets elements and returns the number of elements in this list in listing-\ref{listing:tweet-count-function}. The function can be assured to work by counting the number of tweets displayed on the search result page and making sure that it matches the number returned by the function.
+Using jQuery \cite{jquery} and the JavaScript JS Console in GCDT \cite{gcdt}, it is possible to determine how many tweets have been returned. This is done by defining a JS function that selects the tweets elements and returns the number of elements in the list in listing-\ref{listing:tweet-count-function}. The function can be assured to work by counting the number of tweets displayed on the search result page and making sure that it matches the number returned by the function.
 
-  \begin{lstlisting}[caption={Creating a function in GCDT Javascript Console for counting the occurance of tweets on the Twitter search result page},label={listing:tweet-count-function},captionpos=b]
+  \begin{lstlisting}[caption={Creating a function in GCDT JS Console for counting the occurance of tweets on the Twitter search result page},label={listing:tweet-count-function},captionpos=b]
   > number_of_tweets_in_search_results = function(){ return $("li[data-item-type='tweet']").size(); }
   > number_of_tweets_in_search_results();
   15
   \end{lstlisting}
 
 \subsubsection{Scroll Search Results}
-TODO: Add captions and references and use \$ for direct reference.
-In order to obtain more search results it is necessary to scroll to the bottom of the page for the browser to make an XHR request to retrieve more tweets. As the scrolling is done, XHR requests can be monitored in the Network tab of GCDT. Consecutive xhr requests are sent as scrolling is done several times.
+In order to obtain more search results, it is necessary to scroll to the bottom of the page for the browser to make an XHR request to retrieve more tweets. As the scrolling is done, XHR requests can be monitored in the Network Console of GCDT. Consecutive XHR requests are sent as scrolling is done several times. This is shown in listing~\ref{lst:scrolling-gcdt}
 
-  \begin{lstlisting}[caption={TODO: Caption},label={},captionpos=b]
-  Javascript Console:
+  \begin{lstlisting}[caption={GCDT JS Console and Network Console showing the effects of scrolling to the bottom of the Twitter search result page several times.},label={lst:scrolling-gcdt},captionpos=b]
+  JS Console:
   > number_of_tweets_in_search_results();
   15
+
+  (Scrolling to the bottom of the page)
 
   Network Console > XHR:
   Request URL:https://twitter.com/i/search/timeline?q=the%20dark%20knight%202012&src=typd&include_available_features=1&include_entities=1&last_note_ts=0&scroll_cursor=TWEET-360758159364734978-399762568459612160
 
 
-  Javascript Console:
+  JS Console:
   > number_of_tweets_in_search_results();
   35
+
+  (Scrolling to the bottom of the page)
 
   Network Console > XHR:
   Request URL:https://twitter.com/i/search/timeline?q=the%20dark%20knight%202012&src=typd&include_available_features=1&include_entities=1&last_note_ts=0&oldest_unread_id=0&scroll_cursor=TWEET-338938038694584320-399762568459612160
 
-  Javascript Console:
+  JS Console:
   > number_of_tweets_in_search_results();
   50
+
+  (Scrolling to the bottom of the page)
 
   Network Console > XHR:
   Request URL:https://twitter.com/i/search/timeline?q=the%20dark%20knight%202012&src=typd&include_available_features=1&include_entities=1&last_note_ts=0&oldest_unread_id=0&scroll_cursor=TWEET-316893896573607937-399762568459612160
 
-  Javascript Console:
+  JS Console:
   > number_of_tweets_in_search_results();
   65
   \end{lstlisting}
 
-As the requests are sent and processed, tweets are appended to the tweets element. All that is needed in order to keep receiving tweets is to keep sending requests of this pattern.
-Examining the attributes of the XHR requests, they consists of the following variables and constants.
+As the requests are sent and processed, tweets are appended to the tweets element. All that is needed in order to keep receiving tweets is to keep sending requests of this pattern. 
+The attributes of the XHR requests consist of the variables and constants shown in listing~\ref{lst:scrolling-xhr-variables}
 
-  \begin{lstlisting}[caption={TODO: Caption},label={},captionpos=b]
+  \begin{lstlisting}[caption={Variables and constants of the XHR requests sent when scrolling to the bottom of the Twitter search result page.},label={lst:scrolling-xhr-variables},captionpos=b]
   constant src=typd
   constant include_available_features=1
   constant include_entities=1
@@ -455,23 +459,24 @@ Examining the attributes of the XHR requests, they consists of the following var
   variable scroll_cursor=TWEET-<18 character number>-<18 character number>
   \end{lstlisting}
 
-At this point a snapshot of the HTML page is taken [A3]. The only attribute that seems to variate with each request is scroll\_cursor attribute. This means that the piece of javascript code that is making the requests somehow has access to the information contained in this changing attribute. A DOM tree search for 'TWEET-' shows us that scroll\_cursor is contained by a div with the class stream-container under under the attribute 'data-scroll-cursor' and 'data-refresh-cursor'.
+The only attribute that seems to variate with each request is scroll\_cursor attribute. This means that the piece of JS code that is making the requests somehow has access to the information contained in this changing attribute. A DOM tree search for 'TWEET-' shows that scroll\_cursor is contained by a div with the class stream-container under the attribute 'data-scroll-cursor' and 'data-refresh-cursor' as seen in listing~\ref{lst:scroll-cursor}
 
-  \begin{lstlisting}[caption={TODO: Caption},label={},captionpos=b]
+  \begin{lstlisting}[caption={The div element of the Twitter search result that contains the scroll cursor which is used in the XHR requests made to retrieve more tweets when scrolling to the bottom of the page.},label={lst:scroll-cursor},captionpos=b]
   <div class="stream-container" data-scroll-cursor="TWEET-311337362556846081-399762568459612160" data-refresh-cursor="TWEET-396773826303762432-399762568459612160">
   \end{lstlisting}
 
-By making another scroll to the bottom of the page, a request with scroll-cursor information from one of these attributes is sent.
-As is shown, the attribute data-scroll-cursor is responsible for what goes in the attribute scroll-cursor.
+By scrolling to the bottom of the page again, a request with scroll-cursor information from one of these attributes is sent.
+As shown in listing~\ref{lst:xhr-scroll-cursor-request}, the attribute data-scroll-cursor is responsible for what goes in the attribute scroll-cursor.
 
-  \begin{lstlisting}[caption={TODO: Caption},label={},captionpos=b]
+  \begin{lstlisting}[caption={XHR request made when scrolling to the bottom of the page showing that the scroll cursor has been extracted from the div element in listing~\ref{lst:scroll-cursor}},label={lst:xhr-scroll-cursor-request},captionpos=b]
   Network Console > XHR:
   https://twitter.com/i/search/timeline?q=the%20dark%20knight%202012&src=typd&include_available_features=1&include_entities=1&last_note_ts=0&scroll_cursor=TWEET-311337362556846081-399762568459612160
   \end{lstlisting}
 
 \subsubsection{Scraping Search Results}
 
-Each tweet element in the search results contains DOM elements of importance that can be scraped. These DOM elements are shown in table-\ref{table:important-tweet-element-elements}.
+Each tweet element in the search results contains DOM elements of importance that can be scraped.
+These DOM elements are shown in table-\ref{table:important-tweet-element-elements}.
 
 \begin{table}[H]
 \centering
@@ -489,7 +494,7 @@ Each tweet element in the search results contains DOM elements of importance tha
 \end{table}
 
 \subsubsection{User Name}
-The user name can be found in the header of the tweet. Using the GCDT Select, it can be extracted from the page as shown in blue in figure-\ref{figure:tweet-user-field}. It will be referred to as the user name element.
+The user name can be found in the header of the tweet. Using GCDT Select, it can be extracted from the page as shown in blue in figure-\ref{figure:tweet-user-field}. It will be referred to as the user name element. The HTML of this element is shown in listing~\ref{user-name-element-html}.
 
 \begin{figure}[H]
 \includegraphics[width=4in]{image/tweet-user-field.png}
@@ -505,12 +510,12 @@ The user name can be found in the header of the tweet. Using the GCDT Select, it
 \noindent
 Using jQuery, a function can be created to count the occurances of the class "username js-action-profile-name", as shown in \ref{user-name-element-count-jquery-function}. This function can then be used to compare the number of user name elements in the DOM tree to the number of tweets in the search result, as shown in listing-\ref{user-elements-matches-tweets}. Since they are equal, it is likely that the right class is being scraped for the user name element.
 
-\begin{lstlisting}[caption={Creating a function in GCDT Javascript Console for counting the occurance of user name elements on the Twitter search result page},label={user-name-element-count-jquery-function},captionpos=b]
+\begin{lstlisting}[caption={Creating a function in GCDT JS Console for counting the occurance of user name elements on the Twitter search result page},label={user-name-element-count-jquery-function},captionpos=b]
   > number_of_tweet_user_name_element_occurances = function(){ return $("span.username.js-action-profile-name").size() }
 \end{lstlisting}
 
 
-\begin{lstlisting}[caption={Running functions in GCDT Javascript Console to show that the number of user name elements matches the number of tweets},label={user-elements-matches-tweets},captionpos=b]
+\begin{lstlisting}[caption={Running functions in GCDT JS Console to show that the number of user name elements matches the number of tweets},label={user-elements-matches-tweets},captionpos=b]
   > number_of_tweet_user_name_element_occurances();
   119
   > number_of_tweets_in_search_results();
@@ -527,11 +532,11 @@ The user ID can also be found in the header. It is contained in the attribute da
 \noindent
 Using jQuery, a function can be created to count the occurances of the class used to specify the user id element, as shown in \ref{user-id-element-count-jquery-function}. This function can then be used to compare the number of user id elements in the DOM tree to the number of tweets in the search result, as shown in listing-\ref{user-id-elements-matches-tweets}. Since they are equal, it is likely that the right class is being scraped for the user id element.
 
-\begin{lstlisting}[caption={Creating a function in GCDT Javascript Console for counting the occurance of user id elements on the Twitter search result page},label={user-id-element-count-jquery-function},captionpos=b]
+\begin{lstlisting}[caption={Creating a function in GCDT JS Console for counting the occurance of user id elements on the Twitter search result page},label={user-id-element-count-jquery-function},captionpos=b]
   > number_of_tweet_user_id_element_occurances = function(){ return $("a.account-group.js-account-group.js-action-profile.js-user-profile-link.js-nav").size() }
 \end{lstlisting}
 
-\begin{lstlisting}[caption={Running functions in GCDT Javascript Console to show that the number of user id elements matches the number of tweets},label={user-id-elements-matches-tweets},captionpos=b]
+\begin{lstlisting}[caption={Running functions in GCDT JS Console to show that the number of user id elements matches the number of tweets},label={user-id-elements-matches-tweets},captionpos=b]
   > number_of_tweet_user_id_element_occurances();
   21
   > number_of_tweets_in_search_results();
@@ -570,11 +575,11 @@ The tweet text can be found in the content of the tweet, as shown in blue in fig
 Using jQuery, a function can be created to count the occurances of the class "js-tweet-text tweet-text", which most likely describes all tweet content elements. The function is shown in listing-\ref{listing:tweet-content-element-count-function}. By comparing this number with the number of tweets in the search results and making sure it is equal, we can be confident that this class is describing the correct DOM element. The comparison is shown in
 listing-\ref{listing:tweet-content-element-count-comparison}
 
-\begin{lstlisting}[caption={Creating a function in GCDT Javascript Console for counting the occurance of tweet content elements on the Twitter search result page},label={listing:tweet-content-element-count-function},captionpos=b]
+\begin{lstlisting}[caption={Creating a function in GCDT JS Console for counting the occurance of tweet content elements on the Twitter search result page},label={listing:tweet-content-element-count-function},captionpos=b]
   > number_of_tweet_content_element_occurances = function(){ return $("p.js-tweet-text.tweet-text").size() }
 \end{lstlisting}
 
-\begin{lstlisting}[caption={Running functions in GCDT Javascript Console to show that the number of tweet content elements matches the number of tweets},label={listing:tweet-content-element-count-comparison},captionpos=b]
+\begin{lstlisting}[caption={Running functions in GCDT JS Console to show that the number of tweet content elements matches the number of tweets},label={listing:tweet-content-element-count-comparison},captionpos=b]
   > number_of_tweet_content_element_occurances();
   119
   > number_of_tweets_in_search_results();
@@ -769,17 +774,17 @@ MySQL, which is the faster of the SQL alternatives, was also considered.
 \subsubsection*{MongoDB}
 MongoDB is a large scale, high availability, robust system. It is a NoSQL document store. Instead of storing the data in tables as in SQL, the data is stored in a BSON document. BSON stands for Binary JSON and is essentially a JSON document that is stored in binary instead of ASCII. A JSON document is a nested hash which can hold any number of attributes without depending on the other documents in the store. It is thus schemaless. Even though it is schemaless, MongoDB still possesses the some of the great properties from SQL databases, such as indexes, dynamic queries and updates.
 
-MongoDB is implemented in C. It also has sharding which allows the database to scale horizontally. Custom queries and map-reduce queries can be written in JavaScript which has fast interpreters. This makes mongoDB an efficient and high speed data base for storing, modifying and fetching data with a nested document structure \cite{mongodb-intro}. In addition it has bindings to many different languages, which is a great advantage if some of the modules that need to access the database needs to be written in a language other than what it originally was written in.
+MongoDB is implemented in C. It also has sharding which allows the database to scale horizontally. Custom queries and map-reduce queries can be written in JS which has fast interpreters. This makes mongoDB an efficient and high speed data base for storing, modifying and fetching data with a nested document structure \cite{mongodb-intro}. In addition it has bindings to many different languages, which is a great advantage if some of the modules that need to access the database needs to be written in a language other than what it originally was written in.
 
 
 \subsubsection*{CouchDB}
-CouchDB is similar to MongoDB in the sense that it is a NoSQL Document store. It also has the same query capabilities as mongo and also uses JavaScript as a query language. In addition, CouchDB has a HTTP REST API which allows any web application to access it easily. CouchDB has a lot of built in features which makes web development with CouchDB easy. One of the greatest advantages is the intuitive web-based admin user-interface that is provided.
+CouchDB is similar to MongoDB in the sense that it is a NoSQL Document store. It also has the same query capabilities as mongo and also uses JS as a query language. In addition, CouchDB has a HTTP REST API which allows any web application to access it easily. CouchDB has a lot of built in features which makes web development with CouchDB easy. One of the greatest advantages is the intuitive web-based admin user-interface that is provided.
 CouchDB does not support sharding which makes it less horizontally scalable. An alternative to achieve this is to use CouchBase, which is the distributed version of CouchDB. CouchDB is implemented in erlang. While erlang is faster than it used to be, it is certainly slower than a similar system written in pure C. In addition, CouchDB stores a copy of every single document every time it is modified. This makes CouchDB grow in size with time.
 \cite{couchdb-about, couchdb-technical}
 
 
 \subsubsection*{MySQL}
-MySQL is one of the most popular database in the world of open databases. This is because of its high performance, reliability and ease of use. It should therefore be considered for the question of which database system to use. MySQL is an SQL based relational database, as opposed to the two NoSQL databases. It has bindings to most languages. It provides a much more advanced high level query language than a typical NoSQL document store. This is great for easily making complex queries during development, which is somewhat more tricky in NoSQL and JavaScript. However it is somewhat slower because of the interpretation of this high level language. The SQL database schema makes it more difficult to change the format of the data. MySQL also does not support JSON which is one of the most common standards for data retrieved from the web. This creates extra work with parsing JSON to the schema or invoking a mapper that has been created for this purpose.
+MySQL is one of the most popular database in the world of open databases. This is because of its high performance, reliability and ease of use. It should therefore be considered for the question of which database system to use. MySQL is an SQL based relational database, as opposed to the two NoSQL databases. It has bindings to most languages. It provides a much more advanced high level query language than a typical NoSQL document store. This is great for easily making complex queries during development, which is somewhat more tricky in NoSQL and JS. However it is somewhat slower because of the interpretation of this high level language. The SQL database schema makes it more difficult to change the format of the data. MySQL also does not support JSON which is one of the most common standards for data retrieved from the web. This creates extra work with parsing JSON to the schema or invoking a mapper that has been created for this purpose.
 \cite{mysql-about}
 
 
