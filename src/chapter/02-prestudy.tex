@@ -381,8 +381,8 @@ This section will examine how to crawl and scrape Twitter's Web Search. This wil
 
 \subsubsection{Search Request}
 Tweets can be found using an HTTP search request with the search query in the format URLE \cite{w3-urle-ref}.
-Searching for <URLE search query> can be done with the HTTP request is shown in listing-\ref{listing:search-request}.
-In the rest of the discussion, the search query "The Dark Knight Rises 2012" will be used. The search request for this search query parsed to URLE is shown in listing-\ref{listing:search-request-batman-urle}
+Searching for <URLE search query> can be done with the HTTP request is shown in listing~\ref{listing:search-request}.
+In the rest of the discussion, the search query "The Dark Knight Rises 2012" will be used. The search request for this search query parsed to URLE is shown in listing~\ref{listing:search-request-batman-urle}
 
   \begin{lstlisting}[caption={URL of a Twitter HTTP search request for <URLE-search-query>},label={listing:search-request},captionpos=b]
   http://twitter.com/search?q=<URLE-search-query>&src=typd&f=realtime
@@ -392,7 +392,7 @@ In the rest of the discussion, the search query "The Dark Knight Rises 2012" wil
   http://twitter.com/search?q=the%20dark%20knight%202012&src=typd&f=realtime
   \end{lstlisting}
 
-Using the GCDT \cite{gcdt} the DOM element on the search page that contains all the tweets that have been returned can be found using the select element tool. The HTML of this element is shown in listing-\ref{listing:tweet-container-html}. Within it, each tweet is contained in a DOM element like the one in listing-\ref{listing:tweet-element-html}
+Using the GCDT \cite{gcdt} the DOM element on the search page that contains all the tweets that have been returned can be found using the select element tool. The HTML of this element is shown in listing~\ref{listing:tweet-container-html}. Within it, each tweet is contained in a DOM element like the one in listing~\ref{listing:tweet-element-html}
 
   \begin{lstlisting}[caption={HTML of the DOM element containing all tweet elements},label={listing:tweet-container-html},captionpos=b]
   <ol class="stream-items js-navigable-stream" id="stream-items-id\">
@@ -402,7 +402,7 @@ Using the GCDT \cite{gcdt} the DOM element on the search page that contains all 
   <li class="js-stream-item stream-item stream-item expanding-stream-item" data-item-id="397530125715402752" id="stream-item-tweet-397530125715402752" data-item-type="tweet">...</li>
   \end{lstlisting}
 
-Using jQuery \cite{jquery} and the JS Console in GCDT \cite{gcdt}, it is possible to determine how many tweets have been returned. This is done by defining JS function that selects the tweets elements and returns the number of elements in this list in listing-\ref{listing:tweet-count-function}. The function can be assured to work by counting the number of tweets displayed on the search result page and making sure that it matches the number returned by the function.
+Using jQuery \cite{jquery} and the JS Console in GCDT \cite{gcdt}, it is possible to determine how many tweets have been returned. This is done by defining JS function that selects the tweets elements and returns the number of elements in this list in listing~\ref{listing:tweet-count-function}. The function can be assured to work by counting the number of tweets displayed on the search result page and making sure that it matches the number returned by the function.
 
   \begin{lstlisting}[caption={Creating a function in GCDT JS Console for counting the occurance of tweets on the Twitter search result page},label={listing:tweet-count-function},captionpos=b]
   > number_of_tweets_in_search_results = function(){ return $("li[data-item-type='tweet']").size(); }
@@ -476,7 +476,7 @@ As shown in listing~\ref{lst:xhr-scroll-cursor-request}, the attribute data-scro
 \subsubsection{Scraping Search Results}
 
 Each tweet element in the search results contains DOM elements of importance that can be scraped.
-These DOM elements are shown in table-\ref{table:important-tweet-element-elements}.
+These DOM elements are shown in table~\ref{table:important-tweet-element-elements}.
 
 \begin{table}[H]
 \centering
@@ -494,7 +494,7 @@ These DOM elements are shown in table-\ref{table:important-tweet-element-element
 \end{table}
 
 \subsubsection{User Name}
-The user name can be found in the header of the tweet. Using GCDT Select, it can be extracted from the page as shown in blue in figure-\ref{figure:tweet-user-field}. It will be referred to as the user name element. The HTML of this element is shown in listing~\ref{user-name-element-html}.
+The user name can be found in the header of the tweet. Using GCDT Select, it can be extracted from the page as shown in blue in figure~\ref{figure:tweet-user-field}. It will be referred to as the user name element. The HTML of this element is shown in listing~\ref{user-name-element-html}.
 
 \begin{figure}[H]
 \includegraphics[width=4in]{image/tweet-user-field.png}
@@ -589,7 +589,7 @@ listing~\ref{listing:tweet-content-element-count-comparison}
 \noindent
 First, in order to obtain the tweet text, everything that is not a link or contained in a link must be scraped from the tweet content element in listing~\ref{listing:tweet-content-element-html}. An example of the HTML of this scraping is shown in listing~\ref{listing:tweet-text-scrape}. Then, the tweet text is obtained by stripping the HTML of all tags.
 
-\begin{lstlisting}[caption={The HTML of scraping everything from listing-\ref{listing:tweet-content-element-html} that is not a link},label={listing:tweet-text-scrape},captionpos=b]
+\begin{lstlisting}[caption={The HTML of scraping everything from listing~\ref{listing:tweet-content-element-html} that is not a link},label={listing:tweet-text-scrape},captionpos=b]
   <strong>The Dark Knight</strong> Rises (DVD, <strong>2012</strong>)
 \end{lstlisting}
 
