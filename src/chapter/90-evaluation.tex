@@ -10,7 +10,7 @@ This chapter will be used to evaluate the work and the results drawn from the re
 
 
 \section{Development Process}
-The development process used in the project was not modelled after any particular rigid paradigm of development, but instead followed the natural workflow of the individual programmers. Even though a particular type of predetermined workflow was not applied, there were clear tendencies in how the development happened.
+The development process used in the project was not modeled after any particular rigid paradigm of development, but instead followed the natural workflow of the individual programmers. Even though a particular type of predetermined workflow was not applied, there were clear tendencies in how the development happened.
 
 The team started out with less rigid requirements. In the beginning of the project, they were something along the lines of: Store the Netflix movies in an accessible database, retrieve tweets about movies from twitter and store them in the same database.
 
@@ -23,7 +23,7 @@ At one point, the code base was beginning to get complex and fusing implementati
 \begin{figure}[H]
 \includegraphics[width=4in]{image/evaluation-development-cycle.png}
 \centering
-\caption[]{The development cycle that emerged naturally from the individual developers workflow.}
+\caption[Development Cycle]{The development cycle that emerged naturally from the individual developers workflow.}
 \label{figure:development-cycle}
 \end{figure}
 
@@ -38,17 +38,19 @@ The project went through some major refactoring during development when the arch
 Implementing the requirements outside of the code base made integration more difficult than if the requirement had been implemented within the code base in the first place.
 
 \section{Result Evaluation}
-The two types of testing used in the project were testing the assumptions in the preliminary study and one time testing of code functionallity
+The two types of testing used in the project were testing the assumptions in the preliminary study and one time testing of code functionality
 
 \subsubsection{Testing of preliminary study}
-The testing in the preliminary study was done by browsing twitter for data and aggregating the results in excel or using the google chrome developer console.
+The testing in the preliminary study was done by browsing twitter for data and aggregating the results in excel or using the Google chrome developer console.
 
-In section~\ref{sec:pre-stream-api-testing}, the Stream API was tested to show what kind coverage of the Netflix dataset can be expected by running the Stream API to harvest tweets. The test was done by manually exploring Twitter web search. This process is prone to human error. However, since the important results were statistical approximations, this type of error can be ignored. The results showed that getting coverage for the entire Netflix data set would take years. The sample size is relatively small and the results could have been better if an automated test was employed. However, the test served primarily as a loose indicator for whether or not the Stream API would serve the purpose as a main channel for harvesting tweets that would cover the dataset. A sample size of 20 assessing 3 different time spans seemed sufficient enough for this. The Stream API was thus concluded to not be suitable for the project, but could complement the requirements in the future and was thus implemented, but not focused on.
+In section~\ref{sec:pre-stream-api-testing}, the Stream API was tested to show what kind coverage of the movies in the Netflix Prize dataset could be expected to get by running the Stream API to harvest tweets. The test was done by manually exploring Twitter web search. This process is prone to human error. However, since the important results were statistical approximations, this type of error can be ignored. The results showed that getting coverage for the entire Netflix data set would take years. The sample size is relatively small and the results could have been better if an automated test was employed. However, the test served primarily as a loose indicator for whether or not the Stream API would serve the purpose as a main channel for harvesting tweets that would cover the dataset. A sample size of 20 assessing 3 different
+%TODO:fr hva er time spans her?
+time spans seemed sufficient enough for this. The Stream API was thus concluded to not be suitable for the project, but could complement the requirements in the future and was thus implemented, but not focused on.
 
-In section~\ref{sec:pre-twitter-crawl-scrape}, the Crawling and Scraping techniques were tested gradually as they were discovered. The tests used jQuery functions to establish that there was a correspondance between the number of tweets shown on the twitter search result page and the number of subelements that were to be extracted on from each tweet the twitter search result page. The results showed correspondance even as the number of tweets on the page increased gradually. This implied that the technique for selecting the subelements was most likely correct. This was further confirmed by running the implementation and observing that the tweets that were extracted from the page were actually the same as shown in the browser.
+In section~\ref{sec:pre-twitter-crawl-scrape}, the Crawling and Scraping techniques were tested gradually as they were discovered. The tests used jQuery functions to establish that there was a correspondence between the number of tweets shown on the twitter search result page and the number of sub elements that were to be extracted from each tweet on the twitter search result page. The results showed correspondence even as the number of tweets on the page increased gradually. This implied that the technique for selecting the sub elements was most likely correct. This was further confirmed by running the implementation and observing that the tweets that were extracted from the page were actually the same as shown in the browser.
 
 \subsubsection{Testing of code functionality}
-The testing of code functionality is described in section~\ref{impl:Testing}. While not as solid as systematic unit and functional testing, the technique verifies at a single point in time that the different parts of the implementation are doing what they should be doing. Though there naturally was more bug fixing, the technique served the needs of the project. The code base ended up being relatively small and thus the amount of manual testing applied was managable. For a larger project this would not have been feasible as the workload would have increased beoynd the point of being managable
+The testing of code functionality is described in section~\ref{impl:Testing}. While not as solid as systematic unit and functional testing, the technique verifies at a single point in time that the different parts of the implementation are doing what they should be doing. Though there naturally was more bug fixing, the technique served the needs of the project. The code base ended up being relatively small and thus the amount of manual testing applied was manageable. For a larger project this would not have been feasible as the workload would have increased beyond the point of being manageable
 
 \subsubsection{Types of testing not used}
 Testing the predictions with RMSE was one of the main requirements of the project, but was not implemented as predictions could not be made due to the lack of a dataset from Twitter due to constraints and limitations of the Twitter APIs and legal constrains on scraping Twitter.
@@ -71,11 +73,4 @@ The REST API showed promise in harvesting Twitter user relationships, but turned
 The scraping technique seemed the most promising. It was not formally tested as scraping is not allowed by Twitter and consent from Twitter to employ this technique could not be obtained. See section~\ref{sec:pre-twitter-legal}.
 
 \subsubsection{Consequential Issues}
-A major aspect of the project was to use data from Twitter to run predictions on the Netflix Prize Dataset. As a sufficient dataset could not be retrieved from Twitter, these predictions could not be made. The project could consequentially not meet the requirements for doing predictions and testing these predictions with RMSE.
-
-
-\section{Summary}
-TODO
-The course has all in all proved to be a positive and valuable experience for us all. For most of us, the experience of working on such a big project in a team was quite new. We experienced how important it was to plan ahead, to distribute the workload, and to collaborate to achieve a common goal. This was also our first experience in working with an external customer, giving us valuable experiences in this type of project. These experiences are sure to prove useful for in the years to come when we participate in similar projects.
-
-We, as a group, feel that we have reached our goal, and rmivered a great product that the customer was very satisfied with. We made our customer happy and exceeded his expectations, and looking back this achievement is something we can be proud of.
+A major aspect of the project was to use data from Twitter to run predictions on the Netflix Prize Dataset. As a sufficient dataset could not be retrieved from Twitter, these predictions could not be made. The project could consequentially not meet the requirements for doing predictions and testing these predictions with their RMSE.
