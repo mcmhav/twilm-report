@@ -25,7 +25,7 @@ The logical view describes the components of the architecture and how they relat
 \begin{center}
 \begin{figure}[H]
 \centerline{\includegraphics[width=7in]{image/architecture-logical-view.png}}
-\caption[Logical view of the project]{Logical view of the project. See figure-\ref{figure:logical-view-notation} for notation.}
+\caption[Logical view]{Logical view of the project. See figure-\ref{figure:logical-view-notation} for notation.}
 \label{figure:logical-view}
 \end{figure}
 \end{center}
@@ -59,7 +59,7 @@ The process view describes the actions that the components of the architecture a
 
 \begin{figure}[H]
 \centerline{\includegraphics[width=7in]{image/architecture-process-view.png}}
-\caption[Process View]{Process view showing the actions taken by various components as time passes and which components they affect. Time is moving downward. An arrow implies that data is sent from one component to another. The data being sent can be a function call, an object or any other type available to the component taking the action.}
+\caption[Process view]{Process view showing the actions taken by various components as time passes and which components they affect. Time is moving downward. An arrow implies that data is sent from one component to another. The data being sent can be a function call, an object or any other type available to the component taking the action.}
 \label{figure:process-view}
 \end{figure}
 
@@ -77,7 +77,7 @@ The development view describes how the various technologies and implementations 
 
 \begin{figure}[H]
     \centerline{\includegraphics[width=4.5in]{image/architecture-development-view.png}}
-    \caption[Development View]{Development view showing the technology stack. Each technology block is dependent on the technology block(s) below it.}
+    \caption[Development view]{Development view showing the technology stack. Each technology block is dependent on the technology block(s) below it.}
     \label{figure:development-view}
 \end{figure}
 
@@ -88,13 +88,13 @@ The NoSQL database can also be decoupled from the computer running Twilm and set
 
 \begin{figure}[H]
 \centerline{\includegraphics[width=4.5in]{image/architecture-physical-view.png}}
-\caption[Physical View]{Physical view showing the components of the system mapped onto hardware. Only a single computer with Internet access to Twitter runs the entire system.}
+\caption[Physical view]{Physical view showing the components of the system mapped onto hardware. Only a single computer with Internet access to Twitter runs the entire system.}
 \label{figure:physical-view}
 \end{figure}
 
 \begin{figure}[H]
 \centerline{\includegraphics[width=4.5in]{image/architecture-physical-view-distributed.png}}
-\caption[Distributed Physical View]{Distributed physical view showing the components of the system mapped onto hardware using database replication.}
+\caption[Distributed physical view]{Distributed physical view showing the components of the system mapped onto hardware using database replication.}
 \label{figure:distr-phys-view}
 \end{figure}
 
@@ -104,7 +104,7 @@ The dataset building algorithm retrieves and iterates over a list of Netflix use
 
 \begin{figure}[H]
     \centerline{\includegraphics[width=6in]{image/design-algorithm-dataset-building.png}}
-    \caption[Database Building Algorithm]{Illustration of the dataset building algorithm. The algorithm retrieves data about a Netflix user and consolidates it with the Twitter data points related to the movies the user has rated.}
+    \caption[Database building algorithm]{Illustration of the dataset building algorithm. The algorithm retrieves data about a Netflix user and consolidates it with the Twitter data points related to the movies the user has rated.}
     \label{figure:dataset-building-algorithm}
 \end{figure}
 
@@ -139,6 +139,6 @@ The prediction algorithm design is split into 3 parts. The last part depends on 
 
 \begin{figure}[H]
 \centerline{\includegraphics[width=3.5in]{image/pred-alg.png}}
-\caption[Prediction algorithm parts]{The prediction algorithm design and the parts it is separated into. The dataset consist of users on the form described in the top. With the given point the neighbors are selected from the dataset. This is then sent to the evaluation part. Here a prediction is produced.}
+\caption[Prediction algorithm]{The prediction algorithm design and the parts it is separated into. The dataset consist of users on the form described in the top. With the given point the neighbors are selected from the dataset. This is then sent to the evaluation part. Here a prediction is produced.}
 \label{figure:pred-alg}
 \end{figure}
