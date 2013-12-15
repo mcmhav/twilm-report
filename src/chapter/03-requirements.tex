@@ -4,12 +4,12 @@
 
 \minitoc
 
-This chapter will describe the capturing of the requirements and go into depth on most central ones.
+This chapter will describe the capturing of the requirements and go into depth on the most central ones.
 
 \clearpage
 
 \section{Capturing the Requirements}
-Based on the initial task at hand and the findings in the prestudy and, the requirements had a basis to get formed on. The initial task gave a coarse grained overview of how the requirements of the system should look like. The prestudy on similar solutions made what was feasible to do and what would be impractical to do clearer. For instance runtime of different recommendation algorithms and their ability to be parallelized. The prestudy on Twitter made it clear how Twitter can be explored and how it can be done in a timely manner. It also showed the difficulties in gathering sufficient data from the APIs and that scraping would work but could not be done due to legal considerations.
+Based on the initial task at hand and the findings in the prestudy, the requirements had a basis to get formed on. The initial task gave a coarse grained overview of how the requirements of the system should look like. The prestudy on similar solutions made it clearer what was feasible to do and what would be impractical to do. For instance runtime of different recommendation algorithms and their ability to be parallelized. The prestudy on Twitter made it clear how Twitter can be explored and how it can be done in a timely manner. It also showed the difficulties in gathering sufficient data from the APIs and that scraping would work but could not be done due to legal considerations.
 
 An interesting find was that most of the recommendation systems for the Netflix Prize had a more stationary ground to them, they only tried to get the RMSE as low as possible, not considering the fact that ratings would be constantly updated, and therefore a requirement to do live recommending with new input-information would require the already heavy computations to be run constantly on all the data often, which is less than feasible.
 
