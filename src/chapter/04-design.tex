@@ -122,7 +122,7 @@ The dataset building algorithm retrieves and iterates over a list of Netflix use
 \subsection{Prediction}\label{algorithm-design:prediction}
 As mentioned in \ref{subsubsec:predict-phase} the system must produce a prediction on the dataset. As concluded in the preliminary study the most suitable algorithms to produce these predictions for this kind of dataset has proven to be a k-nearest neighbors (k-NN) approach. This is because it will allow a low response time, but yet has produced good prediction results on the Netflix Prize dataset~\ref{subsec:sim-sys-conc}.
 
-There are many approaches to gather and select the neighbors to calculate predictions with, but the approach which seems most promising is the probabilistic neighborhood selection~\cite{probcobfilter}, and is the approach to be taken.
+There are many approaches to gather and select neighbors to calculate predictions with, but the approach which seems most promising is the probabilistic neighborhood selection~\cite{probcobfilter}, and is the approach to be taken.
 
 The prediction algorithm design is split into 3 parts. The last part depends on if the prediction was issued because a user rated a movie, or a movie prediction rating was requested.
 
