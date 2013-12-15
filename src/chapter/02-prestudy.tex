@@ -236,7 +236,7 @@ Usertags are labels that are placed on tweets describing who the tweets are adre
 \textbf{tweet.usertags -> [<user>]}
 
 \subsection{Legal Considerations}\label{sec:pre-twitter-legal}
-Collect and use a data set from twitter, a company whose currency is information, must be done in a way that complies with their rules and terms of service. This section considers how an automated system can collect information from twitter and what an automated system can use it for.
+Collect and use a data set from Twitter, a company whose currency is information, must be done in a way that complies with their rules and terms of service. This section considers how an automated system can collect information from twitter and what an automated system can use it for.
 
 \subsubsection{API Terms}
 You may use the Twitter API and Twitter Content in connection with the products or services you provide (your "Service") to search, display, analyze, retrieve, view, and submit information to or on Twitter \cite{twitter-api-terms}. This means that data can be gathered within the limitations set by the API to gather a dataset and analyze it.
@@ -292,13 +292,13 @@ There is no rate limit in the Stream API. However, there are a few cases in whic
 It also takes the Stream API a very long time to create a dense dataset. By a few searches for movie titles that are less watched, it can easily be determined that many of them have only a few tweets posted about them over the span of years. This means that it would take at least a year for the Stream API to deliver any data points about the movie.
 
 \subsubsection{Testing API Capability}\label{sec:pre-stream-api-testing}
-To further understand what kind of dataset the Stream API would produce with regards to time, a sample of 20 random movies were selected from the netflix prize dataset. The mongoDB shell command used to retrieve this sample can be seen in listing~\ref{code:mongo-select-random-movie}. Then, the movie titles and year were searched for using Twitter web search. Values were recorded for how many tweets were available for a search for a given movie within the last month, half a year and a full year. Values for how many days ago the last tweet for each movie was posted were also recorded. The results can be seen in table~\ref{table:stream-api-test-data}
+To further understand what kind of dataset the Stream API would produce with regards to time, a sample of 20 random movies were selected from the Netflix Prize dataset. The mongoDB shell command used to retrieve this sample can be seen in listing~\ref{code:mongo-select-random-movie}. Then, the movie titles and year were searched for using Twitter web search. Values were recorded for how many tweets were available for a search for a given movie within the last month, half a year and a full year. Values for how many days ago the last tweet for each movie was posted were also recorded. The results can be seen in table~\ref{table:stream-api-test-data}
 
 \begin{lstlisting}[caption={The mongoDB console command used to generate a random selection of movies},label={code:mongo-select-random-movie},captionpos=b]
 db.netflix_movies.find().limit(-1).skip(Math.random()*18000).next()
 \end{lstlisting}
 
-The data recorded in table~\ref{table:stream-api-test-data} was then aggregated to show the coverage of tweets for a given time period. The aggregation can be seen in table~\ref{table:stream-api-test-data}. If the Stream API is run for one year, about 65\% of the movies in the netflix dataset will have one tweet or more. If more than 8 tweets are needed for a movie, the Stream API will only produce this number of tweets for about 45\% of the movies.
+The data recorded in table~\ref{table:stream-api-test-data} was then aggregated to show the coverage of tweets for a given time period. The aggregation can be seen in table~\ref{table:stream-api-test-data}. If the Stream API is run for one year, about 65\% of the movies in the Netflix dataset will have one tweet or more. If more than 8 tweets are needed for a movie, the Stream API will only produce this number of tweets for about 45\% of the movies.
 
 \begin{table}[H]
 \centering
@@ -407,9 +407,9 @@ Using the Google Chrome Developer Console \cite{gcdt} we can find the DOM elemen
   <li class="js-stream-item stream-item stream-item expanding-stream-item" data-item-id="397530125715402752" id="stream-item-tweet-397530125715402752" data-item-type="tweet">...</li>
   \end{lstlisting}
 
-Using jQuery \cite{jquery} and the Javascript Console in GCDT \cite{gcdt}, it is possible to determine how many tweets have been returned. This is done by defining javascript function that selects the tweets elements and returns the number of elements in this list in listing-\ref{listing:tweet-count-function}. The function can be assured to work by counting the number of tweets displayed on the search result page and making sure that it matches the number returned by the function.
+Using jQuery \cite{jquery} and the JS Console in GCDT \cite{gcdt}, it is possible to determine how many tweets have been returned. This is done by defining JS function that selects the tweets elements and returns the number of elements in this list in listing-\ref{listing:tweet-count-function}. The function can be assured to work by counting the number of tweets displayed on the search result page and making sure that it matches the number returned by the function.
 
-  \begin{lstlisting}[caption={Creating a function in GCDT Javascript Console for counting the occurance of tweets on the twitter search result page},label={listing:tweet-count-function},captionpos=b]
+  \begin{lstlisting}[caption={Creating a function in GCDT JS Console for counting the occurance of tweets on the twitter search result page},label={listing:tweet-count-function},captionpos=b]
   > number_of_tweets_in_search_results = function(){ return $("li[data-item-type='tweet']").size(); }
   > number_of_tweets_in_search_results();
   15
@@ -420,7 +420,7 @@ TODO: Add captions and references and use \$ for direct reference.
 In order to obtain more search results it is necessary to scroll to the bottom of the page for the browser to make an XHR request to retrieve more tweets. As the scrolling is done, XHR requests can be monitored in the Network tab of GCDT. Consecutive xhr requests are sent as scrolling is done several times.
 
   \begin{lstlisting}[caption={TODO: Caption},label={},captionpos=b]
-  Javascript Console:
+  JS Console:
   > number_of_tweets_in_search_results();
   15
 
@@ -428,21 +428,21 @@ In order to obtain more search results it is necessary to scroll to the bottom o
   Request URL:https://twitter.com/i/search/timeline?q=the%20dark%20knight%202012&src=typd&include_available_features=1&include_entities=1&last_note_ts=0&scroll_cursor=TWEET-360758159364734978-399762568459612160
 
 
-  Javascript Console:
+  JS Console:
   > number_of_tweets_in_search_results();
   35
 
   Network Console > XHR:
   Request URL:https://twitter.com/i/search/timeline?q=the%20dark%20knight%202012&src=typd&include_available_features=1&include_entities=1&last_note_ts=0&oldest_unread_id=0&scroll_cursor=TWEET-338938038694584320-399762568459612160
 
-  Javascript Console:
+  JS Console:
   > number_of_tweets_in_search_results();
   50
 
   Network Console > XHR:
   Request URL:https://twitter.com/i/search/timeline?q=the%20dark%20knight%202012&src=typd&include_available_features=1&include_entities=1&last_note_ts=0&oldest_unread_id=0&scroll_cursor=TWEET-316893896573607937-399762568459612160
 
-  Javascript Console:
+  JS Console:
   > number_of_tweets_in_search_results();
   65
   \end{lstlisting}
@@ -459,7 +459,7 @@ Examining the attributes of the XHR requests, they consists of the following var
   variable scroll_cursor=TWEET-<18 character number>-<18 character number>
   \end{lstlisting}
 
-At this point a snapshot of the HTML page is taken [A3]. The only attribute that seems to variate with each request is scroll\_cursor attribute. This means that the piece of javascript code that is making the requests somehow has access to the information contained in this changing attribute. A DOM tree search for 'TWEET-' shows us that scroll\_cursor is contained by a div with the class stream-container under under the attribute 'data-scroll-cursor' and 'data-refresh-cursor'.
+At this point a snapshot of the HTML page is taken [A3]. The only attribute that seems to variate with each request is scroll\_cursor attribute. This means that the piece of JS code that is making the requests somehow has access to the information contained in this changing attribute. A DOM tree search for 'TWEET-' shows us that scroll\_cursor is contained by a div with the class stream-container under under the attribute 'data-scroll-cursor' and 'data-refresh-cursor'.
 
   \begin{lstlisting}[caption={TODO: Caption},label={},captionpos=b]
   <div class="stream-container" data-scroll-cursor="TWEET-311337362556846081-399762568459612160" data-refresh-cursor="TWEET-396773826303762432-399762568459612160">
@@ -507,14 +507,14 @@ The user name can be found in the header of the tweet. Using the GCDT Select, it
 \end{lstlisting}
 
 \noindent
-Using jQuery, a function can be created to count the occurances of the class "username js-action-profile-name", as shown in \ref{user-name-element-count-jquery-function}. This function can then be used to compare the number of user name elements in the DOM tree to the number of tweets in the search result, as shown in listing-\ref{user-elements-matches-tweets}. Since they are equal, it is likely that the right class is being scraped for the user name element.
+Using jQuery, a function can be created to count the occurrences of the class "username js-action-profile-name", as shown in listing~\ref{user-name-element-count-jquery-function}. This function can then be used to compare the number of user name elements in the DOM tree to the number of tweets in the search result, as shown in listing~\ref{user-elements-matches-tweets}. Since they are equal, it is highly likely that the right class is being scraped for the user name element.
 
-\begin{lstlisting}[caption={Creating a function in GCDT Javascript Console for counting the occurance of user name elements on the twitter search result page},label={user-name-element-count-jquery-function},captionpos=b]
+\begin{lstlisting}[caption={Creating a function in GCDT JS Console for counting the occurance of user name elements on the twitter search result page},label={user-name-element-count-jquery-function},captionpos=b]
   > number_of_tweet_user_name_element_occurances = function(){ return $("span.username.js-action-profile-name").size() }
 \end{lstlisting}
 
 
-\begin{lstlisting}[caption={Running functions in GCDT Javascript Console to show that the number of user name elements matches the number of tweets},label={user-elements-matches-tweets},captionpos=b]
+\begin{lstlisting}[caption={Running functions in GCDT JS Console to show that the number of user name elements matches the number of tweets},label={user-elements-matches-tweets},captionpos=b]
   > number_of_tweet_user_name_element_occurances();
   119
   > number_of_tweets_in_search_results();
@@ -522,20 +522,20 @@ Using jQuery, a function can be created to count the occurances of the class "us
 \end{lstlisting}
 
 \subsubsection{User ID}
-The user ID can also be found in the header. It is contained in the attribute data-user-id. Using the GCDT Select, it can be scraped from the page. It will be referred to as the user id element. The HTML of this scraping is shown in listing-\ref{listing:user-id-element-html}
+The user ID can also be found in the header. It is contained in the attribute data-user-id. Using GCDT Select, it can be scraped from the page. It will be referred to as the user id element. The HTML of this scraping is shown in listing~\ref{listing:user-id-element-html}
 
 \begin{lstlisting}[caption={HTML of the user id element in a tweet},label={listing:user-id-element-html},captionpos=b]
   <a class="account-group js-account-group js-action-profile js-user-profile-link js-nav" href="/username" data-user-id="userid">...</a>
 \end{lstlisting}
 
 \noindent
-Using jQuery, a function can be created to count the occurances of the class used to specify the user id element, as shown in \ref{user-id-element-count-jquery-function}. This function can then be used to compare the number of user id elements in the DOM tree to the number of tweets in the search result, as shown in listing-\ref{user-id-elements-matches-tweets}. Since they are equal, it is likely that the right class is being scraped for the user id element.
+Using jQuery, a function can be created to count the occurrences of the class used to specify the user id element, as shown in listing~\ref{user-id-element-count-jquery-function}. This function can then be used to compare the number of user id elements in the DOM tree to the number of tweets in the search result, as shown in listing~\ref{user-id-elements-matches-tweets}. Since they are equal, it is highly likely that the right class is being scraped for the user id element.
 
-\begin{lstlisting}[caption={Creating a function in GCDT Javascript Console for counting the occurance of user id elements on the twitter search result page},label={user-id-element-count-jquery-function},captionpos=b]
+\begin{lstlisting}[caption={Creating a function in GCDT JS Console for counting the occurance of user id elements on the twitter search result page},label={user-id-element-count-jquery-function},captionpos=b]
   > number_of_tweet_user_id_element_occurances = function(){ return $("a.account-group.js-account-group.js-action-profile.js-user-profile-link.js-nav").size() }
 \end{lstlisting}
 
-\begin{lstlisting}[caption={Running functions in GCDT Javascript Console to show that the number of user id elements matches the number of tweets},label={user-id-elements-matches-tweets},captionpos=b]
+\begin{lstlisting}[caption={Running functions in GCDT JS Console to show that the number of user id elements matches the number of tweets},label={user-id-elements-matches-tweets},captionpos=b]
   > number_of_tweet_user_id_element_occurances();
   21
   > number_of_tweets_in_search_results();
@@ -543,9 +543,9 @@ Using jQuery, a function can be created to count the occurances of the class use
 \end{lstlisting}
 
 \subsubsection{Tweet Text}
-The tweet text can be found in the content of the tweet, as shown in blue in figure-\ref{figure:tweet-text-field}. Using the GCDT Select, it can be extracted from the page. It will be referred to as the tweet content element. The tweet content element contains several HTML elements from which the text can be scraped, as shown in listing-\ref{listing:tweet-content-element-html}.
+The tweet text can be found in the content of the tweet, as shown in blue in figure~\ref{figure:tweet-text-field}. Using GCDT Select, it can be extracted from the page. It will be referred to as the tweet content element. The tweet content element contains several HTML elements from which the text can be scraped, as shown in listing~\ref{listing:tweet-content-element-html}.
 
-  \begin{figure}[H]
+\begin{figure}[H]
 \includegraphics[width=4in]{image/tweet-text-and-url-field.png}
 \centering
 \caption{Tweet content element (shown in blue) in a tweet retrieved by twitter web search}
@@ -571,14 +571,14 @@ The tweet text can be found in the content of the tweet, as shown in blue in fig
 \end{lstlisting}
 
 \noindent
-Using jQuery, a function can be created to count the occurances of the class "js-tweet-text tweet-text", which most likely describes all tweet content elements. The function is shown in listing-\ref{listing:tweet-content-element-count-function}. By comparing this number with the number of tweets in the search results and making sure it is equal, we can be confident that this class is describing the correct DOM element. The comparison is shown in
-listing-\ref{listing:tweet-content-element-count-comparison}
+Using jQuery, a function can be created to count the occurrences of the class "js-tweet-text tweet-text", which most likely describes all tweet content elements. The function is shown in listing~\ref{listing:tweet-content-element-count-function}. By comparing this number with the number of tweets in the search results and making sure it is equal, it can be verified that it is highly likely that class is describing the correct DOM element. The comparison is shown in
+listing~\ref{listing:tweet-content-element-count-comparison}
 
-\begin{lstlisting}[caption={Creating a function in GCDT Javascript Console for counting the occurance of tweet content elements on the twitter search result page},label={listing:tweet-content-element-count-function},captionpos=b]
+\begin{lstlisting}[caption={Creating a function in GCDT JS Console for counting the occurance of tweet content elements on the twitter search result page},label={listing:tweet-content-element-count-function},captionpos=b]
   > number_of_tweet_content_element_occurances = function(){ return $("p.js-tweet-text.tweet-text").size() }
 \end{lstlisting}
 
-\begin{lstlisting}[caption={Running functions in GCDT Javascript Console to show that the number of tweet content elements matches the number of tweets},label={listing:tweet-content-element-count-comparison},captionpos=b]
+\begin{lstlisting}[caption={Running functions in GCDT JS Console to show that the number of tweet content elements matches the number of tweets},label={listing:tweet-content-element-count-comparison},captionpos=b]
   > number_of_tweet_content_element_occurances();
   119
   > number_of_tweets_in_search_results();
@@ -586,7 +586,7 @@ listing-\ref{listing:tweet-content-element-count-comparison}
 \end{lstlisting}
 
 \noindent
-First, in order to obtain the tweet text, everything that is not a link or contained in a link must be scraped from the tweet content element in listing-\ref{listing:tweet-content-element-html}. An example of the HTML of this scraping is shown in listing-\ref{listing:tweet-text-scrape}. Then, the tweet text is obtained by stripping the HTML of all tags.
+First, in order to obtain the tweet text, everything that is not a link or contained in a link must be scraped from the tweet content element in listing~\ref{listing:tweet-content-element-html}. An example of the HTML of this scraping is shown in listing~\ref{listing:tweet-text-scrape}. Then, the tweet text is obtained by stripping the HTML of all tags.
 
 \begin{lstlisting}[caption={The HTML of scraping everything from listing-\ref{listing:tweet-content-element-html} that is not a link},label={listing:tweet-text-scrape},captionpos=b]
   <strong>The Dark Knight</strong> Rises (DVD, <strong>2012</strong>)
@@ -602,23 +602,22 @@ In this section, similar systems will be discussed. Their usability in the proje
 
 \subsection{Recommender Systems}
 \subsubsection{MovieLens}\label{subsec:MovieLens}
-MovieLens is a movie recommendation system. A user creates an account and gets movie recommendations based on the user's own ratings through MovieLens' collaborative filtering algorithm. They use a item-item based algorithm. They take the 20 movies which are most similar to the target movie and see how these 20 movies where rated.\cite{grouplens}
+MovieLens is a movie recommendation system. A user creates an account and gets movie recommendations based on the user's own ratings through MovieLens's collaborative filtering algorithm. The algorithm uses an item-item based algorithm. It takes the 20 movies which are most similar to the target movie and looks at how these 20 movies were rated.\cite{grouplens}
 
-The issue with using a strict item-item based correlation and the MovieLens recommendation system is that for a user with a low rating average, the user will very seldom get recommended movies with a top-average rating.
+The issue with using a strict item-item based correlation and the MovieLens recommendation system is that for a user with a low rating average, the user will very seldom get recommended movies with a top to average rating.
 
 
 \subsubsection{MovieTweetings}\label{subsec:MovieTweetings}
-MovieTweetings is an application for fetching movie ratings through the Twitter API from Twitter. The application search for ratings shared from IMDB, a movie information webpage, and stored. The user has the option of sharing the rating or not on Twitter, in the last case, the rating will not be caught by the MovieTweetings application.
+MovieTweetings is an application for fetching movie ratings through the Twitter API from Twitter. The application searches for ratings shared from IMDB and ratings that are already stored by the application. On IMDB, users have the option of sharing ratings on Twitter. If they do, the rating will be caught by the MovieTweetings application.
 
-With the use of a social media they wish to get a fresher dataset than using Netflix Prize dataset, or MovieLens datasets~\ref{subsec:MovieLens}. At the time of writing the article they had more than 60 000 ratings, and about 500 new where added every day\cite{MovieTweetings}. The Twitter API is queried daily to update their database.
+Their motivation for using a social media dataset rather than using Netflix Prize dataset or MovieLens's datasets~\ref{subsec:MovieLens} is that they wanted a dataset that was more up to date. At the time of writing the article, they had more than 60 000 ratings, and about 500 new were added every day\cite{MovieTweetings}. The Twitter API is queried daily to update their database.
 
-While querying the API for well structured tweets with ratings about movies are a good way to go when in search for a database with movie ratings, the data will be sparse. The data is not based on the users followers/followees, and will therefore not represent the social strength Twitter is capable of producing. A direct access to IMDB, rather than going through Twitter to get the rating information also seems like a simpler and more result-producing idea.
-
+While querying the API for well structured tweets with ratings about movies is a good approach when searching for a database with movie ratings, the data will be sparse. The data is not based on the users followers and followees, and will therefore not represent the social strength Twitter is capable of producing. A direct access to IMDB, rather than going through Twitter to get the rating information also seems like a simpler and more result-producing way to accomplish the same task.
 
 \subsubsection{Twittomender}
-Twittomender is a followee recommender for Twitter. Twitter uses a friend's friend approach for recommending new Twitter-friends. This does not necessarily produce the most relevant recommendations for a user. Twittomender takes a collaborative approach to the problem. Tweets of a user are used and compare with other users tweets to to find similarities and recommend new Twitter-friendships\cite{twittomender}.
+Twittomender is a followee recommender for Twitter. Twitter uses a collaborative filtering approach for recommending new followee. This does not necessarily produce the most relevant recommendations for a user. Twittomender takes a different but similar approach to the problem. Tweets of a user are used and compare with other users tweets to to find similarities and recommend new Twitter-friendships\cite{twittomender}.
 
-7 recommendation strategies, they are shown in table~\ref{table:to-strategies}.
+The 7 recommendation strategies used by Twittomender are shown in table~\ref{table:to-strategies}.
 
 \begin{table}[H]
 \centering
@@ -639,84 +638,93 @@ Twittomender is a followee recommender for Twitter. Twitter uses a friend's frie
 \label{table:to-strategies}
 \end{table}
 
-The user interacts with the system through providing the system with their username on Twitter, the system produces a profile of the user based on tweets, and determines a score against other users based on most frequent terms amongst the users tweets. Each of the strategies are used from table~\ref{table:to-strategies} and top 20 from each are merged to a list where the most frequent users are returned as recommended users to explore for the user.
+The user interacts with the system through providing the system with their username on Twitter. The system then produces a profile of the user based on tweets, and determines a score against other users based on most frequent terms amongst the users tweets. Each of the strategies from table~\ref{table:to-strategies} are used and top 20 from each are merged to a list where the most frequent users are returned as recommended followees.
 
-After testing on 1000 users the best performing strategy was a collaborative-based approach, users and follower connection, recommendation strategy (6).
+After testing on 1000 users the best performing strategy was a collaborative-based approach, using a users follower connections for recommendation
 
-What we can take from this is the strength of a user relationships.
+What can be concluded from this is that there is data in a user's relationships that indicates interest or more precisely a willingness to subscribe. In particular for followers recommended as followees.
 
 
 \subsection{What the top Netflix-Prize contestants did}\label{subsec:thewinners}
 \subsubsection{BellKor's Pragmatic Chaos}
-BellKor's Pragmatic Chaos, the prize winners of the Netflix-Prize competition, was a group of scientists from AT\&T Labs, Yahoo!, Pragmatic Theory and Commendo Research \& Consulting. They achieved a RMSE of 0.8567, which was 10.06\% better than Netflix's own Cinematch score.
+BellKor's Pragmatic Chaos, the Prize winners of the Netflix-Prize competition, was a group of scientists from AT\&T Labs, Yahoo!, Pragmatic Theory and Commendo Research \& Consulting. They achieved a RMSE of 0.8567, which was 10.06\% better than Netflix's own Cinematch score.
 
-Models for the rating data is learned by fitting previously observed ratings, but since the model is to be used to predict feature ratings, overfitting the data. This achieved by regularizing the learned parameters. A regularization constant is used, and is set to L2 by default. This and other constant such as, step size and number of iterations are set manually through greedy manners. Where the algorithm is ran multiple times and constant value with best score is used. \cite{BellKor-CF-TD}
+TODO:mr fiks den følgende setningen. vanskelig å tolke.
+Models for the rating data is learned by fitting previously observed ratings, but since the model is to be used to predict feature ratings, overfitting the data. This achieved by regularizing the learned parameters.
+TODO:mr fiks hva er L2? hva er regularization?
+A regularization constant is used, and is set to L2 by default. This and other constant such as, step size and number of iterations are set manually.
+TODO:mr fiks den følgende setningen. Ikke en full setning
+When the algorithm is run multiple times and constant value with best score is used. \cite{BellKor-CF-TD}
 
 The winning algorithm was put together based on multiple different modeling techniques. Some of these modeling techniques are described below. \\\\
 
 
-\textbf{Time of week rating}  The team saw that a user-rating done in the weekends had a tendency to have a higher value than a rating done on a Monday. This also applies for multiple ratings done the same day, higher ratings does not necessarily imply that the movie is much better than a movie rated lower another day, the user might just be in a good mood.
+\textbf{Time of week rating}  The team saw that ratings made weekends had a tendency to have a higher value than ratings made on for Monday, for instance. The same applies for different times of day. Higher ratings do not necessarily imply that the movie is much better than a movie rated lower another day or at another time of day. The users just happen to rate movies differently at different points in time.
 
-\textbf{Close User ratings}  Ratings done close to one another done by the same user implied that the user was rating based on the user's recollection of the rated movies, and not that the user just saw that movie, these ratings had to be handled in its own manner. This was because of the effect the faulty or old memories had on these ratings. The all time favorites/negatives are also usually in this bulk. While the movies which did not make much of an impression are forgotten. This helps us explain figure~\ref{figure:avgmovierating}, where we saw that movies with the edge ratings (1 or 5) had a lower rating distribution.
+\textbf{Close User ratings} Multiple ratings made in a small interval of time by the same user implied that the user was rating based on the his/her recollection of the rated movies, and not that the user just saw that movie. These ratings had to be handled with respect to one another. This is because of the effect the faulty or old memories had on these ratings. The all time favorites/negatives are also usually in this bulk. While the movies which did not make much of an impression are forgotten. This helps explain figure~\ref{figure:avgmovierating}, where movies with the edge ratings of 1 or 5 had a lower rating distribution.
 
-\textbf{Baseline predictors}  Some users has the tendency to rate on an overall average higher than other users.
+\textbf{Baseline predictors}  Some users have the tendency to rate on an overall average higher than other users.
 
 \textbf{Movie like-ability}  Movies can go in and out of popularity. This change usually happens over a extended period.
 
-\textbf{Frequency term}  The number of ratings a users gives on a specific day can help explains data-variability during that day.
+\textbf{Frequency term}  The number of ratings a users gives on a specific day can help explain data-variability during that day.
 
-\textbf{Matrix factorization with Temporal Dynamics (SVD)}  Single value decomposition use two sets pf static movie factors. Set one is used in all the models of the factors. Set two uses the movies rated by the user, normalizes the sum, and uses this as a user factor.
+\textbf{Matrix factorization with Temporal Dynamics (SVD)}  Single value decomposition use two sets of static movie factors. Set one is used in all the models of the factors. Set two uses the movies rated by the user, normalizes the sum, and uses this as a user factor.
 
-\textbf{Neighborhood model with Temporal Dynamics}  Most common approach to collaborative filtering. They used a item-item model based on global optimization. To predict rating of a new item based of rating an old item two sets of weights where used. One where the values of the ratings where accounted for, and one disregarding rating values.
-A situation where a user rates an old item and a new item close to each other both in time and rating, is a better indicator that these items can be related to each other, than if two items are rated similarly, but with a greater timespan between each other.Therefore a decaying relationship is introduced between items. This decreased RMSE from 0.9002 to 0.8870.\cite{BellKor-CF-TD}
+\textbf{Neighborhood model with Temporal Dynamics}  The most common approach to collaborative filtering. They used an item-item model based on global optimization. To predict the rating of a new item based on rating an old item two sets of weights were used. One where the values of the ratings were accounted for, and one disregarding rating values.
+A situation where a user rates an old item and a new item close to each other both in time and rating, is a better indicator that these items can be related to each other than if two items are rated similarly with a greater timespan between each other.Therefore a decaying relationship is introduced between items. This decreased RMSE from 0.9002 to 0.8870.\cite{BellKor-CF-TD}
 
-\textbf{Clustering}  In a cluster the average value is the predictor for the user/movie pairs in the cluster. Where the movie-set and user-set are divided randomly into 128 bins, and created $128*128=16384$ clusters. This was their only usage of clustering, they found that it had no measurable impact on the accuracy of the final blend\cite{pragmatictheory-sol}.
+\textbf{Clustering}  In a cluster, the average value is the predictor for the user movie pairs in the cluster.
+TODO:mr følgende setning er ikke fullstendig
+Where the movie set and user set are divided randomly into 128 bins, and created $128*128=16384$ clusters. This was their only use of clustering.
+They found that it had no measurable impact on the accuracy of the final blend\cite{pragmatictheory-sol}.
 
-\textbf{Anchoring}  There is a order of when to watch some movies. For instance, some squeals are usually watched in the order they where made, and should be predicted that way. \\\\
+\textbf{Anchoring}  Certain collections of movies are watched in a given order. For instance, sequels are usually watched in the order they where made, and should be predicted accordingly. \\\\
 
 
-Interestingly, the bias model with tanking in the factor that users change rating-scale over time, resulted in a RMSE of 0.9555, which is almost as good as the Cinematch Netflix was already using. The learning with the different modeling techniques is done by a stochastic gradient descent algorithm running for 30 iterations. This is the only time they use an automatic parameter tuner. \cite{BellKor-2008-sol}
+Interestingly, the bias model that considers the factor that users change rating-scale over time, resulted in a RMSE of 0.9555, which is almost as good as the Cinematch Netflix was already using. The learning with the different modeling techniques is done by a stochastic gradient descent algorithm running for 30 iterations. This is the only time they use an automatic parameter tuner. \cite{BellKor-2008-sol}
 
-The "BellKor's Pragmatic Chaos"-team used a lot of different models and did a lot of tweaking to get to the top. Some interesting findings to take from this is the importance of diversity and how central the timestamp of a rating can be.
+The "BellKor's Pragmatic Chaos"-team used a lot of different models and did a lot of tweaking to get to the top. Some interesting findings to take from this is the importance of diversity and how much information about the rating the time stamp contains.
 
 \subsubsection{The Ensemble}
 % http://www.the-ensemble.com/
+The Ensemble is a merge of the teams "Grand Prize Team" and "Opera Solutions and Vandelay United". They also managed to get an RMSE of 0.8567, and therefore a 10.09\% improvement as well. But since the "BellKor's Pragmatic Chaos"-team managed to submit their results 20 minutes earlier than "The Ensemble"-team, they lost the competition.
 
-A merger of the teams "Grand Prize Team" and "Opera Solutions and Vandelay United". They also managed to get a RMSE of 0.8567, and therefore a 10.09\% improvement as well. But lost since the "BellKor's Pragmatic Chaos"-team managed to submit their results 20 minutes earlier than "The Ensemble"-team.
+The two merged teams that composed "The Ensemble" consisted of multiple smaller teams. They had all competed in the Netflix-Prize challenge, and all put their heads together and collaborated to get the kind of results they got
 
-The two merged teams, which made "The Ensemble" consisted of multiple smaller teams. They had all competed in the Netflix-Prize challenge, and had to put their heads and code together to get to the result they got to.
-
-"The Ensemble"-team used a huge variation of models, just as the "BellKor's Pragmatic Chaos"-team.
+"The Ensemble"-team used a large selection of different models, just as the "BellKor's Pragmatic Chaos"-team.
 
 After the competition was done "The Ensemble" tested a merger of their system with the "BellKor's Pragmatic Chaos"-system. The test RMSE of a 50/50 blend was 0.855476, which is a 10.19\% improvement. This is 0.10\% better then the teams managed to produce by themselves.
 
 \subsubsection{Conclusion}
-After looking at the two top contestants from the competition a pattern is starting to form. Diversity is key to be able to predict user-ratings at a top level.
+Looking at the two top contestants from the competition forms some interesting pattern. Diversity is key to be able to predict user ratings well.
 
-While both the teams managed to produce a 10\% improvement over the original netflix algorithm, it was never taken into use~\cite{nfbeyond5}. Even though SVD and and RBM lowers the RMSE to 0.88 alone, are they not as applicable as wanted. The actual rating amount is 50 times bigger than the training set, and for SVD to give an accurate value, it has to be recalculated for each new rating, which is not applicable in a world where live recommendation is expected~\cite{nfbeyond5}.
+While both the teams managed to produce a 10\% improvement over the original Netflix algorithm, the algorithms were never deployed by Netflix~\cite{nfbeyond5}. Even though SVD and and RBM lowers the RMSE to 0.88 alone, they are not applicable in terms of making predictions in real time. The actual rating amount is 50 times bigger than the training set, and for SVD to give an accurate value, it has to be recalculated for each new rating, which is not applicable in a world where live recommendation is expected~\cite{nfbeyond5}.
 
 
 \subsection{Recommender Algorithms}
 \subsubsection{Probabilistic Neighborhood Selection}
-A often used approach when recommending items is a neighborhood-based collaborative filtering. This approach often has the issue that it over-specializes and makes concentrated biases when recommending. When trying to estimate an unknown value, the nearest neighbors tend to produce a recommendation list with known items. The taste of the user is often multidimensional when it comes to movies, and these can be unknown to the k nearest neighbors to the user~\cite{umana}. This can be handled with a probabilistic approach when selecting neighbors~\cite{probcobfilter}. The approach does not estimate an unknown value based on the weighted averages of the k nearest neighbors, but rather on k probabilistically selected neighbors~\cite{optaplanner}. Another way of handling this issue is suggesting the least similar neighbors and their dislikes~\cite{furthestneighbor}. This approach was proved to be less accurate when calculating the RMSE~\cite{probcobfilter}, and will therefore not be explored further.
+Neighborhood-based collaborative filtering is a common approach for recommending items. This approach often has the issue that it over-specializes and makes concentrated biases when recommending. When trying to estimate an unknown value, the nearest neighbors tend to produce a recommendation list with known items. The taste of the user is often multidimensional when it comes to movies, and these can be unknown to the k nearest neighbors to the user~\cite{umana}. This can be handled with a probabilistic approach when selecting neighbors~\cite{probcobfilter}. The approach does not estimate an unknown value based on the weighted averages of the k nearest neighbors, but rather on k probabilistically selected neighbors~\cite{optaplanner}. Another way of handling this issue is suggesting the least similar neighbors and their dislikes~\cite{furthestneighbor}. This approach was proved to be less accurate when calculating the RMSE~\cite{probcobfilter}, and will therefore not be examined further.
 
 KNN is linear in the size of the training set, and therefore an efficient classification algorithm\cite{introtoIR}. And different implementations of it managed to produce RMSE scores from 0.91 to 1.002~\cite{knnnetflixstand, knnoldies, knnimpl, knncolbgroup}, even though K-NN has show to have some issues with sparse data~\cite{grobelnikDataSparsityIssues}, which implies that it will do better with a more complete dataset, which will be produced by the addition of social media data.
 
 
 \subsubsection{Matrix Factorization}\label{subsubsec:matrixfac}
-There are several matrix factorization algorithms. Amongst them single value decomposition (SVD) and alternating least squares (ALS) are valid candidates. As we saw from Bellkor's solution~\ref{subsec:thewinners} single value decomposition was used, and was a good addition to their blend. The issue with this algorithm is that it is rather computationally expensive and re-computation is needed to be done when new ratings are added, and therefore not very applicable to a live recommendation system. SVD performs well on sparse matrices, which the Netflix Prize dataset is~\cite{grobelnikDataSparsityIssues}.
+There are several matrix factorization algorithms. Amongst them single value decomposition (SVD) and alternating least squares (ALS) are valid candidates. Bellkor's solution~\ref{subsec:thewinners} used single value decomposition. This was a good addition to their solution. The issue with this algorithm is that it is rather computationally expensive and re-computation is needed to be done when new ratings are added, and therefore not very applicable to a live recommendation system. SVD performs well on sparse matrices, which the Netflix Prize dataset is~\cite{grobelnikDataSparsityIssues}.
 
-ALS is a simpler and a very parallelizable matrix factorization algorithm, more so than SVD, but with many of the benefits that matrix factorization brings~\cite{predusingmatrix}. This makes it an interesting algorithm to look at.
+ALS is a simpler and a parallelizable matrix factorization algorithm with many of the benefits that matrix factorization brings~\cite{predusingmatrix}.
 
-This algorithm can be used to populate sparse matrices, just like the one from Netflix where the matrix is made up from users and movies. A rating matrix, $R$, is produced based on the use of two much smaller matrices. A number of "features" are set for each of the two smaller matrices $U$ and $M$, one for the users and one for the movies. The idea is to get $U^\top M$ as close to the real $R$. $U$ and $M$ are computed in two steps. This is easily parallelizable since solving for $U$ is independent of the other users, therefore the columns of $U$ can be computed in parallel. The information is gathered, and $M$ is updated, communication between movies is not necessary~\cite{myrrix}. With this algorithm a 0.9278 was produced, which is a 2\% improvement over Cinematch~\cite{predusingmatrix}. Runtime to produce this score was 2 hours on a high-end system~\cite{alsMPI}.
+This algorithm can be used to populate sparse matrices, just like the one from Netflix where the matrix is made up from users and movies. A rating matrix, $R$, is produced based on the use of two much smaller matrices. A number of features are set for each of the two smaller matrices $U$ and $M$, one for the users and one for the movies respectively. The idea is to get $U^\top M$ as close to the real $R$. $U$ and $M$ are computed in two steps. This is easily parallelizable since solving for $U$ is independent of the other users, therefore the columns of $U$ can be computed in parallel. The information is gathered, and $M$ is updated.
+TODO:mr communication between movies?
+Communication between movies is not necessary~\cite{myrrix}. This algorithm produced a score of 0.9278, which is a 2\% improvement over Cinematch~\cite{predusingmatrix}. The runtime to produce this score was 2 hours on a high-end system~\cite{alsMPI}.
 
 
 \subsection{Conclusion}\label{subsec:sim-sys-conc}
-There are two basic problems when analyzing very large datasets: Writing the code correctly and the performance (i.e. speed at which it runs). As we saw from~\ref{subsubsec:matrixfac}, matrix factorization was one of the algorithms which preformed the best on the Netflix Prize dataset. This is also shown in figure~\ref{figure:sub-distr-nf}. But the issue with it is if we want new ratings to be included in the recommendation system, then we need to recompute all recommendations, which is not ideally for a live recommendation system, where recommendation should include as much information as possible to be accurate.
+There are two basic problems when analyzing very large datasets: Writing the code correctly and the performance (i.e. speed at which it runs). As was shown in~\ref{subsubsec:matrixfac}, matrix factorization is one of the algorithms which preformed the best on the Netflix Prize dataset. This is also shown in figure~\ref{figure:sub-distr-nf}.The issue with it is that if new ratings are to be included in the recommendation system,  all recommendations must be recomputed, which is not ideal for a live recommendation system.
 
-The ALS~\ref{subsubsec:matrixfac} proved to be a very parallelizable algorithm, and a potential good alternative to SVD when doing live recommendation. But this requires a lot of computational power to make it live updating and will not be feasible to run on a low-end personal computer when wanting live results. But could prove to be a potential algorithm to use if one where to scale up to a high-end system.
+The ALS~\ref{subsubsec:matrixfac} proved to be a very parallelizable algorithm, and a potential good alternative to SVD when doing live recommendation. However, the algorithm still requires a lot of computational power and will not be feasible to run when wanting live results on a low-end. But could prove to be a potential algorithm to use if one where to scale up to a high-end system.
 
-The probabilistic neighborhood selection is a form of K-NN has a good runtime and produced a respectable RMSE. This is a well know approach to collaborative filtering, and there is a lot of documentations on different ways of selecting neighbors and implementation. This seems like the way to go as a start to produce recommendations on bigger datasets.
+The probabilistic neighborhood selection is a form of K-NN has a good runtime and produced a respectable RMSE. This is a well know approach to collaborative filtering, and there is a lot of documentations on different ways of selecting neighbors and how to implement the algorithm. This is a good algorithm for producing recommendations on big datasets.
 % end similar systems
 
 
@@ -724,11 +732,11 @@ The probabilistic neighborhood selection is a form of K-NN has a good runtime an
 \section{Development language and technologies}
 
 \subsection{Database}
-In order to easily retrieve data from the netflix prize dataset and store and retrieve data from twitter, it is useful to consider various kinds persistent storage or databases. There are three categories of options: Traditional file systems, SQL and NoSQL. Since traditional file systems are not designed for dynamically storing and retrieving data based on the structure of the data, they are not considered. The two options remaining are SQL and NoSQL which will be discussed and evaluated in the following sections.
+In order to easily retrieve data from the Netflix Prize dataset and store and retrieve data from Twitter, it is useful to consider various kinds persistent storage or databases. There are three categories of options: Traditional file systems, SQL and NoSQL. Since traditional file systems are not designed for dynamically storing and retrieving data based on the structure of the data, they are not considered. The two options remaining are SQL and NoSQL which will be discussed and evaluated in the following sections.
 
 \subsubsection*{NoSQL}
 % http://en.wikipedia.org/wiki/NoSQL
-NoSQL databases can be defined as: being non-relational. In many cases they are also: Open-source, distributed and horizontally scalable\cite{nosql}. NoSQL is meant for storing large amounts of data\cite{bigdata}, where all the data does not share the same attributes or schema. They are focusing on eventually consistency (BASE) instead of the more traditional consistent atomic transactions (ACID) \cite{pritchett}. The different kinds of NoSQL databases have different ways of classifying the database, some of the more used ones are: key-value, column, document, graph and relational.
+NoSQL databases can be defined as being non-relational. In many cases they are also: Open-source, distributed and horizontally scalable\cite{nosql}. NoSQL is meant for storing large amounts of data\cite{bigdata}, where all the data does not share the same attributes or schema. They are focusing on eventually consistency BASE instead of the more traditional consistent atomic transactions ACID \cite{pritchett}. There are a number of different kinds of NoSQL database classes. The common classes are: key-value, column, document, graph and relational.
 
 \begin{table}[H]
 \centering
@@ -751,46 +759,43 @@ NoSQL databases can be defined as: being non-relational. In many cases they are 
 \label{table:nosql-calssifications}
 \end{table}
 % http://www.slideshare.net/bscofield/nosql-death-to-relational-databases
-As we can see from table~\ref{table:nosql-calssifications} performance, scalability and flexibility are usually rated as high in all the categories.
-
-TODO: Move this to conclusion section
-Relational algebra in the database will not be needed for the project to succeed so that category can be disregarded. High flexibility in the database would also be a feature sought after when going for NoSQL, so the column storage can also be eliminated from the equation. TODO: MAYBE SOMETHING MORE HERE lol the tree left are described well here : http://en.wikipedia.org/wiki/NoSQL
+As seen in table~\ref{table:nosql-calssifications} performance, scalability and flexibility are rated high in all categories.
 % http://en.wikipedia.org/wiki/Comparison_of_structured_storage_software
 % http://www.mongodb.org/
 \cite{nosql-databases, nosql-article}
 
 
 \subsubsection*{SQL}
-SQL databases are the most common way of storing structured data. The data is stored in columns and tables and is schema defined. This means that the attributes of the different datatypes are already defined and must be set whenever a data points is added to the database, even if it is NULL. The database can make relations between the tables id necessary, hence the name relational databases.
-Performing queries is the way users and applications modify and read a SQL database. They are simple operations such as SELECT, UPDATE and DELETE written in the SQL query language. On a higher level of abstraction are transactions. Transactions are more or less a collection of queries. SQL Databases follow the ACID(atomicity, consistency, isolation, durability) principles for transactions. This means that the state of the database will never appear partially modified by a transaction to a new transaction that is being executed. Consistency of transactions are great for ensuring consistency across the data, but come at a performance cost.
+SQL databases are the most common way of storing structured data. The data is stored in tables with columns and rows and is schema defined. This means that the attributes of the different data types are already defined and must be set whenever a data point is added to the database, even if it is NULL. The database can make relations between the tables ids if necessary. Hence the name relational databases.
+Performing queries is the way users and applications modify and read a SQL database. They are simple operations such as SELECT, UPDATE and DELETE written in the SQL query language. On a higher level of abstraction are transactions. Transactions are more or less a collection of queries. SQL Databases follow the ACID(atomicity, consistency, isolation, durability) principles for transactions. This means that the state of the database will never appear partially modified by a transaction to a new transaction that is being executed. Consistency of transactions are great for ensuring consistency across the data, but comes at a performance cost.
 \cite{ramakrishnan2003database}
 
 \subsubsection{Database Alternatives}
-Recommender systems are in nature performance heavy. They are also statistical which makes them fault tolerant. For this reason we have valued performance over consistency. The dataset is likely to have nested structure as it will combine two different types of data. Being able to append and combine data based on the structure of the content thus has value.
+Recommender systems are in nature performance heavy. They are also statistical which makes them fault tolerant. For this reason performance is valued over consistency. The dataset is likely to have nested document structure as it will combine two different types of data. Being able to append and combine data based on the structure of the content thus has value.
 For these reasons the alternatives centered around NoSQL document stores, which are fast and have supports operations based on the structure of the document.
 MySQL, which is the faster of the SQL alternatives, was also considered.
 
 \subsubsection*{MongoDB}
-MongoDB is a large scale, high availability, robust system. It is a NoSQL document store. Instead of storing the data in tables as in SQL, the data is stored in a BSON document. BSON stands for Binary JSON and is essentially a JSON document that is stored in binary instead of ASCII. A JSON document is a nested hash which can hold any number of attributes without depending on the other documents in the store. It is thus schemaless. Even though it is schemaless, MongoDB still possesses the some of the great properties from SQL databases, such as indexes, dynamic queries and updates.
+MongoDB is a fast NoSQL document store with high availability. Instead of storing the data in tables as in SQL, the data is stored in a BSON document. BSON stands for Binary JSON and is essentially a JSON document that is stored in binary instead of ASCII. A JSON document is a nested hash which can hold any number of attributes without depending on the other documents in the store. It is thus schemaless. Even though it is schemaless, MongoDB still possesses the some of the great properties from SQL databases, such as indexes, dynamic queries and updates.
 
-MongoDB is implemented in C. It also has sharding which allows the database to scale horizontally. Custom queries and map-reduce queries can be written in JavaScript which has fast interpreters. This makes mongoDB an efficient and high speed data base for storing, modifying and fetching data with a nested document structure \cite{mongodb-intro}. In addition it has bindings to many different languages, which is a great advantage if some of the modules that need to access the database needs to be written in a language other than what it originally was written in.
+MongoDB is implemented in C. It also has sharding which allows the database to scale horizontally. Custom queries and map-reduce queries can be written in JS, which has fast interpreters. This makes mongoDB an efficient and high speed data base for storing, modifying and fetching data with a nested document structure \cite{mongodb-intro}. In addition it has bindings to many different languages, which is a great advantage if some of the modules that need to access the database needs to be written in a language other than what it originally was written in.
 
 
 \subsubsection*{CouchDB}
-CouchDB is similar to MongoDB in the sense that it is a NoSQL Document store. It also has the same query capabilities as mongo and also uses JavaScript as a query language. In addition, CouchDB has a HTTP REST API which allows any web application to access it easily. CouchDB has a lot of built in features which makes web development with CouchDB easy. One of the greatest advantages is the intuitive web-based admin user-interface that is provided.
+CouchDB is similar to MongoDB in the sense that it is a NoSQL document store. It also has the same query capabilities as mongo and also uses JS as a query language. In addition, CouchDB has a HTTP REST API which allows any web application to access it easily. CouchDB has a lot of built in features which makes web development with CouchDB easy. One of the greatest advantages is the intuitive web-based admin user-interface that is provided.
 CouchDB does not support sharding which makes it less horizontally scalable. An alternative to achieve this is to use CouchBase, which is the distributed version of CouchDB. CouchDB is implemented in erlang. While erlang is faster than it used to be, it is certainly slower than a similar system written in pure C. In addition, CouchDB stores a copy of every single document every time it is modified. This makes CouchDB grow in size with time.
 \cite{couchdb-about, couchdb-technical}
 
 
 \subsubsection*{MySQL}
-MySQL is one of the most popular database in the world of open databases. This is because of its high performance, reliability and ease of use. It should therefore be considered for the question of which database system to use. MySQL is an SQL based relational database, as opposed to the two NoSQL databases. It has bindings to most languages. It provides a much more advanced high level query language than a typical NoSQL document store. This is great for easily making complex queries during development, which is somewhat more tricky in NoSQL and JavaScript. However it is somewhat slower because of the interpretation of this high level language. The SQL database schema makes it more difficult to change the format of the data. MySQL also does not support JSON which is one of the most common standards for data retrieved from the web. This creates extra work with parsing JSON to the schema or invoking a mapper that has been created for this purpose.
+MySQL is one of the most popular databases in the world. This is because of its high performance, reliability and ease of use. It should therefore be considered for the question of which database system to use. MySQL is an SQL based relational database, as opposed to the two NoSQL databases. It has bindings to most languages. It provides a much more advanced high level query language than a typical NoSQL document store. This is great for easily making complex queries during development, which is somewhat more tricky in NoSQL and JS. However it is slower because of the interpretation of this high level language. The SQL database schema makes it more difficult to change the format of the data. MySQL also does not support JSON which is one of the most common standards for data retrieved from the web. This creates extra work with parsing JSON to the schema or invoking a mapper that has been created for this purpose.
 \cite{mysql-about}
 
 
 \subsubsection{Conclusion}
-Even though MySQL has several of the properties needed for a recommendation system, it lacks the speed of a NoSQL store, which is a huge advantage. The complex join capabilities are not strictly necessary and can be replicated in JS in any of the two NoSQL document stores.
+Even though MySQL has several of the properties needed for a recommendation system, it lacks the performance and flexibility of a NoSQL store, which is a huge advantage. The complex join capabilities are not strictly necessary and can be replicated in JS in any of the two NoSQL document stores.
 
-CouchDB has some unique merits. The simple web UI and HTTP REST API are great for development and compatability with web applications. However, compared to mongoDB it scores low on performance both as a standalone database, and in the sense that it can not be sharded to increase performance horizontally if necessary. It also takes up more space than necessary and grows in size for every single modification, which is an unfortunate property for a database that should handle a large fault tolerant dataset.
+CouchDB has some unique merits. The simple web UI and HTTP REST API are great for development and compatibility with web applications. However, compared to mongoDB it scores low on performance both as a standalone database, and in the sense that it can not be sharded to increase performance horizontally if necessary. It also takes up more space than necessary and grows in size for every single modification, which is an unfortunate property for a database that should handle a large fault tolerant dataset.
 
 For these reasons mongoDB was chosen as the most appropriate alternative.
 
