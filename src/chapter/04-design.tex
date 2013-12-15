@@ -112,13 +112,11 @@ The dataset building algorithm retrieves and iterates over a list of Netflix use
 
 \subsubsection{Retrieval}
     Each Netflix user that is not present in the test set is retrieved and iterated over.
-    TODO:fr usikker på setningen under.
-    For alle movie ratings til alle brukere skal dataset-filmen som inneholder Twitter data points som er relevent til filem brukeren har ratet skal bli hentet?
-    For each of these users movie ratings, the dataset movie containing the Twitter data points that are relevant to the movie the user has rated is retrieved.
+    For each of the movies that these users have rated, the corresponding movie in the dataset that is being built containing the Twitter data points that are relevant to the movie is retrieved.
     If the dataset does not yet contain this movie, the relevant Twitter data points are retrieved from the Twitter model and added to the dataset movie.
 
 \subsubsection{Consolidating}
-	Once Twitter data points that are related to a movie a user has rated have been retrieved, these data points must be consolidated with the users data points. The user data points is a hash of Twitter data points that point to a number indicating whether or not the user is positively or negatively interested in this Twitter data point. Each Twitter data point related to the movie the user has rated is added to this hash and scaled by whether or not the user liked it. After Twitter data points have been added to the user data points for all movies the user has rated, they are normalized to a scale of [0, 1] for each user. The user is now expressed in the dataset entirely by Twitter data points rated from 0 to 1.
+	Once Twitter data points that are related to a movie a user has rated have been retrieved, these data points must be consolidated with the user's data points. The user data points is a hash of Twitter data points that point to a number indicating whether or not the user is positively or negatively interested in this Twitter data point. Each Twitter data point related to the movie the user has rated is added to this hash and scaled by whether or not the user liked it. After Twitter data points have been added to the user data points for all movies the user has rated, they are normalized to a scale of [0, 1] for each user. The user is now expressed in the dataset entirely by Twitter data points rated from 0 to 1.
 
 \subsection{Prediction}\label{algorithm-design:prediction}
 As mentioned in \ref{subsubsec:predict-phase} the system must produce a prediction on the dataset. As concluded in the preliminary study the most suitable algorithms to produce these predictions for this kind of dataset has proven to be a k-nearest neighbors (k-NN) approach. This is because it will allow a low response time, but yet has produced good prediction results on the Netflix Prize dataset~\ref{subsec:sim-sys-conc}.

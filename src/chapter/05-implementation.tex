@@ -56,7 +56,6 @@ The attributes are referred to as keys in MongoMapper. Instead of declaring vari
 
 MongoMappers relationship descriptors are also utilized. When an object is pointing to many instances of another object, the descriptor "many" can be used instead of declaring a regular variable. When an object is pointing to one instance of another object, the keyword "one" is used. An example used in the implementation for TwitterUser is "many twitter\_tweets" and conversely, "one twitter\_user" in TwitterTweet.
 
-%TODO:fr check if agreeing with putting "" around nil
 Validations in MongoMapper are used to ensure that certain keys and relationships are not stored with "nil" values. In the implementation, validations are used wherever there is a key that should always be stored. An example is "validates\_presence\_of text" in TwitterTweet.
 
 
@@ -178,8 +177,7 @@ The data structures were tested by creating, saving and cross checking with the 
 
 First, an instance of each data structure with all the valid fields filled out correctly was first created. For example TwitterTweet. The lack of errors confirmed that the instances were created correctly.
 
-%TODO:fr is the function called "save" or is it using "MongoMapper document function save"?
-Then, the instance was saved using MongoMappers document function save, which updates mongoDB with the document reflected in the object.
+Then, the instance was saved using MongoMapper's document function "save!", which updates mongoDB with the document reflected in the object.
 
 At last, the mongoDB console was opened and a query was made to make sure that the object had been created. Each field was then cross checked with the keys of the corresponding data structure instance to make sure they all matched.
 
@@ -196,8 +194,7 @@ First, an instance of each field was created in order to make sure that the fiel
 
 Then, all the functions in the field available to the harvester for retrieving Twitter data points were run in order to see that they were returning valid TwitterTweets or TwitterUsers. An example would be calling rest.followees(some\_twitter\_user) and see if it returned a list of TwitterUsers.
 
-%TODO:fr is it "save!" if so, use ""?
-At last, the Twitter data points returned by each function was saved by calling save! on each of them. Queries for mongoDB were then constructed to retrieve these items from the database. The items returned were then cross checked to see that they matched the data in each of the Twitter data points.
+At last, the Twitter data points returned by each function was saved by calling "save!" on each of them. Queries for mongoDB were then constructed to retrieve these items from the database. The items returned were then cross checked to see that they matched the data in each of the Twitter data points.
 
 \subsection{Harvesters}
 The harvesters were tested by creating the harvesters and making sure that they were storing the items that they retrieved in the database. No formal functional testing was employed as the harvesters were fairly simple in functionality to the point where formal test would only be testing the underlying technology. The following steps were taken to test the harvesters.
