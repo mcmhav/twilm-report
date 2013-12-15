@@ -22,9 +22,9 @@ The harvesters implemented are
 \item TwitterUserFolloweeREST
 \end{itemize}
 
-NetflixMovieTweetScrape iterates through all netflix movies and uses the field Scrape to harvest tweets related to each netflix movie. TwitterUserFolloweeREST iterates over all Twitter users in storage and uses the field REST to harvest followees for this user.
+NetflixMovieTweetScrape iterates through all Netflix movies and uses the field Scrape to harvest tweets related to each Netflix movie. TwitterUserFolloweeREST iterates over all Twitter users in storage and uses the field REST to harvest followees for this user.
 
-Thus, the system can harvest tweets and users from Twitter related to movies in the netflix dataset and the requirement is therefore implemented.
+Thus, the system can harvest tweets and users from Twitter related to movies in the Netflix dataset and the requirement is therefore implemented.
 
 \subsection{FR6}\label{subsec:FR6}
 \begin{quotation}
@@ -62,7 +62,7 @@ Validations in mongomapper are used to ensure that certain keys and relationship
 \subsection{Data structure: Netflix}
 
 \subsubsection{User}
-The NetflixUser datastructure models the users in the netflix prize dataset. The implementation reflects the netflix movies the user has rated and also holds a cached average of these ratings. The implementation can be seen in figure~\ref{figure:datastructure-netflix-user}.
+The NetflixUser datastructure models the users in the Netflix Prize dataset. The implementation reflects the Netflix movies the user has rated and also holds a cached average of these ratings. The implementation can be seen in figure~\ref{figure:datastructure-netflix-user}.
 
 	\begin{figure}[H]
 	\includegraphics[width=4in]{image/datastructure-netflix-user.png}
@@ -72,7 +72,7 @@ The NetflixUser datastructure models the users in the netflix prize dataset. The
 	\end{figure}
 
 \subsubsection{Movie}
-The NetflixUser datastructure models the movies in the netflix prize dataset. The implementation have the keys title and year which reflects the title of the movie and the year it was released. It also reflects the netflix users that have rated the movie and the rating itself. The implementation can be seen in figure~\ref{figure:datastructure-netflix-movie}.
+The NetflixUser datastructure models the movies in the Netflix Prize dataset. The implementation have the keys title and year which reflects the title of the movie and the year it was released. It also reflects the Netflix users that have rated the movie and the rating itself. The implementation can be seen in figure~\ref{figure:datastructure-netflix-movie}.
 
 	\begin{figure}[H]
 	\includegraphics[width=4in]{image/datastructure-netflix-movie.png}
@@ -132,7 +132,7 @@ The event after\_crawl is triggered after no more urls can be generated. This sh
 \subsubsection{Stream}
 Stream is implemented separately from the twilm projects due to quicker development iteration. It is based on the gem tweetstream which is a full implementation of the Twitter Stream API. It connects to Twitter with OAuth for Twilm and the personal Twitter user account of one of the authors. The OAuth details are hardcoded into the application.
 
-Stream is initialized by a harvester with a list of keywords. The keyword list retrieves all tweets that contain one or more of the keywords. The key to using Stream correctly is to define the keywords so that they return a set where the tweets wanted are a subset of this set. For netflix movies, this could be either one of the following
+Stream is initialized by a harvester with a list of keywords. The keyword list retrieves all tweets that contain one or more of the keywords. The key to using Stream correctly is to define the keywords so that they return a set where the tweets wanted are a subset of this set. For Netflix movies, this could be either one of the following
 
 	\begin{itemize}
 	\item movie

@@ -39,7 +39,7 @@ The logical view describes the components of the architecture and how they relat
 \subsubsection{Models}
 Models is the module responsible for holding the different datamodels that are used in the project. It is found in the upper left part of the logical view in figure-\ref{figure:logical-view}. All classes in this module are mapped to and reflect the database.
 
-The Netflix Models model the netflix prize dataset. Each user has a list of movie ratings and each movie has a list of user ratings. The probe is a list of movies with empty user ratings that need to be predicted.
+The Netflix Models model the Netflix Prize dataset. Each user has a list of movie ratings and each movie has a list of user ratings. The probe is a list of movies with empty user ratings that need to be predicted.
 
 The Twitter Models reflect the data harvested from Twitter. The schema of these models are variable as it depends on what type of data is harvested. A tweet typically contains a text and refers to a user. A user typically has a name and a user ID and may refer to tweets. As an example, it may also contain a list of followees or followers.
 
@@ -52,13 +52,13 @@ Farm is the module responsible for accessing and gathering data from Twitter.
 
 The fields access Twitter's data. Most fields implement one of Twitter's existing APIs. There is also a Scrape field for accessing Twitter's web search and scraping the results. It is important to note that Twitter does not allow this without explicit consent. Each field is implemented in such a way that it delivers a subset of the Twitter data types that are outlined in the functional requirements in section~\ref{section:functional-requirements}. The fields combined delivers all the Twitter data types in the requirements. The reason for dividing the access over several fields is that some of the fields are unsuitable for gathering certain Twitter data types.
 
-The harvesters uses the fields to gather and store Twitter data that matches a model that already exists in either the netflix model or the Twitter model. It is used for finding say tweets for a movie using the scraper field, followees for a user using the rest field or users for a movie using the stream field.
+The harvesters uses the fields to gather and store Twitter data that matches a model that already exists in either the Netflix model or the Twitter model. It is used for finding say tweets for a movie using the scraper field, followees for a user using the rest field or users for a movie using the stream field.
 
 \subsubsection{Dataset Builder}
-The dataset builder is responsible for building a dataset that reflects the netflix dataset using the data gathered from Twitter by the harvesters. This new dataset is stored in dataset model.
+The dataset builder is responsible for building a dataset that reflects the Netflix dataset using the data gathered from Twitter by the harvesters. This new dataset is stored in dataset model.
 
 \subsubsection{Predictor}
-The predictor is responsible for predicting movie ratings for a collection of users. The predictor does so by for a test set and comparing it to several entries in a dataset. The test set is usually the probe in the netflix models. The dataset that the test set is compared to, is either the dataset model or the netflix model. The predictor also gradually calculates RMSE as it is predicting ratings.
+The predictor is responsible for predicting movie ratings for a collection of users. The predictor does so by for a test set and comparing it to several entries in a dataset. The test set is usually the probe in the Netflix models. The dataset that the test set is compared to, is either the dataset model or the Netflix model. The predictor also gradually calculates RMSE as it is predicting ratings.
 
 \subsection{Process View}
 The process view describes the actions that the components of the architecture engage in over time and how there actions relate to other components. See figure-\ref{figure:process-view}
@@ -70,13 +70,13 @@ The process view describes the actions that the components of the architecture e
 \end{figure}
 
 \subsubsection{Harvest Phase}
-The harvest phase is responsible for gathering data from Twitter. First, the harvester retrieves an initial model from either netflix models or Twitter models. Then, it uses one or more fields to harvest data from Twitter that is related to the initial model. This can be tweets containing the movie title in the tweet.text, tweet.users for these tweets, users.each.followees and so forth, as outlined in the functional requirements related to harvesting in section~\ref{section:functional-requirements}. At last, the harvested data is stored as Twitter models.
+The harvest phase is responsible for gathering data from Twitter. First, the harvester retrieves an initial model from either Netflix models or Twitter models. Then, it uses one or more fields to harvest data from Twitter that is related to the initial model. This can be tweets containing the movie title in the tweet.text, tweet.users for these tweets, users.each.followees and so forth, as outlined in the functional requirements related to harvesting in section~\ref{section:functional-requirements}. At last, the harvested data is stored as Twitter models.
 
 \subsubsection{Datset Building Phase}
-The dataset building phase is responsible for building a dataset using the data gathered from Twitter in the harvest phase. First, the dataset builder retrieves a netflix model, which is likely to be a movie. Then, it retrieves Twitter models that are relevant for the netflix model and consolidates them into a set of datapoints that expresses this netflix model. At last, the datapoints are stored along with the netflix model it expresses in the dataset model. In this way, the functional requirement in section~\ref{section:functional-requirements} for supplementing the netflix-dataset with data from Twitter is fulfilled.
+The dataset building phase is responsible for building a dataset using the data gathered from Twitter in the harvest phase. First, the dataset builder retrieves a Netflix model, which is likely to be a movie. Then, it retrieves Twitter models that are relevant for the Netflix model and consolidates them into a set of datapoints that expresses this Netflix model. At last, the datapoints are stored along with the Netflix model it expresses in the dataset model. In this way, the functional requirement in section~\ref{section:functional-requirements} for supplementing the netflix-dataset with data from Twitter is fulfilled.
 
 \subsubsection{Prediction Phase}\label{subsubsec:predict-phase}
-The prediction phase is responsible for using the dataset model to predict the ratings of the probe in the netflix model and calculate the RMSE. First, the predictor retrieves a datapoint from the probe. Then, it gathers the relevant datapoints it needs from the dataset model in order to make a prediction. After this step, the rating has been predicted and the contribution to the RMSE score is calculated and. The RMSE contribution is summed in the predictor and kept until all ratings have been predicted. At last, the predicted rating is stored in the prediciton model. When all ratings have been predicted and all the RMSE contributions have been added to the prediction model, the RMSE can be calculated and stored. Thus, the functional requirements in section~\ref{section:functional-requirements} related to giving and testing predictions are fulfilled.
+The prediction phase is responsible for using the dataset model to predict the ratings of the probe in the Netflix model and calculate the RMSE. First, the predictor retrieves a datapoint from the probe. Then, it gathers the relevant datapoints it needs from the dataset model in order to make a prediction. After this step, the rating has been predicted and the contribution to the RMSE score is calculated and. The RMSE contribution is summed in the predictor and kept until all ratings have been predicted. At last, the predicted rating is stored in the prediciton model. When all ratings have been predicted and all the RMSE contributions have been added to the prediction model, the RMSE can be calculated and stored. Thus, the functional requirements in section~\ref{section:functional-requirements} related to giving and testing predictions are fulfilled.
 
 \subsection{Development View}
 The development view describes how the various technologies and implementeations are dependent on one another. A layered approach is used to depict this in figure-\ref{figure:development-view}. It shows how the commercial off-the-shelf software COTS is dependent on the underlying language they are built in. Also, it shows how the modules implemented in the project are dependent on the various COTS.
@@ -106,16 +106,16 @@ The NoSQL database can also be decoupled from the computer running Twilm and set
 
 \section{Algorithm Design}
 \subsection{Dataset Building}\label{algorithm-design:dataset-building}
-The dataset building algorithm retrieves and iterates over a list of netflix useres in a test set. This test set is normally the probe provided in the netflix dataset. It then consolidates Twitter data with netflix data by buliding a dataset for the user based on Twitter data points related to the movies the user has reated. An illustration of this process and its beginning and resulting data structures can be seen in figure~\ref{figure:dataset-building-algorithm}
+The dataset building algorithm retrieves and iterates over a list of Netflix useres in a test set. This test set is normally the probe provided in the Netflix dataset. It then consolidates Twitter data with Netflix data by buliding a dataset for the user based on Twitter data points related to the movies the user has reated. An illustration of this process and its beginning and resulting data structures can be seen in figure~\ref{figure:dataset-building-algorithm}
 
 \begin{figure}[H]
 \centerline{\includegraphics[width=6in]{image/design-algorithm-dataset-building.png}}
-\caption{Illustration of the dataset building algorithm. The algorithm retrieves data about a netflix user and consolidates it with the Twitter data points related to the movies the user has rated.}
+\caption{Illustration of the dataset building algorithm. The algorithm retrieves data about a Netflix user and consolidates it with the Twitter data points related to the movies the user has rated.}
 \label{figure:dataset-building-algorithm}
 \end{figure}
 
 \subsubsection{Retrieval}
-	Each netflix user that is not present in the test set is retrieved and iterated over. For each of these users movie ratings, the dataset movie containing the Twitter data points that are relevant to the movie the user has rated is retrieved. If the dataset does not yet contain this movie, the relevant Twitter data points are retrieved from the Twitter model and added to the dataset movie.
+	Each Netflix user that is not present in the test set is retrieved and iterated over. For each of these users movie ratings, the dataset movie containing the Twitter data points that are relevant to the movie the user has rated is retrieved. If the dataset does not yet contain this movie, the relevant Twitter data points are retrieved from the Twitter model and added to the dataset movie.
 
 \subsubsection{Consolidating}
 	Once we have Twitter data points that are related to a movie a user has rated, these data points must be consolidated with the users data points. The user data points is a hash of Twitter data points that point to a number indicating indicating whether or not the user is positively or negatively interested in this Twitter data point. Each Twitter data point related to the movie the user has rated is added to this hash and scaled by whether or not the user liked it. After Twitter data points have been added to the user data points for all movies the user has rated, they are normalized to a scale of [0, 1] for each user. The user is now expressed in the dataset entirely by Twitter data points rated from 0 to 1.
