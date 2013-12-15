@@ -14,7 +14,7 @@ The architecture uses a custom simplified version of the 4+1 notation that bette
 
 
 \subsection{Logical View}
-The logical view describes the components of the architecture and how they relate to one another in terms of containment, inheritance and usage. The logical view can be found in figure-\ref{figure:logical-view} and the notation for the logical view in figure-\ref{figure:logical-view-notation}
+The logical view describes the components of the architecture and how they relate to one another in terms of containment, inheritance and usage. The logical view can be found in figure~\ref{figure:logical-view} and the notation for the logical view in figure~\ref{figure:logical-view-notation}
 
 \begin{figure}[H]
 \centerline{\includegraphics[width=2.5in]{image/architecture-logical-view-notation.png}}
@@ -25,13 +25,13 @@ The logical view describes the components of the architecture and how they relat
 \begin{center}
 \begin{figure}[H]
 \centerline{\includegraphics[width=7in]{image/architecture-logical-view.png}}
-\caption[Logical view]{Logical view of the project. See figure-\ref{figure:logical-view-notation} for notation.}
+\caption[Logical view]{Logical view of the project. See figure~\ref{figure:logical-view-notation} for notation.}
 \label{figure:logical-view}
 \end{figure}
 \end{center}
 
 \subsubsection{Models}
-Models is the module responsible for holding the different data models that are used in the project. It is found in the upper left part of the logical view in figure-\ref{figure:logical-view}. All classes in this module are mapped to and reflect the database.
+Models is the module responsible for holding the different data models that are used in the project. It is found in the upper left part of the logical view in figure~\ref{figure:logical-view}. All classes in this module are mapped to and reflect the database.
 
 The Netflix Models model the Netflix Prize dataset. Each user has a list of movie ratings and each movie has a list of user ratings. The probe is a list of movies with empty user ratings that need to be predicted.
 
@@ -55,7 +55,7 @@ The dataset builder is responsible for building a dataset that reflects the Netf
 The predictor is responsible for predicting movie ratings for a collection of users. The predictor does this by taking a test set and comparing it to several entries in a dataset. The test set is usually the probe in the Netflix models. The dataset that the test set is compared to, is either the dataset model or the Netflix model. The predictor also gradually calculates RMSE as it is predicting ratings.
 
 \subsection{Process View}
-The process view describes the actions that the components of the architecture are engaged in over time, and how their actions relate to other components. See figure-\ref{figure:process-view}
+The process view describes the actions that the components of the architecture are engaged in over time, and how their actions relate to other components. See figure~\ref{figure:process-view}
 
 \begin{figure}[H]
 \centerline{\includegraphics[width=7in]{image/architecture-process-view.png}}
@@ -74,7 +74,7 @@ The dataset building phase is responsible for building a dataset using the data 
 The prediction phase is responsible for using the dataset model to predict the ratings of the probe in the Netflix model and calculate the RMSE. First, the predictor retrieves a data points from the probe. Then, it gathers the relevant data points it needs from the dataset model in order to make a prediction. After this step, the rating has been predicted and the contribution to the RMSE score is calculated. The RMSE contribution is summed in the predictor and kept until all ratings have been predicted. At last, the predicted rating is stored in the prediction model. When all ratings have been predicted and all the RMSE contributions have been added to the prediction model, the RMSE can be calculated and stored. Thus, the functional requirements in section~\ref{section:functional-requirements} related to giving and testing predictions are fulfilled.
 
 \subsection{Development View}
-The development view describes how the various technologies and implementations are dependent on one another. A layered approach is used to depict this in figure-\ref{figure:development-view}. It shows how the commercial off-the-shelf software (COTS) is dependent on the underlying language they are built in. Also, it shows how the modules implemented in the project are dependent on the various COTS.
+The development view describes how the various technologies and implementations are dependent on one another. A layered approach is used to depict this in figure~\ref{figure:development-view}. It shows how the commercial off-the-shelf software (COTS) is dependent on the underlying language they are built in. Also, it shows how the modules implemented in the project are dependent on the various COTS.
 
 \begin{figure}[H]
     \centerline{\includegraphics[width=4.5in]{image/architecture-development-view.png}}
