@@ -54,7 +54,7 @@ The choice of database was a good match to the data harvested from Twitter. Mong
 \subsubsection{Done}
 Research around good prediction candidates has been made, and is and interesting topic for future work. Especially the use of k-NN for gathering similar data points to make rating predictions with.
 
-It was interesting to see from the research done how many different approaches there are to take when suggesting user ratings, and the importance of diversity when calculating the predictions is key. There is no one model when suggesting movies to users, which will be perfect for all. Even the top two winners of the Netflix Prize competition scored better when their solutions were merged together. Even though the winners managed to produce a 10\% better score than the Netflix's own system, the winners solution was not taken into production. The algorithms used to recommend at the winners level would be too time consuming to use on the complete data, and would not work well with the constant updating values of the actual Netflix users ratings, whereas the Netflix Prize competitors where working on a unknown but stationary set of users and ratings.
+It was interesting to see from the research done how many different approaches there are to take when suggesting user ratings, and the importance of diversity when calculating the predictions is key. There is no one model when suggesting movies to users, which will be perfect for all. Even the top two winners of the Netflix Prize competition scored better when their solutions were merged together. Even though the winners managed to produce a 10\% better score than the Netflix's own system, the winners solution was not taken into production. The algorithms used to recommend at the winners level would be too time consuming to use on the complete data. It would not work well with the constant updating values.
 
 \subsubsection{Not Done}
 The prediction part was never implemented because of the missing dataset as described in \ref{sec:issues}.
@@ -63,7 +63,7 @@ The prediction part was never implemented because of the missing dataset as desc
 \section{Related Work}
 As was shown in the preliminary study on similar systems~\ref{sec:similarsys}, there are some systems with similar characteristics as the approach taken in the project. They were of great help when exploring how to attack the issues that comes along with recommending movies, gathering information from social media and exploring big amounts of data.
 
-For the development of the Twitter-part of the system Twittomender~\cite{twittomender} had some very helpful insight. Their approach and research on how to find interesting friends, and thereby finding relevant users to harvest from, was especially helpful.
+Twittomender~\cite{twittomender} had some very helpful insight. Their approach and research on how to find interesting friends, and thereby finding relevant users to harvest from, was especially helpful.
 
 Papers on different recommendation algorithms and their produced runtime and root-mean-square error, such as \cite{bigchaos-sol,alsMPI,BellKor-CF-TD} was of great help when deciding a suitable algorithm to use for rating predictions.
 
