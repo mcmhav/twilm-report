@@ -11,7 +11,8 @@ This chapter will describe the capturing of the requirements and go into depth o
 \section{Capturing the Requirements}
 Based on the initial task at hand and the findings in the prestudy, the requirements had a basis to get formed on. The initial task gave a coarse grained overview of how the requirements of the system should look like. The prestudy on similar solutions made it clearer what was feasible to do and what would be impractical to do. For instance runtime of different recommendation algorithms and their ability to be parallelized. The prestudy on Twitter made it clear how Twitter can be explored and how it can be done in a timely manner. It also showed the difficulties in gathering sufficient data from the APIs and that scraping would work but could not be done due to legal considerations.
 
-An interesting find was that most of the recommendation systems for the Netflix Prize had a more stationary ground to them, they only tried to get the RMSE as low as possible, not considering the fact that ratings would be constantly updated, and therefore a requirement to do live recommending with new input-information would require the already heavy computations to be run constantly on all the data often, which is less than feasible.
+An interesting find that was due to the nature of the Netflix Price competition most of the recommendation systems only tried to get the RMSE as low as possible. Not considering the fact that ratings would constantly be updated. This lead to the use of a lot of time consuming and computationally heavy algorithms. Live recommending, which Netflix is doing, would require major changes is system structure to be able to use many of them.
+with new input-information would require the already heavy computations to be run constantly on all the data often, which is less than feasible.
 
 
 \section{Functional Requirements}\label{section:functional-requirements}
