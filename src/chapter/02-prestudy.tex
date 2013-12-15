@@ -193,7 +193,7 @@ Weka can let the user utilize its many machine-learnings algorithms in an easy a
 Twitter is a free social media network based on microblogging. In microblogging, a user can post a paragraph of a certain number of characters or less to his/her timeline. The user can also follow other users. Whenever the users that a given user is following posts something, the user can see these posts in his/her feed. This is the basis for many of todays most popular social media networks.
 
 \subsection{Terminology}
-For more clarity, we define the terminology Twitter uses. All words in \textbf{bold} are our own definitions for more easily describing how the various term relate to eachother.
+For more clarity, we define the terminology Twitter uses. All words in \textbf{bold} are our own definitions for more easily describing how the various terms relate to each other.
 
 \subsubsection{Tweet}
 A tweet is a post containing max 140 characters. It can also refer to the verb ‘to tweet’, which means ‘to post a tweet’. \textbf{tweets} is an attribute of a user which returns a list of tweets that the users
@@ -203,7 +203,7 @@ A tweet is a post containing max 140 characters. It can also refer to the verb �
 A user is someone with a Twitter account. A user can post tweets. By following other users, Twitter generates a feed for the user containing the tweets of all the users they follow. They also have certain information retrieval tools available, such as filtering tweets by a tag name, specific user or search term.
 
 \subsubsection{Tweeter}
-A user who tweets a tweet that is referenced in the same context. For instance: The best tweets are tweeted by the most popular tweeters
+A user who tweets a tweet that is referenced in the same context. For example: The best tweets are tweeted by the most popular tweeters
 
 
 \subsubsection{Follower}
@@ -212,17 +212,17 @@ A follower is someone who follows a user. The follower will see the users tweets
   \textbf{user.followers -> [<user>]}
 
 \subsubsection{Followee}
-A followee is someone who a user is following. The user will appear in the followees list of followers, and the followee will appear in the users list called ‘following’. We will refer to the list ‘following’ for a user as followees for clearer terminology. \textbf{followees} is an attribute of a user which returns the list of users that the user is following.
+A followee is someone who a user is following. The user will appear in the followees list of followers, and the followee will appear in the users list with the name following. We will refer to the following list for a user as followees for clarity. \textbf{followees} is an attribute of a user which returns the list of users that the user is following.
 
   \textbf{user.followees -> [<user>]}
 
 \subsubsection{Hashtag}
-Hashtags are topic labels that are placed on tweets. They are made by typing \#topicname anywhere in the tweet. By navigating to \#topicname, a user will see a feed of all tweets containing \#tagname. \textbf{hashtags} is a an attribute of a tweet which returns the list of hashtags the tweet contains.
+Hashtags are topic labels that are placed on tweets by the tweeter. They are made by typing \#tagname anywhere in the tweet when composing it. By navigating to \#tagname, a user will see a feed of all tweets containing \#tagname. \textbf{hashtags} is a an attribute of a tweet which returns the list of hashtags that the tweet contains.
 
   \textbf{tweet.hashtags -> [<hashtag>]}
 
 \noindent
-Hashtag also has the attribute tweets, which returns all tweets that have a certain hashtag. These hashtags are ordered by twitters algorithm which balances how recent the tweet is with the popularity of the tweeter.
+Hashtag also has the attribute tweets, which returns all tweets that have a certain hashtag. These hashtags are ordered by Twitter's algorithm which balances how recent the tweet is with the popularity of the tweeter.
 
   \textbf{hashtag.tweets -> [<tweet>]}
 
@@ -283,7 +283,7 @@ After the initial request is made, a persistent HTTP connection is opened. Then,
 Authentication for using the Stream API is done with OAuth. There is no application wide identification such as in the REST API and the Search API.
 
 \subsubsection{Limitations}
-There is no rate limit in the Stream API. However, there are a few cases in which the streaming will stop. For instance, If the client fails to receive the streamed data and twitters buffer builds up too many tweets, the connection will be closed. Also, if the client opens too many streams with the same credentials, the oldest connection will be closed.
+There is no rate limit in the Stream API. However, there are a few cases in which the streaming will stop. For instance, If the client fails to receive the streamed data and Twitter's buffer builds up too many tweets, the connection will be closed. Also, if the client opens too many streams with the same credentials, the oldest connection will be closed.
 
 It also takes the Stream API a very long time to create a dense dataset. By a few searches for movie titles that are less watched, it can easily be determined that many of them have only a few tweets posted about them over the span of years. This means that it would take at least a year for the Stream API to deliver any datapoints about the movie.
 
@@ -377,7 +377,7 @@ Hera Pheri&1975&&0&0&0
 
 \subsection{Crawling and Scraping Twitter}\label{sec:pre-twitter-crawl-scrape}
 TODO: Add appendixes from scrapbook.
-This section will examine how to crawl and scrape Twitters HTTPS Web Search. This will be examined by browsing twitter.com logged in as a user and examining it Google Chrome Developer Tools (GCDT)\cite{gcdt} as the site is being browsed and search requests are being made. The goal of this examination is to discover requests a webcrawler must be capable of making in order to search Twitter and harvest tweets and users automatically and how a scraper can distinguish the dom elements that describe a tweet.
+This section will examine how to crawl and scrape Twitter's HTTPS Web Search. This will be examined by browsing twitter.com logged in as a user and examining it Google Chrome Developer Tools (GCDT)\cite{gcdt} as the site is being browsed and search requests are being made. The goal of this examination is to discover requests a webcrawler must be capable of making in order to search Twitter and harvest tweets and users automatically and how a scraper can distinguish the dom elements that describe a tweet.
 
 
 \subsubsection{Search Request}
@@ -834,13 +834,13 @@ There are several ways to access and retrieve this data. The REST API has the ca
 
 The Streaming API is also great in the sense of data completeness. It has the capability of capturing all tweets for any given topic described by keywords. It is however slow in the sense that it takes a long time to build a dense dataset because less popular films are rarely tweeted about. In the study we see that even running the Stream API for over a year will only produce more than one tweet for about 65\% of the movies in the dataset. This is not satisfactory.
 
-The Search API is great in the sense that it has looser limitations than the REST API. It can process a total of 180 requests per client per 15 minute window. It is however, like the Stream API limited in time span. The Search API only has a week worth of data. There is also no guarantee from Twitters side for which time window the Search API reflects and thus no guarantee for the completeness of data. This renders the Search API almost completely similar in terms of data gathering capability to the Stream API, but inferior in certainty of data completeness. A slight advantage for Search over Stream is that keeping a persistent connection is not required which makes it easier to maintain.
+The Search API is great in the sense that it has looser limitations than the REST API. It can process a total of 180 requests per client per 15 minute window. It is however, like the Stream API limited in time span. The Search API only has a week worth of data. There is also no guarantee from Twitter's side for which time window the Search API reflects and thus no guarantee for the completeness of data. This renders the Search API almost completely similar in terms of data gathering capability to the Stream API, but inferior in certainty of data completeness. A slight advantage for Search over Stream is that keeping a persistent connection is not required which makes it easier to maintain.
 
 Scraping is the best solution in terms of data completeness and time consumption. It achieves what the Stream API is capable of achieving in years in mere days. However, it is a more complicated and error prone procedure as the scraping must be done by the client and the content being scraped is not under its control. The scraping procedure itself is more difficult to test than to just utilize an existing api. This makes Scraping more prone to sparseness and errors in the dataset. However, the speed with which an entire site can be crawled and scraped compared to the years it takes the Stream API to collect a dataset of the same density, makes it easy to test run a scraper, correct errors as they are found and run the scraper over again.
 
 All of the previously mentioned APIs have the advantage that all the data gathered by them can be be aggregated and analyzed. Aggregations and analysis of data obtained by these means can be legally used to create services, including movie recommenders.
 
-One problem with scraping is that it is not allowed by Twitter without their consent. As Twitters consent has not been granted to scrape Twitter for the purposes of the project, a dataset based on scraping can not be gathered. The data can certainly not be used to legally create services like movie recommenders.
+One problem with scraping is that it is not allowed by Twitter without their consent. As Twitter's consent has not been granted to scrape Twitter for the purposes of the project, a dataset based on scraping can not be gathered. The data can certainly not be used to legally create services like movie recommenders.
 
 All of the techniques for gathering data from Twitter discussed have pros and cons in terms of how dense of a dataset they build, how likely the dataset is to contain errors, how long they take to run and the legallity of how the data collection. As APIs exist for all techniques except scraping, the barrier for utilizing them are low. Implementing them and having them available has a low cost in terms of development time and each API increases the richness of available data. Implementing a scraper is also a good idea in case consent from Twitter is obtained as it has superior performance compared to any of the other techniques considered.
 
