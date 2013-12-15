@@ -12,54 +12,52 @@ This chapter will give an overview of what the project is about, and the purpose
 
 
 \section{Purpose}
-The goal of the project is to explore the correlation between social media and movie recommendation, and put down the cornerstones for such a system. The system is intended to produce ratings for movies based on a social media network (Twitter) and a set of movies with movie-ratings (Netflix Prize dataset). The social media network will be harvested for movies based on the movies from the movie-dataset, then these two datasets will be combined to open the possibility of movie recommendation.
+Social media data is used frequently in recommendation systems. There are many ways in which this can be done, both in terms of what data is used and what is recommended. The purpose of the project is to explore one of these possibilities, namely how data from Twitter can be used to predict movie ratings and recommend movies. Also, the purpose is to design a system that can use data from Twitter in such a way. Furthermore, the report is meant to ease further development of such a system and explain reasons to why some directions are preferred over other directions.
 
+\renewcommand{\arraystretch}{1.5}
 \begin{table}[H]
     \centering
-    \begin{tabular}{ l }
+    \begin{tabular}{ p{10cm} }
         \textbf{Goals} \\ \hline
-        Understand how social media can be used for recommendations \\
-        Implement harvesting \\
-        Gather data from Twitter \\
-        Supplement Netflix Prize dataset with data from Twitter \\
-        Implement prediction system \\
-        Compare RMSE scores \\
+        Understand how data from Twitter can be used for recommendations and predictions. \\
+        Implement harvesting of data from Twitter. \\
+        Gather data from Twitter. \\
+        Supplement the Netflix Prize dataset with data from Twitter. \\
+        Implement a Netflix Prize movie rating prediction system. \\
+        Compare RMSE scores. \\
     \end{tabular}
     \captionof{table}[Main goals]{The main goals of the research}
     \label{tab:main-goals}
 \end{table}
-
-The report is the cornerstone of this system, and is meant to ease further development and explain reasons to why some directions are to be preferred before other directions.
-
+\renewcommand{\arraystretch}{1}
 
 \section{Motivation}
-Social media networks are well established networks, they possess and produce big amounts of data on a daily basis. On Twitter, a social media site, 9 100 messages are posted every second~\cite{twitt-stats}, and on Facebook, another social media site, 1 million links are shared every 20 minuets~\cite{face-stats}. With this amount of data produced conclusions and predictions can be made through gathering the data and performing collaborative filtering on this data. One of the potential ways this data can be used is movie rating predictions. Hence the motivation for utilizing the vast amount of data for movie rating predictions.
-
+Social media networks are well established systems. They harbor and produce huge amounts of data on a daily basis. On Twitter, a social media network, 9 100 messages are posted every second~\cite{twitt-stats}, and on Facebook, another social media network, 1 million links are shared every 20 minuets~\cite{face-stats}. Predictions and recommendations based on this data can be done by gathering some of it and running information retrieval algorithms on it. Several of these social media networks have APIs and ways of making the data they produce accessible to developers. One of the potential ways this data can be used is for movie rating predictions. Hence the motivation for utilizing this huge amount of data for movie rating predictions.
 
 \section{Context}
-The coming chapters describes the course of the project in order of the structure. And how social media can be used in correlation with movie recommendation. Table~\ref{table-reportstructure} gives a short insight to the content of the different chapters.
+The following section describes how the project is structured. Table~\ref{table-reportstructure} gives a brief overview of the content of the different chapters in the report.
 
 \begin{table}
 \centering
 \begin{tabularx}{\textwidth}{ l X l }
   \textbf{Chapter}      & \textbf{Description} \\
   \hline \\ [-1.5ex]
-  Chapter 1 & The Introduction chapter gives an overview of the project to the reader, and explains the tasks the project is meant to solve. \\
+  Chapter 1 & The Introduction chapter gives an overview of the project to the reader. It also outlines the purpose and motivation of the project. \\
   \hline \\ [-1.5ex]
-  Chapter 2 & The Preliminary Study chapter describes knowledge, research and technology that is relevant to the project, and how and why some of them were prioritized over others. This includes information about different technologies, such as Netflix and Twitter, how they can be used, different algorithms to work with and similar solutions. \\
+  Chapter 2 & The Preliminary Study chapter documents knowledge, research and technology that is relevant to the project, and how and why some of them were prioritized over others when it comes to how they are used in the project. Twitter and the Netflix Prize dataset is documented in this chapter. \\
   \hline \\ [-1.5ex]
-  Chapter 3 & The Requirements chapter describes how the requirements where acquired and the major functional and non functional requirements of the system and why these are important for the system. \\
+  Chapter 3 & The Requirements chapter describes the requirements of the project. It also describes how and why they were created. \\
   \hline \\ [-1.5ex]
-  Chapter 4 & The Design chapter explores how the system is structured, and describes the different parts of the system and how they correlates. \\
+  Chapter 4 & The Design chapter describes the design of the system and how it was made. \\
   \hline \\ [-1.5ex]
-  Chapter 5 & The Implementation chapter explores in detail the implementation of gathering of twitter information. TODO: something more?  \\
+  Chapter 5 & The Implementation chapter describes the implementation of the system. Mainly, the implementation of the system harvesting data from Twitter is described. \\
   \hline \\ [-1.5ex]
-  Chapter 6 & Evaluation chapter includes how the research went, what to take from the results drawn from the research done and issues during the project. \\
+  Chapter 6 & Evaluation chapter discussed the development process, testing of results and major issues. \\
   \hline \\ [-1.5ex]
-  Chapter 7 & The Conclusion chapter sums up the project and describes the findings and reflections around this. It also explores further work to be done. \\
+  Chapter 7 & The Conclusion chapter sums up the project and describes the findings and reflects on them. It also describes further work to be done. \\
   \hline \\ [-1.5ex]
   Appendix & The appendix contains extended information such as a full list of the requirements. \\
 \end{tabularx}
-\caption{Structure of Report}
+\caption{Structure and chapters of the report.}
 \label{table-reportstructure}
 \end{table}
