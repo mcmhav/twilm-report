@@ -134,7 +134,7 @@ This section defines terminology related to Twitter. All words in \textbf{bold} 
 \subsubsection{Tweet}
 A tweet is a post containing max 140 characters. It can also refer to the verb ‘to tweet’, which means ‘to post a tweet’. \textbf{tweets} is an attribute of a user which returns a list of tweets that the users
 
-  \textbf{user.tweets -> [<tweet>]}
+  \textbf{user.tweets returns [<tweet>]}
 \subsubsection{User}
 A user is someone with a Twitter account. A user can post tweets. By following other users, Twitter generates a feed for the user containing the tweets of all the users they follow. They also have certain information retrieval tools available, such as filtering tweets by a tag name, specific user or search term.
 
@@ -145,27 +145,27 @@ A user who tweets a tweet that is referenced in the same context. For example: T
 \subsubsection{Follower}
 A follower is someone who follows a user. The follower will see the users tweets in their feed. \textbf{followers} is an attribute of a user which returns the list of users that are following that user.
 
-  \textbf{user.followers -> [<user>]}
+  \textbf{user.followers returns [<user>]}
 
 \subsubsection{Followee}
 A followee is someone who a user is following. The user will appear in the followees list of followers, and the followee will appear in the users list with the name following. The following list for a user will be referred to as followees for clarity. \textbf{followees} is an attribute of a user which returns the list of users that the user is following.
 
-  \textbf{user.followees -> [<user>]}
+  \textbf{user.followees returns [<user>]}
 
 \subsubsection{Hashtag}
 Hashtags are topic labels that are placed on tweets by the tweeter. They are made by typing \#tagname anywhere in the tweet when composing it. By navigating to \#tagname, a user will see a feed of all tweets containing \#tagname. \textbf{hashtags} is a an attribute of a tweet which returns the list of hashtags that the tweet contains.
 
-  \textbf{tweet.hashtags -> [<hashtag>]}
+  \textbf{tweet.hashtags returns [<hashtag>]}
 
 \noindent
 Hashtag also has the attribute tweets, which returns all tweets that have a certain hashtag. These hashtags are ordered by Twitter's algorithm which balances how recent the tweet is with the popularity of the tweeter.
 
-  \textbf{hashtag.tweets -> [<tweet>]}
+  \textbf{hashtag.tweets returns [<tweet>]}
 
 \subsubsection{Usertag}
 Usertags are labels that are placed on tweets describing who the tweets are addressed to. They are made by typing @username anywhere in the tweet. This tweet will also show up in the feed of the user with name username. \textbf{usertags} is an attribute of a tweet which returns the list of users that the tweet is addressed to.
 
-\textbf{tweet.usertags -> [<user>]}
+\textbf{tweet.usertags returns [<user>]}
 
 \subsection{Legal Considerations}\label{sec:pre-twitter-legal}
 Collecting and using a data set from Twitter, a company whose currency is information, must be done in a way that complies with their rules and terms of service. This section considers the legal considerations of gathering data from Twitter with an automated system.
@@ -233,7 +233,8 @@ db.netflix_movies.find().limit(-1).skip(Math.random()*18000).next()
 The data recorded in table~\ref{table:stream-api-test-data} was then aggregated to show the coverage of tweets for a given time period. The aggregation can be seen in table~\ref{table:stream-api-test-data}. If the Stream API is run for one year, about 65\% of the movies in the Netflix dataset will have one tweet or more. If more than 8 tweets are needed for a movie, the Stream API will only produce this number of tweets for about 45\% of the movies.
 
 \begin{table}[H]
-\centering
+\begin{adjustwidth}{-.5in}{-.5in}  
+\begin{center}
 \begin{tabularx}{5.3\textwidth}{ |p{7cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}| }
   \textbf{Movie Title}&\textbf{Year}&\textbf{Days since last tweet}&\textbf{Tweets last month}&\textbf{Tweets last half year}&\textbf{Tweets last year}\\
   \cline{0-5}
@@ -279,6 +280,8 @@ Hera Pheri&1975&&0&0&0
 \end{tabularx}
 \caption[Stream API capability test data]{Data gathered from Twitter web search about a random selection of 20 movies from the Netflix Prize Dataset.}
 \label{table:stream-api-test-data}
+\end{center}
+\end{adjustwidth}
 \end{table}
 
 \begin{table}[H]
@@ -552,9 +555,7 @@ Their motivation for using a social media dataset rather than using Netflix Priz
 While querying the API for well structured tweets with ratings about movies is a good approach when searching for a database with movie ratings, the data will be sparse. The data is not based on the users followers and followees, and will therefore not represent the social strength Twitter is capable of producing. A direct access to IMDB, rather than going through Twitter to get the rating information also seems like a simpler and more result-producing way to accomplish the same task.
 
 \subsubsection{Twittomender}
-Twittomender is a followee recommender for Twitter. Twitter uses a collaborative filtering approach for recommending new followee. This does not necessarily produce the most relevant recommendations for a user. Twittomender takes a different but similar approach to the problem. Tweets of a user are used and compare with other users tweets to to find similarities and recommend new Twitter-friendships\cite{twittomender}.
-
-The 7 recommendation strategies used by Twittomender are shown in table~\ref{table:to-strategies}.
+Twittomender is a followee recommender for Twitter. Twitter uses a collaborative filtering approach for recommending new followee. This does not necessarily produce the most relevant recommendations for a user. Twittomender takes a different but similar approach to the problem. Tweets of a user are used and compare with other users tweets to to find similarities and recommend new Twitter-friendships\cite{twittomender}. The 7 recommendation strategies used by Twittomender are shown in table~\ref{table:to-strategies}.
 
 \begin{table}[H]
 \centering
