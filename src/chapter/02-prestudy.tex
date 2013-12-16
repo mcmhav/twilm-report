@@ -233,9 +233,8 @@ db.netflix_movies.find().limit(-1).skip(Math.random()*18000).next()
 The data recorded in table~\ref{table:stream-api-test-data} was then aggregated to show the coverage of tweets for a given time period. The aggregation can be seen in table~\ref{table:stream-api-test-data}. If the Stream API is run for one year, about 65\% of the movies in the Netflix dataset will have one tweet or more. If more than 8 tweets are needed for a movie, the Stream API will only produce this number of tweets for about 45\% of the movies.
 
 \begin{table}[H]
-\begin{adjustwidth}{-.5in}{-.5in}  
 \begin{center}
-\begin{tabularx}{5.3\textwidth}{ |p{7cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}| }
+\begin{tabular}{ p{7cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm} }
   \textbf{Movie Title}&\textbf{Year}&\textbf{Days since last tweet}&\textbf{Tweets last month}&\textbf{Tweets last half year}&\textbf{Tweets last year}\\
   \cline{0-5}
 Mickey Blue Eyes&1999&5&1&16&26\\
@@ -277,16 +276,15 @@ Absolutely Fabulous: Absolutely Special&1996&&0&0&0\\
 Ghost Story&1981&2&7&31&44\\
   \cline{0-5}
 Hera Pheri&1975&&0&0&0
-\end{tabularx}
+\end{tabular}
 \caption[Stream API capability test data]{Data gathered from Twitter web search about a random selection of 20 movies from the Netflix Prize Dataset.}
 \label{table:stream-api-test-data}
 \end{center}
-\end{adjustwidth}
 \end{table}
 
 \begin{table}[H]
 \centering
-\begin{tabularx}{5.3\textwidth}{ |p{7cm}|p{1cm}|p{1cm}|p{1cm}| }
+\begin{tabular}{ l|p{1cm}|p{1cm}|p{1cm} }
 \textbf{\% of movies where tweets found was..} & \textbf{Last month} & \textbf{Last half year} & \textbf{Last year}\\
   \cline{0-3}
 > 1 & 20.00\% & 50.00\% & 65.00\%\\
@@ -306,7 +304,7 @@ Hera Pheri&1975&&0&0&0
 > 64 & 0.00\% & 5.00\% & 5.00\%\\
   \cline{0-3}
 > 100 & 0.00\% & 5.00\% & 5.00\%
-\end{tabularx}
+\end{tabular}
 \caption[Stream API capability test aggregation]{Aggregation of the data in table~\ref{table:stream-api-test-data} showing the percentage of how many movies had more tweets than a given number for a given time period.}
 \label{table:stream-api-test-data-aggregate}
 \end{table}
@@ -419,7 +417,7 @@ These DOM elements are shown in table~\ref{table:important-tweet-element-element
 
 \begin{table}[H]
 \centering
-\begin{tabularx}{5.3\textwidth}{ lp{7cm} lp{5cm} }
+\begin{tabular}{ lp{7cm} lp{5cm} }
   \textbf{Element Name} & \textbf{Content}\\
   \cline{0-1}
   User Name & The name of the user who posted the tweet \\
@@ -427,7 +425,7 @@ These DOM elements are shown in table~\ref{table:important-tweet-element-element
   User ID & The ID of the user who posted the tweet \\
   \cline{0-1}
   Tweet Text & The text contained in the tweet
-\end{tabularx}
+\end{tabular}
 \caption[Elements to be scraped from tweets]{Elements to be scraped from each tweet element that has been retrieved}
 \label{table:important-tweet-element-elements}
 \end{table}
@@ -671,8 +669,7 @@ NoSQL databases can be defined as being non-relational. In many cases they are a
 
 \begin{table}[H]
 \centering
-\begin{adjustwidth}{-2cm}{}
-\begin{tabularx}{1.3\textwidth}{  l l l l l l }
+\begin{tabular}{ l l l l l l }
   \textbf{Data Model} & \textbf{Performance} & \textbf{Scalability} & \textbf{Flexibility} & \textbf{Complexity} & \textbf{Functionality}\\
   \hline \\ [-1.5ex]
   Key-value & high      & high              & high      & none      & variable (none)\\
@@ -684,8 +681,7 @@ NoSQL databases can be defined as being non-relational. In many cases they are a
   Graph     & variable  & variable          & high      & high      & graph theory \\
   \hline \\ [-1.5ex]
   Relational & variable & variable          & low       & moderate  & relational algebra\\
-\end{tabularx}
-\end{adjustwidth}
+\end{tabular}
 \caption{Differences in features of NoSQL Database Types}
 \label{table:nosql-calssifications}
 \end{table}

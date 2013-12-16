@@ -15,7 +15,7 @@
 \usepackage{wrapfig}
 \usepackage{pbox}
 
-% \usepackage{fullpage} % wider
+\usepackage[headings]{fullpage} % wider
 \usepackage{verbatim}
 \usepackage{url}
 \usepackage{minitoc}
@@ -124,8 +124,6 @@ This paper explores how the data from Twitter can be used to supplement the Netf
         Implement a Netflix Prize movie rating prediction system. \\
         Compare RMSE scores. \\
     \end{tabular}
-    \captionof{table}[Main goals]{The main goals of the research}
-    \label{tab:main-goals}
 \end{table}
 \renewcommand{\arraystretch}{1}
 
@@ -150,8 +148,9 @@ The project also reflects on the possibilities of future work in the case where 
 \listoftables
 
 \setcounter{tocdepth}{1}
-\pagestyle{fancy}
-\lhead{\leftmark}
+% \pagestyle{fancy}
+% \pagestyle{headings}
+% \lhead{\leftmark}
 % \rhead{\rightmark}
 
 %CHAPTERS
